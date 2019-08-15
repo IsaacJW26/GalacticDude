@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    int maxLifeTime = 300;
+    int timeSinceBirth = 0;
     int index;
+
     Rigidbody2D rb;
     Vector2 velocity;
+    CharacterShoot parent;
 
     // Start is called before the first frame update
     void Awake()
@@ -16,13 +20,17 @@ public class Projectile : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        rb.velocity = velocity;
+        timeSinceBirth++;
+        if (timeSinceBirth > maxLifeTime)
+            parent.DisableProjectile(index);
     }
 
-    public void Initialise(int index, Vector2 velocity)
+    public void Initialise(int index, Vector2 velocity, CharacterShoot parent)
     {
         this.index = index;
         this.velocity = velocity;
+        this.parent = parent;
     }
 
     public void Activate(Vector3 position, Vector2 velocity)
@@ -35,6 +43,7 @@ public class Projectile : MonoBehaviour
     {
         gameObject.SetActive(this);
         transform.position = position;
+        timeSinceBirth = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

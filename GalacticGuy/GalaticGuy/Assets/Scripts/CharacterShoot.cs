@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CharacterShoot : MonoBehaviour
 {
-    const int MAX_PROJECTILES = 30;
+    const int MAX_PROJECTILES = 20;
 
     int timeUntilNextShot = 0;
     int shootInterval = 35;
     [SerializeField]
     Projectile projectile;
+    [SerializeField]
+    Transform projectilePoint;
 
     Projectile[] objectPool;
     bool[] activeElements;
@@ -22,7 +24,7 @@ public class CharacterShoot : MonoBehaviour
         for (int ii = 0; ii < MAX_PROJECTILES; ii++)
         {
             objectPool[ii] = Instantiate(projectile);
-            objectPool[ii].Initialise(ii, Vector2.up);
+            objectPool[ii].Initialise(ii, Vector2.up*2f, this);
             DisableProjectile(ii);
         }
     }
@@ -40,23 +42,28 @@ public class CharacterShoot : MonoBehaviour
         if(timeUntilNextShot <= 0)
         {
             timeUntilNextShot = shootInterval;
+            Shoot();
         }
     }
 
     private void Shoot()
     {
-
+        Projectile nextProj = EnableNextProjectile();
     }
 
-    private void EnableNextProjectile()
+    private Projectile EnableNextProjectile()
     {
         for(int ii = 0; ii < MAX_PROJECTILES; ii++)
         {
             if(!activeElements[ii])
             {
-                objectPool[ii].Activate(transform.position);
+                activeElements[ii] = true;
+                objectPool[ii].Activate(projectilePoint.position);
+                return objectPool[ii];
             }
         }
+
+        return null;
     }
 
     public void DisableProjectile(int index)

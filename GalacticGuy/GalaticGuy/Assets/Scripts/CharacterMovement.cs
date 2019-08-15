@@ -5,8 +5,9 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     Rigidbody2D rb;
-    float speedo = 4f;
-    float xBound = 2f;
+    [SerializeField]
+    float speed = 2.5f;
+    float xBound = 4f;
     int xdirection = 0, ydirection = 0;
 
     void Start()
@@ -27,7 +28,7 @@ public class CharacterMovement : MonoBehaviour
         {
             actualX = xdirection;
         }
-        rb.velocity = new Vector3(actualX, ydirection) * speedo;
+        rb.velocity = new Vector3(actualX, ydirection) * speed;
     }
 
     public void InputDirectionX(int value)
