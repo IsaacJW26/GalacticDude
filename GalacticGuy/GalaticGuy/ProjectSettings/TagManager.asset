@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 573365297
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemies
+    uniqueID: 1314313239
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1265774789
+    locked: 0
+  - name: Character
+    uniqueID: 1984197585
     locked: 0
