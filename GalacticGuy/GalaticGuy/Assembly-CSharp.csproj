@@ -62,9 +62,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CharacterMovement.cs" />
-    <Compile Include="Assets\Scripts\CharacterShoot.cs" />
-    <Compile Include="Assets\Scripts\MainCharacter.cs" />
+    <Compile Include="Assets\Scripts\Characters\CharacterHealth.cs" />
+    <Compile Include="Assets\Scripts\Characters\CharacterMovement.cs" />
+    <Compile Include="Assets\Scripts\Characters\CharacterShoot.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Labels.cs" />
+    <Compile Include="Assets\Scripts\Player\MainCharacter.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerProjectile.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Users/Isaac/Documents/Unity/Geogame Challenge/GGC5 - Space/GalacticGuy/GalaticGuy/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

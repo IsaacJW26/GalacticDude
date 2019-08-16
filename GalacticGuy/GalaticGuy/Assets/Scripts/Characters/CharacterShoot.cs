@@ -9,9 +9,9 @@ public class CharacterShoot : MonoBehaviour
     int timeUntilNextShot = 0;
     int shootInterval = 35;
     [SerializeField]
-    Projectile projectile;
+    Projectile projectile = null;
     [SerializeField]
-    Transform projectilePoint;
+    Transform projectilePoint = null;
 
     Projectile[] objectPool;
     bool[] activeElements;

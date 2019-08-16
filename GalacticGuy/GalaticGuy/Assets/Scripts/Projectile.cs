@@ -5,12 +5,12 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     int maxLifeTime = 300;
-    int timeSinceBirth = 0;
-    int index;
+    protected int timeSinceBirth = 0;
+    protected int index;
 
     Rigidbody2D rb;
-    Vector2 velocity;
-    CharacterShoot parent;
+    protected Vector2 velocity;
+    protected CharacterShoot parent;
 
     // Start is called before the first frame update
     void Awake()
@@ -46,8 +46,14 @@ public class Projectile : MonoBehaviour
         timeSinceBirth = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //default behaviour: destroy on hit
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        //todo
+        if (collision.tag.Equals(Labels.TAGS.PROJECTILE) ||
+            collision.tag.Equals(Labels.TAGS.ENEMY) ||
+            collision.tag.Equals(Labels.TAGS.PLAYER))
+        {
+            parent.DisableProjectile(index);
+        }
     }
 }

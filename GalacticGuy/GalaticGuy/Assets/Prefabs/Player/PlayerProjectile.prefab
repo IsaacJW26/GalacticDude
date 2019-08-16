@@ -88,11 +88,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 519112092338487423}
-  - component: {fileID: 8392208931838604128}
   - component: {fileID: 5315195200416691685}
   - component: {fileID: 3333804251504392022}
+  - component: {fileID: -7737870076711456961}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: PlayerProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,18 +114,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
---- !u!114 &8392208931838604128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519112092338487408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe2eb5534c0e1df4da78ea786ce907b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &5315195200416691685
 Rigidbody2D:
   serializedVersion: 4
@@ -173,6 +161,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7737870076711456961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519112092338487408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba793110e0482224696a69dd53b0bf3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519112092876008079
 GameObject:
   m_ObjectHideFlags: 0

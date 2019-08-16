@@ -6,6 +6,7 @@ public class MainCharacter : MonoBehaviour
 {
     CharacterMovement move;
     CharacterShoot shoot;
+    CharacterHealth health;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class MainCharacter : MonoBehaviour
     void Update()
     {
         //input direction x
-        move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis("Horizontal")));
+        move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)));
 
         if (IsInput())
             shoot.TryShoot();
@@ -26,6 +27,6 @@ public class MainCharacter : MonoBehaviour
 
     public bool IsInput()
     {
-        return Mathf.RoundToInt(Input.GetAxis("Horizontal")) != 0;
+        return Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)) != 0;
     }
 }
