@@ -9,6 +9,7 @@ public class PlayerProjectile : Projectile
         if (collision.tag.Equals(Labels.TAGS.PROJECTILE) ||
             collision.tag.Equals(Labels.TAGS.ENEMY))
         {
+            ScreenShake.INSTANCE.BigShake();
             parent.DisableProjectile(index);
         }
     }
