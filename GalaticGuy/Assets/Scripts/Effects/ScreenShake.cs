@@ -64,8 +64,8 @@ public class ScreenShake : MonoBehaviour
 
     private void ShakeDecay()
     {
-        virtualCameraNoise.m_AmplitudeGain *= 0.95f;
-        virtualCameraNoise.m_FrequencyGain *= 0.95f;
+        virtualCameraNoise.m_AmplitudeGain *= 0.90f;
+        virtualCameraNoise.m_FrequencyGain *= 0.90f;
     }
 
 
