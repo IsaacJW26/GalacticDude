@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IDamageable
 {
     int maxLifeTime = 300;
     protected int timeSinceBirth = 0;
@@ -10,7 +10,15 @@ public class Projectile : MonoBehaviour
 
     Rigidbody2D rb;
     protected Vector2 velocity;
+    protected int damage;
     protected CharacterShoot parent;
+    [Header("Collisions")]
+    [SerializeField]
+    bool player = true;
+    [SerializeField]
+    bool projectiles = true;
+    [SerializeField]
+    bool enemies = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -26,34 +34,59 @@ public class Projectile : MonoBehaviour
             parent.DisableProjectile(index);
     }
 
-    public void Initialise(int index, Vector2 velocity, CharacterShoot parent)
+    public void Initialise(int damage, int index, CharacterShoot parent)
     {
+        this.damage = damage;
         this.index = index;
-        this.velocity = velocity;
         this.parent = parent;
     }
 
     public void Activate(Vector3 position, Vector2 velocity)
     {
-        Activate(position);
         this.velocity = velocity;
-    }
-
-    public void Activate(Vector3 position)
-    {
-        gameObject.SetActive(this);
         transform.position = position;
         timeSinceBirth = 0;
+        gameObject.SetActive(this);
     }
 
     //default behaviour: destroy on hit
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals(Labels.TAGS.PROJECTILE) ||
-            collision.tag.Equals(Labels.TAGS.ENEMY) ||
-            collision.tag.Equals(Labels.TAGS.PLAYER))
+        if (CheckProj(collision) ||
+            CheckEnemy(collision)||
+            CheckPlayer(collision))
         {
-            parent.DisableProjectile(index);
+            //damage hit target
+            IDamageable damageable = collision.GetComponentInParent<IDamageable>();
+            damageable?.OnDamage(damage);
+            //disable this object
+            OnDamage(0);
         }
+    }
+
+    private bool CheckTag(Collider2D col, string tag)
+    {
+        return col.tag.Equals(tag);
+    }
+
+    public bool CheckProj(Collider2D col)
+    {
+        return CheckTag(col, Labels.TAGS.PROJECTILE) && projectiles;
+    }
+
+    public bool CheckEnemy(Collider2D col)
+    {
+        return CheckTag(col, Labels.TAGS.ENEMY) && enemies;
+    }
+
+    public bool CheckPlayer(Collider2D col)
+    {
+        return CheckTag(col, Labels.TAGS.PLAYER) && player;
+    }
+
+    //Destroys 
+    public void OnDamage(int inDamage)
+    {
+        parent.DisableProjectile(index);
     }
 }

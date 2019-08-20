@@ -87,18 +87,18 @@ public class ScreenShake : MonoBehaviour
     [ContextMenu("Big Shake")]
     public void BigShake()
     {
-        StartShake(1.5f, 4f, 0.6f);
+        StartShake(2.0f, 4f, 0.5f);
     }
 
     [ContextMenu("Medium Shake")]
     public void MediumShake()
     {
-        StartShake(1.0f, 3f, 0.4f);
+        StartShake(1.2f, 3f, 0.4f);
     }
 
     [ContextMenu("Small Shake")]
     public void SmallShake()
     {
-        StartShake(0.2f, 1.5f, 0.2f);
+        StartShake(0.8f, 1.5f, 0.2f);
     }
 }

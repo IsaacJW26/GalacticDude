@@ -1,31 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Enemy : MonoBehaviour
+[RequireComponent(typeof(CharacterShoot))]
+[RequireComponent(typeof(CharacterMovement))]
+public class Enemy : MonoBehaviour, IDamageable
 {
-    CharacterHealth health;
+    [SerializeField]
+    CharacterHealth health = null;
+    CharacterShoot shoot;
+    CharacterMovement movement;
 
-    void Start()
+    protected EnemyAI Ai;
+
+    void Awake()
     {
-        health = new CharacterHealth(5, OnDeath);
+        health?.InitialiseMethods(OnDeath);
+        shoot = GetComponent<CharacterShoot>();
+        movement = GetComponent<CharacterMovement>();
+        Ai = new BasicAI(movement, null, shoot);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag.Equals(Labels.TAGS.PROJECTILE))
-        {
-            health.TakeDamage(1);
-        }
+        Ai.UpdateFrame(transform.position);
     }
 
     public void OnDeath()
     {
         Destroy(gameObject);
+    }
+
+    public void OnDamage(int damage)
+    {
+        health.TakeDamage(damage);
+
+        if(damage <= 2)
+            ScreenShake.INSTANCE.SmallShake();
+        else if(damage <= 4)
+            ScreenShake.INSTANCE.MediumShake();
+        else if(damage >= 5)
+            ScreenShake.INSTANCE.BigShake();
+
+        //Stub
     }
 }

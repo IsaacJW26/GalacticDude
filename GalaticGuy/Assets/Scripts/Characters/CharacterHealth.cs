@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class CharacterHealth
 {
-    public delegate void OnDeath();
+    public delegate void UpdateDel();
 
-    private int maxHP;
+    [SerializeField]
+    private int maxHP = 5;
     private int currentHP;
-    OnDeath deathMethod;
+    UpdateDel deathMethod;
 
-    public CharacterHealth(int maxHP, OnDeath deathMethod)
+    public void InitialiseMethods(UpdateDel deathMethod)
+    { 
+        this.currentHP = maxHP;
+        this.deathMethod = deathMethod;
+    }
+
+    public CharacterHealth(int maxHP, UpdateDel deathMethod)
     {
         this.maxHP = maxHP;
         this.currentHP = maxHP;
         this.deathMethod = deathMethod;
     }
 
-    public CharacterHealth(int maxHP, int currentHP, OnDeath deathMethod)
+    public CharacterHealth(int maxHP, int currentHP, UpdateDel deathMethod, UpdateDel onDamageMethod)
     {
         this.maxHP = maxHP;
         this.currentHP = currentHP;

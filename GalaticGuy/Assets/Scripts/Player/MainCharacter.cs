@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCharacter : MonoBehaviour
+public class MainCharacter : MonoBehaviour, IDamageable
 {
     CharacterMovement move;
     CharacterShoot shoot;
@@ -13,6 +13,7 @@ public class MainCharacter : MonoBehaviour
     {
         move = GetComponent<CharacterMovement>();
         shoot = GetComponent<CharacterShoot>();
+        health = new CharacterHealth(10, OnDeath);
     }
 
     // Update is called once per frame
@@ -22,11 +23,21 @@ public class MainCharacter : MonoBehaviour
         move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)));
 
         if (IsInput())
-            shoot.TryShoot();
+            shoot.TryShoot(Vector3.up * 3f);
     }
 
     public bool IsInput()
     {
         return Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)) != 0;
+    }
+
+    public void OnDeath()
+    {
+        //stub
+    }
+
+    public void OnDamage(int inDamage)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -7,7 +7,13 @@ public class CharacterShoot : MonoBehaviour
     const int MAX_PROJECTILES = 20;
 
     int timeUntilNextShot = 0;
+    [SerializeField]
     int shootInterval = 35;
+    [SerializeField]
+    int projectileDamage = 1;
+    [SerializeField]
+    float projectileSpeed = 3f;
+
     [SerializeField]
     Projectile projectile = null;
     [SerializeField]
@@ -20,11 +26,12 @@ public class CharacterShoot : MonoBehaviour
     {
         objectPool = new Projectile[MAX_PROJECTILES];
         activeElements = new bool[MAX_PROJECTILES];
+
         //intialise object pool
         for (int ii = 0; ii < MAX_PROJECTILES; ii++)
         {
             objectPool[ii] = Instantiate(projectile);
-            objectPool[ii].Initialise(ii, Vector2.up*2f, this);
+            objectPool[ii].Initialise(projectileDamage, ii, this);
             DisableProjectile(ii);
         }
     }
@@ -36,29 +43,30 @@ public class CharacterShoot : MonoBehaviour
             timeUntilNextShot--;
     }
 
-    public void TryShoot()
+    public void TryShoot(Vector3 direction)
     {
         //successfully shoot
         if(timeUntilNextShot <= 0)
         {
             timeUntilNextShot = shootInterval;
-            Shoot();
+            Shoot(direction.normalized * projectileSpeed);
         }
     }
 
-    private void Shoot()
+    private void Shoot(Vector3 velocity)
     {
-        Projectile nextProj = EnableNextProjectile();
+        Projectile nextProj = EnableNextProjectile(velocity);
     }
 
-    private Projectile EnableNextProjectile()
+    //overload of enable next projectile
+    private Projectile EnableNextProjectile(Vector3 velocity)
     {
-        for(int ii = 0; ii < MAX_PROJECTILES; ii++)
+        for (int ii = 0; ii < MAX_PROJECTILES; ii++)
         {
-            if(!activeElements[ii])
+            if (!activeElements[ii])
             {
                 activeElements[ii] = true;
-                objectPool[ii].Activate(projectilePoint.position);
+                objectPool[ii].Activate(projectilePoint.position, velocity);
                 return objectPool[ii];
             }
         }
