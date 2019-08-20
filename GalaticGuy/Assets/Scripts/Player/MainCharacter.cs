@@ -38,6 +38,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void OnDamage(int inDamage)
     {
+        //Stub
         throw new System.NotImplementedException();
     }
 }
