@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IDamageable
 {
+    [SerializeField]
     int maxLifeTime = 300;
     protected int timeSinceBirth = 0;
     protected int index;
@@ -31,7 +32,7 @@ public class Projectile : MonoBehaviour, IDamageable
         rb.velocity = velocity;
         timeSinceBirth++;
         if (timeSinceBirth > maxLifeTime)
-            parent.DisableProjectile(index);
+            DisableObject();
     }
 
     public void Initialise(int damage, int index, CharacterShoot parent)
@@ -85,7 +86,12 @@ public class Projectile : MonoBehaviour, IDamageable
     }
 
     //Destroys 
-    public void OnDamage(int inDamage)
+    public virtual void OnDamage(int inDamage)
+    {
+        DisableObject();
+    }
+
+    public virtual void DisableObject()
     {
         parent.DisableProjectile(index);
     }

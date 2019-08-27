@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CharacterShoot : MonoBehaviour
 {
-    const int MAX_PROJECTILES = 20;
+    [SerializeField]
+    int MAX_PROJECTILES = 20;
 
     int timeUntilNextShot = 0;
     [SerializeField]
@@ -72,6 +73,14 @@ public class CharacterShoot : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void DestroyPool()
+    {
+        for (int ii = 0; ii < MAX_PROJECTILES; ii++)
+        {
+            Destroy(objectPool[ii]);
+        }
     }
 
     public void DisableProjectile(int index)

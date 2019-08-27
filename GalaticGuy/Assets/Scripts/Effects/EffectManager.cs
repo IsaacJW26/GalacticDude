@@ -1,0 +1,75 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(ScreenShake))]
+public class EffectManager : MonoBehaviour
+{
+    public static EffectManager INSTANCE = null;
+    ScreenShake shake;
+    IEnumerator slowFunction;
+    [SerializeField]
+    GameObject Explosion;
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        if (INSTANCE == null)
+            INSTANCE = this;
+        else
+            Destroy(this);
+
+        shake = GetComponent<ScreenShake>();
+    }
+
+    public void ScreenShakeBig()
+    {
+        shake.BigShake();
+    }
+
+    public void ScreenShakeMedium()
+    {
+        shake.MediumShake();
+    }
+
+    public void ScreenShakeSmall()
+    {
+        shake.SmallShake();
+    }
+
+    public void SlowLong()
+    {
+        if(slowFunction != null)
+            StopCoroutine(slowFunction);
+        slowFunction = SlowTime(2.5f, 0.3f);
+        StartCoroutine(slowFunction);
+    }
+
+    public void SlowShort()
+    {
+        if (slowFunction != null)
+            StopCoroutine(slowFunction);
+        slowFunction = SlowTime(2f, 0.8f);
+        StartCoroutine(slowFunction);
+    }
+
+    private IEnumerator SlowTime(float unscaledDuration, float percent)
+    {
+        Time.timeScale = percent;
+        yield return new WaitForSecondsRealtime(unscaledDuration);
+        Time.timeScale = 1f;
+    }
+
+    public void CreateExplosion(Vector3 position)
+    {
+        GameObject obj = Instantiate(Explosion);
+        obj.transform.position = position;
+        StartCoroutine(RemoveExposion(obj, 5f));
+    }
+
+    private IEnumerator RemoveExposion(GameObject instance, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Destroy(instance);
+    }
+}

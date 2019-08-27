@@ -5,12 +5,18 @@ using UnityEngine.UI;
 
 public class UIHp : MonoBehaviour
 {
+    public static UIHp INSTANCE = null;
+
     [SerializeField]
     Image[] HPimages;
 
-    void Start()
+    void Awake()
     {
-        
+        //singleton
+        if (INSTANCE == null)
+            INSTANCE = this;
+        else
+            Destroy(this);
     }
 
     public void UpdateHP(int hp)

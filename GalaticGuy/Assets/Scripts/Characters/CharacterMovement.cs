@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField]
     float speed = 2.5f;
-    float xBound = 4f;
+    public const float xBound = 4f;
     int xdirection = 0, ydirection = 0;
 
     void Start()

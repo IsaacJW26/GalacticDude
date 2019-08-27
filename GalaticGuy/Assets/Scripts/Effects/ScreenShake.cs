@@ -6,8 +6,6 @@ using UnityEngine.Events;
 
 public class ScreenShake : MonoBehaviour
 {
-    public static ScreenShake INSTANCE = null;
-
     /*
     [SerializeField]
     float ShakeDuration = 0.3f;          // Time the Camera Shake effect will last
@@ -26,11 +24,6 @@ public class ScreenShake : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        if (INSTANCE == null)
-            INSTANCE = this;
-        else
-            Destroy(this);
-
         VirtualCamera = GetComponent<CinemachineVirtualCamera>();
         // Get Virtual Camera Noise Profile
         if (VirtualCamera != null)

@@ -45,4 +45,14 @@ public class CharacterHealth
             currentHP -= newDamage;
         }
     }
+
+    public int GetHealth()
+    {
+        return currentHP;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHP;
+    }
 }
