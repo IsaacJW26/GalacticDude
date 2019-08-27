@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicAI : EnemyAI
+public class AIUpDownShoot : EnemyAI
 {
-    public BasicAI(CharacterMovement movement, MainCharacter player, CharacterShoot shoot) : base(movement, player, shoot)
-    {    }
-
+    [SerializeField]
     int MoveDurationMin = 10;
+    [SerializeField]
     int MoveDurationMax = 60;
     int timeUntilNextMove = 0;
+    [SerializeField]
+    float lowestPosition = -2f;
     bool movingDown = true;
 
     //tries to shoot and move every frame
@@ -30,7 +31,7 @@ public class BasicAI : EnemyAI
 
         if (movingDown)
         {
-            movingDown = movingDown && (currentPosition.y > -2f);
+            movingDown = movingDown && (currentPosition.y > lowestPosition);
             Move(Vector3.down);
         }
         else

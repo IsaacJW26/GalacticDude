@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyAI
+public abstract class EnemyAI : MonoBehaviour
 {
     private CharacterMovement movement;
     protected MainCharacter player;
     private CharacterShoot shoot;
 
-    protected EnemyAI(CharacterMovement movement, MainCharacter player, CharacterShoot shoot)
+    public void Initialise(CharacterMovement movement, MainCharacter player, CharacterShoot shoot)
     {
         this.movement = movement;
         this.player = player;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(CharacterShoot))]
 [RequireComponent(typeof(CharacterMovement))]
+[RequireComponent(typeof(EnemyAI))]
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
@@ -17,7 +18,8 @@ public class Enemy : MonoBehaviour, IDamageable
         health?.InitialiseMethods(OnDeath);
         shoot = GetComponent<CharacterShoot>();
         movement = GetComponent<CharacterMovement>();
-        Ai = new BasicAI(movement, null, shoot);
+        Ai = GetComponent<EnemyAI>();
+        Ai.Initialise(movement, null, shoot);
     }
 
     void FixedUpdate()
@@ -27,6 +29,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void OnDeath()
     {
+        EffectManager.INSTANCE.CreateExplosion(transform.position);
+        shoot.DestroyPool();
         Destroy(gameObject);
     }
 
@@ -35,12 +39,13 @@ public class Enemy : MonoBehaviour, IDamageable
         health.TakeDamage(damage);
 
         if(damage <= 2)
-            ScreenShake.INSTANCE.SmallShake();
+            EffectManager.INSTANCE.ScreenShakeSmall();
+        /*
         else if(damage <= 4)
             ScreenShake.INSTANCE.MediumShake();
         else if(damage >= 5)
             ScreenShake.INSTANCE.BigShake();
-
+            */
         //Stub
     }
 }

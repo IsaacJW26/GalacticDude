@@ -93,8 +93,9 @@ GameObject:
   - component: {fileID: 7977547823748359183}
   - component: {fileID: 8256181706797301278}
   - component: {fileID: 1999848888}
+  - component: {fileID: 4986101983708997922}
   m_Layer: 0
-  m_Name: EnemyBasic
+  m_Name: EnemySideNormal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00304ece41361a440892d15c065cd05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootInterval: 120
+  MAX_PROJECTILES: 20
+  shootInterval: 180
   projectileDamage: 1
   projectileSpeed: 2
   projectile: {fileID: 7674457554669734050, guid: 05796e3e6ad4b524e92a198c0fc716b8,
@@ -206,12 +208,25 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4986101983708997922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9119908270630566909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6871f4c310524f45b084914d773d1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowestPosition: 0
 --- !u!1 &9119908270693691263
 GameObject:
   m_ObjectHideFlags: 0
