@@ -41,7 +41,7 @@ public class EffectManager : MonoBehaviour
     {
         if(slowFunction != null)
             StopCoroutine(slowFunction);
-        slowFunction = SlowTime(2.5f, 0.3f);
+        slowFunction = SlowTime(1.0f, 0.3f);
         StartCoroutine(slowFunction);
     }
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e325c1e9fbee35345999cf72d57048d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLifeTime: 40
+  maxLifeTime: 20
   player: 0
   projectiles: 1
   enemies: 1
