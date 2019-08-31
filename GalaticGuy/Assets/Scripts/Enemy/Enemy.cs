@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable
     CharacterHealth health = null;
     CharacterShoot shoot;
     CharacterMovement movement;
+    Animator anim;
 
     protected EnemyAI Ai;
 
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
         movement = GetComponent<CharacterMovement>();
         Ai = GetComponent<EnemyAI>();
         Ai.Initialise(movement, null, shoot);
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void OnDamage(int damage)
     {
+        anim.SetTrigger("Damage");
         health.TakeDamage(damage);
 
         if(damage <= 2)

@@ -9,10 +9,21 @@ public class MainCharacter : MonoBehaviour, IDamageable
     CharacterHealth health;
     [SerializeField]
     CharacterShoot laserShoot;
+    Animator anim;
 
     int chargeMeter = 0;
     //a second and a half
-    int chargeMax = 900;
+    const int chargeMax = 900;
+
+    const int invulDuration = 30;
+    int timeTillInvulnerable = 0;
+    IEnumerator invulCoroutine;
+    Collider2D hitbox;
+
+    [SerializeField]
+    ParticleSystem particles;
+    ParticleSystem.EmissionModule emission;
+    ParticleSystem.VelocityOverLifetimeModule particleVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +31,12 @@ public class MainCharacter : MonoBehaviour, IDamageable
         move = GetComponent<CharacterMovement>();
         shoot = GetComponent<CharacterShoot>();
         health = new CharacterHealth(3, OnDeath);
+        anim = GetComponent<Animator>();
+        hitbox = GetComponent<Collider2D>();
+
+        emission = particles.emission;
+        particleVelocity = particles.velocityOverLifetime;
+        emission.enabled = false;
     }
 
     // Update is called once per frame
@@ -34,6 +51,9 @@ public class MainCharacter : MonoBehaviour, IDamageable
         //when moving use normal attack
         if (IsInput())
         {
+            emission.enabled = false;
+            particleVelocity.orbitalZ = 0f;
+
             if (chargeMeter >= chargeMax)
             {
                 ShootSpecial();
@@ -47,6 +67,8 @@ public class MainCharacter : MonoBehaviour, IDamageable
         else
         {
             ChargeMeter();
+            emission.enabled = true;
+            particleVelocity.orbitalZ = 2f;
         }
     }
 
@@ -74,8 +96,14 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void OnDamage(int inDamage)
     {
+        anim.SetTrigger("Damage");
         health.TakeDamage(inDamage);
-        UIHp.INSTANCE.UpdateHP(health.GetHealth());
+        UIHp.INSTANCE.RemoveHP(health.GetHealth());
+        //set invul
+        if (invulCoroutine != null)
+            StopCoroutine(invulCoroutine);
+        invulCoroutine = SetInvulnerable();
+        StartCoroutine(invulCoroutine);
     }
 
     //try shoot normal attack
@@ -97,5 +125,22 @@ public class MainCharacter : MonoBehaviour, IDamageable
     {
         float percent = (float)chargeMeter / (float)chargeMax;
         UICharge.INSTANCE.UpdateCharge(percent);
+    }
+
+    public IEnumerator SetInvulnerable()
+    {
+        //disable hitbox
+        hitbox.enabled = false;
+
+        //wait for frame duration
+        timeTillInvulnerable = invulDuration;
+        while(timeTillInvulnerable >= 0)
+        {
+            yield return null;
+            timeTillInvulnerable--;
+        }
+
+        //enable hitbox
+        hitbox.enabled = true;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    Vector2 spawnPosition = new Vector2(0, 6);
+    float spawnPositionY = 5;
     [SerializeField]
     Level[] levels;
     int currentLevel;
@@ -29,7 +29,6 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnRandomEnemy(levels[currentLevel].difficulty);
             timeTillNext = GetNextTime(levels[currentLevel]);
-            Debug.Log("spawn new" + timeTillNext);
         }
         else
         {
@@ -55,6 +54,7 @@ public class EnemySpawner : MonoBehaviour
     private Enemy SpawnRandomEnemy(int difficulty)
     {
         Enemy enemy;
+        Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), spawnPositionY);
         spawnedCount++;
         int value = Random.Range(0, 10) * DIFF_MULTI * difficulty + spawnedCount;
 

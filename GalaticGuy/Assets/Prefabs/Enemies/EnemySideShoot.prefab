@@ -93,10 +93,10 @@ GameObject:
   - component: {fileID: 7977547823748359183}
   - component: {fileID: 8256181706797301278}
   - component: {fileID: 1999848888}
-  - component: {fileID: 4986101983708997922}
   - component: {fileID: -2352281823233633654}
+  - component: {fileID: -2970168889606329600}
   m_Layer: 0
-  m_Name: EnemySideNormal
+  m_Name: EnemySideShoot
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00304ece41361a440892d15c065cd05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_PROJECTILES: 0
+  MAX_PROJECTILES: 5
   shootInterval: 180
   projectileDamage: 1
   projectileSpeed: 2
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb6f9b0483578844aa8bb9c5b1b436b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 2
 --- !u!50 &1999848888
 Rigidbody2D:
   serializedVersion: 4
@@ -210,19 +210,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4986101983708997922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9119908270630566909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6871f4c310524f45b084914d773d1a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lowestPosition: 0
 --- !u!95 &-2352281823233633654
 Animator:
   serializedVersion: 3
@@ -242,6 +229,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-2970168889606329600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9119908270630566909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0becffc8e33cef645aa9e1516d7b6017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowestPosition: 0
 --- !u!1 &9119908270693691263
 GameObject:
   m_ObjectHideFlags: 0

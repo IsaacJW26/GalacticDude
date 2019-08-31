@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AISideBasic : EnemyAI
 {
-    readonly float moveDownDistance = 0.2f;
+    readonly float moveDownDistance = 0.6f;
     [SerializeField]
     float lowestPosition = 0f;
     bool movingDown = true;

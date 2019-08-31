@@ -53,8 +53,7 @@ public class Projectile : MonoBehaviour, IDamageable
     //default behaviour: destroy on hit
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CheckProj(collision) ||
-            CheckEnemy(collision)||
+        if (CheckEnemy(collision)||
             CheckPlayer(collision))
         {
             //damage hit target
@@ -69,12 +68,12 @@ public class Projectile : MonoBehaviour, IDamageable
     {
         return col.tag.Equals(tag);
     }
-
+    /*
     public bool CheckProj(Collider2D col)
     {
         return CheckTag(col, Labels.TAGS.PROJECTILE) && projectiles;
     }
-
+    */
     public bool CheckEnemy(Collider2D col)
     {
         return CheckTag(col, Labels.TAGS.ENEMY) && enemies;
