@@ -16,6 +16,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     Enemy[] enemiesPrefabs;
 
+    public delegate void EndLevelDelegate();
+    private EndLevelDelegate endListener;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,14 +28,21 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (timeTillNext <= 0)
+        if (spawnedCount < levels[currentLevel].length)
         {
-            SpawnRandomEnemy(levels[currentLevel].difficulty);
-            timeTillNext = GetNextTime(levels[currentLevel]);
+            if (timeTillNext <= 0)
+            {
+                SpawnRandomEnemy(levels[currentLevel].difficulty);
+                timeTillNext = GetNextTime(levels[currentLevel]);
+            }
+            else
+            {
+                timeTillNext--;
+            }
         }
         else
         {
-            timeTillNext--;
+            OnLevelEnd();
         }
     }
 
@@ -78,5 +88,13 @@ public class EnemySpawner : MonoBehaviour
         return enemy;
     }
 
-    
+    public void SetListener(EndLevelDelegate endListener)
+    {
+        this.endListener = endListener;
+    }
+
+    private void OnLevelEnd()
+    {
+        endListener();
+    }
 }
