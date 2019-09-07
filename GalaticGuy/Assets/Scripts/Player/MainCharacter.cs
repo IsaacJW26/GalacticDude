@@ -23,7 +23,6 @@ public class MainCharacter : MonoBehaviour, IDamageable
     [SerializeField]
     ParticleSystem particles;
     ParticleSystem.EmissionModule emission;
-    ParticleSystem.VelocityOverLifetimeModule particleVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +34,6 @@ public class MainCharacter : MonoBehaviour, IDamageable
         hitbox = GetComponent<Collider2D>();
 
         emission = particles.emission;
-        particleVelocity = particles.velocityOverLifetime;
         emission.enabled = false;
     }
 
@@ -43,40 +41,49 @@ public class MainCharacter : MonoBehaviour, IDamageable
     void Update()
     {
         //input direction x
-        move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)));
+        if (chargeCooldown <= 0)
+            move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)));
     }
+
+
+    int chargeCooldown = 0;
+    const int chargeCooldownMax = 15;
 
     private void FixedUpdate()
     {
-        //when moving use normal attack
-        if (IsInput())
+        if (chargeCooldown <= 0)
         {
-            emission.enabled = false;
-            particleVelocity.orbitalZ = 0f;
-
-            if (chargeMeter >= chargeMax)
+            //when moving use normal attack
+            if (IsInput())
             {
-                ShootSpecial();
+                emission.enabled = false;
+
+                if (chargeMeter >= chargeMax)
+                {
+                    chargeCooldown = chargeCooldownMax;
+                    ShootSpecial();
+                }
+                else
+                {
+                    ShootNormal();
+                }
             }
+            //charge special when not moving
             else
             {
-                ShootNormal();
+                ChargeMeter();
+                emission.enabled = true;
             }
         }
-        //charge special when not moving
         else
-        {
-            ChargeMeter();
-            emission.enabled = true;
-            particleVelocity.orbitalZ = 2f;
-        }
+            chargeCooldown--;
     }
 
     public void ChargeMeter()
     {
         if (chargeMeter >= chargeMax)
         {
-
+             
         }
         else
             chargeMeter++;
@@ -98,7 +105,8 @@ public class MainCharacter : MonoBehaviour, IDamageable
     {
         anim.SetTrigger("Damage");
         health.TakeDamage(inDamage);
-        UIHp.INSTANCE.RemoveHP(health.GetHealth());
+        UIManager.INSTANCE.RemoveHP(health.GetHealth());
+
         //set invul
         if (invulCoroutine != null)
             StopCoroutine(invulCoroutine);
@@ -124,7 +132,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
     public void UpdateCharge()
     {
         float percent = (float)chargeMeter / (float)chargeMax;
-        UICharge.INSTANCE.UpdateCharge(percent);
+        UIManager.INSTANCE.UpdateCharge(percent);
     }
 
     public IEnumerator SetInvulnerable()

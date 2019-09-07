@@ -9,20 +9,27 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     Level[] levels;
     int currentLevel;
+
+    int killedCount = 0;
     int spawnedCount = 0;
+
     int timeTillNext = 0;
     const int MAXTIME = 600;
     const int DIFF_MULTI = 10;
+
     [SerializeField]
     Enemy[] enemiesPrefabs;
 
     public delegate void EndLevelDelegate();
     private EndLevelDelegate endListener;
 
+    private bool ended = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        currentLevel = 0;    
+        currentLevel = 0;
+        killedCount = 0;
     }
 
     // Update is called once per frame
@@ -40,8 +47,13 @@ public class EnemySpawner : MonoBehaviour
                 timeTillNext--;
             }
         }
-        else
+        else if (spawnedCount > killedCount)
         {
+
+        }
+        else if(!ended)
+        {
+            ended = true;
             OnLevelEnd();
         }
     }
@@ -84,7 +96,6 @@ public class EnemySpawner : MonoBehaviour
         {
             enemy = Instantiate(enemiesPrefabs[2], spawnPosition, Quaternion.identity);
         }
-
         return enemy;
     }
 
@@ -96,5 +107,17 @@ public class EnemySpawner : MonoBehaviour
     private void OnLevelEnd()
     {
         endListener();
+    }
+
+    public void StartLevel()
+    {
+        currentLevel++;
+        spawnedCount = 0;
+        killedCount = 0;
+    }
+
+    public void EnemyDied()
+    {
+        killedCount++;
     }
 }

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class UIHp : MonoBehaviour
 {
-    public static UIHp INSTANCE = null;
-
     [SerializeField]
     Animator[] HpImages;
 
@@ -14,13 +12,6 @@ public class UIHp : MonoBehaviour
 
     void Awake()
     {
-
-        //singleton
-        if (INSTANCE == null)
-            INSTANCE = this;
-        else
-            Destroy(this);
-
         currentHP = 3;
     }
 

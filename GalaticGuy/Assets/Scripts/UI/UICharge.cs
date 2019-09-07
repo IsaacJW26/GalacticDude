@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UICharge : MonoBehaviour
 {
-    public static UICharge INSTANCE = null;
 
     [SerializeField]
     Slider chargebar;
@@ -14,11 +13,6 @@ public class UICharge : MonoBehaviour
 
     private void Awake()
     {
-        if (INSTANCE == null)
-            INSTANCE = this;
-        else
-            Destroy(this);
-
         anim = GetComponent<Animator>();
     }
 

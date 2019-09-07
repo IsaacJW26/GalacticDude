@@ -16,12 +16,13 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Awake()
     {
-        health?.InitialiseMethods(OnDeath);
         shoot = GetComponent<CharacterShoot>();
         movement = GetComponent<CharacterMovement>();
         Ai = GetComponent<EnemyAI>();
-        Ai.Initialise(movement, null, shoot);
         anim = GetComponent<Animator>();
+
+        health?.InitialiseMethods(OnDeath);
+        Ai?.Initialise(movement, null, shoot);
     }
 
     void FixedUpdate()
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public void OnDeath()
     {
         EffectManager.INSTANCE.CreateExplosion(transform.position);
+        GameManager.INST.EnemyDeath();
         shoot.DestroyPool();
         Destroy(gameObject);
     }
