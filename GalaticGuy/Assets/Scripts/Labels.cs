@@ -22,4 +22,11 @@ namespace Labels
         public static string VERTICAL_AXIS = "Vertical";
 
     }
+
+    public static class AnimProperties
+    {
+        public static string DAMAGE = "Damage";
+        public static string CHARGING = "Charging";
+
+    }
 }

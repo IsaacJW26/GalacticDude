@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
     const int DIFF_MULTI = 10;
 
     [SerializeField]
-    Enemy[] enemiesPrefabs;
+    Enemy[] enemiesPrefabs = null;
 
     public delegate void EndLevelDelegate();
     private EndLevelDelegate endListener;
@@ -71,6 +71,13 @@ public class EnemySpawner : MonoBehaviour
         public int difficulty;
         public int length;
         public bool containsBoss;
+
+        public Level(int difficulty, int length, bool containsBoss)
+        {
+            this.difficulty = difficulty;
+            this.length = length;
+            this.containsBoss = containsBoss;
+        }
     }
 
     private Enemy SpawnRandomEnemy(int difficulty)

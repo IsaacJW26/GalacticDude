@@ -103,7 +103,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void OnDamage(int inDamage)
     {
-        anim.SetTrigger("Damage");
+        anim.SetTrigger(Labels.AnimProperties.DAMAGE);
         health.TakeDamage(inDamage);
         UIManager.INSTANCE.RemoveHP(health.GetHealth());
 

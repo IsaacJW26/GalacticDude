@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Labels;
 
 public class UICharge : MonoBehaviour
 {
-
     [SerializeField]
     Slider chargebar;
     Animator anim;
@@ -25,7 +25,7 @@ public class UICharge : MonoBehaviour
 
     private void FixedUpdate()
     {
-        anim.SetBool("Charging", charging);
+        anim.SetBool(AnimProperties.CHARGING, charging);
         charging = false;
     }
 }

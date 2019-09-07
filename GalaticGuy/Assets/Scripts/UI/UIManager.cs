@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     GameObject UiText;
     [SerializeField]
     GameObject Uibackground;
+    [SerializeField]
+    Animator storeUI;
 
     // Start is called before the first frame update
     void Awake()
@@ -45,21 +47,35 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         UiText.SetActive(false);
+        //
         charge.gameObject.SetActive(true);
         health.gameObject.SetActive(true);
         Uibackground.SetActive(true);
+        //
+        storeUI.gameObject.SetActive(false);
     }
-
 
     //
     public void EndGame()
     {
         UiText.SetActive(true);
-
+        //
         charge.gameObject.SetActive(false);
         health.gameObject.SetActive(false);
 
         Uibackground.SetActive(false);
+        //
     }
 
+    //de activate everything
+    public void PurchasePhase()
+    {
+        UiText.SetActive(false);
+        charge.gameObject.SetActive(false);
+        health.gameObject.SetActive(false);
+        Uibackground.SetActive(false);
+        //
+        storeUI.gameObject.SetActive(true);
+        //storeUI.SetTrigger(Labels.AnimProperties.PURCHASE);
+    }
 }

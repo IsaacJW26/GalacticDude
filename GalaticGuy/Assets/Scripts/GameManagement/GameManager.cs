@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(endOfLevelDelay);
         Debug.Log("Start purchase phase");
+        UIManager.INSTANCE.PurchasePhase();
         gameState = GameState.purchaseUpgrade;
         StopCoroutine(waitingFunction);
     }
