@@ -5700,6 +5700,7 @@ MonoBehaviour:
   - {fileID: 9119908270630566908, guid: 72ec208e6718f9043832d27cb9756cfe, type: 3}
   - {fileID: 9119908270630566908, guid: 152658a90921d044999085e6fd95b3f6, type: 3}
   - {fileID: 9119908270630566908, guid: f40c546b6409d204185ab595c839636b, type: 3}
+  bossPrefabs: []
 --- !u!114 &723401887
 MonoBehaviour:
   m_ObjectHideFlags: 0

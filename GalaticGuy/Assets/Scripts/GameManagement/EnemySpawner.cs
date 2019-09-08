@@ -19,6 +19,8 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     Enemy[] enemiesPrefabs = null;
+    [SerializeField]
+    Enemy[] bossPrefabs = null;
 
     public delegate void EndLevelDelegate();
     private EndLevelDelegate endListener;
@@ -35,26 +37,34 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (spawnedCount < levels[currentLevel].length)
+        if (levels[currentLevel].containsBoss)
         {
-            if (timeTillNext <= 0)
-            {
-                SpawnRandomEnemy(levels[currentLevel].difficulty);
-                timeTillNext = GetNextTime(levels[currentLevel]);
-            }
-            else
-            {
-                timeTillNext--;
-            }
+            if(spawnedCount <= 0)
+                SpawnRandomBoss(levels[currentLevel].difficulty);
         }
-        else if (spawnedCount > killedCount)
+        else
         {
+            if (spawnedCount < levels[currentLevel].length)
+            {
+                if (timeTillNext <= 0)
+                {
+                    SpawnRandomEnemy(levels[currentLevel].difficulty);
+                    timeTillNext = GetNextTime(levels[currentLevel]);
+                }
+                else
+                {
+                    timeTillNext--;
+                }
+            }
+            else if (spawnedCount > killedCount)
+            {
 
-        }
-        else if(!ended)
-        {
-            ended = true;
-            OnLevelEnd();
+            }
+            else if (!ended)
+            {
+                ended = true;
+                OnLevelEnd();
+            }
         }
     }
 
@@ -78,6 +88,18 @@ public class EnemySpawner : MonoBehaviour
             this.length = length;
             this.containsBoss = containsBoss;
         }
+    }
+
+    private Enemy SpawnRandomBoss(int difficulty)
+    {
+        Enemy enemy = null;
+        spawnedCount++;
+
+        Vector3 spawnPosition = new Vector3(0f, spawnPositionY);
+
+        enemy = Instantiate(bossPrefabs[difficulty], spawnPosition, Quaternion.identity);
+
+        return enemy;
     }
 
     private Enemy SpawnRandomEnemy(int difficulty)
