@@ -8,12 +8,12 @@ public class UIManager : MonoBehaviour
 
     UICharge charge;
     UIHp health;
+    UIShop storeUI;
+
     [SerializeField]
     GameObject UiText;
     [SerializeField]
     GameObject Uibackground;
-    [SerializeField]
-    Animator storeUI;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
 
         charge = GetComponentInChildren<UICharge>();
         health = GetComponentInChildren<UIHp>();
+        storeUI = GetComponentInChildren<UIShop>();
     }
 
     // Update is called once per frame
