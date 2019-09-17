@@ -1,32 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UIShop : MonoBehaviour
 {
-    Animator[] shopElement;
+    Button[] shopElement;
     int currentIndex = 0;
     int delay = 0;
     const int maxDelay = 10;
-    // Start is called before the first frame update
+
     void Start()
     {
-        shopElement = GetComponentsInChildren<Animator>();
-        foreach(Animator elem in shopElement)
+        shopElement = GetComponentsInChildren<Button>();
+        EventSystem.current.SetSelectedGameObject(null);
+        /*
+        foreach (Button elem in shopElement)
         {
             if(elem.gameObject != gameObject)
-                elem.SetBool("Select", false);
+                elem.OnDeselect();
         }
-
-        while (shopElement[currentIndex].gameObject == gameObject)
-        {
-            currentIndex = (currentIndex + 1) % shopElement.Length;
-        }
-        shopElement[currentIndex].SetBool("Select", true);
-
+        */
+        shopElement[currentIndex].Select();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS) > 0)
@@ -53,22 +51,16 @@ public class UIShop : MonoBehaviour
 
     public void SelectNext()
     {
-        shopElement[currentIndex].SetBool("Select", false);
-        do
-        {
-            currentIndex = (currentIndex + 1) % shopElement.Length;
-        } while (shopElement[currentIndex].gameObject == gameObject);
-        shopElement[currentIndex].SetBool("Select", true);
+        //shopElement[currentIndex].Select;
+        currentIndex = (currentIndex + 1) % shopElement.Length;
+        shopElement[currentIndex].Select();
     }
 
     public void SelectPrev()
     {
-        shopElement[currentIndex].SetBool("Select", false);
-        do
-        {
-            currentIndex = (currentIndex - 1 + shopElement.Length) % shopElement.Length;
-        } while (shopElement[currentIndex].gameObject == gameObject);
-        shopElement[currentIndex].SetBool("Select", true);
+        //shopElement[currentIndex].SetBool("Select", false);
+        currentIndex = (currentIndex - 1 + shopElement.Length) % shopElement.Length;
+        shopElement[currentIndex].Select();
     }
 }
 
