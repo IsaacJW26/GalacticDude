@@ -8,7 +8,18 @@ public abstract class PlayerUpgrade
     protected MainCharacter player;
     private CharacterShoot shoot;
 
-    public void Initialise(CharacterMovement movement, MainCharacter player, CharacterShoot shoot)
+    //purchase info
+    [SerializeField]
+    protected Sprite sprite;
+    [SerializeField]
+    protected int cost;
+
+    //public getters
+    public int Cost { get { return cost; } }
+    public Sprite Sprite { get { return sprite; } }
+
+    //Intitialise values of player attributes
+    public virtual void Initialise(CharacterMovement movement, MainCharacter player, CharacterShoot shoot)
     {
         this.movement = movement;
         this.player = player;
@@ -19,17 +30,17 @@ public abstract class PlayerUpgrade
     public abstract void UpdateFrame(Vector3 currentPosition);
 
     //
-    public void OnMove(Vector3 direction)
+    public virtual void OnMove(Vector3 direction)
     {
         
     }
 
-    public void OnShoot(Vector3 direction)
+    public virtual void OnShoot(Vector3 direction)
     {
 
     }
 
-    public void OnRemove()
+    public virtual void OnRemove()
     {
 
     }

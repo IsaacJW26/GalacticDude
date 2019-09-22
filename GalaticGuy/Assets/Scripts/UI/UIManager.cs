@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
         charge = GetComponentInChildren<UICharge>();
         health = GetComponentInChildren<UIHp>();
         storeUI = GetComponentInChildren<UIShop>();
+        StartGame();
     }
 
     // Update is called once per frame

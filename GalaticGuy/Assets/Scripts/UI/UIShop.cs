@@ -15,38 +15,37 @@ public class UIShop : MonoBehaviour
     {
         shopElement = GetComponentsInChildren<Button>();
         EventSystem.current.SetSelectedGameObject(null);
-        /*
-        foreach (Button elem in shopElement)
-        {
-            if(elem.gameObject != gameObject)
-                elem.OnDeselect();
-        }
-        */
         shopElement[currentIndex].Select();
     }
 
     void FixedUpdate()
     {
-        if(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS) > 0)
+        InputSelection();
+    }
+
+    //Gets input from player
+    public void InputSelection()
+    {
+        if (delay <= 0)
         {
-            if(delay <= 0)
+            if (Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS) > 0)
             {
                 delay = maxDelay;
                 SelectNext();
             }
-        }
-        else if(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS) < 0)
-        {
-            if (delay <= 0)
+            else if (Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS) < 0)
             {
                 delay = maxDelay;
                 SelectPrev();
+            }
+            else if (Input.GetButtonDown("Fire1"))
+            {
+                SelectButton();
             }
         }
 
         if (delay > 0)
             delay--;
-
     }
 
     public void SelectNext()
@@ -61,6 +60,22 @@ public class UIShop : MonoBehaviour
         //shopElement[currentIndex].SetBool("Select", false);
         currentIndex = (currentIndex - 1 + shopElement.Length) % shopElement.Length;
         shopElement[currentIndex].Select();
+    }
+
+    //
+    public void SelectButton()
+    {
+        shopElement[currentIndex].onClick.Invoke();
+    }
+
+    public void PurchaseUpgrade(PlayerUpgrade upgrade)
+    {
+
+    }
+
+    public void ExitShop()
+    {
+        
     }
 }
 
