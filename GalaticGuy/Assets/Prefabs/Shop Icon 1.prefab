@@ -152,7 +152,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 90
+  m_Text: 55
 --- !u!1 &4391318884844001606
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +272,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uICost: {fileID: 4391318884529322825}
   uIImage: {fileID: 4391318884844378821}
+  testUpgradeObj:
+    sprite: {fileID: 21300000, guid: 52177b890ea4dce44918ea1658315e4c, type: 3}
+    cost: 55
+  testUpgradeObj2:
+    sprite: {fileID: 21300000, guid: ca1c9336bb690ab48a1f00ca9d7ce81b, type: 3}
+    cost: 90
 --- !u!1 &4391318884844378823
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +343,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ca1c9336bb690ab48a1f00ca9d7ce81b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52177b890ea4dce44918ea1658315e4c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

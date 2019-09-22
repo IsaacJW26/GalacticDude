@@ -16,7 +16,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
     const int chargeMax = 900;
 
     const int invulDuration = 30;
-    int timeTillInvulnerable = 0;
+    int IFramesRemaining = 0;
     IEnumerator invulCoroutine;
     Collider2D hitbox;
 
@@ -45,12 +45,12 @@ public class MainCharacter : MonoBehaviour, IDamageable
             move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)));
     }
 
-
     int chargeCooldown = 0;
     const int chargeCooldownMax = 15;
 
     private void FixedUpdate()
     {
+        //when charge hasn't started in 15 frames
         if (chargeCooldown <= 0)
         {
             //when moving use normal attack
@@ -141,14 +141,28 @@ public class MainCharacter : MonoBehaviour, IDamageable
         hitbox.enabled = false;
 
         //wait for frame duration
-        timeTillInvulnerable = invulDuration;
-        while(timeTillInvulnerable >= 0)
+        IFramesRemaining = invulDuration;
+        while(IFramesRemaining >= 0)
         {
             yield return null;
-            timeTillInvulnerable--;
+            IFramesRemaining--;
         }
 
         //enable hitbox
         hitbox.enabled = true;
+    }
+
+    public void OnDisable()
+    {
+        move.enabled = false;
+        shoot.enabled = false;
+        emission.enabled = false;
+        chargeCooldown = chargeCooldownMax;
+    }
+
+    public void OnEnable()
+    {
+        move.enabled = true;
+        shoot.enabled = true;
     }
 }
