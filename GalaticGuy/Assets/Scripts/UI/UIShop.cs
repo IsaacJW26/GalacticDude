@@ -38,7 +38,7 @@ public class UIShop : MonoBehaviour
                 delay = maxDelay;
                 SelectPrev();
             }
-            else if (Input.GetButtonDown("Fire1"))
+            else if (Input.GetButtonDown("Jump"))
             {
                 SelectButton();
             }
@@ -75,7 +75,7 @@ public class UIShop : MonoBehaviour
 
     public void ExitShop()
     {
-        
+        GameManager.INST.EndPurchasePhase();
     }
 }
 

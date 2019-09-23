@@ -26,7 +26,6 @@ public class UIManager : MonoBehaviour
         charge = GetComponentInChildren<UICharge>();
         health = GetComponentInChildren<UIHp>();
         storeUI = GetComponentInChildren<UIShop>();
-        StartGame();
     }
 
     // Update is called once per frame
@@ -78,7 +77,6 @@ public class UIManager : MonoBehaviour
         Uibackground.SetActive(false);
         //
         storeUI.gameObject.SetActive(true);
-        //storeUI.SetTrigger(Labels.AnimProperties.PURCHASE);
     }
 
 }

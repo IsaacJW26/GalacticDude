@@ -32,17 +32,26 @@ public class MainCharacter : MonoBehaviour, IDamageable
         health = new CharacterHealth(3, OnDeath);
         anim = GetComponent<Animator>();
         hitbox = GetComponent<Collider2D>();
-
+        //initialise particles
         emission = particles.emission;
         emission.enabled = false;
+        //
+        GameManager.INST.InitialisePlayer(SetEnabled);
     }
 
-    // Update is called once per frame
     void Update()
     {
         //input direction x
         if (chargeCooldown <= 0)
+        {
+            move.enabled = true;
+
             move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)));
+        }
+        else
+        {
+            move.enabled = false;
+        }
     }
 
     int chargeCooldown = 0;
@@ -76,7 +85,9 @@ public class MainCharacter : MonoBehaviour, IDamageable
             }
         }
         else
+        {
             chargeCooldown--;
+        }
     }
 
     public void ChargeMeter()
@@ -103,15 +114,16 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void OnDamage(int inDamage)
     {
+        //Damage animation
         anim.SetTrigger(Labels.AnimProperties.DAMAGE);
+        
+        //update health value
         health.TakeDamage(inDamage);
+        //update UI
         UIManager.INSTANCE.RemoveHP(health.GetHealth());
 
         //set invul
-        if (invulCoroutine != null)
-            StopCoroutine(invulCoroutine);
-        invulCoroutine = SetInvulnerable();
-        StartCoroutine(invulCoroutine);
+        SetInvulnerable();
     }
 
     //try shoot normal attack
@@ -126,7 +138,9 @@ public class MainCharacter : MonoBehaviour, IDamageable
         chargeMeter = 0;
         UpdateCharge();
         laserShoot.TryShoot(Vector3.up);
-        //stub
+
+        //set invulerable while shooting
+        SetInvulnerable();
     }
 
     public void UpdateCharge()
@@ -135,7 +149,15 @@ public class MainCharacter : MonoBehaviour, IDamageable
         UIManager.INSTANCE.UpdateCharge(percent);
     }
 
-    public IEnumerator SetInvulnerable()
+    private void SetInvulnerable()
+    {
+        if (invulCoroutine != null)
+            StopCoroutine(invulCoroutine);
+        invulCoroutine = SetInvulCoroutine();
+        StartCoroutine(invulCoroutine);
+    }
+
+    private IEnumerator SetInvulCoroutine()
     {
         //disable hitbox
         hitbox.enabled = false;
@@ -162,7 +184,15 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void OnEnable()
     {
-        move.enabled = true;
-        shoot.enabled = true;
+        if (move != null && shoot != null)
+        {
+            move.enabled = true;
+            shoot.enabled = true;
+        }
+    }
+
+    public void SetEnabled(bool enabled)
+    {
+        this.enabled = enabled;
     }
 }

@@ -5,27 +5,25 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterHealth
 {
-    public delegate void UpdateDel();
-
     [SerializeField]
     private int maxHP = 5;
     private int currentHP;
-    UpdateDel deathMethod;
+    BasicMethod deathMethod;
 
-    public void InitialiseMethods(UpdateDel deathMethod)
+    public void InitialiseMethods(BasicMethod deathMethod)
     { 
         this.currentHP = maxHP;
         this.deathMethod = deathMethod;
     }
 
-    public CharacterHealth(int maxHP, UpdateDel deathMethod)
+    public CharacterHealth(int maxHP, BasicMethod deathMethod)
     {
         this.maxHP = maxHP;
         this.currentHP = maxHP;
         this.deathMethod = deathMethod;
     }
 
-    public CharacterHealth(int maxHP, int currentHP, UpdateDel deathMethod, UpdateDel onDamageMethod)
+    public CharacterHealth(int maxHP, int currentHP, BasicMethod deathMethod, BasicMethod onDamageMethod)
     {
         this.maxHP = maxHP;
         this.currentHP = currentHP;

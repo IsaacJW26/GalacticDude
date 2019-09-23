@@ -5930,33 +5930,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPositionY: 5
   levels:
-  - difficulty: 5
-    length: 10
-    containsBoss: 0
   - difficulty: 0
-    length: 5
+    length: 3
     containsBoss: 0
+    averageTime: 200
   - difficulty: 1
-    length: 7
+    length: 3
     containsBoss: 0
-  - difficulty: 1
+    averageTime: 100
+  - difficulty: 2
+    length: 3
+    containsBoss: 0
+    averageTime: 100
+  - difficulty: 0
     length: 1
     containsBoss: 1
+    averageTime: 450
   - difficulty: 0
     length: 0
     containsBoss: 0
+    averageTime: 0
   - difficulty: 0
     length: 0
     containsBoss: 0
+    averageTime: 0
   - difficulty: 0
     length: 0
     containsBoss: 0
+    averageTime: 0
   enemiesPrefabs:
   - {fileID: 9119908270630566908, guid: 0e31c05e1a13c074aba851b78b03ac48, type: 3}
   - {fileID: 9119908270630566908, guid: 72ec208e6718f9043832d27cb9756cfe, type: 3}
   - {fileID: 9119908270630566908, guid: 152658a90921d044999085e6fd95b3f6, type: 3}
   - {fileID: 9119908270630566908, guid: f40c546b6409d204185ab595c839636b, type: 3}
-  bossPrefabs: []
+  bossPrefabs:
+  - {fileID: 298488469091147086, guid: 5642c885c737ac340b0392bcc3a9e9f0, type: 3}
 --- !u!114 &723401887
 MonoBehaviour:
   m_ObjectHideFlags: 0

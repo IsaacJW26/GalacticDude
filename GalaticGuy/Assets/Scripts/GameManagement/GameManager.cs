@@ -11,23 +11,24 @@ public class GameManager : MonoBehaviour
     IEnumerator waitingFunction = null;
 
     const float endOfLevelDelay = 5f;
-    // Start is called before the first frame update
+
+    //
+    public delegate void ActivePlayer(bool active);
+    ActivePlayer playerActive;
+
+
     void Awake()
     {
         if (INST == null)
             INST = this;
         else
             Destroy(this);
+
         DontDestroyOnLoad(gameObject);
 
         spawner = GetComponent<EnemySpawner>();
         spawner.SetListener(EndLevel);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UIManager.INSTANCE.StartGame();
     }
 
     private void EndLevel()
@@ -36,36 +37,49 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Start ended phase");
             gameState = GameState.ended;
-            UIManager.INSTANCE.EndGame();
+
+            //disable player
+            playerActive(false);
+
             //
-            waitingFunction = endLevelDelay();
+            waitingFunction = EndLevelDelay();
             StartCoroutine(waitingFunction);
-            EndLevelUI();
+
+            //activate end game ui
+            UIManager.INSTANCE.EndGame();
         }
     }
 
-    private IEnumerator endLevelDelay()
+    private IEnumerator EndLevelDelay()
     {
         yield return new WaitForSeconds(endOfLevelDelay);
         Debug.Log("Start purchase phase");
+        //
         UIManager.INSTANCE.PurchasePhase();
+        //
         gameState = GameState.purchaseUpgrade;
-        StopCoroutine(waitingFunction);
-    }
 
-    private void EndLevelUI()
-    {
-        //stub
+        StopCoroutine(waitingFunction);
+        waitingFunction = null;
     }
 
     [ContextMenu("end purchase phase")]
     public void EndPurchasePhase()
     {
+        //activate start game ui
         UIManager.INSTANCE.StartGame();
 
-        Debug.Log("start playing phase");
+        Debug.Log("end playing phase");
         gameState = GameState.playing;
         spawner.StartLevel();
+
+        //re enable player
+        playerActive(true);
+    }
+
+    public void InitialisePlayer(ActivePlayer enablePlayer)
+    {
+        playerActive = enablePlayer;
     }
 
     public void EnemyDeath()
@@ -78,3 +92,5 @@ public enum GameState
 {
     playing, ended, purchaseUpgrade
 }
+
+public delegate void BasicMethod();

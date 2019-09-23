@@ -42,4 +42,19 @@ public class CharacterMovement : MonoBehaviour
     {
         ydirection = Mathf.Clamp(value, -1, 1);
     }
+
+    private void OnDisable()
+    {
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
+    }
+
+    private void OnEnable()
+    {
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = false;
+        }
+    }
 }
