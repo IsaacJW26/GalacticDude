@@ -80,4 +80,5 @@ public class UIManager : MonoBehaviour
         storeUI.gameObject.SetActive(true);
         //storeUI.SetTrigger(Labels.AnimProperties.PURCHASE);
     }
+
 }
