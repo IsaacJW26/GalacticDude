@@ -193,6 +193,9 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void SetEnabled(bool enabled)
     {
-        this.enabled = enabled;
+        if (move != null)
+            move.enabled = true;
+        if(shoot != null)
+            shoot.enabled = true;
     }
 }

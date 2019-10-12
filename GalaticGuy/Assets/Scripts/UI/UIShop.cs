@@ -38,7 +38,7 @@ public class UIShop : MonoBehaviour
                 delay = maxDelay;
                 SelectPrev();
             }
-            else if (Input.GetButtonDown("Jump"))
+            else if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
             {
                 SelectButton();
             }

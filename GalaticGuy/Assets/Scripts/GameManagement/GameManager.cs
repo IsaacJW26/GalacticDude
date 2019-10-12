@@ -86,6 +86,42 @@ public class GameManager : MonoBehaviour
     {
         spawner.EnemyDied();
     }
+
+    [ContextMenu("0.25x Speed")]
+    public void Speed_quarterx()
+    {
+        Time.timeScale = 0.25f;
+    }
+
+    [ContextMenu("0.5x Speed")]
+    public void Speed_halfx()
+    {
+        Time.timeScale = 0.5f;
+    }
+
+    [ContextMenu("1x Speed")]
+    public void Speed1x()
+    {
+        Time.timeScale = 1f;
+    }
+
+    [ContextMenu("2x Speed")]
+    public void Speed2x()
+    {
+        Time.timeScale = 2f;
+    }
+
+    [ContextMenu("5x Speed")]
+    public void Speed5x()
+    {
+        Time.timeScale = 5f;
+    }
+
+    [ContextMenu("10x Speed")]
+    public void Speed10x()
+    {
+        Time.timeScale = 10f;
+    }
 }
 
 public enum GameState
