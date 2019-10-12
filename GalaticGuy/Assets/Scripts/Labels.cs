@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Labels
 {
-    public static class TAGS
+    public static class Tags
     {
         public static string ENEMY = "Enemy";
         public static string PLAYER = "Player";
@@ -27,6 +27,7 @@ namespace Labels
     {
         public static string DAMAGE = "Damage";
         public static string CHARGING = "Charging";
+        public static string DEATH = "Death";
 
     }
 }

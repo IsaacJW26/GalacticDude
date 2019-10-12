@@ -90,6 +90,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
         }
     }
 
+    //increments charge on a single frame
     public void ChargeMeter()
     {
         if (chargeMeter >= chargeMax)
@@ -109,7 +110,9 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void OnDeath()
     {
-        //stub
+        GameManager.INST.PlayerDeath();
+        anim.SetBool(Labels.AnimProperties.DEATH, true);
+        SetEnabled(false);
     }
 
     public void OnDamage(int inDamage)
@@ -193,9 +196,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void SetEnabled(bool enabled)
     {
-        if (move != null)
-            move.enabled = true;
-        if(shoot != null)
-            shoot.enabled = true;
+        hitbox.enabled = enabled;
+        this.enabled = enabled;
     }
 }

@@ -379,6 +379,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4540031686852793605, guid: 960e45fed8a25d9419dd0429961ea5a7,
+        type: 3}
+      propertyPath: testUpgradeObj.cost
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 960e45fed8a25d9419dd0429961ea5a7, type: 3}
 --- !u!224 &36957587 stripped
@@ -5597,7 +5602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80287e820997b5e449ac6a5f3d0d0725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UiText: {fileID: 664108999}
+  UiText: {fileID: 664109001}
   Uibackground: {fileID: 1774332194}
 --- !u!1 &340871733
 GameObject:
@@ -5934,19 +5939,19 @@ MonoBehaviour:
   - difficulty: 0
     length: 3
     containsBoss: 0
-    averageTime: 200
+    averageTime: 0
   - difficulty: 1
     length: 3
     containsBoss: 0
-    averageTime: 100
+    averageTime: 0
   - difficulty: 2
     length: 3
     containsBoss: 0
-    averageTime: 100
+    averageTime: 0
   - difficulty: 0
     length: 1
     containsBoss: 1
-    averageTime: 450
+    averageTime: 0
   - difficulty: 0
     length: 0
     containsBoss: 0
@@ -6166,6 +6171,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540031686852793605, guid: 960e45fed8a25d9419dd0429961ea5a7,
+        type: 3}
+      propertyPath: testUpgradeObj.cost
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 960e45fed8a25d9419dd0429961ea5a7, type: 3}
@@ -17204,6 +17214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540031686852793605, guid: 960e45fed8a25d9419dd0429961ea5a7,
+        type: 3}
+      propertyPath: testUpgradeObj.cost
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 960e45fed8a25d9419dd0429961ea5a7, type: 3}

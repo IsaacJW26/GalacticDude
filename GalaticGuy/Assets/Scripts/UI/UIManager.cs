@@ -11,9 +11,13 @@ public class UIManager : MonoBehaviour
     UIShop storeUI;
 
     [SerializeField]
-    GameObject UiText;
+    UnityEngine.UI.Text UiText;
     [SerializeField]
     GameObject Uibackground;
+    readonly string STR_CLEAR = "Wave Cleared";
+    readonly string STR_INCOMING = "Wave Incoming";
+    readonly string STR_DEAD = "Game Over\nHold any key to try again";
+
 
     // Start is called before the first frame update
     void Awake()
@@ -47,36 +51,50 @@ public class UIManager : MonoBehaviour
     //
     public void StartGame()
     {
-        UiText.SetActive(false);
-        //
+        UiText.gameObject.SetActive(false);
+        //activate UI
         charge.gameObject.SetActive(true);
         health.gameObject.SetActive(true);
         Uibackground.SetActive(true);
-        //
+        //disable store
         storeUI.gameObject.SetActive(false);
     }
 
     //
     public void EndGame()
     {
-        UiText.SetActive(true);
-        //
+        //activate text
+        UiText.text = STR_CLEAR;
+        UiText.gameObject.SetActive(true);
+
+        //disable everything else
         charge.gameObject.SetActive(false);
         health.gameObject.SetActive(false);
-
         Uibackground.SetActive(false);
-        //
     }
 
     //de activate everything
     public void PurchasePhase()
     {
-        UiText.SetActive(false);
+        //activate store ui
+        storeUI.gameObject.SetActive(true);
+        //
+        UiText.gameObject.SetActive(false);
         charge.gameObject.SetActive(false);
         health.gameObject.SetActive(false);
         Uibackground.SetActive(false);
-        //
-        storeUI.gameObject.SetActive(true);
     }
 
+    //playerdeath
+    public void PlayerDeath()
+    {
+        //activate text
+        UiText.text = STR_DEAD;
+        UiText.gameObject.SetActive(true);
+
+        //disable everything else
+        charge.gameObject.SetActive(false);
+        health.gameObject.SetActive(false);
+        Uibackground.SetActive(false);
+    }
 }

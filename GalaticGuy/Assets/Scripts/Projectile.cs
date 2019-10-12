@@ -76,12 +76,12 @@ public class Projectile : MonoBehaviour, IDamageable
     */
     public bool CheckEnemy(Collider2D col)
     {
-        return CheckTag(col, Labels.TAGS.ENEMY) && enemies;
+        return CheckTag(col, Labels.Tags.ENEMY) && enemies;
     }
 
     public bool CheckPlayer(Collider2D col)
     {
-        return CheckTag(col, Labels.TAGS.PLAYER) && player;
+        return CheckTag(col, Labels.Tags.PLAYER) && player;
     }
 
     //Destroys 

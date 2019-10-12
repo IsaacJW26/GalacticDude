@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public delegate void ActivePlayer(bool active);
     ActivePlayer playerActive;
 
-
     void Awake()
     {
         if (INST == null)
@@ -53,28 +52,41 @@ public class GameManager : MonoBehaviour
     private IEnumerator EndLevelDelay()
     {
         yield return new WaitForSeconds(endOfLevelDelay);
-        Debug.Log("Start purchase phase");
+        gameState = GameState.purchaseUpgrade;
+
         //
         UIManager.INSTANCE.PurchasePhase();
         //
-        gameState = GameState.purchaseUpgrade;
 
         StopCoroutine(waitingFunction);
         waitingFunction = null;
+
+        Debug.Log("Start purchase phase");
     }
 
     [ContextMenu("end purchase phase")]
     public void EndPurchasePhase()
     {
+        gameState = GameState.playing;
+
         //activate start game ui
         UIManager.INSTANCE.StartGame();
 
         Debug.Log("end playing phase");
-        gameState = GameState.playing;
         spawner.StartLevel();
 
         //re enable player
         playerActive(true);
+    }
+
+    [ContextMenu("Kill Player")]
+    public void PlayerDeath()
+    {
+        gameState = GameState.playing;
+
+        UIManager.INSTANCE.PlayerDeath();
+
+        Debug.Log("Player died");
     }
 
     public void InitialisePlayer(ActivePlayer enablePlayer)
@@ -126,7 +138,7 @@ public class GameManager : MonoBehaviour
 
 public enum GameState
 {
-    playing, ended, purchaseUpgrade
+    playing, ended, purchaseUpgrade, dead
 }
 
 public delegate void BasicMethod();
