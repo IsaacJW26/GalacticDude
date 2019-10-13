@@ -115,6 +115,12 @@ public class MainCharacter : MonoBehaviour, IDamageable
         SetEnabled(false);
     }
 
+    [ContextMenu("Take Damage")]
+    public void OnDamage()
+    {
+        OnDamage(1);
+    }
+
     public void OnDamage(int inDamage)
     {
         //Damage animation
