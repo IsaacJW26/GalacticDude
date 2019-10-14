@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(EnemySpawner))]
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +28,14 @@ public class GameManager : MonoBehaviour
         spawner = GetComponent<EnemySpawner>();
         spawner.SetListener(EndLevel);
         UIManager.INSTANCE.StartGame();
+    }
+
+    private void Update()
+    {
+        if(gameState == GameState.dead && Input.anyKey)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     private void EndLevel()
