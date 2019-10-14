@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IDamageable
 {
-    [SerializeField]
-    int maxLifeTime = 300;
+    [System.Serializable]
+    private struct Stats
+    {
+        public int shootInterval;
+        public int damage;
+        public float initialSpeed;
+        public float projectileDrag;
+        public int maxLifeTime;
+    }
     protected int timeSinceBirth = 0;
     protected int index;
 
     Rigidbody2D rb;
     protected Vector2 velocity;
-    protected int damage;
     protected CharacterShoot parent;
+
+    [SerializeField]
+    Stats stats;
+
     [Header("Collisions")]
     [SerializeField]
     bool player = true;
@@ -31,20 +41,20 @@ public class Projectile : MonoBehaviour, IDamageable
     {
         rb.velocity = velocity;
         timeSinceBirth++;
-        if (timeSinceBirth > maxLifeTime)
+
+        if (timeSinceBirth > stats.maxLifeTime)
             DisableObject();
     }
 
-    public void Initialise(int damage, int index, CharacterShoot parent)
+    public void Initialise(int index, CharacterShoot parent)
     {
-        this.damage = damage;
         this.index = index;
         this.parent = parent;
     }
 
-    public void Activate(Vector3 position, Vector2 velocity)
+    public void Activate(Vector3 position, Vector2 direction)
     {
-        this.velocity = velocity;
+        this.velocity = direction.normalized * stats.initialSpeed;
         transform.position = position;
         timeSinceBirth = 0;
         gameObject.SetActive(this);
@@ -58,7 +68,7 @@ public class Projectile : MonoBehaviour, IDamageable
         {
             //damage hit target
             IDamageable damageable = collision.GetComponentInParent<IDamageable>();
-            damageable?.OnDamage(damage);
+            damageable?.OnDamage(stats.damage);
             //disable this object
             OnDamage(0);
         }

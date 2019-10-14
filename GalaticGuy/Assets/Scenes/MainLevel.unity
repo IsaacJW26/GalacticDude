@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 8207699}
   - component: {fileID: 8207700}
   - component: {fileID: 8207694}
+  - component: {fileID: 8207701}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -263,6 +264,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8207701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8207693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67b726f8a4ef20479b3abdd2f34fc03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test:
+    stats:
+      shootInterval: 3
+      projectileDamage: 2
+      projectileSpeed: 1
+    projectile: {fileID: 3735054432054898068, guid: 002ec457c3227334a979ad70c6468457,
+      type: 3}
 --- !u!1001 &36957586
 PrefabInstance:
   m_ObjectHideFlags: 0
