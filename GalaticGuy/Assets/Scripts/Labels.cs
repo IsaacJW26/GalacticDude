@@ -20,7 +20,7 @@ namespace Labels
     {
         public static string HORIZONTAL_AXIS = "Horizontal";
         public static string VERTICAL_AXIS = "Vertical";
-
+        public static string SHOOT = "Jump";
     }
 
     public static class AnimProperties

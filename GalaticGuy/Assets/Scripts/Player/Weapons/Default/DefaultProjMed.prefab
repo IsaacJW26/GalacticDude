@@ -1,6 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2231036581932612546
+--- !u!58 &-3049458228655092229
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4654127213129162372}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
+--- !u!1001 &5161839547234442996
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,11 +26,16 @@ PrefabInstance:
     - target: {fileID: 519112092338487408, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_Name
-      value: EnemyProjectile Variant
+      value: DefaultProjMed
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092338487408, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
-      propertyPath: enemies
+      propertyPath: player
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
@@ -25,12 +46,37 @@ PrefabInstance:
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: stats.damage
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: stats.initialSpeed
-      value: 4
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: stats.projectileDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: stats.yAccelerationOverTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: stats.dragOverTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: projectiles
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: destroyOnHit
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
@@ -87,5 +133,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3333804251504392022, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
+--- !u!1 &4654127213129162372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 519112092338487408, guid: 8022621cf3437834085c47560e4ce33e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5161839547234442996}
+  m_PrefabAsset: {fileID: 0}

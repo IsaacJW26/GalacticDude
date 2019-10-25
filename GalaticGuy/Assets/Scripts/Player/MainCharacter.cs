@@ -5,19 +5,14 @@ using UnityEngine;
 public class MainCharacter : MonoBehaviour, IDamageable
 {
     CharacterMovement move;
-    CharacterShoot shoot;
     CharacterHealth health;
-    [SerializeField]
-    CharacterShoot laserShoot;
+    WeaponManager weapons; 
     Animator anim;
-
-    int chargeMeter = 0;
-    //a second and a half
-    const int chargeMax = 900;
 
     const int invulDuration = 30;
     int IFramesRemaining = 0;
     IEnumerator invulCoroutine;
+    int frozenTimeRemaining;
     Collider2D hitbox;
 
     [SerializeField]
@@ -28,9 +23,9 @@ public class MainCharacter : MonoBehaviour, IDamageable
     void Start()
     {
         move = GetComponent<CharacterMovement>();
-        shoot = GetComponent<CharacterShoot>();
         health = new CharacterHealth(3, OnDeath);
         anim = GetComponent<Animator>();
+        weapons = GetComponent<WeaponManager>();
         hitbox = GetComponent<Collider2D>();
         //initialise particles
         emission = particles.emission;
@@ -42,11 +37,23 @@ public class MainCharacter : MonoBehaviour, IDamageable
     void Update()
     {
         //input direction x
-        if (chargeCooldown <= 0)
+        if (frozenTimeRemaining <= 0)
         {
             move.enabled = true;
 
             move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)));
+            if (Input.GetButtonDown(Labels.Inputs.SHOOT))
+            {
+                weapons.OnShootButtonDown();
+            }
+            else if(Input.GetButton(Labels.Inputs.SHOOT))
+            {
+                weapons.OnShootButtonHold();
+            }
+            else if(Input.GetButtonUp(Labels.Inputs.SHOOT))
+            {
+                weapons.OnShootButtonRelease();
+            }
         }
         else
         {
@@ -54,58 +61,11 @@ public class MainCharacter : MonoBehaviour, IDamageable
         }
     }
 
-    int chargeCooldown = 0;
-    const int chargeCooldownMax = 15;
-
     private void FixedUpdate()
     {
-        //when charge hasn't started in 15 frames
-        if (chargeCooldown <= 0)
-        {
-            //when moving use normal attack
-            if (IsInput())
-            {
-                emission.enabled = false;
-
-                if (chargeMeter >= chargeMax)
-                {
-                    chargeCooldown = chargeCooldownMax;
-                    ShootSpecial();
-                }
-                else
-                {
-                    ShootNormal();
-                }
-            }
-            //charge special when not moving
-            else
-            {
-                ChargeMeter();
-                emission.enabled = true;
-            }
-        }
-        else
-        {
-            chargeCooldown--;
-        }
-    }
-
-    //increments charge on a single frame
-    public void ChargeMeter()
-    {
-        if (chargeMeter >= chargeMax)
-        {
-             
-        }
-        else
-            chargeMeter++;
-
-        UpdateCharge();
-    }
-
-    public bool IsInput()
-    {
-        return Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)) != 0;
+        //count down to unfreeze character
+        if (frozenTimeRemaining > 0)
+            frozenTimeRemaining--;
     }
 
     public void OnDeath()
@@ -138,24 +98,13 @@ public class MainCharacter : MonoBehaviour, IDamageable
     //try shoot normal attack
     public void ShootNormal()
     {
-        shoot.TryShoot(Vector3.up * 3f);
+
     }
 
-    //try shoot special attack
-    public void ShootSpecial()
+    //Freeze player for given frames
+    public void freezePlayer(int freezeDuration)
     {
-        chargeMeter = 0;
-        UpdateCharge();
-        laserShoot.TryShoot(Vector3.up);
-
-        //set invulerable while shooting
-        SetInvulnerable();
-    }
-
-    public void UpdateCharge()
-    {
-        float percent = (float)chargeMeter / (float)chargeMax;
-        UIManager.INSTANCE.UpdateCharge(percent);
+        frozenTimeRemaining = freezeDuration;
     }
 
     private void SetInvulnerable()
@@ -186,23 +135,23 @@ public class MainCharacter : MonoBehaviour, IDamageable
     public void OnDisable()
     {
         move.enabled = false;
-        shoot.enabled = false;
+        weapons.enabled = false;
         emission.enabled = false;
-        chargeCooldown = chargeCooldownMax;
     }
 
     public void OnEnable()
     {
-        if (move != null && shoot != null)
+        if (move != null && weapons != null)
         {
             move.enabled = true;
-            shoot.enabled = true;
+            weapons.enabled = true;
         }
     }
 
     public void SetEnabled(bool enabled)
     {
         hitbox.enabled = enabled;
+        weapons.enabled = enabled;
         this.enabled = enabled;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterShoot : MonoBehaviour
+public class CharacterShoot : MonoBehaviour, Shooter
 {
     [SerializeField]
     int MAX_PROJECTILES = 20;
@@ -32,8 +32,8 @@ public class CharacterShoot : MonoBehaviour
         for (int ii = 0; ii < MAX_PROJECTILES; ii++)
         {
             objectPool[ii] = Instantiate(projectile);
-            objectPool[ii].Initialise(projectileDamage, ii, this);
-            DisableProjectile(ii);
+            objectPool[ii].Initialise(ii, this);
+            DisableProjectile(objectPool[ii]);
         }
     }
 
@@ -71,7 +71,6 @@ public class CharacterShoot : MonoBehaviour
                 return objectPool[ii];
             }
         }
-
         return null;
     }
 
@@ -83,9 +82,14 @@ public class CharacterShoot : MonoBehaviour
         }
     }
 
-    public void DisableProjectile(int index)
+    public void DisableProjectile(Projectile proj)
     {
-        activeElements[index] = false;
-        objectPool[index].gameObject.SetActive(false);
+        activeElements[proj.GetIndex()] = false;
+        objectPool[proj.GetIndex()].gameObject.SetActive(false);
     }
+}
+
+public interface Shooter
+{
+    void DisableProjectile(Projectile proj);
 }
