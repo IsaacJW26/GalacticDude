@@ -33,9 +33,13 @@ public class UIManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void UpdateCharge(float percent)
+    public void UpdateChargeL(float percent)
     {
-        charge.UpdateCharge(percent);
+        charge.UpdateChargeL(percent);
+    }
+    public void UpdateChargeR(float percent)
+    {
+        charge.UpdateChargeR(percent);
     }
 
     public void UpdateHP(int hp)

@@ -7,25 +7,42 @@ using Labels;
 public class UICharge : MonoBehaviour
 {
     [SerializeField]
-    Slider chargebar;
+    Slider chargebarL;
+    [SerializeField]
+    Slider chargebarR;
     Animator anim;
-    bool charging;
+    bool chargingL, chargingR;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    public void UpdateCharge(float percent)
+    private void InitialiseCharge(float percentOfMax)
     {
-        charging = true;
-        chargebar.value = percent;
+        //stub
+    }
+
+    // Update is called once per frame
+    public void UpdateChargeL(float percent)
+    {
+        chargingL = true;
+        chargingR = true;
+        chargebarR.value = 0f;
+        chargebarL.value = percent;
+    }
+
+    public void UpdateChargeR(float percent)
+    {
+        chargingL = false;
+        chargingR = true;
+        chargebarL.value = 1f;
+        chargebarR.value = percent;
     }
 
     private void FixedUpdate()
     {
-        anim.SetBool(AnimProperties.CHARGING, charging);
-        charging = false;
+        //anim.SetBool(AnimProperties.CHARGING, chargingL);
+        chargingL = false;
     }
 }

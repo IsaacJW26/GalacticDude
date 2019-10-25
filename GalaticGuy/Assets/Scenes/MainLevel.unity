@@ -26733,7 +26733,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cf3063ecb14564f9380c90df32cba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargebar: {fileID: 1867233064}
+  chargebarL: {fileID: 1867233064}
+  chargebarR: {fileID: 601587453}
 --- !u!95 &1813798698
 Animator:
   serializedVersion: 3

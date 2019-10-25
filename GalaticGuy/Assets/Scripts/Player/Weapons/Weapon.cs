@@ -25,9 +25,11 @@ public class Weapon : MonoBehaviour, Shooter
         public int chargeTier = WeaponManager.MAX_CHARGE / 2;
     }
 
+    //stores current weapon state
     protected struct State
     {
         //
+
         public int currentCharge;
     }
 
@@ -53,9 +55,8 @@ public class Weapon : MonoBehaviour, Shooter
         if(projectileDefault == null)
             Debug.LogError("No default projectile selected");
 
-        state.currentCharge = 0;
+        SetCharge(0);
         this.timeUntilNextShot = 0;
-        Debug.Log("call me uwu");
     }
 
     // Update is called once per frame
@@ -64,7 +65,31 @@ public class Weapon : MonoBehaviour, Shooter
         if (timeUntilNextShot > 0)
             timeUntilNextShot--;
     }
-    
+
+    private void SetCharge(int charge)
+    {
+
+        float percent;
+        if (charge < stats.chargeTier)
+        {
+            percent = (float)charge / (float)stats.chargeTier;
+            UIManager.INSTANCE.UpdateChargeL(percent);
+            state.currentCharge = charge;
+
+        }
+        else
+        {
+            percent = (float)(charge - stats.chargeTier) /
+                (float)(WeaponManager.MAX_CHARGE - stats.chargeTier);
+            UIManager.INSTANCE.UpdateChargeR(percent);
+
+            if (charge >= WeaponManager.MAX_CHARGE)
+                state.currentCharge = WeaponManager.MAX_CHARGE;
+            else
+                state.currentCharge = charge;
+        }
+    }
+
     public virtual void OnShootButtonDown()
     {
 
@@ -72,10 +97,7 @@ public class Weapon : MonoBehaviour, Shooter
 
     public virtual void OnShootButtonHold()
     {
-        if ((state.currentCharge + stats.chargeRate) >= WeaponManager.MAX_CHARGE)
-            state.currentCharge = WeaponManager.MAX_CHARGE;
-        else
-            state.currentCharge += stats.chargeRate;
+        SetCharge(state.currentCharge + stats.chargeRate);
     }
 
     public virtual void OnShootButtonRelease(WeaponManager manager)
@@ -89,7 +111,6 @@ public class Weapon : MonoBehaviour, Shooter
             if (state.currentCharge >= WeaponManager.MAX_CHARGE)
             {
                 ShootMax(manager.GetPlayerDirection(), manager);
-
             }
             else if (state.currentCharge >= stats.chargeTier)
             {
@@ -100,10 +121,9 @@ public class Weapon : MonoBehaviour, Shooter
                 ShootDefault(manager.GetPlayerDirection(), manager);
             }
             //reset charge
-            state.currentCharge = 0;
+            SetCharge(0);
         }
     }
-
     //
     public int GetCurrentCharge()
     {
