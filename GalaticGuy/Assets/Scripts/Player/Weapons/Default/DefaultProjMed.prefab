@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: stats.initialSpeed
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}

@@ -38,11 +38,11 @@ public class Weapon : MonoBehaviour, Shooter
     State state;
 
     [SerializeField]
-    Projectile projectileDefault = null;
+    protected Projectile projectileDefault = null;
     [SerializeField]
-    Projectile projectileMedium = null;
+    protected Projectile projectileMedium = null;
     [SerializeField]
-    Projectile projectileMax = null;
+    protected Projectile projectileMax = null;
     [SerializeField]
     Vector2 relativeShoot = Vector2.up;
 
@@ -110,15 +110,15 @@ public class Weapon : MonoBehaviour, Shooter
 
             if (state.currentCharge >= WeaponManager.MAX_CHARGE)
             {
-                ShootMax(manager.GetPlayerDirection(), manager);
+                ShootMax(manager.GetPlayerDirection(), manager.GetLaunchPosition());
             }
             else if (state.currentCharge >= stats.chargeTier)
             {
-                ShootMedium(manager.GetPlayerDirection(), manager);
+                ShootMedium(manager.GetPlayerDirection(), manager.GetLaunchPosition());
             }
             else
             {
-                ShootDefault(manager.GetPlayerDirection(), manager);
+                ShootDefault(manager.GetPlayerDirection(), manager.GetLaunchPosition());
             }
             //reset charge
             SetCharge(0);
@@ -130,30 +130,28 @@ public class Weapon : MonoBehaviour, Shooter
         return state.currentCharge;
     }
 
-    protected virtual void ShootDefault(Vector3 direction, WeaponManager manager)
+    protected virtual void ShootDefault(Vector3 direction, Vector3 pos)
     {
-        Projectile proj = Instantiate(projectileDefault);
-        proj.Activate(manager.GetLaunchPosition(), direction);
-        proj.Initialise(0, this);
+        CreateProjectile(projectileDefault, direction, pos);
     }
 
-
-    protected virtual void ShootMedium(Vector3 direction, WeaponManager manager)
+    protected virtual void ShootMedium(Vector3 direction, Vector3 pos)
     {
-        Projectile proj = Instantiate(projectileMedium);
-        proj.Activate(manager.GetLaunchPosition(), direction);
-        proj.Initialise(0, this);
-        Debug.Log("SHOOT MEDIUM");
-
+        CreateProjectile(projectileMedium, direction, pos);
     }
 
-    protected virtual void ShootMax(Vector3 direction, WeaponManager manager)
+    protected virtual void ShootMax(Vector3 direction, Vector3 pos)
     {
-        Projectile proj = Instantiate(projectileMax);
-        proj.Activate(manager.GetLaunchPosition(), direction);
-        proj.Initialise(0, this);
-        Debug.Log("SHOOT MAX");
+        CreateProjectile(projectileMax, direction, pos);
+    }
 
+    protected Projectile CreateProjectile(Projectile projPrefab, Vector3 direction, Vector3 pos)
+    {
+        Projectile proj = Instantiate(projPrefab);
+        proj.Activate(pos, direction);
+        proj.Initialise(0, this);
+
+        return proj;
     }
 
     public void DisableProjectile(Projectile proj)

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6407506664756749491}
-  - component: {fileID: 176995618498543106}
+  - component: {fileID: 3919556559296529783}
   m_Layer: 0
-  m_Name: WeaponDefault
+  m_Name: ScatterWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &176995618498543106
+--- !u!114 &3919556559296529783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,17 +40,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437679865043990651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 809b456215d95fa48b05eb89f0683c34, type: 3}
+  m_Script: {fileID: 11500000, guid: 9466ca78b7843094592dd0d2b0d6a250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    minShootInterval: 20
-    chargeRate: 5
-    chargeTier: 150
-  projectileDefault: {fileID: 3735054432054898068, guid: a7a8387a59411ed4488a3890527ddddd,
+    minShootInterval: 15
+    chargeRate: 15
+    chargeTier: 300
+  projectileDefault: {fileID: 3735054432054898068, guid: 935e9a5abfb578f46ac0cd085d776451,
     type: 3}
-  projectileMedium: {fileID: 3735054432054898068, guid: ba7101d3824c60f46a78d0c39071231b,
+  projectileMedium: {fileID: 3735054432054898068, guid: 0ae34d1105f44de41bbf593e5f363bf6,
     type: 3}
-  projectileMax: {fileID: 8038325770130421891, guid: d9455d972a96e004d9fe70fcfe0c4d76,
-    type: 3}
-  relativeShoot: {x: 0, y: 0}
+  projectileMax: {fileID: 0}
+  relativeShoot: {x: 0, y: 1}

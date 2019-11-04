@@ -32,6 +32,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
         emission.enabled = false;
         //
         GameManager.INST.InitialisePlayer(SetEnabled);
+        GameManager.INST.SetPlayer(this);
     }
 
     void Update()
