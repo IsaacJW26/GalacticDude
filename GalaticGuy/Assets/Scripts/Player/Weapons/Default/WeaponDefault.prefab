@@ -46,7 +46,7 @@ MonoBehaviour:
   stats:
     minShootInterval: 20
     chargeRate: 5
-    chargeTier: 150
+    chargeTier: 300
   projectileDefault: {fileID: 3735054432054898068, guid: a7a8387a59411ed4488a3890527ddddd,
     type: 3}
   projectileMedium: {fileID: 3735054432054898068, guid: ba7101d3824c60f46a78d0c39071231b,

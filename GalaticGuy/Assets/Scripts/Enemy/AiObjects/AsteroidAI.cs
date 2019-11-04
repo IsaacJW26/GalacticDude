@@ -18,6 +18,9 @@ public class AsteroidAI : EnemyAI
         float xVal = Random.Range(-3f, 3f);
 
         direction = new Vector2(xVal, -1f).normalized;
+
+        float scale = Random.Range(0.8f, 1.2f);
+        transform.localScale *= scale;
     }
 
     private Vector3 GetRandomAxis()

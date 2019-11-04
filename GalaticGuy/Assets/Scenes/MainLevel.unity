@@ -10970,14 +10970,14 @@ MonoBehaviour:
   spawnPositionY: 5
   levels:
   - difficulty: 0
-    length: 6
+    length: 100
     containsBoss: 0
     averageTime: 300
-  - difficulty: 1
+  - difficulty: 0
     length: 7
     containsBoss: 0
     averageTime: 0
-  - difficulty: 2
+  - difficulty: 0
     length: 3
     containsBoss: 0
     averageTime: 0
