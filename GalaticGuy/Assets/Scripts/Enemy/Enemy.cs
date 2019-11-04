@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterShoot))]
 [RequireComponent(typeof(CharacterMovement))]
 [RequireComponent(typeof(EnemyAI))]
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
@@ -11,6 +12,8 @@ public class Enemy : MonoBehaviour, IDamageable
     CharacterShoot shoot;
     CharacterMovement movement;
     Animator anim;
+    [SerializeField]
+    Enemy[] deathChildren;
 
     protected EnemyAI Ai;
 
@@ -30,17 +33,24 @@ public class Enemy : MonoBehaviour, IDamageable
         Ai.UpdateFrame(transform.position);
     }
 
-    public void OnDeath()
+    public virtual void OnDeath()
     {
         EffectManager.INSTANCE.CreateExplosion(transform.position);
         GameManager.INST.EnemyDeath();
         shoot.DestroyPool();
         Destroy(gameObject);
+
+        foreach(Enemy enemy in deathChildren)
+        {
+            float r = Random.Range(0f, 1.5f), angle = Random.Range(0f, 2f * Mathf.PI);
+            Vector3 location = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle))*r;
+            EnemySpawner.INST.SpawnEnemy(enemy, location + transform.position);
+        }
     }
 
-    public void OnDamage(int damage)
+    public virtual void OnDamage(int damage)
     {
-        anim.SetTrigger("Damage");
+        anim.SetTrigger(Labels.AnimProperties.DAMAGE);
         health.TakeDamage(damage);
 
         if(damage <= 2)

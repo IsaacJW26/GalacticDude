@@ -10970,11 +10970,11 @@ MonoBehaviour:
   spawnPositionY: 5
   levels:
   - difficulty: 0
-    length: 3
+    length: 6
     containsBoss: 0
-    averageTime: 0
+    averageTime: 300
   - difficulty: 1
-    length: 3
+    length: 7
     containsBoss: 0
     averageTime: 0
   - difficulty: 2
@@ -10997,13 +10997,24 @@ MonoBehaviour:
     length: 0
     containsBoss: 0
     averageTime: 0
-  enemiesPrefabs:
-  - {fileID: 9119908270630566908, guid: 0e31c05e1a13c074aba851b78b03ac48, type: 3}
-  - {fileID: 9119908270630566908, guid: 72ec208e6718f9043832d27cb9756cfe, type: 3}
-  - {fileID: 9119908270630566908, guid: 152658a90921d044999085e6fd95b3f6, type: 3}
-  - {fileID: 9119908270630566908, guid: f40c546b6409d204185ab595c839636b, type: 3}
-  bossPrefabs:
-  - {fileID: 298488469091147086, guid: 5642c885c737ac340b0392bcc3a9e9f0, type: 3}
+  tiers:
+  - enemiesPrefabs:
+    - {fileID: 9119908270630566908, guid: 0e31c05e1a13c074aba851b78b03ac48, type: 3}
+    - {fileID: 9119908270630566908, guid: 72ec208e6718f9043832d27cb9756cfe, type: 3}
+    - {fileID: 9119908270630566908, guid: ac332372c15461047a552525b68c420c, type: 3}
+    - {fileID: 9119908270630566908, guid: 152658a90921d044999085e6fd95b3f6, type: 3}
+    - {fileID: 9119908270630566908, guid: f40c546b6409d204185ab595c839636b, type: 3}
+    - {fileID: 366538063770070275, guid: 9a9e008667b1d89439fb9142833f83e0, type: 3}
+    - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
+    bossPrefabs:
+    - {fileID: 0}
+    squads: []
+  - enemiesPrefabs: []
+    bossPrefabs: []
+    squads: []
+  - enemiesPrefabs: []
+    bossPrefabs: []
+    squads: []
 --- !u!114 &723401887
 MonoBehaviour:
   m_ObjectHideFlags: 0

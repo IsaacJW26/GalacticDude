@@ -75,7 +75,7 @@ public class Projectile : MonoBehaviour, IDamageable
         transform.position = position;
         timeSinceBirth = 0;
         gameObject.SetActive(this);
-        Debug.Log(velocity+ ", "+direction+", "+stats.initialSpeed);
+        //Debug.Log(velocity+ ", "+direction+", "+stats.initialSpeed);
     }
 
     //default behaviour: destroy on hit

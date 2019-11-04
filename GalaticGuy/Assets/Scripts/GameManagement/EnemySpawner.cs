@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner INST = null;
+
     [SerializeField]
     float spawnPositionY = 5;
     [SerializeField]
@@ -20,13 +22,33 @@ public class EnemySpawner : MonoBehaviour
 
     const int MAX_REROLLS = 10;
 
-
     const int DIFF_MULTI = 10;
 
+    [System.Serializable]
+    public struct Tier
+    {
+        [SerializeField]
+        public Enemy[] enemiesPrefabs;
+        [SerializeField]
+        public Enemy[] bossPrefabs;
+        [SerializeField]
+        public Squad[] squads;
+    }
+
+    [System.Serializable]
+    public struct Squad
+    {
+        [System.Serializable]
+        public struct EnemyInfo
+        {
+            public Enemy enemy;
+            public Vector2 relativePosition;
+        }
+        public EnemyInfo[] squadMembers;
+    }
+
     [SerializeField]
-    Enemy[] enemiesPrefabs = null;
-    [SerializeField]
-    Enemy[] bossPrefabs = null;
+    Tier[] tiers;
 
     public delegate void EndLevelDelegate();
     private EndLevelDelegate endListener;
@@ -36,6 +58,10 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (INST == null)
+            INST = this;
+        else
+            Destroy(this);
         currentLevel = 0;
         killedCount = 0;
     }
@@ -127,38 +153,44 @@ public class EnemySpawner : MonoBehaviour
     {
         Enemy enemy = null;
         spawnedCount++;
+        int spawnIndex = Random.Range(0, tiers[difficulty].bossPrefabs.Length);
 
         Vector3 spawnPosition = new Vector3(0f, spawnPositionY);
 
-        enemy = Instantiate(bossPrefabs[difficulty], spawnPosition, Quaternion.identity);
+        enemy = SpawnEnemy(tiers[difficulty].bossPrefabs[spawnIndex], spawnPosition);
 
         return enemy;
+    }
+
+    private void SpawnRandomSquad(int difficulty)
+    {
+        int spawnIndex = Random.Range(0, tiers[difficulty].squads.Length);
+        Squad squad = tiers[difficulty].squads[spawnIndex];
+        Vector2 squadPosition = new Vector2(Random.Range(-4f, 4f), spawnPositionY);
+
+
+        foreach (Squad.EnemyInfo enemyIn in squad.squadMembers)
+        {
+            SpawnEnemy(enemyIn.enemy, squadPosition + enemyIn.relativePosition);
+        }
     }
 
     private Enemy SpawnRandomEnemy(int difficulty)
     {
         Enemy enemy;
         Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), spawnPositionY);
-        spawnedCount++;
-        int difficultyIndex = Random.Range(0, 10) * DIFF_MULTI * difficulty + spawnedCount;
+        int spawnIndex = Random.Range(0, tiers[difficulty].enemiesPrefabs.Length);
 
-        Debug.Log("diff " + difficultyIndex);
-        //spawn easy enemy
-        if(difficultyIndex < 45)
-        {
-            enemy = Instantiate(enemiesPrefabs[0], spawnPosition, Quaternion.identity);
-        }
-        //spawn med
-        else if(difficultyIndex < 100)
-        {
-            enemy = Instantiate(enemiesPrefabs[1], spawnPosition, Quaternion.identity);
-        }
-        //spawn hard
-        else
-        {
-            enemy = Instantiate(enemiesPrefabs[2], spawnPosition, Quaternion.identity);
-        }
+        enemy = SpawnEnemy(tiers[difficulty].enemiesPrefabs[spawnIndex], spawnPosition);
+
         return enemy;
+    }
+
+    public Enemy SpawnEnemy(Enemy enemy, Vector3 position)
+    {
+        spawnedCount++;
+
+        return Instantiate(enemy, position, Quaternion.identity);
     }
 
     public void SetListener(EndLevelDelegate endListener)

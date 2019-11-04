@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     //
     public delegate void ActivePlayer(bool active);
     ActivePlayer playerActive;
+    MainCharacter player;
 
     void Awake()
     {
@@ -36,6 +37,16 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    public void SetPlayer(MainCharacter character)
+    {
+        player = character;
+    }
+
+    public Vector3 GetPlayerPos()
+    {
+        return player.transform.position;
     }
 
     private void EndLevel()
