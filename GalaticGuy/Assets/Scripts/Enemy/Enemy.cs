@@ -47,8 +47,9 @@ public class Enemy : MonoBehaviour, IDamageable
         foreach(Enemy enemy in deathChildren)
         {
             float r = Random.Range(0.5f, 1.0f)*transform.localScale.magnitude, angle = Random.Range(0f, 2f * Mathf.PI);
-            Vector3 location = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle))*r;
-            EnemySpawner.INST.SpawnEnemy(enemy, location + transform.position);
+            Vector3 location = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle))* r + transform.position;
+            if (location.y > -1.5f)
+                EnemySpawner.INST.SpawnEnemy(enemy, location);
         }
     }
 
