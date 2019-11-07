@@ -7,12 +7,12 @@ public class CharacterMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField]
-    float speed = 2.5f;
+    public float speed = 2.5f;
 
     public const float xBound = 4f;
     int xdirection = 0, ydirection = 0;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -45,8 +45,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        rb.velocity = Vector3.zero;
-        rb.isKinematic = true;
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
     }
 
     private void OnEnable()

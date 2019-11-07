@@ -10,6 +10,11 @@ public class AISideBasic : EnemyAI
     bool movingDown = true;
     bool movingRight = true;
 
+    private void Awake()
+    {
+        movingRight = Random.Range(0, 2) == 1;
+    }
+
     //tries to shoot and move every frame
     public override void UpdateFrame(Vector3 currentPosition)
     {

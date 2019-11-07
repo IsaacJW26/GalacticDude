@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb6f9b0483578844aa8bb9c5b1b436b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.6
+  speed: 0.7
 --- !u!114 &366538063770070275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    maxHP: 10
+    maxHP: 5
   deathChildren: []
 --- !u!95 &366538063770070296
 Animator:
@@ -271,7 +271,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e3fa142313deb814bae21efc20dfac4c, type: 2}
+      objectReference: {fileID: 2100000, guid: c612432aab59b84419f238cf3e2b2cea, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd46789ae87dae44b99c173b50816db1, type: 3}
 --- !u!4 &2735435672977727379 stripped

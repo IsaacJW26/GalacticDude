@@ -9,7 +9,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
     WeaponManager weapons; 
     Animator anim;
 
-    const int invulDuration = 30;
+    const int invulDuration = 120;
     int IFramesRemaining = 0;
     IEnumerator invulCoroutine;
     int frozenTimeRemaining;

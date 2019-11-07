@@ -31,6 +31,10 @@ public class Enemy : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         Ai.UpdateFrame(transform.position);
+
+        //destroy once end of level is reached
+        if (transform.position.y < -7)
+            OnDeath();
     }
 
     public virtual void OnDeath()
@@ -42,7 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         foreach(Enemy enemy in deathChildren)
         {
-            float r = Random.Range(0f, 1.5f), angle = Random.Range(0f, 2f * Mathf.PI);
+            float r = Random.Range(0.5f, 1.0f)*transform.localScale.magnitude, angle = Random.Range(0f, 2f * Mathf.PI);
             Vector3 location = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle))*r;
             EnemySpawner.INST.SpawnEnemy(enemy, location + transform.position);
         }
@@ -62,5 +66,15 @@ public class Enemy : MonoBehaviour, IDamageable
             ScreenShake.INSTANCE.BigShake();
             */
         //Stub
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == Labels.Tags.PLAYER)
+        {
+            MainCharacter player = other.GetComponentInParent<MainCharacter>();
+            player.OnDamage();
+            OnDeath();
+        }
     }
 }
