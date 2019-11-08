@@ -84,16 +84,20 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void OnDamage(int inDamage)
     {
-        //Damage animation
-        anim.SetTrigger(Labels.AnimProperties.DAMAGE);
-        
-        //update health value
-        health.TakeDamage(inDamage);
-        //update UI
-        UIManager.INSTANCE.RemoveHP(health.GetHealth());
+        //dont do damage if invuln
+        if (IFramesRemaining <= 0)
+        {
+            //Damage animation
+            anim.SetTrigger(Labels.AnimProperties.DAMAGE);
 
-        //set invul
-        SetInvulnerable();
+            //update health value
+            health.TakeDamage(inDamage);
+            //update UI
+            UIManager.INSTANCE.RemoveHP(health.GetHealth());
+
+            //set invul
+            SetInvulnerable();
+        }
     }
 
     //try shoot normal attack
