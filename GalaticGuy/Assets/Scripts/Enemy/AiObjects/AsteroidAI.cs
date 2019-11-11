@@ -13,6 +13,8 @@ public class AsteroidAI : EnemyAI
     Enemy asteroid;
     CharacterMovement move;
 
+    int frame;
+
     private void Awake()
     {
         asteroid = GetComponentInParent<Enemy>();
@@ -52,7 +54,17 @@ public class AsteroidAI : EnemyAI
         }
 
         Move(direction);
-        model.RotateAround(model.position ,rotationAxis, rotationSpeed * Time.fixedDeltaTime);
+
+        //only execute physics every third frame
+        if (frame >= 5)
+        {
+            frame = 0;
+            model.RotateAround(model.position, rotationAxis, rotationSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            frame++;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
