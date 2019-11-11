@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponManager : MonoBehaviour, IOnCharge
 {
     public const int MAX_CHARGE = 1800;
 
@@ -10,13 +10,21 @@ public class WeaponManager : MonoBehaviour
     Weapon current;
     [SerializeField]
     Transform projectilePointDefault;
+    [SerializeField]
+    ParticleSystem chargeParticles;
+    ParticleSystem.EmissionModule emissionModule;
+
+    float defaultEmission;
+
     bool held = false;
     
     // Start is called before the first frame update
     void Start()
     {
         current.Awake();
-        current.SetMovement(GetComponent<CharacterMovement>());
+        current.Initialise(GetComponent<CharacterMovement>(), this);
+        emissionModule = chargeParticles.emission;
+        defaultEmission = emissionModule.rateOverTime.Evaluate(0);
     }
 
     // Update is called once per frame
@@ -56,5 +64,22 @@ public class WeaponManager : MonoBehaviour
     public Vector3 GetLaunchPosition()
     {
         return projectilePointDefault.position;
+    }
+
+    public void OnCharge()
+    {
+        emissionModule.enabled = true;
+    }
+
+    public void OnChargeEnd()
+    {
+        emissionModule.enabled = false;
+    }
+
+    public void SetEmissionLevel(float emissionPercent)
+    {
+        ParticleSystem.MinMaxCurve rate = emissionModule.rateOverTime;
+        rate.constant = defaultEmission * emissionPercent;
+        emissionModule.rateOverTime = rate;
     }
 }

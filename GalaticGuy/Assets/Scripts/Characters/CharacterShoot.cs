@@ -33,6 +33,7 @@ public class CharacterShoot : MonoBehaviour, Shooter
         {
             objectPool[ii] = Instantiate(projectile);
             objectPool[ii].Initialise(ii, this);
+            objectPool[ii].name = gameObject.name + " " + ii;
             DisableProjectile(objectPool[ii]);
         }
     }
@@ -78,7 +79,7 @@ public class CharacterShoot : MonoBehaviour, Shooter
     {
         for (int ii = 0; ii < MAX_PROJECTILES; ii++)
         {
-            Destroy(objectPool[ii]);
+            Destroy(objectPool[ii].gameObject);
         }
     }
 

@@ -64,6 +64,7 @@ public class Weapon : MonoBehaviour, Shooter
     protected float shootSlowMedium = 1f;
     */
     ISpeed movement;
+    IOnCharge weaponMan;
     private int heldDuration;
     private bool beingHeld;
 
@@ -80,9 +81,10 @@ public class Weapon : MonoBehaviour, Shooter
         this.timeUntilNextShot = 0;
     }
 
-    public void SetMovement(ISpeed movement)
+    public void Initialise(ISpeed movement, IOnCharge weapon)
     {
         this.movement = movement;
+        this.weaponMan = weapon;
     }
 
     // Update is called once per frame
@@ -90,8 +92,11 @@ public class Weapon : MonoBehaviour, Shooter
     {
         if (timeUntilNextShot > 0)
             timeUntilNextShot--;
+
         if (beingHeld)
+        {
             heldDuration++;
+        }
     }
 
     private void SetCharge(int charge)
@@ -129,7 +134,12 @@ public class Weapon : MonoBehaviour, Shooter
         //dont slow down until significantly held
         //TODO replace magic number :/
         if (heldDuration > 20)
+        {
             movement.SlowDown(slowPercent: chargeSlowDown);
+            weaponMan.OnCharge();
+            float percent = state.currentCharge / (float) WeaponManager.MAX_CHARGE;
+            weaponMan.SetEmissionLevel(percent);
+        }
     }
 
     public virtual void OnShootButtonRelease(WeaponManager manager)
@@ -158,6 +168,7 @@ public class Weapon : MonoBehaviour, Shooter
         }
         beingHeld = false;
         heldDuration = 0;
+        weaponMan.OnChargeEnd();
     }
     //
     public int GetCurrentCharge()

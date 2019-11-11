@@ -192,7 +192,6 @@ Transform:
   m_Children:
   - {fileID: 1464757872}
   - {fileID: 137126185}
-  - {fileID: 1179080696}
   - {fileID: 1632723575}
   - {fileID: 1746025844}
   m_Father: {fileID: 0}
@@ -257,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: {fileID: 176995618498543106, guid: e8c7eade21149734db06c67d2ed7c568, type: 3}
   projectilePointDefault: {fileID: 1464757872}
+  chargeParticles: {fileID: 1632723577}
 --- !u!1 &16594447
 GameObject:
   m_ObjectHideFlags: 0
@@ -5427,7 +5427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117976100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.59743154, y: 5.2, z: -1.1599998}
+  m_LocalPosition: {x: -0.59743154, y: 5.2, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11000,9 +11000,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPositionY: 5
   levels:
-  - difficulty: 0
-    length: 10
-    containsBoss: 0
+  - difficulty: 1
+    length: 0
+    containsBoss: 1
     averageTime: 200
   - difficulty: 0
     length: 13
@@ -11963,56 +11963,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114774369}
   m_CullTransparentMesh: 0
---- !u!1 &1179080695
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1179080696}
-  - component: {fileID: 1179080697}
-  m_Layer: 0
-  m_Name: LaserShoot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1179080696
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179080695}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8207696}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1179080697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179080695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00304ece41361a440892d15c065cd05b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MAX_PROJECTILES: 1
-  shootInterval: 35
-  projectileDamage: 10
-  projectileSpeed: 0
-  projectile: {fileID: 8038325770130421891, guid: e7978566f2db4154e96c9c7b28ed994e,
-    type: 3}
-  projectilePoint: {fileID: 1179080696}
 --- !u!1 &1269171430
 GameObject:
   m_ObjectHideFlags: 0
@@ -12435,7 +12385,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 8207696}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!199 &1632723576
 ParticleSystemRenderer:
@@ -13332,7 +13282,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -21967,7 +21917,7 @@ Transform:
   m_Children:
   - {fileID: 424923973}
   m_Father: {fileID: 8207696}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!199 &1746025845
 ParticleSystemRenderer:
