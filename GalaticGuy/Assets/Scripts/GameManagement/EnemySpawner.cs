@@ -121,8 +121,6 @@ public class EnemySpawner : MonoBehaviour
         //info.spawnPosition = spawnpos;
 
         enemySpawnQueue.Enqueue(info);
-
-        Debug.Log(enemy.gameObject.name + ", " + info.delay);
     }
 
     private void SpawnNextEnemy()
@@ -230,6 +228,15 @@ public class EnemySpawner : MonoBehaviour
     public Enemy SpawnEnemy(Enemy enemy, Vector3 position)
     {
         spawnedCount++;
+
+        if(position.x > CharacterMovement.xBound)
+        {
+            position.x = CharacterMovement.xBound - 0.01f;
+        }
+        else if(position.x < -CharacterMovement.xBound)
+        {
+            position.x = -(CharacterMovement.xBound - 0.01f);
+        }
 
         return Instantiate(enemy, position, Quaternion.identity);
     }

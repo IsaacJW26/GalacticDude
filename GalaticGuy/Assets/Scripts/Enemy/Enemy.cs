@@ -40,9 +40,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public virtual void OnDeath()
     {
         EffectManager.INSTANCE.CreateExplosion(transform.position);
-        GameManager.INST.EnemyDeath();
         shoot.DestroyPool();
-        Destroy(gameObject);
 
         foreach(Enemy enemy in deathChildren)
         {
@@ -51,6 +49,9 @@ public class Enemy : MonoBehaviour, IDamageable
             if (location.y > -1.5f)
                 EnemySpawner.INST.SpawnEnemy(enemy, location);
         }
+
+        GameManager.INST.EnemyDeath();
+        Destroy(gameObject);
     }
 
     public virtual void OnDamage(int damage)

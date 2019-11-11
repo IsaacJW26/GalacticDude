@@ -10,6 +10,12 @@ public class AITracker : EnemyAI
     bool movingDown = true;
     bool movingRight = true;
 
+    public void Awake()
+    {
+        if (transform.position.y < lowestPosition)
+            movingDown = false;
+    }
+
     //tries to shoot and move every frame
     public override void UpdateFrame(Vector3 currentPosition)
     {
@@ -20,7 +26,7 @@ public class AITracker : EnemyAI
             direction = Vector3.left;
 
         //near edges move down
-        if(DistanceToXBound() < moveDownDistance)
+        if (DistanceToXBound() < moveDownDistance)
         {
             //check if it is above the lowest position
             if (transform.position.y >= lowestPosition)
@@ -34,7 +40,7 @@ public class AITracker : EnemyAI
                 movingRight = false;
             }
             //when left bound is reached turn around
-            else if(transform.position.x <= -CharacterMovement.xBound && !movingRight)
+            else if (transform.position.x <= -CharacterMovement.xBound && !movingRight)
             {
                 movingRight = true;
             }
@@ -44,9 +50,8 @@ public class AITracker : EnemyAI
             movingDown = false;
         }
 
-        if (movingDown)
+        if (movingDown && (transform.position.y >= lowestPosition))
             direction += Vector3.down;
-
 
         Move(direction);
 
