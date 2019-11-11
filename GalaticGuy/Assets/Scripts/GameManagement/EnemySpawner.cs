@@ -16,7 +16,6 @@ public class EnemySpawner : MonoBehaviour
     int killedCount = 0;
     int spawnedCount = 0;
 
-    int timeTillNextSpawn = 0;
     const int MAXTIME = 450;
     const int MINTIME = 10;
     const int REROLL_REDUCER = 13;
@@ -106,6 +105,7 @@ public class EnemySpawner : MonoBehaviour
                 ended = true;
                 OnLevelEnd();
                 Debug.Log("spawning stopped");
+                System.GC.Collect();
             }
         }
     }

@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IDamageable
     Enemy[] deathChildren;
 
     protected EnemyAI Ai;
+    bool isDead = false;
 
     void Awake()
     {
@@ -39,18 +40,29 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void OnDeath()
     {
-        EffectManager.INSTANCE.CreateExplosion(transform.position);
-        shoot.DestroyPool();
-
-        foreach(Enemy enemy in deathChildren)
+        if (!isDead)
         {
-            float r = Random.Range(0.5f, 1.0f)*transform.localScale.magnitude, angle = Random.Range(0f, 2f * Mathf.PI);
-            Vector3 location = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle))* r + transform.position;
-            if (location.y > -1.5f)
-                EnemySpawner.INST.SpawnEnemy(enemy, location);
-        }
+            isDead = true;
+            EffectManager.INSTANCE.CreateExplosion(transform.position);
+            shoot.DestroyPool();
 
+            foreach (Enemy enemy in deathChildren)
+            {
+                float r = Random.Range(0.5f, 1.0f) * transform.localScale.magnitude, angle = Random.Range(0f, 2f * Mathf.PI);
+                Vector3 location = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * r + transform.position;
+                if (location.y > -1.5f)
+                    EnemySpawner.INST.SpawnEnemy(enemy, location);
+            }
+
+            StartCoroutine(WaitToDie());
+        }
+    }
+
+    IEnumerator WaitToDie()
+    {
+        yield return null;
         GameManager.INST.EnemyDeath();
+        yield return null;
         Destroy(gameObject);
     }
 

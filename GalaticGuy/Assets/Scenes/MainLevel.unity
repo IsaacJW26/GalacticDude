@@ -11000,9 +11000,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPositionY: 5
   levels:
-  - difficulty: 1
-    length: 0
-    containsBoss: 1
+  - difficulty: 0
+    length: 15
+    containsBoss: 0
     averageTime: 200
   - difficulty: 0
     length: 13
@@ -11045,8 +11045,9 @@ MonoBehaviour:
     bossPrefabs:
     - {fileID: 726255909376779045, guid: c4b270aa8bc256b478084994e30e3ecc, type: 3}
     squads: []
-  - name: 
-    enemiesPrefabs: []
+  - name: Spawndude
+    enemiesPrefabs:
+    - {fileID: 9119908270630566908, guid: 74c62ed7211e86c498631bdfc6666d5f, type: 3}
     bossPrefabs: []
     squads: []
 --- !u!114 &723401887
@@ -27280,7 +27281,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
