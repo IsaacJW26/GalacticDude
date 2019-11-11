@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public const int MAX_CHARGE = 900;
+    public const int MAX_CHARGE = 1800;
 
     [SerializeField]
     Weapon current;
@@ -16,6 +16,7 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         current.Awake();
+        current.SetMovement(GetComponent<CharacterMovement>());
     }
 
     // Update is called once per frame

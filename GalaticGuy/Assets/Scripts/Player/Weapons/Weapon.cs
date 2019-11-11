@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour, Shooter
         //[SerializeField]
         //public bool hasCharge;
         [SerializeField]
-        [Tooltip("rate of 3 is 5 second charge time")]
+        [Tooltip("rate of 3 is 10 second charge time")]
         [Range(1, WeaponManager.MAX_CHARGE/9)]
         public int chargeRate = WeaponManager.MAX_CHARGE / 300;
         [SerializeField]
@@ -38,13 +38,34 @@ public class Weapon : MonoBehaviour, Shooter
     State state;
 
     [SerializeField]
+    Vector2 relativeShoot = Vector2.up;
+    [Header("Projectiles")]
+    [SerializeField]
     protected Projectile projectileDefault = null;
     [SerializeField]
     protected Projectile projectileMedium = null;
+    [Header("Max Projectile")]
+
     [SerializeField]
     protected Projectile projectileMax = null;
     [SerializeField]
-    Vector2 relativeShoot = Vector2.up;
+    [Range(0f, 1f)]
+    protected float shootSlowMax = 1f;
+    [SerializeField]
+    protected int slowDuration = 0;
+
+    [Header("Speed up slow, down")]
+    [SerializeField]
+    protected float chargeSlowDown = 1f;
+    /*
+    [SerializeField]
+    protected float shootSlowDefault = 1f;
+    [SerializeField]
+    protected float shootSlowMedium = 1f;
+    */
+    ISpeed movement;
+    private int heldDuration;
+    private bool beingHeld;
 
     public void Awake()
     {
@@ -59,11 +80,18 @@ public class Weapon : MonoBehaviour, Shooter
         this.timeUntilNextShot = 0;
     }
 
+    public void SetMovement(ISpeed movement)
+    {
+        this.movement = movement;
+    }
+
     // Update is called once per frame
     public void FixedUpdate()
     {
         if (timeUntilNextShot > 0)
             timeUntilNextShot--;
+        if (beingHeld)
+            heldDuration++;
     }
 
     private void SetCharge(int charge)
@@ -92,12 +120,16 @@ public class Weapon : MonoBehaviour, Shooter
 
     public virtual void OnShootButtonDown()
     {
-
+        beingHeld = true;
     }
 
     public virtual void OnShootButtonHold()
     {
         SetCharge(state.currentCharge + stats.chargeRate);
+        //dont slow down until significantly held
+        //TODO replace magic number :/
+        if (heldDuration > 20)
+            movement.SlowDown(slowPercent: chargeSlowDown);
     }
 
     public virtual void OnShootButtonRelease(WeaponManager manager)
@@ -111,6 +143,7 @@ public class Weapon : MonoBehaviour, Shooter
             if (state.currentCharge >= WeaponManager.MAX_CHARGE)
             {
                 ShootMax(manager.GetPlayerDirection(), manager.GetLaunchPosition());
+                movement.SlowDown(shootSlowMax, slowDuration);
             }
             else if (state.currentCharge >= stats.chargeTier)
             {
@@ -123,6 +156,8 @@ public class Weapon : MonoBehaviour, Shooter
             //reset charge
             SetCharge(0);
         }
+        beingHeld = false;
+        heldDuration = 0;
     }
     //
     public int GetCurrentCharge()
