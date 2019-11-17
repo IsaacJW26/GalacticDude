@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    damage: 9
+    damage: 1
     initialSpeed: 0
-    projectileDrag: 0
+    yAccelerationOverTime: 0
+    dragOverTime: 1
     maxLifeTime: 20
   player: 0
   projectiles: 1
   enemies: 1
+  destroyOnHit: 1
+  damageInterval: 2
 --- !u!1001 &5121965817248640268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127,6 +130,26 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 519112093836934864, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112093836934864, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112093836934864, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848577, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 519112093522866671, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -161,26 +184,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 519112093836934864, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 519112093836934864, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 519112093836934864, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 519112092327848577, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 519112092876008079, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}

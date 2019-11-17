@@ -52,6 +52,7 @@ public class AISideBasic : EnemyAI
         if (movingDown)
             direction += Vector3.down;
 
+        direction += (Vector3.down / 2f);
 
         Move(direction);
         //Shoot(Vector3.down);

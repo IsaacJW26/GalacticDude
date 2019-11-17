@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     minShootInterval: 20
-    chargeRate: 7
+    chargeRate: 28
     chargeTier: 420
   relativeShoot: {x: 0, y: 0}
   projectileDefault: {fileID: 3735054432054898068, guid: a7a8387a59411ed4488a3890527ddddd,

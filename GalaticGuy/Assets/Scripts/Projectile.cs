@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour, IDamageable
 {
     [System.Serializable]
-    private class Stats
+    protected class Stats
     {
         public int damage;
         public float initialSpeed;
@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour, IDamageable
     protected Shooter parent;
 
     [SerializeField]
-    Stats stats;
+    protected Stats stats;
 
     [Header("Collisions")]
     [SerializeField]
@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         velocity = GetVelocity();
         rb.velocity = velocity;
