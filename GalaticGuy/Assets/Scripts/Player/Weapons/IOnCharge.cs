@@ -1,4 +1,4 @@
-﻿public interface IOnCharge
+﻿public interface IOnChargeCallback
 {
     void OnCharge();
     void OnChargeEnd();

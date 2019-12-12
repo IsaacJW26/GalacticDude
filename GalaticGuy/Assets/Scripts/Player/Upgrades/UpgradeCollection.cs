@@ -5,11 +5,24 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class UpgradeCollection : MonoBehaviour
 {
-    PlayerUpgrade[] upgrades;
+    public static UpgradeCollection INSTANCE;
+
+    private PlayerUpgrade[] upgrades;
+
+    [SerializeField]
+    private Sprite[] spriteList;
 
     public void OnEnable()
     {
-        upgrades = new PlayerUpgrade[] { new TestUpgrade() };
+        if (INSTANCE == null && INSTANCE != this)
+            INSTANCE = this;
+        else
+        {
+            Debug.LogError("Deplicate UpgradeCollection found");
+            DestroyImmediate(this);
+        }
+
+        upgrades = GetUpgradeList();
 
         //verify upgrades are unique
         if (Application.isEditor)
@@ -18,9 +31,9 @@ public class UpgradeCollection : MonoBehaviour
         }
     }
 
-    public PlayerUpgrade GetUpgrade(int index)
+    public static PlayerUpgrade GetUpgrade(int index)
     {
-        return upgrades[index];
+        return INSTANCE.upgrades[index];
     }
 
     public int GetSize()
@@ -30,19 +43,33 @@ public class UpgradeCollection : MonoBehaviour
 
     private void AreUnique()
     {
-        foreach(PlayerUpgrade upgradeA in upgrades)
+        for(int ii = 0; ii < upgrades.Length; ii++)
         {
-            foreach(PlayerUpgrade upgradeB in upgrades)
+            for (int jj = 0; jj < upgrades.Length; jj++)
             {
-                if(upgradeA != upgradeB)
+                if(ii != jj)
                 {
-                    if (upgradeA.GetType() == upgradeB.GetType())
+                    if (upgrades[ii].GetType() == upgrades[jj].GetType())
                     {
-                        Debug.LogError(upgradeA.GetType().ToString()+" exists twice");
+                        Debug.LogError(upgrades[ii].GetType().ToString()+" exists twice");
                     }
                 }
             }
         }
     }
 
+    private static PlayerUpgrade[] GetUpgradeList()
+    {
+        return new PlayerUpgrade[] {
+            new TestUpgradeSpeedUp(INSTANCE.spriteList[0])//,
+            //,
+            //,
+        };
+    }
+
+    [ContextMenu("Get Number of Upgrades")]
+    public void GetListSize()
+    {
+        Debug.Log("Upgrade list has "+ GetUpgradeList().Length+" elements");
+    }
 }

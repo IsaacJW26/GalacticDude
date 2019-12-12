@@ -7,18 +7,21 @@ public class CharacterHealth
 {
     [SerializeField]
     private int maxHP = 5;
+    private int currentMaxHP;
     private int currentHP;
     BasicMethod deathMethod;
 
     public void InitialiseMethods(BasicMethod deathMethod)
     { 
         this.currentHP = maxHP;
+        this.currentMaxHP = maxHP;
         this.deathMethod = deathMethod;
     }
 
     public CharacterHealth(int maxHP, BasicMethod deathMethod)
     {
         this.maxHP = maxHP;
+        this.currentMaxHP = maxHP;
         this.currentHP = maxHP;
         this.deathMethod = deathMethod;
     }
@@ -26,6 +29,7 @@ public class CharacterHealth
     public CharacterHealth(int maxHP, int currentHP, BasicMethod deathMethod, BasicMethod onDamageMethod)
     {
         this.maxHP = maxHP;
+        this.currentMaxHP = maxHP;
         this.currentHP = currentHP;
         this.deathMethod = deathMethod;
     }
@@ -51,6 +55,11 @@ public class CharacterHealth
 
     public int GetMaxHealth()
     {
-        return maxHP;
+        return currentMaxHP;
+    }
+
+    public void SetNewMaxHP(int newMaxHP)
+    {
+        currentMaxHP = newMaxHP;
     }
 }

@@ -1,4 +1,4 @@
-﻿internal interface IDamageable
+﻿public interface IDamageable
 {
     void OnDamage(int inDamage);
 }

@@ -58,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [SerializeField]
-    Tier[] tiers;
+    Tier[] tiers = new Tier[0];
 
     public delegate void EndLevelDelegate();
     private EndLevelDelegate endListener;

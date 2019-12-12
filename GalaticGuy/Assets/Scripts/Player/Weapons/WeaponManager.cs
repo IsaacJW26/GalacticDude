@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponManager : MonoBehaviour, IOnCharge
+public class WeaponManager : MonoBehaviour, IOnChargeCallback
 {
     public const int MAX_CHARGE = 1800;
 
@@ -39,9 +39,12 @@ public class WeaponManager : MonoBehaviour, IOnCharge
 
     public void OnShootButtonDown()
     {
-        held = true;
+        if (!held)
+        {
+            held = true;
 
-        current.OnShootButtonDown();
+            current.OnShootButtonDown();
+        }
     }
 
     public void OnShootButtonHold()
@@ -49,11 +52,19 @@ public class WeaponManager : MonoBehaviour, IOnCharge
         //current.OnShootButtonHold();
     }
 
+    public IWeapon GetCurrentWeapon()
+    {
+        return current;
+    }
+
     public void OnShootButtonRelease()
     {
-        held = false;
+        if (held)
+        {
+            held = false;
 
-        current.OnShootButtonRelease(this);
+            current.OnShootButtonRelease(this);
+        }
     }
 
     public Vector2 GetPlayerDirection()

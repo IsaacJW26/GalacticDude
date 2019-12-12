@@ -12,9 +12,9 @@ public class UIShopItem : MonoBehaviour
     [SerializeField]
     Image uIImage;
     [SerializeField]
-    TestUpgradeClass testUpgradeObj;
+    TestUpgradeSpeedUp testUpgradeObj;
     [SerializeField]
-    TestUpgradeClass testUpgradeObj2;
+    TestUpgradeSpeedUp testUpgradeObj2;
 
     public void Awake()
     {
@@ -26,7 +26,7 @@ public class UIShopItem : MonoBehaviour
     {
         this.upgrade = upgrade;
         uIImage.sprite = upgrade.Sprite;
-        uICost.text = upgrade.Cost.ToString();
+        uICost.text = upgrade.cost.ToString();
     }
 
     [ContextMenu("Test Upgrade")]
@@ -45,15 +45,6 @@ public class UIShopItem : MonoBehaviour
     public void PurchaseUpgrade()
     {
             
-    }
-
-    [System.Serializable]
-    private class TestUpgradeClass : PlayerUpgrade
-    {
-        public override void UpdateFrame(Vector3 currentPosition)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
 

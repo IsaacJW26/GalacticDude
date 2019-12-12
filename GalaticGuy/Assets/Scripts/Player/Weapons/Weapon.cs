@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, Shooter
+public class Weapon : MonoBehaviour, Shooter, IWeapon
 {
     protected int timeUntilNextShot
     { get; private set; }
@@ -11,36 +11,48 @@ public class Weapon : MonoBehaviour, Shooter
     [Serializable]
     protected class Stats
     {
+        [Header("Main")]
         [SerializeField]
         [Range(1,150)]
         public int minShootInterval = 10;
-        //[SerializeField]
-        //public bool hasCharge;
+
         [SerializeField]
         [Tooltip("rate of 3 is 10 second charge time")]
         [Range(1, WeaponManager.MAX_CHARGE/9)]
         public int chargeRate = WeaponManager.MAX_CHARGE / 300;
+
         [SerializeField]
         [Range(1, WeaponManager.MAX_CHARGE)]
         public int chargeTier = WeaponManager.MAX_CHARGE / 2;
+
+        [Header("Speed up slow, down")]
+        [SerializeField]
+        [Range(0f, 1f)]
+        public float shootSlowMax = 1f;
+
+        [SerializeField]
+        public int slowDuration = 0;
+
+        [SerializeField]
+        public float chargeSlowDown = 1f;
     }
 
     //stores current weapon state
     protected struct State
     {
         //
-
         public int currentCharge;
     }
 
     [SerializeField]
-    Stats stats;
+    Stats baseStats;
+    Stats currentStats;
     State state;
 
     [SerializeField]
     Vector2 relativeShoot = Vector2.up;
     [Header("Projectiles")]
-    [SerializeField]
+    [SerializeField] 
     protected Projectile projectileDefault = null;
     [SerializeField]
     protected Projectile projectileMedium = null;
@@ -48,44 +60,41 @@ public class Weapon : MonoBehaviour, Shooter
 
     [SerializeField]
     protected Projectile projectileMax = null;
-    [SerializeField]
-    [Range(0f, 1f)]
-    protected float shootSlowMax = 1f;
-    [SerializeField]
-    protected int slowDuration = 0;
 
-    [Header("Speed up slow, down")]
-    [SerializeField]
-    protected float chargeSlowDown = 1f;
-    /*
-    [SerializeField]
-    protected float shootSlowDefault = 1f;
-    [SerializeField]
-    protected float shootSlowMedium = 1f;
-    */
     ISpeed movement;
-    IOnCharge weaponMan;
+    IOnChargeCallback weaponManCallback;
     private int heldDuration;
     private bool beingHeld;
 
     public void Awake()
     {
-        if (stats.minShootInterval <= 0)
+        if (baseStats.minShootInterval <= 0)
             Debug.LogError("shoot interval is 0 or less");
-        if(stats.chargeRate <= 0)
+        if(baseStats.chargeRate <= 0)
             Debug.LogError("charge rate is 0 or less");
         if(projectileDefault == null)
             Debug.LogError("No default projectile selected");
 
         SetCharge(0);
         this.timeUntilNextShot = 0;
+        //currentStats = baseStats;
     }
 
-    public void Initialise(ISpeed movement, IOnCharge weapon)
+    private void ResetAllStats()
+    {
+        currentStats.chargeRate = baseStats.chargeRate;
+        currentStats.chargeSlowDown = baseStats.chargeSlowDown;
+        currentStats.chargeTier = baseStats.chargeTier;
+        currentStats.minShootInterval = baseStats.minShootInterval;
+        currentStats.shootSlowMax = baseStats.shootSlowMax;
+        currentStats.slowDuration = baseStats.slowDuration;
+    }
+
+    public void Initialise(ISpeed movement, IOnChargeCallback weapon)
     {
         this.movement = movement;
-        this.weaponMan = weapon;
-    }
+        this.weaponManCallback = weapon;
+    } 
 
     // Update is called once per frame
     public void FixedUpdate()
@@ -103,17 +112,17 @@ public class Weapon : MonoBehaviour, Shooter
     {
 
         float percent;
-        if (charge < stats.chargeTier)
+        if (charge < currentStats.chargeTier)
         {
-            percent = (float)charge / (float)stats.chargeTier;
+            percent = (float)charge / (float)currentStats.chargeTier;
             UIManager.INSTANCE.UpdateChargeL(percent);
             state.currentCharge = charge;
 
         }
         else
         {
-            percent = (float)(charge - stats.chargeTier) /
-                (float)(WeaponManager.MAX_CHARGE - stats.chargeTier);
+            percent = (float)(charge - currentStats.chargeTier) /
+                (float)(WeaponManager.MAX_CHARGE - currentStats.chargeTier);
             UIManager.INSTANCE.UpdateChargeR(percent);
 
             if (charge >= WeaponManager.MAX_CHARGE)
@@ -130,15 +139,15 @@ public class Weapon : MonoBehaviour, Shooter
 
     public virtual void OnShootButtonHold()
     {
-        SetCharge(state.currentCharge + stats.chargeRate);
+        SetCharge(state.currentCharge + currentStats.chargeRate);
         //dont slow down until significantly held
         //TODO replace magic number :/
         if (heldDuration > 20)
         {
-            movement.SlowDown(slowPercent: chargeSlowDown);
-            weaponMan.OnCharge();
+            movement.SlowDown(slowPercent: currentStats.chargeSlowDown);
+            weaponManCallback.OnCharge();
             float percent = state.currentCharge / (float) WeaponManager.MAX_CHARGE;
-            weaponMan.SetEmissionLevel(percent);
+            weaponManCallback.SetEmissionLevel(percent);
         }
     }
 
@@ -148,14 +157,14 @@ public class Weapon : MonoBehaviour, Shooter
         //frame limit exists to stop spamming
         if (timeUntilNextShot <= 0)
         {
-            timeUntilNextShot = stats.minShootInterval;
+            timeUntilNextShot = currentStats.minShootInterval;
 
             if (state.currentCharge >= WeaponManager.MAX_CHARGE)
             {
                 ShootMax(manager.GetPlayerDirection(), manager.GetLaunchPosition());
-                movement.SlowDown(shootSlowMax, slowDuration);
+                movement.SlowDown(currentStats.shootSlowMax, currentStats.slowDuration);
             }
-            else if (state.currentCharge >= stats.chargeTier)
+            else if (state.currentCharge >= currentStats.chargeTier)
             {
                 ShootMedium(manager.GetPlayerDirection(), manager.GetLaunchPosition());
             }
@@ -168,7 +177,7 @@ public class Weapon : MonoBehaviour, Shooter
         }
         beingHeld = false;
         heldDuration = 0;
-        weaponMan.OnChargeEnd();
+        weaponManCallback.OnChargeEnd();
     }
     //
     public int GetCurrentCharge()
@@ -204,4 +213,66 @@ public class Weapon : MonoBehaviour, Shooter
     {
         Destroy(proj.gameObject);
     }
+
+    float rapidDuration;
+    int startInterval;
+    public void RapidFire(float duration)
+    {
+        startInterval = currentStats.minShootInterval;
+        currentStats.minShootInterval = 2;
+        rapidDuration = duration;
+    }
+
+    IEnumerator rapidFireDuration()
+    {
+        yield return rapidDuration;
+        currentStats.minShootInterval = startInterval;
+    }
+
+    public void ForceShot()
+    {
+        //stub
+        throw new NotImplementedException();
+    }
+
+    public void FirerateBuffPercent(float percent)
+    {
+        //stub
+        throw new NotImplementedException();
+    }
+
+    public void DecreaseDebuffFireratePercent(float percent)
+    {
+        //stub
+        throw new NotImplementedException();
+    }
+
+    public void DamageBuffPercent(float percent)
+    {
+        //stub
+        throw new NotImplementedException();
+    }
+
+    public void DamageDebuffPercent(float percent)
+    {
+        //stub
+        throw new NotImplementedException();
+    }
+
+    public void BoostDamageFixed(int increase)
+    {
+        //stub
+        throw new NotImplementedException();
+    }
+}
+
+public interface IWeapon
+{
+    void RapidFire(float duration);
+    void ForceShot();
+    void FirerateBuffPercent(float percent);
+    void DecreaseDebuffFireratePercent(float percent);
+    void DamageBuffPercent(float percent);
+    void DamageDebuffPercent(float percent);
+    void BoostDamageFixed(int increase);
 }

@@ -39,13 +39,17 @@ public class CharacterMovement : MonoBehaviour, ISpeed
         if (timeTillSpeedReset > 0)
         {
             float perc = timeTillSpeedReset / (float)speedreset;
+            if(Mathf.Abs(currentSpeed - speed) < 0.01f)
             currentSpeed = Mathf.Lerp(speed, currentSpeed, perc);
 
             timeTillSpeedReset--;
         }
         else
         {
-            currentSpeed = speed;
+            if (Mathf.Abs(currentSpeed - speed) > 0.01f)
+                currentSpeed = speed;
+            else
+                currentSpeed = Mathf.Lerp(speed, currentSpeed, 0.5f);
         }
     }
 
@@ -57,25 +61,6 @@ public class CharacterMovement : MonoBehaviour, ISpeed
     public void InputDirectionY(int value)
     {
         ydirection = Mathf.Clamp(value, -1, 1);
-    }
-
-    public void SlowDown(float slowPercent)
-    {
-        currentSpeed = speed * slowPercent;
-        timeTillSpeedReset = speedreset;
-    }
-
-    public void SlowDown(float slowPercent, int duration)
-    {
-        currentSpeed = speed * slowPercent;
-        timeTillSpeedReset = duration;
-    }
-
-
-    public void SpeedUp(float speedupPercent)
-    {
-        currentSpeed = speed * speedupPercent;
-        timeTillSpeedReset = speedreset;
     }
 
     private void OnDisable()
@@ -95,6 +80,30 @@ public class CharacterMovement : MonoBehaviour, ISpeed
             rb.isKinematic = false;
         }
     }
+
+    void ISpeed.SlowDown(float slowPercent)
+    {
+        currentSpeed = speed * slowPercent;
+        timeTillSpeedReset = speedreset;
+    }
+
+    void ISpeed.SlowDown(float slowPercent, int duration)
+    {
+        currentSpeed = speed * slowPercent;
+        timeTillSpeedReset = duration;
+    }
+
+    void ISpeed.SpeedUp(float speedupPercent)
+    {
+        currentSpeed = speed * speedupPercent;
+        timeTillSpeedReset = speedreset;
+    }
+
+    void ISpeed.SpeedUp(float speedupPercent, int duration)
+    {
+        currentSpeed = speed * speedupPercent;
+        timeTillSpeedReset = duration;
+    }
 }
 
 public interface ISpeed
@@ -103,4 +112,5 @@ public interface ISpeed
     void SlowDown(float slowPercent, int duration);
 
     void SpeedUp(float speedupPercent);
+    void SpeedUp(float speedupPercent, int duration);
 }
