@@ -11,10 +11,6 @@ public class UIShopItem : MonoBehaviour
     Text uICost;
     [SerializeField]
     Image uIImage;
-    [SerializeField]
-    TestUpgradeSpeedUp testUpgradeObj;
-    [SerializeField]
-    TestUpgradeSpeedUp testUpgradeObj2;
 
     public void Awake()
     {
@@ -24,27 +20,31 @@ public class UIShopItem : MonoBehaviour
     //Set values of upgrades to item
     public void InitialiseShopItem(PlayerUpgrade upgrade)
     {
+        if(shop == null)
+            shop = GetComponentInParent<UIShop>();
+
         this.upgrade = upgrade;
+        Debug.Log(this.upgrade.ToString() + " " + upgrade.ToString());
         uIImage.sprite = upgrade.Sprite;
-        uICost.text = upgrade.cost.ToString();
-    }
+        uICost.text = upgrade.GetCost().ToString();
 
-    [ContextMenu("Test Upgrade")]
-    public void TestUpgrade()
-    {
-        InitialiseShopItem(testUpgradeObj);
+        if (!ShopManager.INSTANCE.CanAfford(upgrade.GetCost()))
+        {
+            //GetComponent<Animator>().SetTrigger(Labels.UIAnimProperties.DISABLED);
+            GetComponent<Button>().enabled = false;
+            uIImage.color = Color.grey;
+        }
+        else
+        {
+            GetComponent<Button>().enabled = true;
+            uIImage.color = Color.white;
+        }
     }
-
-    [ContextMenu("Test Upgrade - original")]
-    public void TestUpgrade2()
-    {
-        InitialiseShopItem(testUpgradeObj2);
-    }
-
 
     public void PurchaseUpgrade()
     {
-            
+        Debug.Log("Purchasing upgrade " + upgrade.GetType());
+        shop.PurchaseUpgrade(upgrade);
     }
 }
 

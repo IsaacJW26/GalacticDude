@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
         health.gameObject.SetActive(true);
         Uibackground.SetActive(true);
         //disable store
-        storeUI.gameObject.SetActive(false);
+        storeUI.SetStoreActive(false);
     }
 
     //
@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
     public void PurchasePhase()
     {
         //activate store ui
-        storeUI.gameObject.SetActive(true);
+        storeUI.SetStoreActive(true);
         //
         UiText.gameObject.SetActive(false);
         charge.gameObject.SetActive(false);
