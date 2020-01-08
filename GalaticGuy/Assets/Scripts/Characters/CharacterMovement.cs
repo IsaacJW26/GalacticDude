@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CharacterAnimator))]
 public class CharacterMovement : MonoBehaviour, ISpeed
 {
+    ICharacterAnimation anim;
     Rigidbody2D rb;
     [SerializeField]
     public float speed = 2.5f;
@@ -18,6 +20,7 @@ public class CharacterMovement : MonoBehaviour, ISpeed
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<CharacterAnimator>();
         currentSpeed = speed;
     }
 
@@ -34,13 +37,19 @@ public class CharacterMovement : MonoBehaviour, ISpeed
         {
             actualX = xdirection;
         }
-        rb.velocity = new Vector3(actualX, ydirection) * currentSpeed;
 
+        var velocity = new Vector3(actualX, ydirection) * currentSpeed;
+        //move in animator
+        anim?.Move(velocity);
+        rb.velocity = velocity;
+
+        //if speed is modified
         if (timeTillSpeedReset > 0)
         {
             float perc = timeTillSpeedReset / (float)speedreset;
+            //
             if(Mathf.Abs(currentSpeed - speed) < 0.01f)
-            currentSpeed = Mathf.Lerp(speed, currentSpeed, perc);
+                currentSpeed = Mathf.Lerp(speed, currentSpeed, perc);
 
             timeTillSpeedReset--;
         }

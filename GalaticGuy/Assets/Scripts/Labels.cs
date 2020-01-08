@@ -6,9 +6,9 @@ namespace Labels
 {
     public static class Tags
     {
-        public static string ENEMY = "Enemy";
-        public static string PLAYER = "Player";
-        public static string PROJECTILE = "Projectile";
+        public const string ENEMY = "Enemy";
+        public const string PLAYER = "Player";
+        public const string PROJECTILE = "Projectile";
     }
 
     public static class PhysicsLayers
@@ -18,16 +18,28 @@ namespace Labels
 
     public static class Inputs
     {
-        public static string HORIZONTAL_AXIS = "Horizontal";
-        public static string VERTICAL_AXIS = "Vertical";
-        public static string SHOOT = "Jump";
+        public const string HORIZONTAL_AXIS = "Horizontal";
+        public const string VERTICAL_AXIS = "Vertical";
+        public const string SHOOT = "Jump";
     }
 
     public static class AnimProperties
     {
-        public static string DAMAGE = "Damage";
-        public static string CHARGING = "Charging";
-        public static string DEATH = "Death";
+        public const string DAMAGE_TRIG = "Damage";
+        public const string DEATH_TRIG = "Death";
+        public const string CHARGING = "Charging";
+        public const string MOVE_LEFT = "Move_Left";
+        public const string MOVE_RIGHT = "Move_Right";
+        public const string MOVE_UP = "Move_Up";
+        public const string MOVE_DOWN = "Move_Down";
+    }
 
+    public static class UIAnimProperties
+    {
+        public const string NORMAL = "Normal";
+        public const string HIGHLIGHTED = "Highlighted";
+        public const string PRESSED = "Pressed";
+        public const string SELECTED = "Selected";
+        public const string DISABLED = "Disabled";
     }
 }

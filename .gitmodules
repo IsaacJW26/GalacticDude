@@ -1,0 +1,3 @@
+[submodule "GalaticGuy/Assets/Scripts/UnityTools"]
+	path = GalaticGuy/Assets/Scripts/UnityTools
+	url = https://github.com/IsaacJW26/UnityTools.git

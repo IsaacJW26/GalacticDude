@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour, IDamageable
 
         public int maxLifeTime = DEFAULT_LIFETIME;
 
+        public int hp = 1;
         public const int DEFAULT_LIFETIME = 180;
     }
     protected int timeSinceBirth = 0;
@@ -89,7 +90,8 @@ public class Projectile : MonoBehaviour, IDamageable
             IDamageable damageable = collision.GetComponentInParent<IDamageable>();
             damageable?.OnDamage(stats.damage);
             //disable this object
-            OnDamage(0);
+            if(!CheckProj(collision))
+                OnDamage(stats.hp);
         }
     }
 
@@ -116,7 +118,8 @@ public class Projectile : MonoBehaviour, IDamageable
     //Destroys 
     public virtual void OnDamage(int inDamage)
     {
-        if (destroyOnHit)
+        stats.hp--;
+        if (destroyOnHit && stats.hp <= 0)
             DisableObject();
     }
 

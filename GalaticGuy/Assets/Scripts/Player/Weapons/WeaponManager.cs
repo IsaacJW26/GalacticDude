@@ -91,9 +91,12 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
 
     public void SetEmissionLevel(float emissionPercent)
     {
+        //
         chargeParticles.transform.localScale = emissionPercent * defaultSize;
+        
+        //
         ParticleSystem.MinMaxCurve rate = emissionModule.rateOverTime;
-        rate.constant = defaultEmission * emissionPercent;
+        rate.constant = defaultEmission * (emissionPercent +0.3f);
         emissionModule.rateOverTime = rate;
     }
 }

@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void OnDamage(int damage)
     {
-        anim.SetTrigger(Labels.AnimProperties.DAMAGE);
+        anim.SetTrigger(Labels.AnimProperties.DAMAGE_TRIG);
         health.TakeDamage(damage);
 
         if(damage <= 2)
