@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        SetPlayer(FindObjectOfType<MainCharacter>());
         spawner = GetComponent<EnemySpawner>();
         spawner.SetListener(EndLevel);
         UIManager.INSTANCE.StartGame();
@@ -47,6 +48,11 @@ public class GameManager : MonoBehaviour
     public Vector3 GetPlayerPos()
     {
         return player.transform.position;
+    }
+
+    public T GetPlayerComponent<T>()
+    {
+        return player.GetComponent<T>();
     }
 
     private void EndLevel()

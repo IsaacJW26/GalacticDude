@@ -80,6 +80,12 @@ public class EnemySpawner : MonoBehaviour
         StartLevel();
     }
 
+    [ContextMenu("Spawn boss")]
+    public void SpawnBossTest()
+    {
+        SpawnRandomBoss(levels[currentLevel].difficulty);
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {

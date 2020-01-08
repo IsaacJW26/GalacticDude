@@ -15,6 +15,7 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
     ParticleSystem.EmissionModule emissionModule;
 
     float defaultEmission;
+    Vector3 defaultSize;
 
     bool held = false;
     
@@ -24,6 +25,7 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
         current.Awake();
         current.Initialise(GetComponent<CharacterMovement>(), this);
         emissionModule = chargeParticles.emission;
+        defaultSize = chargeParticles.transform.localScale;
         defaultEmission = emissionModule.rateOverTime.Evaluate(0);
     }
 
@@ -89,6 +91,7 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
 
     public void SetEmissionLevel(float emissionPercent)
     {
+        chargeParticles.transform.localScale = emissionPercent * defaultSize;
         ParticleSystem.MinMaxCurve rate = emissionModule.rateOverTime;
         rate.constant = defaultEmission * emissionPercent;
         emissionModule.rateOverTime = rate;

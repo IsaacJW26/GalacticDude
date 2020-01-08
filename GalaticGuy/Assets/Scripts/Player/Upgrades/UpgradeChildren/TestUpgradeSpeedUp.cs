@@ -6,6 +6,7 @@ public class TestUpgradeSpeedUp : PlayerUpgrade
 {
     public TestUpgradeSpeedUp(Sprite sprite) : base(sprite)
     {
+        SetCost(10);
     }
 
     public override void Initialise(ISpeed movement, MainCharacter player, IWeapon weapon)
@@ -41,6 +42,6 @@ public class TestUpgradeSpeedUp : PlayerUpgrade
 
     public override void UpdateFrame(Vector3 currentPosition)
     {
-        this.movement.SpeedUp(5f, 60);
+        this.movement.SpeedUp(1.2f, 60);
     }
 }

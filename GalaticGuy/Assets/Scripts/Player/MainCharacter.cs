@@ -1,19 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
+[RequireComponent(typeof(CharacterMovement))]
+[RequireComponent(typeof(CharacterHealth))]
+[RequireComponent(typeof(WeaponManager))]
+[RequireComponent(typeof(CharacterAnimator))]
 
 public class MainCharacter : MonoBehaviour, IDamageable
 {
     CharacterMovement move;
     CharacterHealth health;
-    WeaponManager weapons; 
-    Animator anim;
+    WeaponManager weapons;
+    ICharacterAnimation anim;
 
     const int invulDuration = 120;
-    int IFramesRemaining = 0;
+    int iFramesRemaining = 0;
     IEnumerator invulCoroutine;
     int frozenTimeRemaining;
-    Collider2D hitbox;
+    List<Collider2D> hitboxes;
 
     [SerializeField]
     ParticleSystem particles;
@@ -24,15 +30,16 @@ public class MainCharacter : MonoBehaviour, IDamageable
     {
         move = GetComponent<CharacterMovement>();
         health = new CharacterHealth(3, OnDeath);
-        anim = GetComponent<Animator>();
+        anim = GetComponent<ICharacterAnimation>();
         weapons = GetComponent<WeaponManager>();
-        hitbox = GetComponent<Collider2D>();
+        hitboxes = GetComponentsInChildren<Collider2D>().ToList();
+
         //initialise particles
         emission = particles.emission;
         emission.enabled = false;
-        //
+
         GameManager.INST.InitialisePlayer(SetEnabled);
-        GameManager.INST.SetPlayer(this);
+        //GameManager.INST.SetPlayer(this);
     }
 
     void Update()
@@ -72,7 +79,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
     public void OnDeath()
     {
         GameManager.INST.PlayerDeath();
-        anim.SetBool(Labels.AnimProperties.DEATH, true);
+        anim.OnDeath();
         SetEnabled(false);
     }
 
@@ -85,10 +92,10 @@ public class MainCharacter : MonoBehaviour, IDamageable
     public void OnDamage(int inDamage)
     {
         //dont do damage if invuln
-        if (IFramesRemaining <= 0)
+        if (iFramesRemaining <= 0)
         {
             //Damage animation
-            anim.SetTrigger(Labels.AnimProperties.DAMAGE);
+            anim.OnDamage();
 
             //update health value
             health.TakeDamage(inDamage);
@@ -100,14 +107,8 @@ public class MainCharacter : MonoBehaviour, IDamageable
         }
     }
 
-    //try shoot normal attack
-    public void ShootNormal()
-    {
-
-    }
-
     //Freeze player for given frames
-    public void freezePlayer(int freezeDuration)
+    public void FreezePlayer(int freezeDuration)
     {
         frozenTimeRemaining = freezeDuration;
     }
@@ -123,18 +124,18 @@ public class MainCharacter : MonoBehaviour, IDamageable
     private IEnumerator SetInvulCoroutine()
     {
         //disable hitbox
-        hitbox.enabled = false;
+        EnableHitboxes(false);
 
         //wait for frame duration
-        IFramesRemaining = invulDuration;
-        while(IFramesRemaining >= 0)
+        iFramesRemaining = invulDuration;
+        while(iFramesRemaining >= 0)
         {
             yield return null;
-            IFramesRemaining--;
+            iFramesRemaining--;
         }
 
         //enable hitbox
-        hitbox.enabled = true;
+        EnableHitboxes(true);
     }
 
     public void OnDisable()
@@ -155,8 +156,13 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void SetEnabled(bool enabled)
     {
-        hitbox.enabled = enabled;
+        EnableHitboxes(enabled);
         weapons.enabled = enabled;
         this.enabled = enabled;
+    }
+
+    private void EnableHitboxes(bool enabled)
+    {
+        hitboxes.ForEach(x => x.enabled = enabled);
     }
 }

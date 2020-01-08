@@ -10,9 +10,19 @@ public abstract class PlayerUpgrade
     protected IWeapon weapon;
 
     protected Sprite sprite;
-    public readonly int cost = -1;
+    private int cost = -1;
 
+    protected void SetCost(int inCost)
+    {
+        cost = inCost;
+    }
+    
     //public getters
+    public int GetCost()
+    {
+        return cost;
+    }
+
     public Sprite Sprite { get { return sprite; } }
     
     public PlayerUpgrade()

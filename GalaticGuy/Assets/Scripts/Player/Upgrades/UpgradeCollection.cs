@@ -14,9 +14,9 @@ public class UpgradeCollection : MonoBehaviour
 
     public void OnEnable()
     {
-        if (INSTANCE == null && INSTANCE != this)
+        if (INSTANCE == null)
             INSTANCE = this;
-        else
+        else if(INSTANCE != this)
         {
             Debug.LogError("Deplicate UpgradeCollection found");
             DestroyImmediate(this);
@@ -34,6 +34,11 @@ public class UpgradeCollection : MonoBehaviour
     public static PlayerUpgrade GetUpgrade(int index)
     {
         return INSTANCE.upgrades[index];
+    }
+
+    public static PlayerUpgrade[] GetAllUpgrades()
+    {
+        return INSTANCE.upgrades;
     }
 
     public int GetSize()

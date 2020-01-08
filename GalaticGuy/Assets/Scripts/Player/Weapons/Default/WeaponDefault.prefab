@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    minShootInterval: 10
-    chargeRate: 9
-    chargeTier: 900
+    minShootInterval: 15
+    chargeRate: 18
+    chargeTier: 300
     shootSlowMax: 1
     slowDuration: 0
     chargeSlowDown: 0.5
