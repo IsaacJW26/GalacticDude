@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Labels;
+using UnityTools.MathTools;
 
 public class CharacterAnimator : MonoBehaviour, ICharacterAnimation
 {
@@ -15,43 +16,43 @@ public class CharacterAnimator : MonoBehaviour, ICharacterAnimation
 
     void ICharacterAnimation.Move(Vector2 velocity)
     {
-        if (compareVelocity(velocity.y, 0f))
+        switch(Comparitors.FloatCompare(velocity.y, 0f))
         {
-            animator.SetBool(AnimProperties.MOVE_DOWN, false);
-            animator.SetBool(AnimProperties.MOVE_UP, false);
-        }
-        else if(velocity.y > 0f)
-        {
-            animator.SetBool(AnimProperties.MOVE_DOWN, false);
-            animator.SetBool(AnimProperties.MOVE_UP, true);
-        }
-        else if(velocity.y < 0f)
-        {
-            animator.SetBool(AnimProperties.MOVE_DOWN, true);
-            animator.SetBool(AnimProperties.MOVE_UP, false);
+            //moving down
+            case -1:
+                animator.SetBool(AnimProperties.MOVE_DOWN, true);
+                animator.SetBool(AnimProperties.MOVE_UP, false);
+                break;
+            //not moving
+            case 0:
+                animator.SetBool(AnimProperties.MOVE_DOWN, false);
+                animator.SetBool(AnimProperties.MOVE_UP, false);
+                break;
+            //moving up
+            case 1:
+                animator.SetBool(AnimProperties.MOVE_DOWN, false);
+                animator.SetBool(AnimProperties.MOVE_UP, true);
+                break;
         }
 
         // left and right movement
-        if (compareVelocity(velocity.x, 0f))
+        switch(Comparitors.FloatCompare(velocity.x, 0f))
         {
-            animator.SetBool(AnimProperties.MOVE_RIGHT, false);
-            animator.SetBool(AnimProperties.MOVE_LEFT, false);
-        }
-        else if (velocity.x > 0f)
-        {
-            animator.SetBool(AnimProperties.MOVE_RIGHT, true);
-            animator.SetBool(AnimProperties.MOVE_LEFT, false);
-        }
-        else if (velocity.x < 0f)
-        {
-            animator.SetBool(AnimProperties.MOVE_RIGHT, false);
-            animator.SetBool(AnimProperties.MOVE_LEFT, true);
-        }
-
-        //nested function
-        bool compareVelocity(float valueX, float valueY)
-        {
-            return Mathf.Abs(valueX - valueY) < 0.001f;
+            //velocity is less than 0, moving left
+            case -1:
+                animator.SetBool(AnimProperties.MOVE_RIGHT, false);
+                animator.SetBool(AnimProperties.MOVE_LEFT, true);
+                break;
+            //velocity is 0, not moving
+            case 0:
+                animator.SetBool(AnimProperties.MOVE_RIGHT, false);
+                animator.SetBool(AnimProperties.MOVE_LEFT, false);
+                break;
+            //velocity is more than 0, moving right
+            case 1:
+                animator.SetBool(AnimProperties.MOVE_RIGHT, true);
+                animator.SetBool(AnimProperties.MOVE_LEFT, false);
+                break;
         }
     }
 

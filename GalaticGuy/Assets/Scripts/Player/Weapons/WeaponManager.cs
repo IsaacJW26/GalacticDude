@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityTools.MathTools;
 
 public class WeaponManager : MonoBehaviour, IOnChargeCallback
 {
@@ -93,10 +94,14 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
     {
         //
         chargeParticles.transform.localScale = emissionPercent * defaultSize;
-        
+
         //
+
+        rfloat rateRange = new rfloat(0.3f, 1.2f);
+
         ParticleSystem.MinMaxCurve rate = emissionModule.rateOverTime;
-        rate.constant = defaultEmission * (emissionPercent +0.3f);
+        rate.constant = defaultEmission * rateRange.LerpValue(emissionPercent);
+
         emissionModule.rateOverTime = rate;
     }
 }

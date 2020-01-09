@@ -12,7 +12,6 @@ public class EnemySpawner : MonoBehaviour
     Level[] levels;
     int currentLevel;
 
-
     int killedCount = 0;
     int spawnedCount = 0;
 
