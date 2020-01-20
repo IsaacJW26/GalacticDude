@@ -14,9 +14,12 @@ public class AsteroidAI : EnemyAI
     CharacterMovement move;
 
     int frame;
+    const int rotateUpdateTime = 10;
 
     private void Awake()
     {
+        frame = -rotateUpdateTime;
+
         asteroid = GetComponentInParent<Enemy>();
         move = GetComponent<CharacterMovement>();
         rotationAxis = GetRandomAxis();
@@ -56,10 +59,10 @@ public class AsteroidAI : EnemyAI
         Move(direction);
 
         //only execute physics every third frame
-        if (frame >= 5)
+        if (frame >= rotateUpdateTime)
         {
             frame = 0;
-            model.RotateAround(model.position, rotationAxis, rotationSpeed * Time.fixedDeltaTime);
+            model.RotateAround(model.position, rotationAxis, rotationSpeed * Time.fixedDeltaTime*10f);
         }
         else
         {

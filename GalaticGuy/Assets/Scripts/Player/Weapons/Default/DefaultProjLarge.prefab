@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    damage: 1
+    damage: 2
     initialSpeed: 0
     yAccelerationOverTime: 0
     dragOverTime: 1
-    maxLifeTime: 20
+    maxLifeTime: 18
+    hp: 1
   player: 0
   projectiles: 1
   enemies: 1
   destroyOnHit: 1
-  damageInterval: 2
+  damageFrameGap: 1
 --- !u!1001 &5121965817248640268
 PrefabInstance:
   m_ObjectHideFlags: 0

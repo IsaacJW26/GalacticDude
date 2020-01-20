@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using LevelInfo;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +8,11 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner INST = null;
 
     [SerializeField]
-    float spawnPositionY = 6;
+    LevelContainer levelInfo;
+
     [SerializeField]
-    Level[] levels;
+    float spawnPositionY = 6;
+    
     int currentLevel;
 
     int killedCount = 0;
@@ -22,42 +25,6 @@ public class EnemySpawner : MonoBehaviour
     const int MAX_REROLLS = 10;
 
     const int DIFF_MULTI = 10;
-
-    [System.Serializable]
-    public struct Tier
-    {
-        [SerializeField]
-        public string name;
-        [SerializeField]
-        public Enemy[] enemiesPrefabs;
-        [SerializeField]
-        public Enemy[] bossPrefabs;
-        [SerializeField]
-        public Squad[] squads;
-    }
-
-    [System.Serializable]
-    public struct Squad
-    {
-        [System.Serializable]
-        public struct SquadEnemy
-        {
-            public Enemy enemy;
-            public Vector2 spawnPosition;
-        }
-
-        public SquadEnemy[] squadMembers;
-    }
-
-    [System.Serializable]
-    public struct EnemyInfo
-    {
-        public Enemy enemy;
-        public int delay;
-    }
-
-    [SerializeField]
-    Tier[] tiers = new Tier[0];
 
     public delegate void EndLevelDelegate();
     private EndLevelDelegate endListener;
@@ -82,17 +49,17 @@ public class EnemySpawner : MonoBehaviour
     [ContextMenu("Spawn boss")]
     public void SpawnBossTest()
     {
-        SpawnRandomBoss(levels[currentLevel].difficulty);
+        SpawnRandomBoss(levelInfo.Levels[currentLevel].difficulty);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         //boss levels
-        if (levels[currentLevel].containsBoss)
+        if (levelInfo.Levels[currentLevel].containsBoss)
         {
             if (spawnedCount <= 0)
-                SpawnRandomBoss(levels[currentLevel].difficulty);
+                SpawnRandomBoss(levelInfo.Levels[currentLevel].difficulty);
             else if (killedCount > 0 && !ended)
             {
                 ended = true;
@@ -122,9 +89,9 @@ public class EnemySpawner : MonoBehaviour
         EnemyInfo info = new EnemyInfo();
 
         info.enemy = enemy;
-        info.delay = GetNextTime(levels[currentLevel]);
+        info.delay = GetNextTime(levelInfo.Levels[currentLevel]);
         //info.spawnPosition = spawnpos;
-
+        //Debug.Log($"time = {info.delay}");
         enemySpawnQueue.Enqueue(info);
     }
 
@@ -165,44 +132,25 @@ public class EnemySpawner : MonoBehaviour
 
         int nextTime = Mathf.Clamp(unclampedTime, MINTIME, MAXTIME);
 
-        return nextTime;
+        return FrequencyDeterminer(spawnedCount, nextTime * 6, 5);
     }
-
-    //Level information container
-    [System.Serializable]
-    private struct Level
-    {
-        public int difficulty;
-        public int length;
-        public bool containsBoss;
-        public int averageTime;
-
-        public Level(int difficulty, int length, bool containsBoss, int averageTime)
-        {
-            this.difficulty = difficulty;
-            this.length = length;
-            this.containsBoss = containsBoss;
-            this.averageTime = averageTime;
-        }
-    }
-
     private Enemy SpawnRandomBoss(int difficulty)
     {
         Enemy enemy = null;
         spawnedCount++;
-        int spawnIndex = Random.Range(0, tiers[difficulty].bossPrefabs.Length);
+        int spawnIndex = Random.Range(0, levelInfo.DifficultyTiers[difficulty].bossPrefabs.Length);
 
         Vector3 spawnPosition = new Vector3(0f, spawnPositionY);
 
-        enemy = SpawnEnemy(tiers[difficulty].bossPrefabs[spawnIndex], spawnPosition);
+        enemy = SpawnEnemy(levelInfo.DifficultyTiers[difficulty].bossPrefabs[spawnIndex], spawnPosition);
 
         return enemy;
     }
 
     private void SpawnRandomSquad(int difficulty)
     {
-        int spawnIndex = Random.Range(0, tiers[difficulty].squads.Length);
-        Squad squad = tiers[difficulty].squads[spawnIndex];
+        int spawnIndex = Random.Range(0, levelInfo.DifficultyTiers[difficulty].squads.Length);
+        Squad squad = levelInfo.DifficultyTiers[difficulty].squads[spawnIndex];
         Vector2 squadPosition = GetRandomSpawnPos();
 
         foreach (Squad.SquadEnemy enemyIn in squad.squadMembers)
@@ -216,11 +164,11 @@ public class EnemySpawner : MonoBehaviour
     {
         //Enemy enemy;
         //Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), spawnPositionY);
-        int spawnIndex = Random.Range(0, tiers[difficulty].enemiesPrefabs.Length);
+        int spawnIndex = Random.Range(0, levelInfo.DifficultyTiers[difficulty].enemyPrefabs.Length);
 
         //enemy = SpawnEnemy(tiers[difficulty].enemiesPrefabs[spawnIndex], spawnPosition);
 
-        return tiers[difficulty].enemiesPrefabs[spawnIndex];
+        return levelInfo.DifficultyTiers[difficulty].enemyPrefabs[spawnIndex];
     }
 
 
@@ -263,18 +211,36 @@ public class EnemySpawner : MonoBehaviour
         killedCount = 0;
         ended = false;
 
-        int enemiesToSpawn = levels[currentLevel].length;
+        int enemiesToSpawn = levelInfo.Levels[currentLevel].length;
 
         for(int ii = 0; ii < enemiesToSpawn; ii++)
         {
-            Enemy enemy = GetRandomEnemyPrefab(levels[currentLevel].difficulty);
+            Enemy enemy = GetRandomEnemyPrefab(levelInfo.Levels[currentLevel].difficulty);
             AddEnemyToQueue(enemy, GetRandomSpawnPos());
         }
         SpawnNextEnemy();
+    }
+
+    [ContextMenu("spawn enemy")]
+    public void SpawnRandomEnemyTest()
+    {
+        
     }
 
     public void EnemyDied()
     {
         killedCount++;
     }
+
+    public int FrequencyDeterminer(int current, int longestSpawnTime, int minspawnTime)
+    {
+        //reaches peak at 7
+        int frequency = 7;
+        float percent = (current % frequency) / (float)frequency;
+        float sinVal = UnityTools.Maths.Trig.PSin(percent * 2 * Mathf.PI);
+
+        //Debug.Log($"{percent} = {sinVal}");
+        return (int)(sinVal * longestSpawnTime) + minspawnTime;
+    }
 }
+

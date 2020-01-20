@@ -21,10 +21,6 @@ public class MainCharacter : MonoBehaviour, IDamageable
     int frozenTimeRemaining;
     List<Collider2D> hitboxes;
 
-    [SerializeField]
-    ParticleSystem particles;
-    ParticleSystem.EmissionModule emission;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -34,12 +30,9 @@ public class MainCharacter : MonoBehaviour, IDamageable
         weapons = GetComponent<WeaponManager>();
         hitboxes = GetComponentsInChildren<Collider2D>().ToList();
 
-        //initialise particles
-        emission = particles.emission;
-        emission.enabled = false;
-
         GameManager.INST.InitialisePlayer(SetEnabled);
         //GameManager.INST.SetPlayer(this);
+        anim.Charge(false);
     }
 
     void Update()
@@ -142,7 +135,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
     {
         move.enabled = false;
         weapons.enabled = false;
-        emission.enabled = false;
+        anim.Charge(false);
     }
 
     public void OnEnable()

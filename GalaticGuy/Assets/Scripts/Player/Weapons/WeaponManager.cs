@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityTools.MathTools;
+using UnityTools.Maths;
 
 public class WeaponManager : MonoBehaviour, IOnChargeCallback
 {
@@ -11,6 +11,8 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
     Weapon current;
     [SerializeField]
     Transform projectilePointDefault;
+    [SerializeField]
+    ICharacterAnimation characterAnimation;
     [SerializeField]
     ParticleSystem chargeParticles;
     ParticleSystem.EmissionModule emissionModule;
@@ -24,6 +26,7 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
     void Start()
     {
         current.Awake();
+        characterAnimation = GetComponent<ICharacterAnimation>();
         current.Initialise(GetComponent<CharacterMovement>(), this);
         emissionModule = chargeParticles.emission;
         defaultSize = chargeParticles.transform.localScale;
@@ -82,22 +85,24 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
 
     public void OnCharge()
     {
-        emissionModule.enabled = true;
+        characterAnimation.Charge(true);
+        //emissionModule.enabled = true;
     }
 
     public void OnChargeEnd()
     {
-        emissionModule.enabled = false;
+        characterAnimation.Charge(false);
+        //emissionModule.enabled = false;
     }
 
     public void SetEmissionLevel(float emissionPercent)
     {
-        //
-        chargeParticles.transform.localScale = emissionPercent * defaultSize;
+        //scale player effects from 35% TO 100%
+        rfloat scaleRange = new rfloat(0.35f, 1.0f);
+        chargeParticles.transform.localScale = scaleRange.LerpValue(emissionPercent) * defaultSize;
 
-        //
-
-        rfloat rateRange = new rfloat(0.3f, 1.2f);
+        //scale emission rate from 30% TO 100
+        rfloat rateRange = new rfloat(0.3f, 1.0f);
 
         ParticleSystem.MinMaxCurve rate = emissionModule.rateOverTime;
         rate.constant = defaultEmission * rateRange.LerpValue(emissionPercent);

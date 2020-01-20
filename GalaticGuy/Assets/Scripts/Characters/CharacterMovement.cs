@@ -7,7 +7,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour, ISpeed
 {
     ICharacterAnimation anim;
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     [SerializeField]
     public float speed = 2.5f;
     private float currentSpeed;
@@ -41,7 +41,7 @@ public class CharacterMovement : MonoBehaviour, ISpeed
         var velocity = new Vector3(actualX, ydirection) * currentSpeed;
         //move in animator
         anim?.Move(velocity);
-        rb.velocity = velocity;
+        Move(velocity, Time.fixedDeltaTime);
 
         //if speed is modified
         if (timeTillSpeedReset > 0)
@@ -60,6 +60,11 @@ public class CharacterMovement : MonoBehaviour, ISpeed
             else
                 currentSpeed = Mathf.Lerp(speed, currentSpeed, 0.5f);
         }
+    }
+
+    protected virtual void Move(Vector2 velocity, float deltaTime)
+    {
+        rb.velocity = velocity;
     }
 
     public void InputDirectionX(int value)

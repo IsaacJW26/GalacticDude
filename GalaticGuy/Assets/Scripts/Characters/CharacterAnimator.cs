@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Labels;
-using UnityTools.MathTools;
+using UnityTools.Maths;
 
 public class CharacterAnimator : MonoBehaviour, ICharacterAnimation
 {
     [SerializeField]
     Animator animator;
+
+    private void Start()
+    {
+        if (animator == null)
+            animator = GetComponent<Animator>();
+    }
 
     void ICharacterAnimation.Charge(bool isCharging)
     {

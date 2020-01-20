@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97f45c080c9b7843a362f29fb369df8, type: 3}
+  m_Name: AsteroidTest
+  m_EditorClassIdentifier: 
+  difficultyTiers:
+  - name: 
+    enemyPrefabs:
+    - {fileID: 366538063770070275, guid: 9a9e008667b1d89439fb9142833f83e0, type: 3}
+    - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
+    bossPrefabs: []
+    squads: []
+  levels:
+  - difficulty: 0
+    length: 15
+    containsBoss: 0
+    averageTime: 60

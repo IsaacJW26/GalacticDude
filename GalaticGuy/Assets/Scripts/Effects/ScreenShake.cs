@@ -15,7 +15,7 @@ public class ScreenShake : MonoBehaviour
     float ShakeFrequency = 2.0f;         // Cinemachine Noise Profile Parameter
     */
 
-    private float ShakeElapsedTime = 0f;
+    private float ShakeTimeRemaining = 0f;
 
     // Cinemachine Shake
     private CinemachineVirtualCamera VirtualCamera;
@@ -35,22 +35,20 @@ public class ScreenShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // If the Cinemachine componet is not set, avoid update
         if (VirtualCamera != null && virtualCameraNoise != null)
         {
             // If Camera Shake effect is still playing
-            if (ShakeElapsedTime > 0)
+            if (ShakeTimeRemaining > 0)
             {
                 ShakeDecay();
                 // Update Shake Timer
-                ShakeElapsedTime -= Time.deltaTime;
+                ShakeTimeRemaining -= Time.deltaTime;
             }
             else
             {
                 // If Camera Shake effect is over, reset variables
                 EndShake();
-                //ShakeElapsedTime = 0f;
             }
         }
     }
@@ -64,10 +62,18 @@ public class ScreenShake : MonoBehaviour
 
     private void StartShake(float frequency, float amplitude, float duration)
     {
-        ShakeElapsedTime = duration;
+        if (ShakeTimeRemaining > 0f)
+            ShakeTimeRemaining = duration / 4f;
+        else
+            ShakeTimeRemaining = duration;
         // Set Cinemachine Camera Noise parameters
         virtualCameraNoise.m_AmplitudeGain += amplitude;
-        virtualCameraNoise.m_FrequencyGain += frequency;
+
+        if(virtualCameraNoise.m_FrequencyGain < 1f)
+            virtualCameraNoise.m_FrequencyGain += frequency;
+        else
+            virtualCameraNoise.m_FrequencyGain += (frequency / virtualCameraNoise.m_FrequencyGain);
+
     }
 
     private void EndShake()

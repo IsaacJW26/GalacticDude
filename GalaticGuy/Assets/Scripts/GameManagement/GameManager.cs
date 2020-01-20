@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 [RequireComponent(typeof(EnemySpawner))]
 public class GameManager : MonoBehaviour
 {
