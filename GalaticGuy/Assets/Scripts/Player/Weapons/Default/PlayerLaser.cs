@@ -7,7 +7,7 @@ public class PlayerLaser : Projectile
     //
     Collider2D col;
     [SerializeField]
-    int damageInterval;
+    int damageFrameGap;
     int timeLeft;
     int loopCount;
 
@@ -18,33 +18,33 @@ public class PlayerLaser : Projectile
         EffectManager.INSTANCE?.ScreenShakeBig();
         EffectManager.INSTANCE?.SlowLong();
 
-        timeLeft = damageInterval;
-        loopCount = stats.maxLifeTime / damageInterval;
+        timeLeft = damageFrameGap;
+        loopCount = stats.maxLifeTime;
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
         //do Damage over time
         if (loopCount > 0)
         {
+            //disable frame when each cycle ends
             if (timeLeft <= 0)
             {
-                loopCount--;
-                timeLeft = damageInterval;
+                timeLeft = damageFrameGap;
                 col.enabled = false;
-                Debug.Log("enabled");
-
             }
             else
             {
-                if (!col.enabled && timeLeft < damageInterval)
+                timeLeft--;
+                //enable when after disabled and cycle begins
+                if (!col.enabled && timeLeft <= 0)
                 {
-                    Debug.Log("disabled");
                     col.enabled = true;
                 }
-                timeLeft--;
             }
+            loopCount--;
         }
     }
 
