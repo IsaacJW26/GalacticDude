@@ -30,12 +30,15 @@ public class ShopManager : MonoBehaviour
         return UpgradeCollection.GetAllUpgrades();
     }
 
-    public void TryBuyItem(PlayerUpgrade upgrade)
+    public void TryBuyItem(PlayerUpgrade upgrade, out bool success)
     {
         if (CanAfford(upgrade.GetCost()))
         {
             Debug.Log("Upgrade bought " + upgrade.GetType());
             upgradeManager.AddUpgrade(upgrade);
+
+            success = true;
+
         }
         else
         {
@@ -43,7 +46,10 @@ public class ShopManager : MonoBehaviour
                 + upgrade.GetType().ToString()
                 + ",cost:" + upgrade.GetCost()
                 + ",cash:" + currencyRemaining);
+
+            success = false;
         }
+
     }
 
     public bool CanAfford(int cost)

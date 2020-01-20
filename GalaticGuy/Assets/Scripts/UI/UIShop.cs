@@ -9,6 +9,7 @@ public class UIShop : MonoBehaviour
 {
     Button[] shopButtons;
     UIShopItem[] shopItems;
+    UIShopText shopText;
     int currentIndex = 0;
     int delay = 0;
     const int maxDelay = 10;
@@ -20,6 +21,8 @@ public class UIShop : MonoBehaviour
     {
         shopButtons = GetComponentsInChildren<Button>();
         shopItems = GetComponentsInChildren<UIShopItem>();
+        shopText = GetComponentInChildren<UIShopText>();
+
         EventSystem.current.SetSelectedGameObject(null);
         shopButtons[currentIndex].Select();
     }
@@ -83,7 +86,14 @@ public class UIShop : MonoBehaviour
 
     public void PurchaseUpgrade(PlayerUpgrade upgrade)
     {
-        ShopManager.INSTANCE.TryBuyItem(upgrade);
+        bool canAfford;
+        ShopManager.INSTANCE.TryBuyItem(upgrade, out canAfford);
+
+        if(canAfford)
+        {
+            shopText.UpdateText($"{upgrade.GetType().Name} upgrade purchased");
+            shopText.AnimateText();
+        }
     }
 
     public void SetUpgrades(PlayerUpgrade[] upgrades)
