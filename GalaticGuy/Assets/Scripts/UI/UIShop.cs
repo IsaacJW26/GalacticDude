@@ -10,9 +10,11 @@ public class UIShop : MonoBehaviour
     Button[] shopButtons;
     UIShopItem[] shopItems;
     UIShopText shopText;
+    UICurrency currencyText;
+
     int currentIndex = 0;
     int delay = 0;
-    const int maxDelay = 10;
+    const int MAX_DELAY = 10;
     [SerializeField]
     GameObject uIPanel;
     bool shopActive = false;
@@ -22,9 +24,10 @@ public class UIShop : MonoBehaviour
         shopButtons = GetComponentsInChildren<Button>();
         shopItems = GetComponentsInChildren<UIShopItem>();
         shopText = GetComponentInChildren<UIShopText>();
+        currencyText = GetComponentInChildren<UICurrency>();
 
         EventSystem.current.SetSelectedGameObject(null);
-        shopButtons[currentIndex].Select();
+        //shopButtons[currentIndex].Select();
     }
 
     void FixedUpdate()
@@ -40,17 +43,18 @@ public class UIShop : MonoBehaviour
         {
             if (Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS) > 0)
             {
-                delay = maxDelay;
+                delay = MAX_DELAY;
                 SelectNext();
             }
             else if (Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS) < 0)
             {
-                delay = maxDelay;
+                delay = MAX_DELAY;
                 SelectPrev();
             }
             else if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump"))
             {
-                SelectButton();
+                if (currentIndex >= 0)
+                    SelectButton();
             }
         }
 
@@ -72,10 +76,20 @@ public class UIShop : MonoBehaviour
         shopButtons[currentIndex].Select();
     }
 
-    internal void SetStoreActive(bool isActive)
+    public void SetStoreActive(bool isActive)
     {
         uIPanel.SetActive(isActive);
         shopActive = isActive;
+        if(isActive)
+            shopButtons[0].Select();
+    }
+
+    private IEnumerator WaitToSelectInitial()
+    {
+        //for(int ii = 0; ii < MAX_DELAY; ii++)
+            yield return null;
+        shopButtons[0].Select();
+        Debug.Log("AAAAAA");
     }
 
     //
@@ -94,6 +108,11 @@ public class UIShop : MonoBehaviour
             shopText.UpdateText($"{upgrade.GetType().Name} upgrade purchased");
             shopText.AnimateText();
         }
+    }
+
+    public void UpdateCurrency(int newValue)
+    {
+        currencyText.UpdateCurrency(newValue);
     }
 
     public void SetUpgrades(PlayerUpgrade[] upgrades)

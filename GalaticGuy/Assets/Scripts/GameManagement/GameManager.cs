@@ -13,10 +13,14 @@ public class GameManager : MonoBehaviour
 
     const float endOfLevelDelay = 5f;
 
-    //
+    //player
     public delegate void ActivePlayer(bool active);
     ActivePlayer playerActive;
     MainCharacter player;
+
+    //respawn hold time
+    const float RESPAWN_HOLD_DURATION = 1f;
+    float heldTime = -RESPAWN_HOLD_DURATION;
 
     void Awake()
     {
@@ -25,7 +29,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         SetPlayer(FindObjectOfType<MainCharacter>());
         spawner = GetComponent<EnemySpawner>();
@@ -35,9 +39,19 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(gameState == GameState.dead && Input.anyKey)
+        if (gameState == GameState.dead)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (Input.anyKey)
+            {
+                if (heldTime <= 0f)
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                else
+                    heldTime -= Time.deltaTime;
+            }
+            else
+            {
+                heldTime = RESPAWN_HOLD_DURATION;
+            }
         }
     }
 
@@ -56,12 +70,17 @@ public class GameManager : MonoBehaviour
         return player.GetComponent<T>();
     }
 
+    public void EndGame()
+    {
+        UIManager.INSTANCE.EndGame();
+    }
+
     private void EndLevel()
     {
         if (waitingFunction == null)
         {
             Debug.Log("Start ended phase");
-            gameState = GameState.ended;
+            gameState = GameState.endlevel;
 
             //disable player
             playerActive(false);
@@ -71,7 +90,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(waitingFunction);
 
             //activate end game ui
-            UIManager.INSTANCE.EndGame();
+            UIManager.INSTANCE.ClearedWave();
         }
     }
 
@@ -108,7 +127,9 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Kill Player")]
     public void PlayerDeath()
     {
-        gameState = GameState.playing;
+        heldTime = RESPAWN_HOLD_DURATION;
+
+        gameState = GameState.dead;
 
         UIManager.INSTANCE.PlayerDeath();
 
@@ -164,7 +185,7 @@ public class GameManager : MonoBehaviour
 
 public enum GameState
 {
-    playing, ended, purchaseUpgrade, dead
+    playing, endlevel, purchaseUpgrade, dead, endgame
 }
 
 public delegate void BasicMethod();

@@ -34,12 +34,17 @@ namespace Labels
         public const string MOVE_DOWN = "Move_Down";
     }
 
-    public static class UIAnimProperties
+    public static class UIButtonAnimProperties
     {
         public const string NORMAL = "Normal";
         public const string HIGHLIGHTED = "Highlighted";
         public const string PRESSED = "Pressed";
         public const string SELECTED = "Selected";
         public const string DISABLED = "Disabled";
+    }
+
+    public static class UITextAnimProperties
+    {
+        public const string SELECTED_TRIG = "Selected";
     }
 }

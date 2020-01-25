@@ -14,9 +14,10 @@ public class UIManager : MonoBehaviour
     UnityEngine.UI.Text UiText;
     [SerializeField]
     GameObject Uibackground;
-    readonly string STR_CLEAR = "Wave Cleared";
-    readonly string STR_INCOMING = "Wave Incoming";
-    readonly string STR_DEAD = "Game Over\nHold any key to try again";
+    const string STR_CLEAR = "Wave Cleared";
+    const string STR_INCOMING = "Wave Incoming";
+    const string STR_WON = "END";
+    const string STR_DEAD = "Game Over\nHold any key to try again";
 
 
     // Start is called before the first frame update
@@ -65,7 +66,7 @@ public class UIManager : MonoBehaviour
     }
 
     //
-    public void EndGame()
+    public void ClearedWave()
     {
         //activate text
         UiText.text = STR_CLEAR;
@@ -77,7 +78,19 @@ public class UIManager : MonoBehaviour
         Uibackground.SetActive(false);
     }
 
-    //de activate everything
+    public void EndGame()
+    {
+        //activate text
+        UiText.text = STR_WON;
+        UiText.gameObject.SetActive(true);
+
+        //disable everything else
+        charge.gameObject.SetActive(false);
+        health.gameObject.SetActive(false);
+        Uibackground.SetActive(false);
+    }
+
+    //deactivate everything
     public void PurchasePhase()
     {
         //activate store ui

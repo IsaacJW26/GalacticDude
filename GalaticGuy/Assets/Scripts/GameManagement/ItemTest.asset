@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97f45c080c9b7843a362f29fb369df8, type: 3}
-  m_Name: AsteroidTest
+  m_Name: ItemTest
   m_EditorClassIdentifier: 
   difficultyTiers:
   - name: 
     enemyPrefabs:
-    - {fileID: 366538063770070275, guid: 9a9e008667b1d89439fb9142833f83e0, type: 3}
-    - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
+    - {fileID: 9119908270630566908, guid: f5c27153ff88b6846a9588a4cc7e092d, type: 3}
     bossPrefabs: []
     squads: []
   levels:

@@ -75,9 +75,16 @@ public class EnemySpawner : MonoBehaviour
                 killedCount >= spawnedCount)
             {
                 ended = true;
-                OnLevelEnd();
+                //Game ended
+                if(currentLevel + 1 >= levelInfo.Levels.Count)
+                {
+                    Debug.Log("Game ended");
+                }
+                else
+                    OnLevelEnd();
+
                 Debug.Log("spawning stopped");
-                System.GC.Collect();
+                //System.GC.Collect();
             }
         }
     }
@@ -203,6 +210,8 @@ public class EnemySpawner : MonoBehaviour
     {
         endListener();
     }
+
+
 
     public void StartLevel()
     {

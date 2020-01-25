@@ -20,11 +20,8 @@ public abstract class EnemyAI : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        int xdir = Mathf.RoundToInt(direction.x);
-        int ydir = Mathf.RoundToInt(direction.y);
-
-        movement.InputDirectionX(xdir);
-        movement.InputDirectionY(ydir);
+        movement.InputDirectionX(direction.x);
+        movement.InputDirectionY(direction.y);
     }
 
     public void Shoot(Vector3 direction)

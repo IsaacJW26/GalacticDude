@@ -46,6 +46,7 @@ public class AsteroidAI : EnemyAI
 
     public override void UpdateFrame(Vector3 currentPosition)
     {
+        //keep asteroid in bounds
         float bound = CharacterMovement.xBound - 0.01f;
         bool collideRight = ((bound) < transform.position.x);
         bool movingRight = (direction.x > 0f);

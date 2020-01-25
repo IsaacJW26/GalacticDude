@@ -15,7 +15,7 @@ public class CharacterMovement : MonoBehaviour, ISpeed
     private const int speedreset = 5;
 
     public const float xBound = 4f;
-    int xdirection = 0, ydirection = 0;
+    float xdirection = 0, ydirection = 0;
 
     void Awake()
     {
@@ -26,19 +26,19 @@ public class CharacterMovement : MonoBehaviour, ISpeed
 
     void FixedUpdate()
     {
-        int actualX = 0;
+        float actualX = 0;
         //outside of bound but moving to centre
         if ((transform.position.x > xBound && xdirection <= 0) || (transform.position.x < -xBound && xdirection >= 0))
         {
             actualX = xdirection;
         }
-        //within bounds
+        //or within bounds
         else if ((transform.position.x < xBound) && (transform.position.x > -xBound))
         {
             actualX = xdirection;
         }
 
-        var velocity = new Vector3(actualX, ydirection) * currentSpeed;
+        var velocity = new Vector3(actualX, ydirection).normalized * currentSpeed;
         //move in animator
         anim?.Move(velocity);
         Move(velocity, Time.fixedDeltaTime);
@@ -67,14 +67,14 @@ public class CharacterMovement : MonoBehaviour, ISpeed
         rb.velocity = velocity;
     }
 
-    public void InputDirectionX(int value)
+    public void InputDirectionX(float value)
     {
-        xdirection = Mathf.Clamp(value, -1, 1);
+        xdirection = Mathf.Clamp(value, -1f, 1f);
     }
 
-    public void InputDirectionY(int value)
+    public void InputDirectionY(float value)
     {
-        ydirection = Mathf.Clamp(value, -1, 1);
+        ydirection = Mathf.Clamp(value, -1f, 1f);
     }
 
     private void OnDisable()

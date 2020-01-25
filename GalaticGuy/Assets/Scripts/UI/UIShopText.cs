@@ -12,6 +12,7 @@ public class UIShopText : MonoBehaviour
     [SerializeField]
     Text shoptext;
     Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,6 @@ public class UIShopText : MonoBehaviour
     public void AnimateText()
     {
         //play animation
-        //throw new NotImplementedException();
-        Debug.LogError("ui shop has no animations");
+        anim.SetTrigger(Labels.UITextAnimProperties.SELECTED_TRIG);
     }
 }
