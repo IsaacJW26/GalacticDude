@@ -23,7 +23,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void AddUpgrade(PlayerUpgrade newUpgrade)
     {
-        newUpgrade.Initialise(GetComponent<CharacterMovement>(), 
+        newUpgrade.Initialise(GetComponent<Movement>(), 
             GetComponent<MainCharacter>(), 
             GetComponent<WeaponManager>().GetCurrentWeapon());
         currentUpgrades.Add(newUpgrade);
@@ -108,7 +108,7 @@ public class UpgradeManager : MonoBehaviour
             IWeapon weapon = GetComponent<WeaponManager>().GetCurrentWeapon();
 
             upgrade.Initialise(
-                GetComponent<CharacterMovement>(),
+                GetComponent<Movement>(),
                 GetComponent<MainCharacter>(),
                 weapon);
         }

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-[RequireComponent(typeof(CharacterMovement))]
+[RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(CharacterHealth))]
 [RequireComponent(typeof(WeaponManager))]
 [RequireComponent(typeof(CharacterAnimator))]
 
 public class MainCharacter : MonoBehaviour, IDamageable
 {
-    CharacterMovement move;
+    Movement move;
     CharacterHealth health;
     WeaponManager weapons;
     ICharacterAnimation anim;
@@ -24,7 +24,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        move = GetComponent<CharacterMovement>();
+        move = GetComponent<Movement>();
         health = new CharacterHealth(3, OnDeath);
         anim = GetComponent<ICharacterAnimation>();
         weapons = GetComponent<WeaponManager>();

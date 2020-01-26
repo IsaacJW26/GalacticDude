@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character3DMovement : CharacterMovement
+public class Character3DMovement : Movement
 {
     public const float CAM_SIZE = 4.787879f;
     public const float X_PIXELS = 240;

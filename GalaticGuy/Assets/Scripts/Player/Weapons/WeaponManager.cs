@@ -27,7 +27,7 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
     {
         current.Awake();
         characterAnimation = GetComponent<ICharacterAnimation>();
-        current.Initialise(GetComponent<CharacterMovement>(), this);
+        current.Initialise(GetComponent<Movement>(), this);
         emissionModule = chargeParticles.emission;
         defaultSize = chargeParticles.transform.localScale;
         defaultEmission = emissionModule.rateOverTime.Evaluate(0);

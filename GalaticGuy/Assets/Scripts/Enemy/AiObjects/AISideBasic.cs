@@ -34,12 +34,12 @@ public class AISideBasic : EnemyAI
                 movingDown = false;
 
             //if it reaches right bound turn around
-            if (transform.position.x >= CharacterMovement.xBound && movingRight)
+            if (transform.position.x >= Movement.xBound && movingRight)
             {
                 movingRight = false;
             }
             //when left bound is reached turn around
-            else if(transform.position.x <= -CharacterMovement.xBound && !movingRight)
+            else if(transform.position.x <= -Movement.xBound && !movingRight)
             {
                 movingRight = true;
             }
@@ -60,6 +60,6 @@ public class AISideBasic : EnemyAI
 
     private float distanceToXBound()
     {
-        return Mathf.Abs(Mathf.Abs(transform.position.x) - (CharacterMovement.xBound));
+        return Mathf.Abs(Mathf.Abs(transform.position.x) - (Movement.xBound));
     }
 }

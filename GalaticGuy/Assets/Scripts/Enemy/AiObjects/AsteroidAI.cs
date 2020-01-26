@@ -11,7 +11,7 @@ public class AsteroidAI : EnemyAI
     [SerializeField]
     Transform model;
     Enemy asteroid;
-    CharacterMovement move;
+    Movement move;
 
     int frame;
     const int rotateUpdateTime = 10;
@@ -21,7 +21,7 @@ public class AsteroidAI : EnemyAI
         frame = -rotateUpdateTime;
 
         asteroid = GetComponentInParent<Enemy>();
-        move = GetComponent<CharacterMovement>();
+        move = GetComponent<Movement>();
         rotationAxis = GetRandomAxis();
 
         float xVal = Random.Range(-2.5f, 2.5f);
@@ -47,7 +47,7 @@ public class AsteroidAI : EnemyAI
     public override void UpdateFrame(Vector3 currentPosition)
     {
         //keep asteroid in bounds
-        float bound = CharacterMovement.xBound - 0.01f;
+        float bound = Movement.xBound - 0.01f;
         bool collideRight = ((bound) < transform.position.x);
         bool movingRight = (direction.x > 0f);
         bool collideLeft = (-bound > transform.position.x);

@@ -77,7 +77,7 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
 
         SetCharge(0);
         this.timeUntilNextShot = 0;
-        //currentStats = baseStats;
+        ResetAllStats();
     }
 
     private void ResetAllStats()

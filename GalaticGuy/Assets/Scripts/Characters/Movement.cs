@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CharacterAnimator))]
-public class CharacterMovement : MonoBehaviour, ISpeed
+public class Movement : MonoBehaviour, ISpeed
 {
     ICharacterAnimation anim;
     protected Rigidbody2D rb;
@@ -99,12 +99,14 @@ public class CharacterMovement : MonoBehaviour, ISpeed
     {
         currentSpeed = speed * slowPercent;
         timeTillSpeedReset = speedreset;
+        Debug.Log($"original {speed} perc {slowPercent} new {currentSpeed} ");
     }
 
     void ISpeed.SlowDown(float slowPercent, int duration)
     {
         currentSpeed = speed * slowPercent;
         timeTillSpeedReset = duration;
+        Debug.Log($"original {speed} perc {slowPercent} new {currentSpeed} ");
     }
 
     void ISpeed.SpeedUp(float speedupPercent)

@@ -182,20 +182,20 @@ public class EnemySpawner : MonoBehaviour
     //gives position inside spawn bounds
     public Vector3 GetRandomSpawnPos()
     {
-        return new Vector3(Random.Range(-CharacterMovement.xBound, CharacterMovement.xBound), spawnPositionY);
+        return new Vector3(Random.Range(-Movement.xBound, Movement.xBound), spawnPositionY);
     }
 
     public Enemy SpawnEnemy(Enemy enemy, Vector3 position)
     {
         spawnedCount++;
 
-        if(position.x > CharacterMovement.xBound)
+        if(position.x > Movement.xBound)
         {
-            position.x = CharacterMovement.xBound - 0.01f;
+            position.x = Movement.xBound - 0.01f;
         }
-        else if(position.x < -CharacterMovement.xBound)
+        else if(position.x < -Movement.xBound)
         {
-            position.x = -(CharacterMovement.xBound - 0.01f);
+            position.x = -(Movement.xBound - 0.01f);
         }
 
         return Instantiate(enemy, position, Quaternion.identity);

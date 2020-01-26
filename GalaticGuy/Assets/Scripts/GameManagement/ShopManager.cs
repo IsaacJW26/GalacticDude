@@ -6,7 +6,7 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager INSTANCE = null;
     UpgradeManager upgradeManager = null;
-    const int START_CURRENCY = int.MaxValue;
+    const int START_CURRENCY = 100;
     int curr;
     int CurrencyRemaining { get { return curr; } set { curr = value; ui.UpdateCurrency(curr); } }
 
@@ -24,7 +24,6 @@ public class ShopManager : MonoBehaviour
         upgradeManager = GameManager.INST.GetPlayerComponent<UpgradeManager>();
         PopulateShop();
         CurrencyRemaining = START_CURRENCY;
-
     }
 
     public PlayerUpgrade[] GetRandomItems(int size)
@@ -69,10 +68,21 @@ public class ShopManager : MonoBehaviour
         StartCoroutine(WaitToPoplulateUpgrades());
     }
 
+    public void AddCurrency(CurrencyTypes currencyType)
+    {
+        Debug.Log($"{(int)currencyType}");
+        CurrencyRemaining += (int)currencyType;
+    }
+
     IEnumerator WaitToPoplulateUpgrades()
     {
         yield return null;
         yield return null;
         ui.SetUpgrades(currentUpgrades);
     }
+}
+
+public enum CurrencyTypes
+{
+    normal = 1, medium = 5, big = 20 
 }

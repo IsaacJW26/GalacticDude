@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(CharacterShoot))]
-[RequireComponent(typeof(CharacterMovement))]
+[RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(EnemyAI))]
 [RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour, IDamageable
@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField]
     CharacterHealth health = null;
     CharacterShoot shoot;
-    CharacterMovement movement;
+    Movement movement;
     Animator anim;
     [SerializeField]
     Enemy[] deathChildren;
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
     void Awake()
     {
         shoot = GetComponent<CharacterShoot>();
-        movement = GetComponent<CharacterMovement>();
+        movement = GetComponent<Movement>();
         Ai = GetComponent<EnemyAI>();
         anim = GetComponent<Animator>();
 
