@@ -13,7 +13,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
     Movement move;
     CharacterHealth health;
     WeaponManager weapons;
-    ICharacterAnimation anim;
+    ICharacterAnimator anim;
 
     const int invulDuration = 120;
     int iFramesRemaining = 0;
@@ -26,12 +26,11 @@ public class MainCharacter : MonoBehaviour, IDamageable
     {
         move = GetComponent<Movement>();
         health = new CharacterHealth(3, OnDeath);
-        anim = GetComponent<ICharacterAnimation>();
+        anim = GetComponent<ICharacterAnimator>();
         weapons = GetComponent<WeaponManager>();
         hitboxes = GetComponentsInChildren<Collider2D>().ToList();
 
         GameManager.INST.InitialisePlayer(SetEnabled);
-        //GameManager.INST.SetPlayer(this);
         anim.Charge(false);
     }
 
@@ -71,6 +70,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
     public void OnDeath()
     {
+        move.OnDeath();
         GameManager.INST.PlayerDeath();
         anim.OnDeath();
         SetEnabled(false);

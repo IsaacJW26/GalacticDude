@@ -60,9 +60,10 @@ public class EffectManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void CreateExplosion(Vector3 position)
+    public void CreateExplosion(Vector3 position, float scale)
     {
         GameObject obj = Instantiate(Explosion);
+        obj.transform.localScale *= scale;
         obj.transform.position = position;
         StartCoroutine(RemoveExposion(obj, 5f));
     }

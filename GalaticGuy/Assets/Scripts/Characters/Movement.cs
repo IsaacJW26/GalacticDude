@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterAnimator))]
 public class Movement : MonoBehaviour, ISpeed
 {
-    ICharacterAnimation anim;
+    ICharacterAnimator anim;
     protected Rigidbody2D rb;
     [SerializeField]
     public float speed = 2.5f;
@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour, ISpeed
 
     public const float xBound = 4f;
     float xdirection = 0, ydirection = 0;
+    bool isDead = false;
 
     void Awake()
     {
@@ -26,40 +27,48 @@ public class Movement : MonoBehaviour, ISpeed
 
     void FixedUpdate()
     {
-        float actualX = 0;
-        //outside of bound but moving to centre
-        if ((transform.position.x > xBound && xdirection <= 0) || (transform.position.x < -xBound && xdirection >= 0))
+        if (!isDead)
         {
-            actualX = xdirection;
-        }
-        //or within bounds
-        else if ((transform.position.x < xBound) && (transform.position.x > -xBound))
-        {
-            actualX = xdirection;
-        }
+            float actualX = 0;
+            //outside of bound but moving to centre
+            if ((transform.position.x > xBound && xdirection <= 0) || (transform.position.x < -xBound && xdirection >= 0))
+            {
+                actualX = xdirection;
+            }
+            //or within bounds
+            else if ((transform.position.x < xBound) && (transform.position.x > -xBound))
+            {
+                actualX = xdirection;
+            }
 
-        var velocity = new Vector3(actualX, ydirection).normalized * currentSpeed;
-        //move in animator
-        anim?.Move(velocity);
-        Move(velocity, Time.fixedDeltaTime);
+            var velocity = new Vector3(actualX, ydirection).normalized * currentSpeed;
+            //move in animator
+            anim?.Move(velocity);
+            Move(velocity, Time.fixedDeltaTime);
 
-        //if speed is modified
-        if (timeTillSpeedReset > 0)
-        {
-            float perc = timeTillSpeedReset / (float)speedreset;
-            //
-            if(Mathf.Abs(currentSpeed - speed) < 0.01f)
-                currentSpeed = Mathf.Lerp(speed, currentSpeed, perc);
+            //if speed is modified
+            if (timeTillSpeedReset > 0)
+            {
+                float perc = timeTillSpeedReset / (float)speedreset;
+                //
+                if (Mathf.Abs(currentSpeed - speed) < 0.01f)
+                    currentSpeed = Mathf.Lerp(speed, currentSpeed, perc);
 
-            timeTillSpeedReset--;
-        }
-        else
-        {
-            if (Mathf.Abs(currentSpeed - speed) > 0.01f)
-                currentSpeed = speed;
+                timeTillSpeedReset--;
+            }
             else
-                currentSpeed = Mathf.Lerp(speed, currentSpeed, 0.5f);
+            {
+                if (Mathf.Abs(currentSpeed - speed) > 0.01f)
+                    currentSpeed = speed;
+                else
+                    currentSpeed = Mathf.Lerp(speed, currentSpeed, 0.5f);
+            }
         }
+    }
+
+    public void OnDeath()
+    {
+        isDead = true;
     }
 
     protected virtual void Move(Vector2 velocity, float deltaTime)
@@ -99,14 +108,14 @@ public class Movement : MonoBehaviour, ISpeed
     {
         currentSpeed = speed * slowPercent;
         timeTillSpeedReset = speedreset;
-        Debug.Log($"original {speed} perc {slowPercent} new {currentSpeed} ");
+        //Debug.Log($"original {speed} perc {slowPercent} new {currentSpeed} ");
     }
 
     void ISpeed.SlowDown(float slowPercent, int duration)
     {
         currentSpeed = speed * slowPercent;
         timeTillSpeedReset = duration;
-        Debug.Log($"original {speed} perc {slowPercent} new {currentSpeed} ");
+        //Debug.Log($"original {speed} perc {slowPercent} new {currentSpeed} ");
     }
 
     void ISpeed.SpeedUp(float speedupPercent)

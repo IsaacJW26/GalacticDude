@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 366538063770070296}
   - component: {fileID: 4264902601414561684}
   - component: {fileID: 8299292342239377011}
+  - component: {fileID: -8926815800575684336}
   m_Layer: 8
   m_Name: SmallAsteroid
   m_TagString: Enemy
@@ -154,6 +155,10 @@ MonoBehaviour:
   health:
     maxHP: 5
   deathChildren: []
+  minBounty: 50
+  maxBounty: 20
+  bountyChance: 2
+  explosionScale: 3
 --- !u!95 &366538063770070296
 Animator:
   serializedVersion: 3
@@ -185,7 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f9c40265a689b4bb6d4016afd485ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!114 &8299292342239377011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +203,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.4
+--- !u!114 &-8926815800575684336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366538063770070272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f9c40265a689b4bb6d4016afd485ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6957090069792257161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206,6 +222,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 366538062678292176}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: cd46789ae87dae44b99c173b50816db1,
+        type: 3}
+      propertyPath: m_Name
+      value: Asteroid
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: cd46789ae87dae44b99c173b50816db1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: cd46789ae87dae44b99c173b50816db1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -275,16 +301,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: cd46789ae87dae44b99c173b50816db1,
-        type: 3}
-      propertyPath: m_Name
-      value: Asteroid
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: cd46789ae87dae44b99c173b50816db1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: cd46789ae87dae44b99c173b50816db1,
         type: 3}

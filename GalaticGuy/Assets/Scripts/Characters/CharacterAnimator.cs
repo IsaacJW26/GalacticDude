@@ -4,23 +4,22 @@ using UnityEngine;
 using Labels;
 using UnityTools.Maths;
 
-public class CharacterAnimator : MonoBehaviour, ICharacterAnimation
+[RequireComponent(typeof(Animator))]
+public class CharacterAnimator : MonoBehaviour, ICharacterAnimator
 {
-    [SerializeField]
     Animator animator;
 
-    private void Start()
+    private void Awake()
     {
-        if (animator == null)
-            animator = GetComponent<Animator>();
+       animator = GetComponent<Animator>();
     }
 
-    void ICharacterAnimation.Charge(bool isCharging)
+    void ICharacterAnimator.Charge(bool isCharging)
     {
         animator.SetBool(AnimProperties.CHARGING, isCharging);
     }
 
-    void ICharacterAnimation.Move(Vector2 velocity)
+    void ICharacterAnimator.Move(Vector2 velocity)
     {
         switch(Comparitors.FloatCompare(velocity.y, 0f))
         {
@@ -62,23 +61,23 @@ public class CharacterAnimator : MonoBehaviour, ICharacterAnimation
         }
     }
 
-    void ICharacterAnimation.OnDeath()
+    void ICharacterAnimator.OnDeath()
     {
         animator.SetTrigger(AnimProperties.DEATH_TRIG);
     }
 
-    void ICharacterAnimation.OnDamage()
+    void ICharacterAnimator.OnDamage()
     {
         animator.SetTrigger(AnimProperties.DAMAGE_TRIG);
     }
 
-    void ICharacterAnimation.Shoot(int level)
+    void ICharacterAnimator.Shoot(int level)
     {
         throw new System.NotImplementedException();
     }
 }
 
-public interface ICharacterAnimation
+public interface ICharacterAnimator
 {
     void OnDeath();
     void OnDamage();

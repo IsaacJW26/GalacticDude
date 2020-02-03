@@ -12,7 +12,7 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
     [SerializeField]
     Transform projectilePointDefault;
     [SerializeField]
-    ICharacterAnimation characterAnimation;
+    ICharacterAnimator characterAnimation;
     [SerializeField]
     ParticleSystem chargeParticles;
     ParticleSystem.EmissionModule emissionModule;
@@ -26,7 +26,7 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
     void Start()
     {
         current.Awake();
-        characterAnimation = GetComponent<ICharacterAnimation>();
+        characterAnimation = GetComponent<ICharacterAnimator>();
         current.Initialise(GetComponent<Movement>(), this);
         emissionModule = chargeParticles.emission;
         defaultSize = chargeParticles.transform.localScale;

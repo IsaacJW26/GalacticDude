@@ -1,29 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityTools.Maths;
+
 [RequireComponent(typeof(CharacterShoot))]
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(EnemyAI))]
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CharacterAnimator))]
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
     CharacterHealth health = null;
     CharacterShoot shoot;
     Movement movement;
-    Animator anim;
+    ICharacterAnimator anim;
+
     [SerializeField]
     Enemy[] deathChildren;
 
+    [Header("Bounty")]
+    [SerializeField]
+    int minBounty;
+    [SerializeField]
+    int maxBounty;
+    [SerializeField]
+    [Range(0,4)]
+    int bountyChance;
+
     protected EnemyAI Ai;
     bool isDead = false;
+
+    [SerializeField]
+    [Range(0f, 5f)]
+    float explosionScale = 1f;
 
     void Awake()
     {
         shoot = GetComponent<CharacterShoot>();
         movement = GetComponent<Movement>();
         Ai = GetComponent<EnemyAI>();
-        anim = GetComponent<Animator>();
+        anim = GetComponent<CharacterAnimator>();
 
         health?.InitialiseMethods(OnDeath);
         Ai?.Initialise(movement, null, shoot);
@@ -31,11 +47,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void FixedUpdate()
     {
-        Ai.UpdateFrame(transform.position);
+        if (!isDead)
+        {
+            Ai.UpdateFrame(transform.position);
 
-        //destroy once end of level is reached
-        if (transform.position.y < -7)
-            OnDeath();
+            //destroy once end of level is reached
+            if (transform.position.y < -7)
+                OnDeath();
+        }
     }
 
     public virtual void OnDeath()
@@ -43,19 +62,86 @@ public class Enemy : MonoBehaviour, IDamageable
         if (!isDead)
         {
             isDead = true;
-            EffectManager.INSTANCE.CreateExplosion(transform.position);
-            shoot.DestroyPool();
+            anim.OnDeath();
 
-            foreach (Enemy enemy in deathChildren)
+            float scale = (transform.localScale.x + transform.localScale.y + transform.localScale.z ) / 3f;
+
+            EffectManager.INSTANCE.CreateExplosion(transform.position, explosionScale * scale);
+            //disable everything
+                shoot.DestroyPool();
+                movement.OnDeath();
+
+
+            //is there objects to spawn when dead
+            if (deathChildren.Length > 0)
+                foreach (Enemy enemy in deathChildren)
+                {
+                    float r = Random.Range(0.5f, 1.0f) * transform.localScale.magnitude, angle = Random.Range(0f, 2f * Mathf.PI);
+                    Vector3 location = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * r + transform.position;
+                    if (location.y > -1.5f)
+                        EnemySpawner.INST.SpawnEnemy(enemy, location);
+                }
+
+
+            //spawn bounty
+            if (Random.Range(0,4) < bountyChance)
             {
-                float r = Random.Range(0.5f, 1.0f) * transform.localScale.magnitude, angle = Random.Range(0f, 2f * Mathf.PI);
-                Vector3 location = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * r + transform.position;
-                if (location.y > -1.5f)
-                    EnemySpawner.INST.SpawnEnemy(enemy, location);
+                StartCoroutine(SpawnRandomCoins());
             }
 
             StartCoroutine(WaitToDie());
         }
+    }
+
+    IEnumerator SpawnRandomCoins()
+    {
+        int coinLayerOrder = 0;
+        int bountyVal = Random.Range(minBounty, maxBounty);
+        CoinPickup prefab = GameManager.INST.CurrencyPrefab;
+        //spawn random coins for certain value
+        while (bountyVal > 0)
+        {
+            coinLayerOrder++;
+            Vector3 offset = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
+            CurrencyType coinType = GetRandomCoin(bountyVal);
+            bountyVal -= (int)coinType;
+            CoinPickup coin = Instantiate(GameManager.INST.CurrencyPrefab, transform.position +offset, Quaternion.identity);
+            coin.Initialise(coinType, coinLayerOrder);
+            int del = Mathf.Clamp(Random.Range(-4, 4), 0, 4);
+            for (int i = 0; i < del; i++)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+        }
+    }
+
+    private CurrencyType GetRandomCoin(int maxValue)
+    {
+        int max = 3;
+        if (maxValue >= (int)CurrencyType.big)
+            max = 3;
+        else if (maxValue >= (int)CurrencyType.medium)
+            max = 2;
+        else
+            max = 1;
+
+        CurrencyType chosenType = CurrencyType.normal;
+        switch (Random.Range(0, max))
+        {
+            case 0:
+                chosenType = CurrencyType.normal;
+                break;
+            case 1:
+                chosenType = CurrencyType.medium;
+                break;
+            case 2:
+                chosenType = CurrencyType.big;
+                break;
+            default:
+                break;
+        }
+
+        return chosenType;
     }
 
     IEnumerator WaitToDie()
@@ -63,16 +149,26 @@ public class Enemy : MonoBehaviour, IDamageable
         yield return null;
         GameManager.INST.EnemyDeath();
         yield return null;
+
+        foreach (var col in GetComponentsInChildren<Collider2D>())
+        {
+            col.enabled = false;
+        }
+
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 
     public virtual void OnDamage(int damage)
     {
-        anim.SetTrigger(Labels.AnimProperties.DAMAGE_TRIG);
-        health.TakeDamage(damage);
+        if (!isDead)
+        {
+            anim.OnDamage();
+            health.TakeDamage(damage);
 
-        if(damage <= 2)
-            EffectManager.INSTANCE.ScreenShakeSmall();
+            if (damage <= 2)
+                EffectManager.INSTANCE.ScreenShakeSmall();
+        }
         /*
         else if(damage <= 4)
             ScreenShake.INSTANCE.MediumShake();

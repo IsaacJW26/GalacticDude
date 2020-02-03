@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     const float RESPAWN_HOLD_DURATION = 1f;
     float heldTime = -RESPAWN_HOLD_DURATION;
 
+    [SerializeField]
+    CoinPickup currencyPrefab;
+
+    public CoinPickup CurrencyPrefab { get => currencyPrefab; private set => currencyPrefab = value; }
+
     void Awake()
     {
         if (INST == null)

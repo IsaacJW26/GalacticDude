@@ -6,12 +6,20 @@ using UnityEngine;
 public class CoinPickup : MonoBehaviour
 {
     [SerializeField]
-    CurrencyTypes type;
+    CurrencyType type;
     Movement movement;
+    SpriteRenderer rend;
 
     void OnEnable()
     {
         movement = GetComponent<Movement>();
+        rend = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    public void Initialise(CurrencyType currencyType, int layerOrder)
+    {
+        type = currencyType;
+        rend.sortingOrder = layerOrder;
     }
 
     void FixedUpdate()

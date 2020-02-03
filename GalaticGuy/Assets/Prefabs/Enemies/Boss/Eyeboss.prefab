@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 5795318427676420456}
   - component: {fileID: 7001233414193594097}
   - component: {fileID: 726255909376779045}
+  - component: {fileID: -5039327450082650990}
   m_Layer: 8
   m_Name: Eyeboss
   m_TagString: Enemy
@@ -452,6 +453,22 @@ MonoBehaviour:
   health:
     maxHP: 10
   deathChildren: []
+  minBounty: 0
+  maxBounty: 0
+  bountyChance: 0
+--- !u!114 &-5039327450082650990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483904256585763367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f9c40265a689b4bb6d4016afd485ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &4201129976644031697
 GameObject:
   m_ObjectHideFlags: 0

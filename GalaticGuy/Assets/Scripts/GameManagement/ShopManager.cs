@@ -68,7 +68,7 @@ public class ShopManager : MonoBehaviour
         StartCoroutine(WaitToPoplulateUpgrades());
     }
 
-    public void AddCurrency(CurrencyTypes currencyType)
+    public void AddCurrency(CurrencyType currencyType)
     {
         Debug.Log($"{(int)currencyType}");
         CurrencyRemaining += (int)currencyType;
@@ -82,7 +82,7 @@ public class ShopManager : MonoBehaviour
     }
 }
 
-public enum CurrencyTypes
+public enum CurrencyType
 {
     normal = 1, medium = 5, big = 20 
 }
