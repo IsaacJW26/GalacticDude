@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour, IDamageable
             Ai.UpdateFrame(transform.position);
 
             //destroy once end of level is reached
-            if (transform.position.y < -7)
+            if (transform.position.y < GameManager.LOWEST_Y)
                 OnDeath();
         }
     }

@@ -10,13 +10,18 @@ public class PlayerLaser : Projectile
     int damageFrameGap;
     int timeLeft;
     int loopCount;
+    [SerializeField]
+    bool slowMo = true;
+    [SerializeField]
+    bool bigShake = true;
 
     public void OnEnable()
     {
         col = GetComponent<Collider2D>();
-
-        EffectManager.INSTANCE?.ScreenShakeBig();
-        EffectManager.INSTANCE?.SlowLong();
+        if (bigShake)
+            EffectManager.INSTANCE?.ScreenShakeBig();
+        if (slowMo)
+            EffectManager.INSTANCE?.SlowLong();
 
         timeLeft = damageFrameGap;
         loopCount = stats.maxLifeTime;
@@ -27,7 +32,7 @@ public class PlayerLaser : Projectile
         base.FixedUpdate();
 
         //do Damage over time
-        if (loopCount > 0)
+        if (loopCount > 0 && damageFrameGap > 0)
         {
             //disable frame when each cycle ends
             if (timeLeft <= 0)

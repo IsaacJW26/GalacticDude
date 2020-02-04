@@ -26,6 +26,9 @@ public class CoinPickup : MonoBehaviour
     {
         movement.InputDirectionX(0f);
         movement.InputDirectionY(-1f);
+
+        if(transform.position.y < GameManager.LOWEST_Y)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

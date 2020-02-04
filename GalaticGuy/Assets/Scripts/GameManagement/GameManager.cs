@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     public CoinPickup CurrencyPrefab { get => currencyPrefab; private set => currencyPrefab = value; }
 
+    public const float LOWEST_Y = -7f;
+
     void Awake()
     {
         if (INST == null)
