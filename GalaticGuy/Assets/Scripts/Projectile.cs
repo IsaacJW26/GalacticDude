@@ -57,17 +57,24 @@ public class Projectile : MonoBehaviour, IDamageable
             DisableObject();
     }
 
-    private Vector2 GetVelocity()
+    protected Vector2 GetVelocity()
     {
         Vector2 drag = (velocity / stats.dragOverTime);
         Vector2 accelerated = drag + Vector2.up* stats.yAccelerationOverTime;
         
         return (accelerated*(Time.fixedDeltaTime)  + velocity * (1f-Time.fixedDeltaTime));
     }
+
     public void Initialise(int index, Shooter parent)
     {
         this.index = index;
         this.parent = parent;
+        OnInitialise();
+    }
+
+    public virtual void OnInitialise()
+    {
+        //instantiated by children
     }
 
     public void Activate(Vector3 position, Vector2 direction)

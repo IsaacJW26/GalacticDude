@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScatterShotWeapon : Weapon
 {
-    protected override void ShootDefault(Vector3 direction, Vector3 pos)
+    protected override Projectile ShootDefault(Vector3 direction, Vector3 pos)
     {
         //base.ShootDefault(direction, pos);
         Vector3 directionL, directionR;
@@ -13,16 +13,20 @@ public class ScatterShotWeapon : Weapon
 
         CreateProjectile(projectileDefault, directionL, pos);
         CreateProjectile(projectileDefault, directionR, pos);
+
+        return null;
     }
 
-    protected override void ShootMedium(Vector3 direction, Vector3 pos)
+    protected override Projectile ShootMedium(Vector3 direction, Vector3 pos)
     {
         base.ShootMedium(direction, pos);
         ShootDefault(direction, pos);
+
+        return null;
     }
 
 
-    protected override void ShootMax(Vector3 direction, Vector3 pos)
+    protected override Projectile ShootMax(Vector3 direction, Vector3 pos)
     {
         Vector3 directionL, directionR;
         directionL = (Vector3.up * 2f + Vector3.left).normalized;
@@ -32,7 +36,7 @@ public class ScatterShotWeapon : Weapon
         CreateProjectile(projectileMedium, direction, pos);
         CreateProjectile(projectileMedium, directionR, pos);
 
-        //base.ShootMax(direction, pos);
+        return null;
     }
 
     // Start is called before the first frame update

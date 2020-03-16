@@ -61,10 +61,10 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
     [SerializeField]
     protected Projectile projectileMax = null;
 
-    ISpeed movement;
-    IOnChargeCallback weaponManCallback;
-    private int heldDuration;
-    private bool beingHeld;
+    protected ISpeed movement;
+    protected IWeaponManager manager;
+    protected int heldDuration;
+    protected bool beingHeld;
 
     public void Awake()
     {
@@ -90,10 +90,10 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
         currentStats.slowDuration = baseStats.slowDuration;
     }
 
-    public void Initialise(ISpeed movement, IOnChargeCallback weapon)
+    public void Initialise(ISpeed movement, IWeaponManager manager)
     {
         this.movement = movement;
-        this.weaponManCallback = weapon;
+        this.manager = manager;
     } 
 
     // Update is called once per frame
@@ -145,13 +145,13 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
         if (heldDuration > 20)
         {
             movement.SlowDown(slowPercent: currentStats.chargeSlowDown);
-            weaponManCallback.OnCharge();
+            manager.OnCharge();
             float percent = state.currentCharge / (float) WeaponManager.MAX_CHARGE;
-            weaponManCallback.SetEmissionLevel(percent);
+            manager.SetEmissionLevel(percent);
         }
     }
 
-    public virtual void OnShootButtonRelease(WeaponManager manager)
+    public virtual void OnShootButtonRelease()
     {
         //successfully shoot
         //frame limit exists to stop spamming
@@ -177,27 +177,28 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
         }
         beingHeld = false;
         heldDuration = 0;
-        weaponManCallback.OnChargeEnd();
+        manager.OnChargeEnd();
     }
+
     //
     public int GetCurrentCharge()
     {
         return state.currentCharge;
     }
 
-    protected virtual void ShootDefault(Vector3 direction, Vector3 pos)
+    protected virtual Projectile ShootDefault(Vector3 direction, Vector3 pos)
     {
-        CreateProjectile(projectileDefault, direction, pos);
+        return CreateProjectile(projectileDefault, direction, pos);
     }
 
-    protected virtual void ShootMedium(Vector3 direction, Vector3 pos)
+    protected virtual Projectile ShootMedium(Vector3 direction, Vector3 pos)
     {
-        CreateProjectile(projectileMedium, direction, pos);
+        return CreateProjectile(projectileMedium, direction, pos);
     }
 
-    protected virtual void ShootMax(Vector3 direction, Vector3 pos)
+    protected virtual Projectile ShootMax(Vector3 direction, Vector3 pos)
     {
-        CreateProjectile(projectileMax, direction, pos);
+        return CreateProjectile(projectileMax, direction, pos);
     }
 
     protected Projectile CreateProjectile(Projectile projPrefab, Vector3 direction, Vector3 pos)
@@ -264,15 +265,4 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
         //stub
         throw new NotImplementedException();
     }
-}
-
-public interface IWeapon
-{
-    void RapidFire(float duration);
-    void ForceShot();
-    void FirerateBuffPercent(float percent);
-    void DecreaseDebuffFireratePercent(float percent);
-    void DamageBuffPercent(float percent);
-    void DamageDebuffPercent(float percent);
-    void BoostDamageFixed(int increase);
 }

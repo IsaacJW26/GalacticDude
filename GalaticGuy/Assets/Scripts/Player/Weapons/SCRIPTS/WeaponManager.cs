@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityTools.Maths;
 
-public class WeaponManager : MonoBehaviour, IOnChargeCallback
+public class WeaponManager : MonoBehaviour, IWeaponManager
 {
     public const int MAX_CHARGE = 1800;
 
@@ -69,7 +69,7 @@ public class WeaponManager : MonoBehaviour, IOnChargeCallback
         {
             held = false;
 
-            current.OnShootButtonRelease(this);
+            current.OnShootButtonRelease();
         }
     }
 

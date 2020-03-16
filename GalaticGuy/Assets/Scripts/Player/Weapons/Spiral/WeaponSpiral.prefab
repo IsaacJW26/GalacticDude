@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6407506664756749491}
-  - component: {fileID: 176995618498543106}
+  - component: {fileID: -5021164595855930440}
   m_Layer: 0
-  m_Name: WeaponRailgun
+  m_Name: WeaponSpiral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &176995618498543106
+--- !u!114 &-5021164595855930440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,16 +44,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    minShootInterval: 60
-    chargeRate: 4
-    chargeTier: 200
+    minShootInterval: 20
+    chargeRate: 36
+    chargeTier: 900
     shootSlowMax: 1
     slowDuration: 0
-    chargeSlowDown: 0.5
-  relativeShoot: {x: 0, y: 0}
-  projectileDefault: {fileID: 8038325770130421891, guid: ed05185104ba7004c8e2d18cc2b4b654,
+    chargeSlowDown: 1
+  relativeShoot: {x: 0, y: 1}
+  projectileDefault: {fileID: 8103097977007251674, guid: 7aa27da2a1f5d354eb7f2b8771290226,
     type: 3}
-  projectileMedium: {fileID: 8038325770130421891, guid: 67bc417a5bb4ab046a80247ecf7a675c,
+  projectileMedium: {fileID: 8103097977007251674, guid: 648e7514cfe820f4681cf7854212e7b7,
     type: 3}
-  projectileMax: {fileID: 8038325770130421891, guid: d8207c78a030f8946ba5168ce7807da8,
+  projectileMax: {fileID: 8103097977007251674, guid: 131347e29cdc4004097031a07581c2a5,
     type: 3}

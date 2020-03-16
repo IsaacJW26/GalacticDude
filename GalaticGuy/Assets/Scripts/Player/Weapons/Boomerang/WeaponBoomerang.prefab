@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6407506664756749491}
-  - component: {fileID: 176995618498543106}
+  - component: {fileID: 1951662360211256309}
   m_Layer: 0
-  m_Name: WeaponDefault
+  m_Name: WeaponBoomerang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &176995618498543106
+--- !u!114 &1951662360211256309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,20 +40,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437679865043990651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 809b456215d95fa48b05eb89f0683c34, type: 3}
+  m_Script: {fileID: 11500000, guid: 6da4005192bd4794588f893340bcc2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    minShootInterval: 15
-    chargeRate: 12
-    chargeTier: 300
+    minShootInterval: 10
+    chargeRate: 6
+    chargeTier: 900
     shootSlowMax: 1
     slowDuration: 0
-    chargeSlowDown: 0.5
-  relativeShoot: {x: 0, y: 0}
-  projectileDefault: {fileID: 3735054432054898068, guid: a7a8387a59411ed4488a3890527ddddd,
+    chargeSlowDown: 1
+  relativeShoot: {x: 0, y: 1}
+  projectileDefault: {fileID: 42830808364343078, guid: bc6e7f67977c08048abd0be35486929c,
     type: 3}
-  projectileMedium: {fileID: 3735054432054898068, guid: ba7101d3824c60f46a78d0c39071231b,
-    type: 3}
-  projectileMax: {fileID: 8038325770130421891, guid: d9455d972a96e004d9fe70fcfe0c4d76,
-    type: 3}
+  projectileMedium: {fileID: 0}
+  projectileMax: {fileID: 0}

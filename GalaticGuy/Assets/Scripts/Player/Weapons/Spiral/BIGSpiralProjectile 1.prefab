@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &8103097977007251674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4654127213129162372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346de821cde3c5549ae9c8cc0e71de46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    damage: 8
+    initialSpeed: 0
+    yAccelerationOverTime: 0
+    dragOverTime: 1
+    maxLifeTime: 540
+    hp: 1
+  player: 0
+  projectiles: 1
+  enemies: 1
+  destroyOnHit: 0
+  distanceFromPlayer: 14
+  velocityY: 0
+  spiralSpeed: 0.2
 --- !u!1001 &5161839547234442996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,7 +36,7 @@ PrefabInstance:
     - target: {fileID: 519112092338487408, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_Name
-      value: DefaultProjSmall
+      value: BIGSpiralProjectile 1
       objectReference: {fileID: 0}
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
@@ -87,5 +113,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
+--- !u!1 &4654127213129162372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 519112092338487408, guid: 8022621cf3437834085c47560e4ce33e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5161839547234442996}
+  m_PrefabAsset: {fileID: 0}
