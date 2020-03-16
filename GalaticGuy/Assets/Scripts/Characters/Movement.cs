@@ -49,7 +49,7 @@ public class Movement : MonoBehaviour, ISpeed
             //if speed is modified
             if (timeTillSpeedReset > 0)
             {
-                float perc = timeTillSpeedReset / (float)speedreset;
+                float perc = (float)timeTillSpeedReset / (float)speedreset;
                 //
                 if (Mathf.Abs(currentSpeed - speed) < 0.01f)
                     currentSpeed = Mathf.Lerp(speed, currentSpeed, perc);

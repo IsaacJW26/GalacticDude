@@ -47,8 +47,8 @@ MonoBehaviour:
     minShootInterval: 15
     chargeRate: 12
     chargeTier: 300
-    shootSlowMax: 1
-    slowDuration: 0
+    shootSlowMax: 0
+    slowDuration: 20
     chargeSlowDown: 0.5
   relativeShoot: {x: 0, y: 0}
   projectileDefault: {fileID: 3735054432054898068, guid: a7a8387a59411ed4488a3890527ddddd,
