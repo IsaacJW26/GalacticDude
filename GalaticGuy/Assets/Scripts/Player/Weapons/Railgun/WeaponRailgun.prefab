@@ -51,7 +51,7 @@ MonoBehaviour:
     slowDuration: 0
     chargeSlowDown: 0.5
   relativeShoot: {x: 0, y: 0}
-  projectileDefault: {fileID: 8038325770130421891, guid: ed05185104ba7004c8e2d18cc2b4b654,
+  projectileDefault: {fileID: 3735054432054898068, guid: 8c9c4b655e66ed64eb612074d6289d1f,
     type: 3}
   projectileMedium: {fileID: 8038325770130421891, guid: 67bc417a5bb4ab046a80247ecf7a675c,
     type: 3}

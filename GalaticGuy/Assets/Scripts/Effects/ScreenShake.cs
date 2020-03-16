@@ -55,8 +55,8 @@ public class ScreenShake : MonoBehaviour
 
     private void ShakeDecay()
     {
-        virtualCameraNoise.m_AmplitudeGain *= 0.90f;
-        virtualCameraNoise.m_FrequencyGain *= 0.90f;
+        virtualCameraNoise.m_AmplitudeGain *= 0.95f;
+        virtualCameraNoise.m_FrequencyGain *= 0.95f;
     }
 
 
@@ -86,7 +86,7 @@ public class ScreenShake : MonoBehaviour
     [ContextMenu("Big Shake")]
     public void BigShake()
     {
-        StartShake(2.0f, 4f, 0.5f);
+        StartShake(frequency: 3.5f, amplitude: 10f, duration: 0.65f);
     }
 
     [ContextMenu("Medium Shake")]

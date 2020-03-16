@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 492571269136689467}
   m_Layer: 0
   m_Name: ShieldSprites_inner
-  m_TagString: Enemy
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f372b6a710a934287894ed61a0f4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHP: 5
+  baseHP: 2
 --- !u!61 &492571269136689467
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1848029263066289163}
   m_Layer: 0
   m_Name: ShieldSprites_outer
-  m_TagString: Enemy
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f372b6a710a934287894ed61a0f4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHP: 5
+  baseHP: 3
 --- !u!61 &1848029263066289163
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: -2690138519752523144}
   - component: {fileID: 6801133464338510374}
   m_Layer: 0
-  m_Name: EnemyUpDown
+  m_Name: EnemyShield
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

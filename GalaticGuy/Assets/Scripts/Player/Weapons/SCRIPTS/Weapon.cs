@@ -27,6 +27,7 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
 
         [Header("Speed up slow, down")]
         [SerializeField]
+        [Tooltip("0 is 0% of original speed, 1 is 100% of original speed")]
         [Range(0f, 1f)]
         public float shootSlowMax = 1f;
 

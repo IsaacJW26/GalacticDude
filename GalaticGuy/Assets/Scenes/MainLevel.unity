@@ -263,8 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67b726f8a4ef20479b3abdd2f34fc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: {fileID: -5021164595855930440, guid: 7eec35230afe77f4d9e4888b868f6109,
-    type: 3}
+  current: {fileID: 176995618498543106, guid: 88348a04a5f773746ab4961f08c63a93, type: 3}
   projectilePointDefault: {fileID: 1464757872}
   chargeParticles: {fileID: 1632723577}
 --- !u!4 &43408440 stripped
@@ -15246,22 +15245,22 @@ PrefabInstance:
     - target: {fileID: 566476722283182095, guid: 8fbe6aaa445976e48aedf89f6b881140,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 566476722283182095, guid: 8fbe6aaa445976e48aedf89f6b881140,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 566476722283182095, guid: 8fbe6aaa445976e48aedf89f6b881140,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 566476722097281982, guid: 8fbe6aaa445976e48aedf89f6b881140,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fbe6aaa445976e48aedf89f6b881140, type: 3}
@@ -15548,7 +15547,7 @@ PrefabInstance:
         type: 3}
       propertyPath: levelInfo
       value: 
-      objectReference: {fileID: 11400000, guid: e602aa850e10cf74a8667e5fc3db29b9,
+      objectReference: {fileID: 11400000, guid: 410c0cffc60cb164e9b015a45676db5b,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0f00f5ab3723f34380a4b81b349e4b8, type: 3}
