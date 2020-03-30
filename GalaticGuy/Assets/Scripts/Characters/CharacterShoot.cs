@@ -14,6 +14,7 @@ public class CharacterShoot : MonoBehaviour, Shooter
     int projectileDamage = 1;
     [SerializeField]
     float projectileSpeed = 3f;
+    public float ProjectileSpeed { get => projectileSpeed; private set => projectileSpeed = value; }
 
     [SerializeField]
     Projectile projectile = null;
@@ -51,7 +52,7 @@ public class CharacterShoot : MonoBehaviour, Shooter
         if(timeUntilNextShot <= 0)
         {
             timeUntilNextShot = shootInterval;
-            Shoot(direction.normalized * projectileSpeed);
+            Shoot(direction.normalized * ProjectileSpeed);
         }
     }
 

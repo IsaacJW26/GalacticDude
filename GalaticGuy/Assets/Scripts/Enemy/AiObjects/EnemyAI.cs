@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class EnemyAI : MonoBehaviour
 {
-    private Movement movement;
+    protected Movement movement;
     protected MainCharacter player;
-    private CharacterShoot shoot;
+    protected CharacterShoot shoot;
 
     public void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
     {
