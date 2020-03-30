@@ -187,4 +187,9 @@ public class Enemy : MonoBehaviour, IDamageable
             OnDeath();
         }
     }
+
+    public CharacterHealth GetHealth()
+    {
+        return health;
+    }
 }

@@ -13,11 +13,27 @@ public class AsteroidAI : EnemyAI
     Enemy asteroid;
     Movement move;
 
+    [Header("Damage Visuals")]
+    new Renderer renderer;
+    CharacterHealth health;
+    [SerializeField]
+    Texture MedDamage;
+    [SerializeField]
+    Texture HighDamage;
+    [SerializeField]
+    Texture FullDamage;
+
+    const float MED_DMG_THRESHOLD = 0.25f;
+    const float HGH_DMG_THRESHOLD = 0.5f;
+    const float FUL_DMG_THRESHOLD = 0.75f;
+
     int frame;
     const int rotateUpdateTime = 10;
 
     private void Awake()
     {
+        renderer = GetComponentInChildren<Renderer>();
+
         frame = -rotateUpdateTime;
 
         asteroid = GetComponentInParent<Enemy>();
@@ -32,6 +48,8 @@ public class AsteroidAI : EnemyAI
         transform.localScale *= scale;
 
         move.speed *= Random.Range(0.8f, 1.2f);
+
+        health = asteroid.GetHealth();
     }
 
     private Vector3 GetRandomAxis()
@@ -69,6 +87,8 @@ public class AsteroidAI : EnemyAI
         {
             frame++;
         }
+
+        SetVisualCracks();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -129,5 +149,29 @@ public class AsteroidAI : EnemyAI
 
             direction = new Vector3(-direction.x, yval).normalized;
         }
+    }
+
+    private void SetVisualCracks()
+    {
+        float fraction = (float)health.GetHealth() / (float)health.GetMaxHealth();
+        fraction = 1f - fraction;
+
+        if(fraction < MED_DMG_THRESHOLD)
+        {
+            //do nothing
+        }
+        else if(fraction < HGH_DMG_THRESHOLD)
+        {
+            renderer.material.SetTexture("_MainTex", MedDamage);
+        }
+        else if(fraction < FUL_DMG_THRESHOLD)
+        {
+            renderer.material.SetTexture("_MainTex", HighDamage);
+        }
+        else
+        {
+            renderer.material.SetTexture("_MainTex", FullDamage);
+        }
+
     }
 }

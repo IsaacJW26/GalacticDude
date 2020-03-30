@@ -101,6 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 74
   model: {fileID: 366538062678292176}
+  MedDamage: {fileID: 2800000, guid: b893afb6c9cdc8241bf837d7962cb36d, type: 3}
+  HighDamage: {fileID: 2800000, guid: bcc241b796b3404409257fef6657a320, type: 3}
+  FullDamage: {fileID: 2800000, guid: 13ba0488e1c42034d9a4053a23e7b07c, type: 3}
 --- !u!114 &366538063770070300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +312,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c612432aab59b84419f238cf3e2b2cea, type: 2}
+      objectReference: {fileID: 2100000, guid: 7a86f4a51c9033942b8a88f82b51bc14, type: 2}
     - target: {fileID: -1504981713932161579, guid: cd46789ae87dae44b99c173b50816db1,
         type: 3}
       propertyPath: m_CastShadows

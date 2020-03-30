@@ -38,6 +38,8 @@ public class Projectile : MonoBehaviour, IDamageable
     [Space(0.1f)]
     [SerializeField]
     bool destroyOnHit = true;
+    [SerializeField]
+    AudioClip audioClip;
 
     // Start is called before the first frame update
     void Awake()
@@ -45,6 +47,7 @@ public class Projectile : MonoBehaviour, IDamageable
         if (stats.maxLifeTime <= 0)
             stats.maxLifeTime = Stats.DEFAULT_LIFETIME;
         rb = GetComponent<Rigidbody2D>();
+        GameManager.audioManager.CreateAudio(audioClip);
     }
 
     protected virtual void FixedUpdate()

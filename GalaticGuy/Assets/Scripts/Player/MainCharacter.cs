@@ -4,9 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 [RequireComponent(typeof(Movement))]
-[RequireComponent(typeof(CharacterHealth))]
 [RequireComponent(typeof(WeaponManager))]
 [RequireComponent(typeof(CharacterAnimator))]
+[RequireComponent(typeof(CharacterSound))]
 
 public class MainCharacter : MonoBehaviour, IDamageable
 {

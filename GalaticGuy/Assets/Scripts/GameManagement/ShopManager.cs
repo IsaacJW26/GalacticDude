@@ -70,7 +70,7 @@ public class ShopManager : MonoBehaviour
 
     public void AddCurrency(CurrencyType currencyType)
     {
-        Debug.Log($"{(int)currencyType}");
+        //Debug.Log($"{(int)currencyType}");
         CurrencyRemaining += (int)currencyType;
     }
 

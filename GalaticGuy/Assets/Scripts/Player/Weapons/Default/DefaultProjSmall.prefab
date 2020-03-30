@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefaultProjSmall
       objectReference: {fileID: 0}
+    - target: {fileID: 519112092338487408, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: player
@@ -86,6 +91,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112093836934865, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112093836934865, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_Name
+      value: Sprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848577, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_Name
+      value: Main
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848591, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
