@@ -122,14 +122,15 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
         }
         else
         {
-            percent = (float)(charge - currentStats.chargeTier) /
-                (float)(WeaponManager.MAX_CHARGE - currentStats.chargeTier);
-            UIManager.INSTANCE.UpdateChargeR(percent);
-
             if (charge >= WeaponManager.MAX_CHARGE)
                 state.currentCharge = WeaponManager.MAX_CHARGE;
             else
                 state.currentCharge = charge;
+
+            percent = (float)(charge - currentStats.chargeTier) /
+                (float)(WeaponManager.MAX_CHARGE - currentStats.chargeTier);
+            UIManager.INSTANCE.UpdateChargeR(percent);
+
         }
     }
 

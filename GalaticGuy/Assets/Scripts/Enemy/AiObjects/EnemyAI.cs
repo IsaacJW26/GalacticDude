@@ -8,7 +8,7 @@ public abstract class EnemyAI : MonoBehaviour
     protected MainCharacter player;
     protected CharacterShoot shoot;
 
-    public void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
+    public virtual void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
     {
         this.movement = movement;
         this.player = player;
@@ -28,4 +28,7 @@ public abstract class EnemyAI : MonoBehaviour
     {
         shoot.TryShoot(direction);
     }
+
+    public virtual void OnDeath()
+    { }
 }

@@ -53,7 +53,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
             //destroy once end of level is reached
             if (transform.position.y < GameManager.LOWEST_Y)
+            {
+                Ai.OnDeath();
                 OnDeath();
+            }
         }
     }
 

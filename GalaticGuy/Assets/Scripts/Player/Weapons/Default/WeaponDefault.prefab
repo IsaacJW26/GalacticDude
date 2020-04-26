@@ -46,7 +46,7 @@ MonoBehaviour:
   baseStats:
     minShootInterval: 15
     chargeRate: 12
-    chargeTier: 300
+    chargeTier: 450
     shootSlowMax: 0
     slowDuration: 20
     chargeSlowDown: 0.5

@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!95 &1238484436430294296
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620870739799469436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 736a546fe54e71141bef122b567f660a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8038325770130421891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23,6 +42,7 @@ MonoBehaviour:
   projectiles: 1
   enemies: 1
   destroyOnHit: 1
+  audioClip: {fileID: 8300000, guid: de1ba8bb46ce5d445b0e4e6c7a9e0e06, type: 3}
   damageFrameGap: 1
   slowMo: 1
   bigShake: 1
@@ -120,7 +140,7 @@ PrefabInstance:
     - target: {fileID: 519112092338487408, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
@@ -227,6 +247,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 5.8
       objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -331,11 +356,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e, type: 3}

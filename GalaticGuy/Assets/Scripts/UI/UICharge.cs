@@ -10,12 +10,37 @@ public class UICharge : MonoBehaviour
     Slider chargebarL;
     [SerializeField]
     Slider chargebarR;
-    Animator anim;
-    bool chargingL, chargingR;
 
-    private void Awake()
+    [SerializeField]
+    Image chargeBarLFilled;
+    [SerializeField]
+    Image chargeBarRFilled;
+
+    [SerializeField]
+    AudioClip filledClip;
+    [SerializeField]
+    AudioClip chargingClip;
+    AudioSource audioSource;
+
+    Animator anim;
+    bool isCharging, chargingR;
+
+    float timeSinceLastCharge = 0f;
+    float chargeDuration = 0f;
+
+    const float MIN_CHARGE_DURATION = 0.25f;
+    const float CHARGE_TIME_THRESHOLD = 0.03f;
+    const float PITCH_INCREASE_RATE = 0.25f;
+    const float BASE_PITCH = 1.0f;
+
+    private void Start()
     {
         anim = GetComponent<Animator>();
+        chargeBarLFilled.enabled = false;
+        chargeBarRFilled.enabled = false;
+        isCharging = false;
+
+        audioSource = GameManager.audioManager.CreatePeristentAudio(gameObject, chargingClip, looping: false, play: false);
     }
 
     private void InitialiseCharge(float percentOfMax)
@@ -26,23 +51,73 @@ public class UICharge : MonoBehaviour
     // Update is called once per frame
     public void UpdateChargeL(float percent)
     {
-        chargingL = true;
-        chargingR = true;
+        chargeBarLFilled.enabled = false;
+        chargeBarRFilled.enabled = false;
+
+        chargingR = false;
+        isCharging = true;
         chargebarR.value = 0f;
         chargebarL.value = percent;
     }
 
     public void UpdateChargeR(float percent)
     {
-        chargingL = false;
-        chargingR = true;
+        chargeBarLFilled.enabled = true;
+
+        isCharging = true;
         chargebarL.value = 1f;
         chargebarR.value = percent;
+
+        if(chargebarR.value >= 1f && !chargeBarRFilled.enabled)
+        {
+            GameManager.audioManager.CreateReplacableAudio(filledClip);
+
+            chargeBarRFilled.enabled = true;
+        }
+
+        if(!chargingR)
+        {
+            GameManager.audioManager.CreateReplacableAudio(filledClip);
+            chargingR = true;
+        }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         //anim.SetBool(AnimProperties.CHARGING, chargingL);
-        chargingL = false;
+        chargeDuration += Time.deltaTime;
+
+        if (isCharging)
+        {
+            timeSinceLastCharge = 0f;
+
+            isCharging = false;
+        }
+        else
+        {
+            timeSinceLastCharge += Time.deltaTime;
+
+            if (timeSinceLastCharge > CHARGE_TIME_THRESHOLD)
+            {
+                chargeDuration = 0f;
+            }
+        }
+
+        //still charging
+        if (timeSinceLastCharge < CHARGE_TIME_THRESHOLD
+            && !chargeBarRFilled.enabled
+            && chargeDuration > MIN_CHARGE_DURATION)
+        {
+            if(!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+            audioSource.pitch += PITCH_INCREASE_RATE * Time.deltaTime;
+        }
+        else
+        {
+            audioSource.Stop();
+            audioSource.pitch = BASE_PITCH;
+        }
     }
 }

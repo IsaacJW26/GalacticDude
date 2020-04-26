@@ -37,6 +37,21 @@ PrefabInstance:
       propertyPath: stats.maxLifeTime
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: be68fe09a1aa2af4fb1e938677b617ee, type: 3}
+    - target: {fileID: 5315195200416691685, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315195200416691685, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalPosition.x

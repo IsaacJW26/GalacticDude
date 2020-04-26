@@ -114,9 +114,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 1.5
-      minScalar: 5
+      minMaxState: 3
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -168,8 +168,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 1
+      scalar: 1
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -284,8 +284,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1.5
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1496,14 +1496,14 @@ ParticleSystem:
     enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 2
-      scalar: 3
-      minScalar: -3
+      minMaxState: 3
+      scalar: 1
+      minScalar: -1
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
+          time: 0.25
           value: 0
           inSlope: 0
           outSlope: 0
@@ -1536,7 +1536,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
+          time: 0.25
           value: 0
           inSlope: 0
           outSlope: 0
@@ -1567,9 +1567,9 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 2
-      scalar: 1
-      minScalar: 0
+      minMaxState: 3
+      scalar: -1
+      minScalar: -1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1620,8 +1620,8 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 2
-      scalar: 1
+      minMaxState: 3
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2649,11 +2649,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.05
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4779,8 +4779,8 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!58 &-3049458228655092229
-CircleCollider2D:
+--- !u!70 &7242042840472288975
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4789,12 +4789,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.4
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!1001 &5161839547234442996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4862,6 +4862,11 @@ PrefabInstance:
       propertyPath: stats.hp
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d165acb6335fe4540aefe35b15a25931, type: 3}
     - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4927,6 +4932,56 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7892874
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0256188
+      objectReference: {fileID: 0}
     - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -4940,47 +4995,42 @@ PrefabInstance:
     - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3763751
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 519112092327848576, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7889375
       objectReference: {fileID: 0}
     - target: {fileID: 519112092327848591, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_SortingOrder
       value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.38268343
-      objectReference: {fileID: 0}
-    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.92387956
-      objectReference: {fileID: 0}
-    - target: {fileID: 4637770967454328544, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3333804251504392022, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
