@@ -198,7 +198,9 @@ public class EnemySpawner : MonoBehaviour
             position.x = -(Movement.xBound - 0.01f);
         }
 
-        return Instantiate(enemy, position, Quaternion.identity);
+        Enemy outEnemy = Instantiate(enemy, position, Quaternion.identity);
+
+        return outEnemy;
     }
 
     public void SetListener(EndLevelDelegate endListener)
