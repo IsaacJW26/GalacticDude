@@ -9,6 +9,8 @@ public class CoinPickup : MonoBehaviour
     CurrencyType type;
     Movement movement;
     SpriteRenderer rend;
+    [SerializeField]
+    AudioClip pickupSoundClip;
 
     void OnEnable()
     {
@@ -35,6 +37,7 @@ public class CoinPickup : MonoBehaviour
     {
         if(collision.tag == Labels.Tags.PLAYER)
         {
+            GameManager.audioManager.CreateReplacableAudio(pickupSoundClip);
             ShopManager.INSTANCE.AddCurrency(type);
             Destroy(gameObject);
         }
