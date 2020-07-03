@@ -16691,6 +16691,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 566476722058459950, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: chargingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e3a553948907d94a80b8678097a6b8e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fbe6aaa445976e48aedf89f6b881140, type: 3}
 --- !u!1001 &1659105852009897733
