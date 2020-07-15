@@ -42,7 +42,7 @@ MonoBehaviour:
   projectiles: 1
   enemies: 1
   destroyOnHit: 1
-  audioClip: {fileID: 8300000, guid: de1ba8bb46ce5d445b0e4e6c7a9e0e06, type: 3}
+  audioClip: {fileID: 8300000, guid: 3a86849816ea6354cb1fe7fcc48af86d, type: 3}
   damageFrameGap: 1
   slowMo: 1
   bigShake: 1
@@ -332,6 +332,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 519112092876008079, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 519112093522866670, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_SortingOrder
@@ -350,11 +355,6 @@ PrefabInstance:
     - target: {fileID: 519112093522866670, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 519112092876008079, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
