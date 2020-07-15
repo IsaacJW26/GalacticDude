@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97f45c080c9b7843a362f29fb369df8, type: 3}
-  m_Name: ShieldEnemyTest
+  m_Name: Level
   m_EditorClassIdentifier: 
   difficultyTiers:
   - name: 
     enemyPrefabs:
-    - {fileID: 9119908270630566908, guid: e527e996e33cb6b4a886a9b6be7dcb4d, type: 3}
+    - {fileID: 366538063770070275, guid: 9a9e008667b1d89439fb9142833f83e0, type: 3}
+    - {fileID: 9119908270630566908, guid: 0e31c05e1a13c074aba851b78b03ac48, type: 3}
+    - {fileID: 9119908270630566908, guid: 72ec208e6718f9043832d27cb9756cfe, type: 3}
+    - {fileID: 9119908270630566908, guid: ac332372c15461047a552525b68c420c, type: 3}
+    - {fileID: 0}
+    - {fileID: 9119908270630566908, guid: f40c546b6409d204185ab595c839636b, type: 3}
+    - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
     bossPrefabs:
     - {fileID: 726255909376779045, guid: c4b270aa8bc256b478084994e30e3ecc, type: 3}
     squads: []
@@ -25,9 +31,9 @@ MonoBehaviour:
     squads: []
   levels:
   - difficulty: 0
-    length: 1
+    length: 140
     containsBoss: 0
-    averageTime: 10
+    averageTime: 70
   - difficulty: 0
     length: 0
     containsBoss: 0
