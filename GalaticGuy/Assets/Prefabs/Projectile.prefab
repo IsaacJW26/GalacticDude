@@ -136,7 +136,6 @@ MonoBehaviour:
   projectiles: 1
   enemies: 1
   destroyOnHit: 1
-  audioClip: {fileID: 0}
 --- !u!50 &5315195200416691685
 Rigidbody2D:
   serializedVersion: 4
