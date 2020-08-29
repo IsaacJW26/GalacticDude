@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,10 +8,35 @@ public class UIShopItem : MonoBehaviour
 {
     UIShop shop;
     PlayerUpgrade upgrade;
-    [SerializeField]
-    Text uICost;
-    [SerializeField]
-    Image uIImage;
+    private Text uICost = null;
+    public Text UiCost
+    {
+        get
+        {
+            if (uICost == null)
+            {
+                uICost = GetComponentInChildren<Text>();
+                Debug.LogWarning("uICost is unassigned, set to default");
+            }
+            return uICost;
+        }
+    }
+
+    private Image uiImage = null;
+    public Image UiImage
+    {
+        get
+        {
+            if (uiImage == null)
+            {
+                uiImage = Array.Find(
+                    GetComponentsInChildren<Image>(),
+                    image => { return image.name == "Icon"; });
+                Debug.LogWarning("uiImage is unassigned, set to default");
+            }
+            return uiImage;
+        }
+    }
 
     public void Awake()
     {
@@ -25,19 +51,19 @@ public class UIShopItem : MonoBehaviour
 
         this.upgrade = upgrade;
         Debug.Log(this.upgrade.ToString() + " " + upgrade.ToString());
-        uIImage.sprite = upgrade.Sprite;
-        uICost.text = upgrade.GetCost().ToString();
+        UiImage.sprite = upgrade.Sprite;
+        UiCost.text = upgrade.GetCost().ToString();
 
         if (!ShopManager.INSTANCE.CanAfford(upgrade.GetCost()))
         {
             //GetComponent<Animator>().SetTrigger(Labels.UIAnimProperties.DISABLED);
             GetComponent<Button>().enabled = false;
-            uIImage.color = Color.grey;
+            UiImage.color = Color.grey;
         }
         else
         {
             GetComponent<Button>().enabled = true;
-            uIImage.color = Color.white;
+            UiImage.color = Color.white;
         }
     }
 

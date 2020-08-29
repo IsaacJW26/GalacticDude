@@ -6,13 +6,36 @@ using UnityEngine.UI;
 public class UICurrency : MonoBehaviour
 {
     [SerializeField]
-    Image currencyImage;
+    private Image currencyImage = null;
+
+    public Image CurrencyImage
+    {
+        get
+        {
+            if (currencyImage == null)
+                currencyImage = GetComponent<Image>();
+
+            return currencyImage;
+        }
+    }
+
     [SerializeField]
-    Text currencyText;
+    private Text currencyText = null;
+
+    public Text CurrencyText
+    {
+        get
+        {
+            if (currencyText == null)
+                currencyText = GetComponent<Text>();
+
+            return currencyText;
+        }
+    }
 
     public void UpdateCurrency(int value)
     {
-        currencyText.text = string.Format("{0:#,#}", value);
+        CurrencyText.text = string.Format("{0:#,#}", value);
     }
 
     [ContextMenu("Test 0")]

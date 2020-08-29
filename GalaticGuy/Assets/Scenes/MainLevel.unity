@@ -5201,6 +5201,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &517232511 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 566476720720665338, guid: 8fbe6aaa445976e48aedf89f6b881140,
+    type: 3}
+  m_PrefabInstance: {fileID: 566476721319977991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &719014591
 GameObject:
   m_ObjectHideFlags: 0
@@ -5344,6 +5356,30 @@ CircleCollider2D:
   m_Offset: {x: 0.03, y: 0.1}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &1161436847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5595220845223130554, guid: 8fbe6aaa445976e48aedf89f6b881140,
+    type: 3}
+  m_PrefabInstance: {fileID: 566476721319977991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1196700917 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 566476722003088175, guid: 8fbe6aaa445976e48aedf89f6b881140,
+    type: 3}
+  m_PrefabInstance: {fileID: 566476721319977991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1464757871
 GameObject:
   m_ObjectHideFlags: 0
@@ -5374,6 +5410,18 @@ Transform:
   m_Father: {fileID: 8207696}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1567306596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7376393962022165061, guid: 8fbe6aaa445976e48aedf89f6b881140,
+    type: 3}
+  m_PrefabInstance: {fileID: 566476721319977991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1632723574
 GameObject:
   m_ObjectHideFlags: 0
@@ -15124,31 +15172,31 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2671518930318427127, guid: 8fbe6aaa445976e48aedf89f6b881140,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5595220845223130554, guid: 8fbe6aaa445976e48aedf89f6b881140,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3796045255518546666, guid: 8fbe6aaa445976e48aedf89f6b881140,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7376393962022165061, guid: 8fbe6aaa445976e48aedf89f6b881140,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 566476722058459950, guid: 8fbe6aaa445976e48aedf89f6b881140,
         type: 3}
-      propertyPath: chargingClip
+      propertyPath: chargebarL
       value: 
-      objectReference: {fileID: 8300000, guid: 5e3a553948907d94a80b8678097a6b8e, type: 3}
+      objectReference: {fileID: 1196700917}
+    - target: {fileID: 566476722058459950, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: chargebarR
+      value: 
+      objectReference: {fileID: 517232511}
+    - target: {fileID: 566476722058459950, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: chargeBarLFilled
+      value: 
+      objectReference: {fileID: 1161436847}
+    - target: {fileID: 566476722058459950, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: chargeBarRFilled
+      value: 
+      objectReference: {fileID: 1567306596}
+    - target: {fileID: 566476722058459950, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: filledClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 259470cf51dd8484488d02d003701ca3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fbe6aaa445976e48aedf89f6b881140, type: 3}
 --- !u!1001 &1659105852009897733
@@ -15430,12 +15478,6 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 315647101}
-    - target: {fileID: 5975125129141001764, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: levelInfo
-      value: 
-      objectReference: {fileID: 11400000, guid: 26d1337b13d74324a82bde049dcf0638,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0f00f5ab3723f34380a4b81b349e4b8, type: 3}
 --- !u!1001 &6539914324053788425
