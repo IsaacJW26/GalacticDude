@@ -36,6 +36,26 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
 
         [SerializeField]
         public float chargeSlowDown = 1f;
+
+        public Stats()
+        {
+            this.minShootInterval = 10;
+            this.chargeRate = WeaponManager.MAX_CHARGE / 300;
+            this.chargeTier = WeaponManager.MAX_CHARGE / 2;
+            this.shootSlowMax = 1f;
+            this.slowDuration = 0;
+            this.chargeSlowDown = 1f;
+        }
+
+        public Stats(Stats stats)
+        {
+            this.minShootInterval = stats.minShootInterval;
+            this.chargeRate = stats.chargeRate;
+            this.chargeTier = stats.chargeTier;
+            this.shootSlowMax = stats.shootSlowMax;
+            this.slowDuration = stats.slowDuration;
+            this.chargeSlowDown = stats.chargeSlowDown;
+        }
     }
 
     //stores current weapon state
@@ -46,8 +66,8 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
     }
 
     [SerializeField]
-    Stats baseStats;
-    Stats currentStats;
+    Stats baseStats = new Stats();
+    Stats currentStats = null;
     State state;
 
     [SerializeField]
@@ -83,12 +103,7 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
 
     private void ResetAllStats()
     {
-        currentStats.chargeRate = baseStats.chargeRate;
-        currentStats.chargeSlowDown = baseStats.chargeSlowDown;
-        currentStats.chargeTier = baseStats.chargeTier;
-        currentStats.minShootInterval = baseStats.minShootInterval;
-        currentStats.shootSlowMax = baseStats.shootSlowMax;
-        currentStats.slowDuration = baseStats.slowDuration;
+        currentStats = new Stats(baseStats);
     }
 
     public void Initialise(ISpeed movement, IWeaponManager manager)
@@ -111,14 +126,12 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
 
     private void SetCharge(int charge)
     {
-
         float percent;
         if (charge < currentStats.chargeTier)
         {
             percent = (float)charge / (float)currentStats.chargeTier;
             UIManager.INSTANCE.UpdateChargeL(percent);
             state.currentCharge = charge;
-
         }
         else
         {

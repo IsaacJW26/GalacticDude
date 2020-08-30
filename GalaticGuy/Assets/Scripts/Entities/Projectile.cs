@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour, IDamageable
     [SerializeField]
     bool destroyOnHit = true;
     [SerializeField]
-    AudioClip audioClip;
+    AudioClip audioClip = null;
 
     // Start is called before the first frame update
     void Awake()

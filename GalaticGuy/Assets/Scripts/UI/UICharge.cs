@@ -17,9 +17,9 @@ public class UICharge : MonoBehaviour
     Image chargeBarRFilled = null;
 
     [SerializeField]
-    AudioClip filledClip;
+    AudioClip filledClip = null;
     [SerializeField]
-    AudioClip chargingClip;
+    AudioClip chargingClip = null;
     AudioSource audioSource;
 
     Animator anim;

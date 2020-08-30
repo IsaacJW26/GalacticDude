@@ -7,9 +7,9 @@ public class AsteroidAI : EnemyAI
     Vector2 direction;
     Vector3 rotationAxis;
     [SerializeField]
-    float rotationSpeed;
+    float rotationSpeed = 74f;
     [SerializeField]
-    Transform model;
+    Transform model = null;
     Enemy asteroid;
     Movement move;
 
@@ -17,11 +17,11 @@ public class AsteroidAI : EnemyAI
     new Renderer renderer;
     CharacterHealth health;
     [SerializeField]
-    Texture MedDamage;
+    Texture MedDamage = null;
     [SerializeField]
-    Texture HighDamage;
+    Texture HighDamage = null;
     [SerializeField]
-    Texture FullDamage;
+    Texture FullDamage = null;
 
     const float MED_DMG_THRESHOLD = 0.25f;
     const float HGH_DMG_THRESHOLD = 0.5f;

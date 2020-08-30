@@ -16,7 +16,7 @@ public class UIShop : MonoBehaviour
     int delay = 0;
     const int MAX_DELAY = 10;
     [SerializeField]
-    GameObject uIPanel;
+    GameObject uiPanel = null;
     bool shopActive = false;
 
     void Awake()
@@ -78,7 +78,7 @@ public class UIShop : MonoBehaviour
 
     public void SetStoreActive(bool isActive)
     {
-        uIPanel.SetActive(isActive);
+        uiPanel.SetActive(isActive);
         shopActive = isActive;
         if(isActive)
             shopButtons[0].Select();

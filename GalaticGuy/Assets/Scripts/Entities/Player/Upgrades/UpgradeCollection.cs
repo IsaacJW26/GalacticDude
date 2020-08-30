@@ -10,7 +10,7 @@ public class UpgradeCollection : MonoBehaviour
     private PlayerUpgrade[] upgrades;
 
     [SerializeField]
-    private Sprite[] spriteList;
+    private Sprite[] spriteList = null;
 
     public void OnEnable()
     {

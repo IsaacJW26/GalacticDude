@@ -7,7 +7,7 @@ public class PlayerLaser : Projectile
     //
     Collider2D col;
     [SerializeField]
-    int damageFrameGap;
+    int damageFrameGap = 0;
     int timeLeft;
     int loopCount;
     [SerializeField]

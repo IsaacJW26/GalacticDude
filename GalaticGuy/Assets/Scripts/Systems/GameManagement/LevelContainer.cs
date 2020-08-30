@@ -11,9 +11,9 @@ namespace LevelInfo
     public class LevelContainer : ScriptableObject
     {
         [SerializeField]
-        List<Tier> difficultyTiers;
+        List<Tier> difficultyTiers = null;
         [SerializeField]
-        List<Level> levels;
+        List<Level> levels = null;
 
         public List<Tier> DifficultyTiers { get { return difficultyTiers; } }
         public List<Level> Levels { get { return levels; } }

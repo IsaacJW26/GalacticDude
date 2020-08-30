@@ -10,9 +10,6 @@ public class AIPredictor : EnemyAI
     bool movingDown = true;
     bool movingRight = true;
 
-    [SerializeField]
-    float projectionFactor = 0.3f;
-
     Vector3 lastPlayerPos;
 
     Vector3 dir;

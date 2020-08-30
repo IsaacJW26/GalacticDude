@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner INST = null;
 
     [SerializeField]
-    LevelContainer levelInfo;
+    LevelContainer levelInfo = null;
 
     [SerializeField]
     float spawnPositionY = 6;

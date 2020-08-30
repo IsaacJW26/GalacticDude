@@ -16,16 +16,16 @@ public class Enemy : MonoBehaviour, IDamageable
     ICharacterAnimator anim;
 
     [SerializeField]
-    Enemy[] deathChildren;
+    Enemy[] deathChildren = null;
 
     [Header("Bounty")]
     [SerializeField]
-    int minBounty;
+    int minBounty = 1;
     [SerializeField]
-    int maxBounty;
+    int maxBounty = 1;
     [SerializeField]
     [Range(0,4)]
-    int bountyChance;
+    int bountyChance = 1;
 
     protected EnemyAI Ai;
     bool isDead = false;

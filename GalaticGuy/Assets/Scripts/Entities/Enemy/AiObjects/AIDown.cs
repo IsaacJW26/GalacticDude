@@ -6,15 +6,15 @@ public class AIDown : EnemyAI
 {
     [Header("Outer Shield")]
     [SerializeField]
-    Shield shieldOuterPrefab;
+    Shield shieldOuterPrefab = null;
     [SerializeField]
-    Vector3 outerRelativePosition;
+    Vector3 outerRelativePosition = Vector3.zero;
 
     [Header("Inner Shield")]
     [SerializeField]
-    Shield shieldInnerPrefab;
+    Shield shieldInnerPrefab = null;
     [SerializeField]
-    Vector3 innerRelativePosition;
+    Vector3 innerRelativePosition = Vector3.zero;
 
     private Shield innerShieldObj;
     private Shield outerShieldObj;

@@ -10,8 +10,7 @@ public class CharacterShoot : MonoBehaviour, Shooter
     int timeUntilNextShot = 0;
     [SerializeField]
     int shootInterval = 35;
-    [SerializeField]
-    int projectileDamage = 1;
+    
     [SerializeField]
     float projectileSpeed = 3f;
     public float ProjectileSpeed { get => projectileSpeed; private set => projectileSpeed = value; }

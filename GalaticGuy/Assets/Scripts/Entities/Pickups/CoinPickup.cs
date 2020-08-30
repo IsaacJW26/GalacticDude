@@ -10,7 +10,7 @@ public class CoinPickup : MonoBehaviour
     Movement movement;
     SpriteRenderer rend;
     [SerializeField]
-    AudioClip pickupSoundClip;
+    AudioClip pickupSoundClip = null;
 
     void OnEnable()
     {

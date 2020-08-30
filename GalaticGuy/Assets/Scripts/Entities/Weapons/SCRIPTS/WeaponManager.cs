@@ -8,13 +8,13 @@ public class WeaponManager : MonoBehaviour, IWeaponManager
     public const int MAX_CHARGE = 1800;
 
     [SerializeField]
-    Weapon current;
+    Weapon current = null;
     [SerializeField]
-    Transform projectilePointDefault;
+    Transform projectilePointDefault = null;
     [SerializeField]
     ICharacterAnimator characterAnimation;
     [SerializeField]
-    ParticleSystem chargeParticles;
+    ParticleSystem chargeParticles = null;
     ParticleSystem.EmissionModule emissionModule;
 
     float defaultEmission;
