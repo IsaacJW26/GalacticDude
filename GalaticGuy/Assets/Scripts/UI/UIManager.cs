@@ -11,9 +11,27 @@ public class UIManager : MonoBehaviour
     UIShop storeUI;
 
     [SerializeField]
-    UnityEngine.UI.Text UiText;
+    UnityEngine.UI.Text uiText = null;
+    private UnityEngine.UI.Text UiText
+    { get
+        {
+            if (uiText == null)
+                uiText = GetComponentInChildren<UnityEngine.UI.Text>();
+            return uiText;
+        }
+    }
+
     [SerializeField]
-    GameObject Uibackground;
+    GameObject uibackground = null;
+
+    private GameObject Uibackground
+    { get
+        {
+            if (uibackground == null)
+                uibackground = GameObject.Find("HP Background");
+            return uibackground;
+        }
+    }
     const string STR_CLEAR = "Wave Cleared";
     const string STR_INCOMING = "Wave Incoming";
     const string STR_WON = "END";

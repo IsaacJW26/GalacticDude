@@ -6,11 +6,12 @@ public class SimpleParallax : MonoBehaviour
 {
     Vector3 startPos;
     [SerializeField]
-    Transform cam;
+    Transform cam = null;
     [SerializeField]
     [Range(0f, 1f)]
-    float parallaxPercent;
+    float parallaxPercent = 0.7f;
     Vector3 zpos;
+
     // Start is called before the first frame update
     void Start()
     {

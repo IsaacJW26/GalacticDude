@@ -9,7 +9,7 @@ public class EffectManager : MonoBehaviour
     ScreenShake shake;
     IEnumerator slowFunction;
     [SerializeField]
-    GameObject Explosion;
+    GameObject Explosion = null;
 
     // Start is called before the first frame update
     void Awake()

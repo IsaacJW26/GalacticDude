@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class UIShopText : MonoBehaviour
 {
     [SerializeField]
-    Text flavourText;
+    Text flavourText = null;
     [SerializeField]
-    Text shoptext;
+    Text shoptext = null;
     Animator anim;
 
     // Start is called before the first frame update

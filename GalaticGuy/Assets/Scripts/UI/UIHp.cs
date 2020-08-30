@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIHp : MonoBehaviour
 {
     [SerializeField]
-    Animator[] HpImages;
+    Animator[] HpImages = null;
 
     int currentHP;
 

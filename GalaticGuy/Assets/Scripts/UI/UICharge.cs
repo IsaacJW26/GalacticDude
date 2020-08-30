@@ -7,19 +7,19 @@ using Labels;
 public class UICharge : MonoBehaviour
 {
     [SerializeField]
-    Slider chargebarL;
+    Slider chargebarL = null;
     [SerializeField]
-    Slider chargebarR;
+    Slider chargebarR = null;
 
     [SerializeField]
-    Image chargeBarLFilled;
+    Image chargeBarLFilled = null;
     [SerializeField]
-    Image chargeBarRFilled;
+    Image chargeBarRFilled = null;
 
     [SerializeField]
-    AudioClip filledClip;
+    AudioClip filledClip = null;
     [SerializeField]
-    AudioClip chargingClip;
+    AudioClip chargingClip = null;
     AudioSource audioSource;
 
     Animator anim;
@@ -103,12 +103,20 @@ public class UICharge : MonoBehaviour
             }
         }
 
+        if(audioSource != null)
+        {
+            UpdateAudio();
+        }
+    }
+
+    private void UpdateAudio()
+    {
         //still charging
         if (timeSinceLastCharge < CHARGE_TIME_THRESHOLD
             && !chargeBarRFilled.enabled
             && chargeDuration > MIN_CHARGE_DURATION)
         {
-            if(!audioSource.isPlaying)
+            if (!audioSource.isPlaying)
             {
                 audioSource.Play();
             }
