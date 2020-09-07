@@ -10,8 +10,6 @@ public class CoinPickup : MonoBehaviour
     Movement movement;
     SpriteRenderer rend;
     [SerializeField]
-    AudioClip pickupSoundClip = null;
-
     void OnEnable()
     {
         movement = GetComponent<Movement>();
@@ -37,7 +35,6 @@ public class CoinPickup : MonoBehaviour
     {
         if(collision.tag == Labels.Tags.PLAYER)
         {
-            GameManager.audioManager.CreateReplacableAudio(pickupSoundClip);
             ShopManager.INSTANCE.AddCurrency(type);
             Destroy(gameObject);
         }

@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(EnemySpawner))]
-[RequireComponent(typeof(AudioManager))]
+[RequireComponent(typeof(MusicManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager INST = null;
-    EnemySpawner spawner;
+    private EnemySpawner spawner;
+    private MusicManager music;
     GameState gameState = GameState.playing;
     IEnumerator waitingFunction = null;
 
@@ -26,11 +27,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     CoinPickup currencyPrefab;
 
-    public static AudioManager audioManager { get; private set; }
+    //public static AudioManager audioManager { get; private set; }
 
     public CoinPickup CurrencyPrefab { get => currencyPrefab; private set => currencyPrefab = value; }
 
     public const float LOWEST_Y = -7f;
+
+    private int currentLevel = 0;
      
     void Awake()
     {
@@ -41,11 +44,13 @@ public class GameManager : MonoBehaviour
 
         //DontDestroyOnLoad(gameObject);
 
-        audioManager = GetComponent<AudioManager>();
+        //audioManager = GetComponent<AudioManager>();
         SetPlayer(FindObjectOfType<MainCharacter>());
         spawner = GetComponent<EnemySpawner>();
+        music = GetComponent<MusicManager>();
         spawner.SetListener(EndLevel);
         UIManager.INSTANCE.StartGame();
+        currentLevel = 0;
     }
 
     private void Update()
@@ -86,7 +91,7 @@ public class GameManager : MonoBehaviour
         UIManager.INSTANCE.EndGame();
     }
 
-    private void EndLevel()
+    private int EndLevel()
     {
         if (waitingFunction == null)
         {
@@ -103,6 +108,9 @@ public class GameManager : MonoBehaviour
             //activate end game ui
             UIManager.INSTANCE.ClearedWave();
         }
+
+        // increment current level and return the value
+        return ++currentLevel;
     }
 
     private IEnumerator EndLevelDelay()
@@ -118,6 +126,11 @@ public class GameManager : MonoBehaviour
         waitingFunction = null;
 
         Debug.Log("Start purchase phase");
+    }
+
+    public int GetLevelNumber()
+    {
+        return currentLevel;
     }
 
     [ContextMenu("end purchase phase")]
@@ -150,6 +163,17 @@ public class GameManager : MonoBehaviour
     public void InitialisePlayer(ActivePlayer enablePlayer)
     {
         playerActive = enablePlayer;
+    }
+
+    public void OnBossEnter()
+    {
+        music.OnBossEnter();
+    }
+
+    public void OnBossDeath()
+    {
+        EnemyDeath();
+        music.OnBossDeath();
     }
 
     public void EnemyDeath()
