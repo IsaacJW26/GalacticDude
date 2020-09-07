@@ -10,6 +10,8 @@ public abstract class EntityAudio : MonoBehaviour
     /* example implementation
         [FMODUnity.EventRef]
         private string OneShotEventSound;
+
+        
     */
 
     /// <summary>
