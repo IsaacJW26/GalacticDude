@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [Range(0f, 5f)]
     float explosionScale = 1f;
 
+    private bool isBoss = false;
+
     void Awake()
     {
         shoot = GetComponent<CharacterShoot>();
@@ -43,6 +45,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
         health?.InitialiseMethods(OnDeath);
         Ai?.Initialise(movement, null, shoot);
+    }
+
+    public void InitialiseProperties(bool isBoss)
+    {
+        this.isBoss = isBoss;
     }
 
     void FixedUpdate()
@@ -150,7 +157,6 @@ public class Enemy : MonoBehaviour, IDamageable
     IEnumerator WaitToDie()
     {
         yield return null;
-        GameManager.INST.EnemyDeath();
         yield return null;
 
         foreach (var col in GetComponentsInChildren<Collider2D>())
@@ -160,6 +166,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+    }
+
+    protected virtual void AnnouceDeath()
+    {
+        GameManager.INST.EnemyDeath();
     }
 
     public virtual void OnDamage(int damage)

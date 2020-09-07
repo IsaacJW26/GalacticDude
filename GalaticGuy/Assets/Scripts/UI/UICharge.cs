@@ -20,7 +20,7 @@ public class UICharge : MonoBehaviour
     AudioClip filledClip = null;
     [SerializeField]
     AudioClip chargingClip = null;
-    AudioSource audioSource;
+    //AudioSource audioSource;
 
     Animator anim;
     bool isCharging, chargingR;
@@ -40,7 +40,7 @@ public class UICharge : MonoBehaviour
         chargeBarRFilled.enabled = false;
         isCharging = false;
 
-        audioSource = GameManager.audioManager.CreatePeristentAudio(gameObject, chargingClip, looping: false, play: false);
+        //audioSource = GameManager.audioManager.CreatePeristentAudio(gameObject, chargingClip, looping: false, play: false);
     }
 
     private void InitialiseCharge(float percentOfMax)
@@ -70,14 +70,14 @@ public class UICharge : MonoBehaviour
 
         if(chargebarR.value >= 1f && !chargeBarRFilled.enabled)
         {
-            GameManager.audioManager.CreateReplacableAudio(filledClip);
+            //GameManager.audioManager.CreateReplacableAudio(filledClip);
 
             chargeBarRFilled.enabled = true;
         }
 
         if(!chargingR)
         {
-            GameManager.audioManager.CreateReplacableAudio(filledClip);
+            //GameManager.audioManager.CreateReplacableAudio(filledClip);
             chargingR = true;
         }
     }
@@ -103,29 +103,31 @@ public class UICharge : MonoBehaviour
             }
         }
 
-        if(audioSource != null)
-        {
-            UpdateAudio();
-        }
+        
+        //UpdateAudio();
     }
-
+/*
     private void UpdateAudio()
     {
-        //still charging
-        if (timeSinceLastCharge < CHARGE_TIME_THRESHOLD
-            && !chargeBarRFilled.enabled
-            && chargeDuration > MIN_CHARGE_DURATION)
+        if(audioSource != null)
         {
-            if (!audioSource.isPlaying)
+            //still charging
+            if (timeSinceLastCharge < CHARGE_TIME_THRESHOLD
+                && !chargeBarRFilled.enabled
+                && chargeDuration > MIN_CHARGE_DURATION)
             {
-                audioSource.Play();
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+                audioSource.pitch += PITCH_INCREASE_RATE * Time.deltaTime;
             }
-            audioSource.pitch += PITCH_INCREASE_RATE * Time.deltaTime;
-        }
-        else
-        {
-            audioSource.Stop();
-            audioSource.pitch = BASE_PITCH;
+            else
+            {
+                audioSource.Stop();
+                audioSource.pitch = BASE_PITCH;
+            }
         }
     }
+    */
 }

@@ -13,8 +13,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     float spawnPositionY = 6;
     
-    int currentLevel;
-
+    private int currentLevel;
     int killedCount = 0;
     int spawnedCount = 0;
 
@@ -26,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
 
     const int DIFF_MULTI = 10;
 
-    public delegate void EndLevelDelegate();
+    public delegate int EndLevelDelegate();
     private EndLevelDelegate endListener;
 
     private bool ended = false;
@@ -40,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
         else
             Destroy(this);
 
-        currentLevel = -1;
+        currentLevel = 0;
         killedCount = 0;
 
         StartLevel();
@@ -92,6 +91,7 @@ public class EnemySpawner : MonoBehaviour
     private void AddEnemyToQueue(Enemy prefab, Vector3 position)
     {
         Enemy enemy = SpawnEnemy(prefab, position);
+
         enemy.gameObject.SetActive(false);
         EnemyInfo info = new EnemyInfo();
 
@@ -143,6 +143,8 @@ public class EnemySpawner : MonoBehaviour
     }
     private Enemy SpawnRandomBoss(int difficulty)
     {
+        GameManager.INST.OnBossEnter();
+
         Enemy enemy = null;
         spawnedCount++;
         int spawnIndex = Random.Range(0, levelInfo.DifficultyTiers[difficulty].bossPrefabs.Length);
@@ -151,6 +153,7 @@ public class EnemySpawner : MonoBehaviour
 
         enemy = SpawnEnemy(levelInfo.DifficultyTiers[difficulty].bossPrefabs[spawnIndex], spawnPosition);
 
+        enemy.InitialiseProperties(isBoss: true);
         return enemy;
     }
 
@@ -210,14 +213,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnLevelEnd()
     {
-        endListener();
+        currentLevel = endListener();
     }
-
-
 
     public void StartLevel()
     {
-        currentLevel++;
         spawnedCount = 0;
         killedCount = 0;
         ended = false;
