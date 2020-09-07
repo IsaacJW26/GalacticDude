@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(EnemySpawner))]
-[RequireComponent(typeof(AudioManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager INST = null;
@@ -26,7 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     CoinPickup currencyPrefab;
 
-    public static AudioManager audioManager { get; private set; }
+    //public static AudioManager audioManager { get; private set; }
 
     public CoinPickup CurrencyPrefab { get => currencyPrefab; private set => currencyPrefab = value; }
 
@@ -41,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         //DontDestroyOnLoad(gameObject);
 
-        audioManager = GetComponent<AudioManager>();
+        //audioManager = GetComponent<AudioManager>();
         SetPlayer(FindObjectOfType<MainCharacter>());
         spawner = GetComponent<EnemySpawner>();
         spawner.SetListener(EndLevel);

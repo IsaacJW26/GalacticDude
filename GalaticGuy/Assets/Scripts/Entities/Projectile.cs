@@ -47,8 +47,8 @@ public class Projectile : MonoBehaviour, IDamageable
         if (stats.maxLifeTime <= 0)
             stats.maxLifeTime = Stats.DEFAULT_LIFETIME;
         rb = GetComponent<Rigidbody2D>();
-        if(audioClip != null)
-            GameManager.audioManager.CreateReplacableAudio(audioClip);
+        //if(audioClip != null)
+            //GameManager.audioManager.CreateReplacableAudio(audioClip);
     }
 
     protected virtual void FixedUpdate()
