@@ -15413,6 +15413,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Params.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Event
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: PlayEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: StopEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5975125129141001766, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: m_Name
@@ -15478,7 +15508,8 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 315647101}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b0f00f5ab3723f34380a4b81b349e4b8, type: 3}
 --- !u!1001 &6539914324053788425
 PrefabInstance:
