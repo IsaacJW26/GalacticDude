@@ -10,6 +10,18 @@ public class MusicManager : MonoBehaviour
 
     private FMOD.Studio.EventInstance gameMusicState;
 
+    [FMODUnity.EventRef]
+    public string defaultShot = "";
+
+    [FMODUnity.EventRef]
+    public string chargingShot = "";
+
+    [FMODUnity.EventRef]
+    public string semiChargedShot = "";
+
+    [FMODUnity.EventRef]
+    public string fullyChargedShot = "";
+
     void Initialise()
     {
         gameMusicState = FMODUnity.RuntimeManager.CreateInstance(MusicStateEvent);
