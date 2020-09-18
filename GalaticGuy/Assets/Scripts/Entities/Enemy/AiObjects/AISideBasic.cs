@@ -10,8 +10,9 @@ public class AISideBasic : EnemyAI
     bool movingDown = true;
     bool movingRight = true;
 
-    private void Awake()
+    public override void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
     {
+        base.Initialise(movement, player, shoot);
         movingRight = Random.Range(0, 2) == 1;
     }
 
