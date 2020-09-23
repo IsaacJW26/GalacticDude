@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
+  HasSourceProject: 0
   HasPlatforms: 1
   sourceProjectPath: ../../../../../../Cloud/Google Drive/FINAL_MUSIC_PROJECT/FMOD/PROJECT_1/PROJECT_1.fspro
-  sourceBankPath: ..\..\..\..\..\..\Cloud\Google Drive\FINAL_MUSIC_PROJECT\FMOD\PROJECT_1\Build
+  sourceBankPath: Assets/Build
   SourceBankPathUnformatted: 
-  AutomaticEventLoading: 1
-  BankLoadType: 0
-  AutomaticSampleLoading: 0
+  AutomaticEventLoading: 0
+  BankLoadType: 1
+  AutomaticSampleLoading: 1
   EncryptionKey: 
-  ImportType: 1
+  ImportType: 0
   TargetAssetPath: FMODBanks
   LoggingLevel: 2
   SpeakerModeSettings:
@@ -85,5 +85,8 @@ MonoBehaviour:
   - Environment
   - Shop
   - UI
-  BanksToLoad: []
+  BanksToLoad:
+  - Character.bank
+  - Music.strings.bank
+  - Music.bank
   LiveUpdatePort: 9264

@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(EnemySpawner))]
-[RequireComponent(typeof(MusicManager))]
+[RequireComponent(typeof(SoundManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager INST = null;
     private EnemySpawner spawner;
-    private MusicManager music;
+    private SoundManager music;
     GameState gameState = GameState.playing;
     IEnumerator waitingFunction = null;
 
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         //audioManager = GetComponent<AudioManager>();
         SetPlayer(FindObjectOfType<MainCharacter>());
         spawner = GetComponent<EnemySpawner>();
-        music = GetComponent<MusicManager>();
+        music = GetComponent<SoundManager>();
         spawner.SetListener(EndLevel);
         UIManager.INSTANCE.StartGame();
         currentLevel = 0;
