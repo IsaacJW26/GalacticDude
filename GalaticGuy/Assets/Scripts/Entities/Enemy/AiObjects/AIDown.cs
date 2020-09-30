@@ -42,8 +42,8 @@ public class AIDown : EnemyAI
 
     private void OnEnable()
     {
-        innerShieldObj.gameObject.SetActive(true);
-        outerShieldObj.gameObject.SetActive(true);
+        innerShieldObj?.gameObject.SetActive(true);
+        outerShieldObj?.gameObject.SetActive(true);
     }
 
     //tries to shoot and move every frame
