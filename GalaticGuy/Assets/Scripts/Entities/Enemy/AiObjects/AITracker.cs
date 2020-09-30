@@ -10,8 +10,9 @@ public class AITracker : EnemyAI
     bool movingDown = true;
     bool movingRight = true;
 
-    public void Awake()
+    public override void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
     {
+        base.Initialise(movement, player, shoot);
         if (transform.position.y < lowestPosition)
             movingDown = false;
     }

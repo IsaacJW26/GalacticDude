@@ -96,9 +96,9 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
         if(projectileDefault == null)
             Debug.LogError("No default projectile selected");
 
-        SetCharge(0);
         this.timeUntilNextShot = 0;
         ResetAllStats();
+        SetCharge(0);
     }
 
     private void ResetAllStats()

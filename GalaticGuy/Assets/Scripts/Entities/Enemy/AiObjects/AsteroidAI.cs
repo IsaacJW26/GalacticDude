@@ -30,8 +30,9 @@ public class AsteroidAI : EnemyAI
     int frame;
     const int rotateUpdateTime = 10;
 
-    private void Awake()
+    public override void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
     {
+        base.Initialise(movement, player, shoot);
         renderer = GetComponentInChildren<Renderer>();
 
         frame = -rotateUpdateTime;
