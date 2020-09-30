@@ -27,11 +27,14 @@ public class Shield : MonoBehaviour, IDamageable
 
     private void LateUpdate()
     {
-        if(rb == null)
-            rb = GetComponent<Rigidbody2D>();
-        Vector3 pos = enemyRb.position;
+        if(enemyRb)
+        {
+            if(rb == null)
+                rb = GetComponent<Rigidbody2D>();
+            Vector3 pos = enemyRb.position;
 
-        rb.MovePosition(pos);
+            rb.MovePosition(pos);
+        }
     }
 
     void IDamageable.OnDamage(int inDamage)
