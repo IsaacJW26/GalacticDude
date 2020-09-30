@@ -14,15 +14,16 @@ public class AIPredictor : EnemyAI
 
     Vector3 dir;
 
-    public void Awake()
+    public override void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
     {
+        base.Initialise(movement,player,shoot);
         if (transform.position.y < lowestPosition)
             movingDown = false;
 
         lastPlayerPos = GameManager.INST.GetPlayerPos();
         dir = Vector3.down;
     }
-
+    
     //tries to shoot and move every frame
     public override void UpdateFrame(Vector3 currentPosition)
     {

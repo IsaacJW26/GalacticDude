@@ -5,14 +5,22 @@ using UnityEngine.UI;
 
 public class UIHp : MonoBehaviour
 {
-    [SerializeField]
-    Animator[] HpImages = null;
+    private Animator[] hpImages = null;
+    private Animator[] HpImages {
+        get
+        {
+           if(hpImages == null)
+                hpImages = GetComponentsInChildren<Animator>();
+            return hpImages;
+        }
+    }
 
     int currentHP;
 
     void Awake()
     {
         currentHP = 3;
+
     }
 
     public void UpdateHP(int hp)
