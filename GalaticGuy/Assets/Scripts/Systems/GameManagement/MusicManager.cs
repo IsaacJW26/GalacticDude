@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
 
     private FMOD.Studio.EventInstance gameMusicState;
 
-    void Initialise()
+    public void Initialise(AudioEventHandler audioEventHandler)
     {
         gameMusicState = FMODUnity.RuntimeManager.CreateInstance(MusicStateEvent);
         gameMusicState.start();
