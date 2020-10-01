@@ -11,6 +11,12 @@ public class CharacterHealth
     private int currentHP;
     BasicMethod deathMethod;
 
+    [SerializeField]
+    private AudioEventNames onDamageAudio = AudioEventNames.EnemyHurt;
+    [SerializeField]
+    private AudioEventNames onDeathAudio = AudioEventNames.EnemyDeath;
+
+
     public void InitialiseMethods(BasicMethod deathMethod)
     { 
         this.currentHP = maxHP;
@@ -40,10 +46,12 @@ public class CharacterHealth
         if ((currentHP - newDamage) <= 0)
         {
             currentHP = 0;
+            GameManager.AudioEvents.PlayAudio(onDeathAudio);
             deathMethod();
         }
         else
         {
+            GameManager.AudioEvents.PlayAudio(onDamageAudio);
             currentHP -= newDamage;
         }
     }

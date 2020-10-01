@@ -15363,24 +15363,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5328a3cfdcf82ab4082ceca87b7236cb, type: 3}
---- !u!1 &2116271360587818036 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2116271360599020092, guid: 5328a3cfdcf82ab4082ceca87b7236cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2116271360587818035}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2116271360587818037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116271360587818036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc6b5aa6fd99814fb419936019530b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5782439020966376789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15584,8 +15566,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f381181dfbe9b2845a5a41525dc73914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultShot: event:/SFX/Character/Charging
-  music: event:/Music/Intense
+  MusicStateEvent: 
+--- !u!114 &5975125128452481731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975125128452481723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be76f1d469deae8439b3bb31b5c6ddcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6539914324053788425
 PrefabInstance:
   m_ObjectHideFlags: 0

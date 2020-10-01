@@ -39,18 +39,8 @@ public class Projectile : MonoBehaviour, IDamageable
     [SerializeField]
     bool destroyOnHit = true;
     [SerializeField]
-    AudioClip audioClip = null;
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        if (stats.maxLifeTime <= 0)
-            stats.maxLifeTime = Stats.DEFAULT_LIFETIME;
-        rb = GetComponent<Rigidbody2D>();
-        //if(audioClip != null)
-            //GameManager.audioManager.CreateReplacableAudio(audioClip);
-    }
-
+    private AudioEventNames audioClip = AudioEventNames.PlayerFireSmallBullet;
+    
     protected virtual void FixedUpdate()
     {
         velocity = GetVelocity();
@@ -71,8 +61,14 @@ public class Projectile : MonoBehaviour, IDamageable
 
     public void Initialise(int index, Shooter parent)
     {
+        if (stats.maxLifeTime <= 0)
+            stats.maxLifeTime = Stats.DEFAULT_LIFETIME;
+        rb = GetComponent<Rigidbody2D>();
+
         this.index = index;
         this.parent = parent;
+
+        GameManager.AudioEvents.PlayAudio(audioClip);
         OnInitialise();
     }
 
@@ -100,6 +96,7 @@ public class Projectile : MonoBehaviour, IDamageable
             //damage hit target
             IDamageable damageable = collision.GetComponentInParent<IDamageable>();
             damageable?.OnDamage(stats.damage);
+
             //disable this object
             if(!CheckProj(collision))
                 OnDamage(stats.hp);

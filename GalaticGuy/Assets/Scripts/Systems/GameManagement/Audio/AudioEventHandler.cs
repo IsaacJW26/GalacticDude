@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioEventHandler : MonoBehaviour
+public class AudioEventHandler : MonoBehaviour, IAudio
 {
     public delegate void OnAudioEvent();
 
@@ -31,7 +31,7 @@ public class AudioEventHandler : MonoBehaviour
     {
         try
         {
-        audioEvents[eventId].Invoke();
+            audioEvents[eventId].Invoke();
         }
         catch (KeyNotFoundException)
         {
@@ -42,11 +42,36 @@ public class AudioEventHandler : MonoBehaviour
 
 public enum AudioEventNames
 {
+    // Player
     PlayerFireSmallBullet,
     PlayerFireMediumMissile,
     PlayerFireLargeLaser,
     PlayerHurt,
-    EnemyHit,
+    PlayerStartCharge,
+    PlayerFullyCharged,
+    // Enemy
+    EnemyHurt,
+    EnemyShot,
+    EnemyDeath,
+    // Boss
+    BossEnter,
+    BossHurt,
+    BossCharge,
+    BossFullCharge,
+    BossAttack,
+    BossDeath,
+    // 
+    AsteroidDestroyed, 
+    AsteroidMoving, 
+    // Currency
+    CoinPickup,
 
-
+    // UI
+    UiSelect,
+    UiNavigate,
 }
+
+public interface IAudio
+{
+    void PlayAudio(AudioEventNames eventId);
+};
