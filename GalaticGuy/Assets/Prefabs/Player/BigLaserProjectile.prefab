@@ -23,7 +23,7 @@ MonoBehaviour:
   projectiles: 1
   enemies: 1
   destroyOnHit: 1
-  audioClip: {fileID: 8300000, guid: 08b4380e79ba92c4db2a594344c042ec, type: 3}
+  audioClip: {fileID: 0}
   damageFrameGap: 0
   slowMo: 1
   bigShake: 1
