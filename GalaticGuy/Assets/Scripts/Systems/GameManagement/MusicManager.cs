@@ -14,6 +14,9 @@ public class MusicManager : MonoBehaviour
     {
         gameMusicState = FMODUnity.RuntimeManager.CreateInstance(MusicStateEvent);
         gameMusicState.start();
+
+        // Example use of setting an event listener
+        audioEventHandler.SetListener(AudioEventNames.BossEnter, OnBossEnter);
     }
 
     public void OnBossEnter()

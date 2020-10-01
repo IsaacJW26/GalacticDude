@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager INST = null;
+
+    public static IAudio AudioEvents { get { return INST.audioEventHandler; } }
+
     private EnemySpawner spawner;
     private MusicManager music;
     private AudioEventHandler audioEventHandler;
@@ -51,7 +54,11 @@ public class GameManager : MonoBehaviour
         spawner = GetComponent<EnemySpawner>();
         music = GetComponent<MusicManager>();
         audioEventHandler = GetComponent<AudioEventHandler>();
+
+        if(audioEventHandler == null)
+            audioEventHandler = gameObject.AddComponent<AudioEventHandler>();
         audioEventHandler.Initialise();
+        
         music.Initialise(audioEventHandler);
 
         spawner.SetListener(EndLevel);

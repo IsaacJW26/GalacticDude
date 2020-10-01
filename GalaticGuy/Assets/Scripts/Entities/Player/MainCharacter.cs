@@ -92,6 +92,7 @@ public class MainCharacter : MonoBehaviour, IDamageable
 
             //update health value
             health.TakeDamage(inDamage);
+            
             //update UI
             UIManager.INSTANCE.RemoveHP(health.GetHealth());
 
