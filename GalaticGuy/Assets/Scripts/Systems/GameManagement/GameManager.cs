@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(EnemySpawner))]
-[RequireComponent(typeof(MusicManager))]
 [RequireComponent(typeof(AudioEventHandler))]
+[RequireComponent(typeof(SoundManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager INST = null;
@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public static IAudio AudioEvents { get { return INST.audioEventHandler; } }
 
     private EnemySpawner spawner;
-    private MusicManager music;
     private AudioEventHandler audioEventHandler;
+    private SoundManager music;
     GameState gameState = GameState.playing;
     IEnumerator waitingFunction = null;
 
@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
         //audioManager = GetComponent<AudioManager>();
         SetPlayer(FindObjectOfType<MainCharacter>());
         spawner = GetComponent<EnemySpawner>();
-        music = GetComponent<MusicManager>();
+
+        music = GetComponent<SoundManager>();
 
         audioEventHandler = GetComponent<AudioEventHandler>();
 

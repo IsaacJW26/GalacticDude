@@ -76,17 +76,7 @@ MonoBehaviour:
   - Platform: 20
     Value: 32
   Plugins: []
-  MasterBanks:
-  - Music
-  Banks:
-  - Boss
-  - Character
-  - Enemy
-  - Environment
-  - Shop
-  - UI
-  BanksToLoad:
-  - Character.bank
-  - Music.strings.bank
-  - Music.bank
+  MasterBanks: []
+  Banks: []
+  BanksToLoad: []
   LiveUpdatePort: 9264

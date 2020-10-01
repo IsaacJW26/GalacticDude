@@ -15,6 +15,12 @@ public class SoundManager : MonoBehaviour
     [FMODUnity.EventRef]
     public string music = "";
 
+    public void Initialise(AudioEventHandler audioEventHandler)
+    {
+        // Example use of setting an event listener
+        audioEventHandler.SetListener(AudioEventNames.BossEnter, OnBossEnter);
+    }
+
     [ContextMenu("Test oneShot")]
     public void TestDefaultShot()
     {
