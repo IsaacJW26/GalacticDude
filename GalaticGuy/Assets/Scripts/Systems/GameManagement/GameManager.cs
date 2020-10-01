@@ -48,21 +48,21 @@ public class GameManager : MonoBehaviour
             Destroy(this);
 
         //DontDestroyOnLoad(gameObject);
+        UIManager.INSTANCE.StartGame();
 
         //audioManager = GetComponent<AudioManager>();
         SetPlayer(FindObjectOfType<MainCharacter>());
         spawner = GetComponent<EnemySpawner>();
         music = GetComponent<MusicManager>();
+
         audioEventHandler = GetComponent<AudioEventHandler>();
 
         if(audioEventHandler == null)
             audioEventHandler = gameObject.AddComponent<AudioEventHandler>();
         audioEventHandler.Initialise();
-        
         music.Initialise(audioEventHandler);
 
         spawner.SetListener(EndLevel);
-        UIManager.INSTANCE.StartGame();
         currentLevel = 0;
     }
 
