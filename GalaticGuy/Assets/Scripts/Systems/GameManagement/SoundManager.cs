@@ -18,7 +18,7 @@ public class SoundManager : MonoBehaviour
     public void Initialise(AudioEventHandler audioEventHandler)
     {
         // Example use of setting an event listener
-        audioEventHandler.SetListener(AudioEventNames.BossEnter, OnBossEnter);
+        audioEventHandler.SetListener(AudioEventNames.PlayerFireSmallBullet, OnBossEnter);
     }
 
     [ContextMenu("Test oneShot")]
@@ -51,7 +51,7 @@ public class SoundManager : MonoBehaviour
 */
     public void OnBossEnter()
     {
-
+         FMODUnity.RuntimeManager.PlayOneShot(defaultShot, transform.position);       
     }
 
     public void OnBossDeath()
