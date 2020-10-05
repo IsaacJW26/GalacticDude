@@ -15462,41 +15462,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: Params.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: Event
-      value: event:/Music/Intense
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: PlayEvent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: StopEvent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: OverrideMinDistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: OverrideMaxDistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: Params.Array.data[0].Value
-      value: 27.2
-      objectReference: {fileID: 0}
     - target: {fileID: 5975125129141001767, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15563,6 +15528,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e602aa850e10cf74a8667e5fc3db29b9,
         type: 2}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Params.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Event
+      value: event:/Music/Intense
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: PlayEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: StopEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Params.Array.data[0].Value
+      value: 27.2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8728468561725648535, guid: b0f00f5ab3723f34380a4b81b349e4b8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b0f00f5ab3723f34380a4b81b349e4b8, type: 3}
@@ -15581,10 +15581,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5975125128452481723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f381181dfbe9b2845a5a41525dc73914, type: 3}
+  m_Script: {fileID: 11500000, guid: 914196c832dc9e14698531809e614a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicStateEvent: 
+  defaultShot: 
+  music: 
 --- !u!114 &5975125128452481731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15597,9 +15598,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be76f1d469deae8439b3bb31b5c6ddcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
-  defaultShot: event:/SFX/Character/Charging
-  music: event:/Music/Intense
 --- !u!1001 &6539914324053788425
 PrefabInstance:
   m_ObjectHideFlags: 0
