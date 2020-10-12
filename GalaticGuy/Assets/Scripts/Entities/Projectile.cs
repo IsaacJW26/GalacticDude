@@ -68,7 +68,6 @@ public class Projectile : MonoBehaviour, IDamageable
         this.index = index;
         this.parent = parent;
 
-        GameManager.AudioEvents.PlayAudio(audioClip);
         OnInitialise();
     }
 
@@ -83,6 +82,8 @@ public class Projectile : MonoBehaviour, IDamageable
         transform.position = position;
         timeSinceBirth = 0;
         gameObject.SetActive(this);
+        GameManager.AudioEvents.PlayAudio(audioClip);
+
         //Debug.Log(velocity+ ", "+direction+", "+stats.initialSpeed);
     }
 
