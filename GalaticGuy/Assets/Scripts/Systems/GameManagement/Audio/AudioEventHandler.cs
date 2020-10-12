@@ -49,6 +49,7 @@ public enum AudioEventNames
     PlayerFireLargeLaser,
     PlayerHurt,
     PlayerStartCharge,
+    PlayerStopCharge,
     PlayerFullyCharged,
     // Enemy
     EnemyHurt,

@@ -150,6 +150,12 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
     public virtual void OnShootButtonDown()
     {
         beingHeld = true;
+        
+        //TODO replace magic number :/
+        //FIXHERE
+        if (heldDuration > 20){
+            GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStartCharge);
+        }
     }
 
     public virtual void OnShootButtonHold()
