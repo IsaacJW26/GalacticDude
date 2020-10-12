@@ -29,6 +29,7 @@ public class AudioEventHandler : MonoBehaviour, IAudio
 
     public void PlayAudio(AudioEventNames eventId)
     {
+        Debug.Log("teeest " +eventId);
         try
         {
             audioEvents[eventId].Invoke();

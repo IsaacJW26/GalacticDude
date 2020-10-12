@@ -16,10 +16,10 @@ MonoBehaviour:
   HasSourceProject: 0
   HasPlatforms: 0
   sourceProjectPath: ../../../../../../Cloud/Google Drive/FINAL_MUSIC_PROJECT/FMOD/PROJECT_1/PROJECT_1.fspro
-  sourceBankPath: Assets/Build/Desktop
+  sourceBankPath: Assets/Banks/Desktop
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 0
-  BankLoadType: 1
+  BankLoadType: 0
   AutomaticSampleLoading: 1
   EncryptionKey: 
   ImportType: 0
@@ -87,11 +87,5 @@ MonoBehaviour:
   - UI
   BanksToLoad:
   - Music.strings.bank
-  - Boss.bank
-  - Character.bank
-  - Enemy.bank
-  - Environment.bank
   - Music.bank
-  - Shop.bank
-  - UI.bank
   LiveUpdatePort: 9264
