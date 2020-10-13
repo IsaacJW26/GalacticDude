@@ -130,16 +130,16 @@ public class GameManager : MonoBehaviour
     private IEnumerator EndLevelDelay()
     {
         yield return new WaitForSeconds(endOfLevelDelay);
-        gameState = GameState.purchaseUpgrade;
-
+        //gameState = GameState.purchaseUpgrade;
         //
-        UIManager.INSTANCE.PurchasePhase();
+        //UIManager.INSTANCE.PurchasePhase();
         //
-
         StopCoroutine(waitingFunction);
         waitingFunction = null;
 
         Debug.Log("Start purchase phase");
+
+        EndPurchasePhase();
     }
 
     public int GetLevelNumber()

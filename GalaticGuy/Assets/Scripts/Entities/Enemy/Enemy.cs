@@ -165,6 +165,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
 
         yield return new WaitForSeconds(1f);
+        AnnouceDeath();
         Destroy(gameObject);
     }
 
