@@ -95,6 +95,7 @@ public class SoundManager : MonoBehaviour
     [ContextMenu("Stop Charging")]
     public void StopCharging()
     {
+        Debug.Log("WWWWWWWWWWW");
         chargingEmitter.Stop();
     }
 

@@ -15630,6 +15630,7 @@ MonoBehaviour:
   oneShot5: event:/SFX/Enemies/Default/Death
   music: event:/Music/Boss
   charging: event:/SFX/Character/Charging
+  chargingEmitter: {fileID: 5975125128452481733}
 --- !u!114 &5975125128452481731
 MonoBehaviour:
   m_ObjectHideFlags: 0
