@@ -380,7 +380,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_PROJECTILES: 10
   shootInterval: 140
-  projectileDamage: 1
   projectileSpeed: 3
   projectile: {fileID: 7674457554669734050, guid: 05796e3e6ad4b524e92a198c0fc716b8,
     type: 3}
@@ -452,10 +451,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     maxHP: 10
+    onDamageAudio: 11
+    onDeathAudio: 15
   deathChildren: []
   minBounty: 0
   maxBounty: 0
   bountyChance: 0
+  explosionScale: 1
 --- !u!114 &-5039327450082650990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,7 +470,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f9c40265a689b4bb6d4016afd485ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!1 &4201129976644031697
 GameObject:
   m_ObjectHideFlags: 0

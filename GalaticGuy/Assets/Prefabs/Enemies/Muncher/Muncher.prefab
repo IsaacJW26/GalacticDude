@@ -79,8 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     maxHP: 2
-    onDamageAudio: 6
-    onDeathAudio: 8
+    onDamageAudio: 7
+    onDeathAudio: 9
   deathChildren: []
   minBounty: 0
   maxBounty: 0
