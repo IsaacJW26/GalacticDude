@@ -15611,6 +15611,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5975125128452481722}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5975125128452481724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975125128452481723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Music/Boss
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!114 &5975125128452481725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15623,14 +15646,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914196c832dc9e14698531809e614a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneShot1: event:/SFX/Character/Default
-  oneShot2: event:/SFX/Character/Semi-Charged-Shot
-  oneShot3: event:/SFX/Character/Fully-Charged-Shot
-  oneShot4: event:/SFX/Character/Charged
-  oneShot5: event:/SFX/Enemies/Default/Death
-  music: event:/Music/Boss
+  defaultShot: event:/SFX/Character/Default
+  semiShot: event:/SFX/Character/Semi-Charged-Shot
+  fullShot: event:/SFX/Character/Fully-Charged-Shot
+  semiCharged: 
+  fullyCharged: event:/SFX/Character/Charged
+  Music: event:/Music/Intense
+  bossMusic: 
+  asteroidHit: 
+  asteroidDestroyed: event:/SFX/Objects/AsteroidDestroyed
+  coin: event:/SFX/Objects/Coin
   charging: event:/SFX/Character/Charging
   chargingEmitter: {fileID: 5975125128452481733}
+  bossEmitter: {fileID: 5975125128452481724}
 --- !u!114 &5975125128452481731
 MonoBehaviour:
   m_ObjectHideFlags: 0

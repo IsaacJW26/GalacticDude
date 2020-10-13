@@ -10,75 +10,125 @@ public class SoundManager : MonoBehaviour
     private FMOD.Studio.EventInstance gameMusicState;
 
     [FMODUnity.EventRef]
-    public string oneShot1 = "";
+    public string defaultShot = "";
 
     [FMODUnity.EventRef]
-    public string oneShot2 = "";
+    public string semiShot = "";
 
     [FMODUnity.EventRef]
-    public string oneShot3 = "";
+    public string fullShot = "";
 
     [FMODUnity.EventRef]
-    public string oneShot4 = "";
+    public string semiCharged = "";
 
     [FMODUnity.EventRef]
-    public string oneShot5 = "";
-
+    public string fullyCharged = "";
 
     [FMODUnity.EventRef]
-    public string music = "";
+    public string Music = "";
+
+    [FMODUnity.EventRef]
+    public string bossMusic = "";
+
+    [FMODUnity.EventRef]
+    public string asteroidHit = "";
+
+    [FMODUnity.EventRef]
+    public string asteroidDestroyed = "";
+    
+    [FMODUnity.EventRef]
+    public string coin = "";
 
     [FMODUnity.EventRef]
     public string charging = "";
-    
+
     [SerializeField]
     private FMODUnity.StudioEventEmitter chargingEmitter;
+
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter bossEmitter;
 
     public void Initialise(AudioEventHandler audioEventHandler)
     {
         // Example use of setting an event listener
-        audioEventHandler.SetListener(AudioEventNames.PlayerFireSmallBullet, TestOneShot1);
-        audioEventHandler.SetListener(AudioEventNames.PlayerFireMediumMissile, TestOneShot2);
-        audioEventHandler.SetListener(AudioEventNames.PlayerFireLargeLaser, TestOneShot3);
+        audioEventHandler.SetListener(AudioEventNames.PlayerFireSmallBullet, PlayDefaultShot);
+        audioEventHandler.SetListener(AudioEventNames.PlayerFireMediumMissile, PlaySemiShot);
+        audioEventHandler.SetListener(AudioEventNames.PlayerFireLargeLaser, PlayFullShot);
         audioEventHandler.SetListener(AudioEventNames.PlayerStartCharge, StartCharging);
         audioEventHandler.SetListener(AudioEventNames.PlayerStopCharge, StopCharging);
-        audioEventHandler.SetListener(AudioEventNames.PlayerFullyCharged, TestOneShot4);
+        audioEventHandler.SetListener(AudioEventNames.PlayerFullyCharged, FullyCharged);
+        audioEventHandler.SetListener(AudioEventNames.AsteroidHit, PlayAsteroidHit);
+        audioEventHandler.SetListener(AudioEventNames.AsteroidDestroyed, PlayAsteroidDestroyed);
+        audioEventHandler.SetListener(AudioEventNames.CoinPickup, PlayCoin);
+        audioEventHandler.SetListener(AudioEventNames.BossEnter, StartBoss);        
+        audioEventHandler.SetListener(AudioEventNames.BossDeath, StopBoss);  
+        
     }
 
-    [ContextMenu("Test oneShot1")]
-    public void TestOneShot1()
+    [ContextMenu("DefaultShot")]
+    public void PlayDefaultShot()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(oneShot1, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(defaultShot, transform.position);
 
     }
 
-    [ContextMenu("Test oneShot2")]
-    public void TestOneShot2()
+    [ContextMenu("Semi-Charged Shot")]
+    public void PlaySemiShot()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(oneShot2, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(semiShot, transform.position);
 
     }
 
-    [ContextMenu("Test oneShot3")]
-    public void TestOneShot3()
+    [ContextMenu("Fully-Chraged Shot")]
+    public void PlayFullShot()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(oneShot3, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(fullShot, transform.position);
 
     }
-
-    [ContextMenu("Test oneShot4")]
-    public void TestOneShot4()
+    
+    [ContextMenu("Semi-Charged")]
+    public void SemiCharged()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(oneShot4, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(semiCharged, transform.position);
 
     }
 
-    [ContextMenu("Test oneShot5")]
-    public void TestOneShot5()
+    [ContextMenu("Fully-Charged")]
+    public void FullyCharged()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(oneShot5, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(fullyCharged, transform.position);
 
     }
+
+    [ContextMenu("Asteroid Hit")]
+    public void PlayAsteroidHit()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(asteroidHit, transform.position);
+
+    }
+
+    [ContextMenu("Asteroid Destroyed")]
+    public void PlayAsteroidDestroyed()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(asteroidDestroyed, transform.position);
+
+    }
+
+    [ContextMenu("Coin")]
+    public void PlayCoin()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(coin, transform.position);
+
+    }
+
+    /*
+    [ContextMenu("")]
+    public void ()
+    {
+        FMODUnity.RuntimeManager.Play(, transform.position);
+
+    }
+    */
 
     [ContextMenu("Test music")]
     public void TestMusic()
@@ -95,14 +145,26 @@ public class SoundManager : MonoBehaviour
     [ContextMenu("Stop Charging")]
     public void StopCharging()
     {
-        Debug.Log("WWWWWWWWWWW");
+        Debug.Log("CharggeEEEE");
         chargingEmitter.Stop();
     }
 
+    [ContextMenu("Start Boss Music")]
+    public void StartBoss()
+    {
+        bossEmitter.Play();
+    }
+
+    [ContextMenu("Stop Boss Music")]
+    public void StopBoss()
+    {
+        Debug.Log("BossSSSS");
+        bossEmitter.Stop();
+    }
 
     public void OnBossEnter()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot(defaultShot, transform.position);       
+        //FMODUnity.RuntimeManager.PlayOneShot(defaultShot, transform.position); 
     }
 
     public void OnBossDeath()
