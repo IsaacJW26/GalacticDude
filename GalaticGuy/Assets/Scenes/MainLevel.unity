@@ -15204,7 +15204,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 566476721278711857, guid: 8fbe6aaa445976e48aedf89f6b881140, type: 3}
-    - {fileID: 566476721278711870, guid: 8fbe6aaa445976e48aedf89f6b881140, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8fbe6aaa445976e48aedf89f6b881140, type: 3}
 --- !u!1 &566476721319977992 stripped
 GameObject:
@@ -15469,6 +15468,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
+      propertyPath: Params.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
       propertyPath: Event
       value: event:/Music/Intense
       objectReference: {fileID: 0}
@@ -15501,6 +15505,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Event
+      value: event:/Music/Intense
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: PlayEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: StopEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Params.Array.data[0].Value
+      value: 27.2
       objectReference: {fileID: 0}
     - target: {fileID: 5975125129141001767, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15568,41 +15602,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e602aa850e10cf74a8667e5fc3db29b9,
         type: 2}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: Params.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: Event
-      value: event:/Music/Intense
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: PlayEvent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: StopEvent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: OverrideMinDistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: OverrideMaxDistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
-        type: 3}
-      propertyPath: Params.Array.data[0].Value
-      value: 27.2
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8728468561725648535, guid: b0f00f5ab3723f34380a4b81b349e4b8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b0f00f5ab3723f34380a4b81b349e4b8, type: 3}
