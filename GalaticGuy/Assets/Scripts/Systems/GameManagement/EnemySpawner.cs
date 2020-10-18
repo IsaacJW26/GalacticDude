@@ -45,25 +45,52 @@ public class EnemySpawner : MonoBehaviour
         StartLevel();
     }
 
+    public void StartLevel()
+    {
+        spawnedCount = 0;
+        killedCount = 0;
+        ended = false;
+
+        CreateAllEnemies();
+        SpawnNextEnemy();
+    }
+
+    private void CreateAllEnemies()
+    {
+        // Spawn boss on boss levels
+        if (levelInfo.Levels[currentLevel].containsBoss)
+        {
+            SpawnRandomBoss(levelInfo.Levels[currentLevel].difficulty);
+        }
+        // Other levels
+        else
+        {
+            int enemiesToSpawn = levelInfo.Levels[currentLevel].length;
+
+            for(int ii = 0; ii < enemiesToSpawn; ii++)
+            {
+                Enemy enemy = GetRandomEnemyPrefab(levelInfo.Levels[currentLevel].difficulty);
+                AddEnemyToQueue(enemy, GetRandomSpawnPos());
+            }
+        }
+    }
+
+
     [ContextMenu("Spawn boss")]
     public void SpawnBossTest()
     {
         SpawnRandomBoss(levelInfo.Levels[currentLevel].difficulty);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void CheckLevelEnded()
     {
         //boss levels
         if (levelInfo.Levels[currentLevel].containsBoss)
         {
-            if (spawnedCount <= 0)
-                SpawnRandomBoss(levelInfo.Levels[currentLevel].difficulty);
-            else if (killedCount > 0 && !ended)
+            if (killedCount >= spawnedCount && !ended)
             {
                 ended = true;
                 OnLevelEnd();
-                Debug.Log("spawning stopped");
             }
         }
         //other level
@@ -83,7 +110,6 @@ public class EnemySpawner : MonoBehaviour
                     OnLevelEnd();
 
                 Debug.Log("spawning stopped");
-                //System.GC.Collect();
             }
         }
     }
@@ -97,8 +123,7 @@ public class EnemySpawner : MonoBehaviour
 
         info.enemy = enemy;
         info.delay = GetNextTime(levelInfo.Levels[currentLevel]);
-        //info.spawnPosition = spawnpos;
-        //Debug.Log($"time = {info.delay}");
+
         enemySpawnQueue.Enqueue(info);
     }
 
@@ -198,31 +223,10 @@ public class EnemySpawner : MonoBehaviour
         currentLevel = endListener();
     }
 
-    public void StartLevel()
-    {
-        spawnedCount = 0;
-        killedCount = 0;
-        ended = false;
-
-        int enemiesToSpawn = levelInfo.Levels[currentLevel].length;
-
-        for(int ii = 0; ii < enemiesToSpawn; ii++)
-        {
-            Enemy enemy = GetRandomEnemyPrefab(levelInfo.Levels[currentLevel].difficulty);
-            AddEnemyToQueue(enemy, GetRandomSpawnPos());
-        }
-        SpawnNextEnemy();
-    }
-
-    [ContextMenu("spawn enemy")]
-    public void SpawnRandomEnemyTest()
-    {
-        
-    }
-
     public void EnemyDied()
     {
         killedCount++;
+        CheckLevelEnded();
     }
 
     public int FrequencyDeterminer(int current, int longestSpawnTime, int minspawnTime)
