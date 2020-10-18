@@ -16,9 +16,9 @@ public class UIShop : MonoBehaviour
     int delay = 0;
     const int MAX_DELAY = 10;
     [SerializeField]
-    GameObject uIPanel;
+    GameObject uiPanel = null;
     bool shopActive = false;
-
+    const bool SHOP_FEATURE_ENABLED = false;
     void Awake()
     {
         shopButtons = GetComponentsInChildren<Button>();
@@ -32,7 +32,7 @@ public class UIShop : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (shopActive)
+        if (shopActive && SHOP_FEATURE_ENABLED)
             InputSelection();
     }
 
@@ -78,10 +78,13 @@ public class UIShop : MonoBehaviour
 
     public void SetStoreActive(bool isActive)
     {
-        uIPanel.SetActive(isActive);
-        shopActive = isActive;
-        if(isActive)
-            shopButtons[0].Select();
+        if(SHOP_FEATURE_ENABLED)
+        {
+            uiPanel.SetActive(isActive);
+            shopActive = isActive;
+            if(isActive)
+                shopButtons[0].Select();
+        }
     }
 
     private IEnumerator WaitToSelectInitial()
@@ -117,22 +120,28 @@ public class UIShop : MonoBehaviour
 
     public void SetUpgrades(PlayerUpgrade[] upgrades)
     {
-        //compare if upgrades are the same, not including the length
-        if(upgrades.Length != (shopButtons.Length -1))
+        if(SHOP_FEATURE_ENABLED)
         {
-            Debug.LogError("Upgrades are not same length as number of shop items");
-        }
+            //compare if upgrades are the same, not including the length
+            if(upgrades.Length != (shopButtons.Length -1))
+            {
+                Debug.LogError("Upgrades are not same length as number of shop items");
+            }
 
-        for(int ii = 0; ii < shopItems.Length; ii++)
-        {
-            Debug.LogWarning("Initialising shop item with magic number");
-            shopItems[ii].InitialiseShopItem(upgrades[0]);
+            for(int ii = 0; ii < shopItems.Length; ii++)
+            {
+                Debug.LogWarning("Initialising shop item with magic number");
+                shopItems[ii].InitialiseShopItem(upgrades[0]);
+            }
         }
     }
 
     public void ExitShop()
     {
-        GameManager.INST.EndPurchasePhase();
+        if(SHOP_FEATURE_ENABLED)
+        {
+            GameManager.INST.EndPurchasePhase();
+        }
     }
 }
 
