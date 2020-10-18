@@ -157,30 +157,12 @@ public class EnemySpawner : MonoBehaviour
         return enemy;
     }
 
-    private void SpawnRandomSquad(int difficulty)
-    {
-        int spawnIndex = Random.Range(0, levelInfo.DifficultyTiers[difficulty].squads.Length);
-        Squad squad = levelInfo.DifficultyTiers[difficulty].squads[spawnIndex];
-        Vector2 squadPosition = GetRandomSpawnPos();
-
-        foreach (Squad.SquadEnemy enemyIn in squad.squadMembers)
-        {
-            //SpawnEnemy(enemyIn.enemy, squadPosition + enemyIn.spawnPosition);
-            //SpawnEnemy()
-        }
-    }
-
     private Enemy GetRandomEnemyPrefab(int difficulty)
     {
-        //Enemy enemy;
-        //Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), spawnPositionY);
         int spawnIndex = Random.Range(0, levelInfo.DifficultyTiers[difficulty].enemyPrefabs.Length);
-
-        //enemy = SpawnEnemy(tiers[difficulty].enemiesPrefabs[spawnIndex], spawnPosition);
 
         return levelInfo.DifficultyTiers[difficulty].enemyPrefabs[spawnIndex];
     }
-
 
     //gives position inside spawn bounds
     public Vector3 GetRandomSpawnPos()

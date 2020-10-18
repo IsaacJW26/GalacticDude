@@ -28,10 +28,10 @@ MonoBehaviour:
     squads: []
   levels:
   - difficulty: 0
-    length: 140
-    containsBoss: 0
+    length: 4
+    containsBoss: 1
     averageTime: 70
   - difficulty: 0
-    length: 0
+    length: 4
     containsBoss: 0
-    averageTime: 0
+    averageTime: 70

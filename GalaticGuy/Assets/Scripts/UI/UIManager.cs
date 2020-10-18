@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
 
     UICharge charge;
     UIHp health;
-    UIShop storeUI;
 
     [SerializeField]
     UnityEngine.UI.Text uiText = null;
@@ -48,7 +47,6 @@ public class UIManager : MonoBehaviour
 
         charge = GetComponentInChildren<UICharge>();
         health = GetComponentInChildren<UIHp>();
-        storeUI = GetComponentInChildren<UIShop>();
     }
 
     // Update is called once per frame
@@ -79,8 +77,6 @@ public class UIManager : MonoBehaviour
         charge.gameObject.SetActive(true);
         health.gameObject.SetActive(true);
         Uibackground.SetActive(true);
-        //disable store
-        storeUI.SetStoreActive(false);
     }
 
     //
@@ -111,8 +107,6 @@ public class UIManager : MonoBehaviour
     //deactivate everything
     public void PurchasePhase()
     {
-        //activate store ui
-        storeUI.SetStoreActive(true);
         //
         UiText.gameObject.SetActive(false);
         charge.gameObject.SetActive(false);

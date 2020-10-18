@@ -113,45 +113,14 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             coinLayerOrder++;
             Vector3 offset = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
-            CurrencyType coinType = GetRandomCoin(bountyVal);
-            bountyVal -= (int)coinType;
             CoinPickup coin = Instantiate(GameManager.INST.CurrencyPrefab, transform.position +offset, Quaternion.identity);
-            coin.Initialise(coinType, coinLayerOrder);
+            coin.Initialise(coinLayerOrder);
             int del = Mathf.Clamp(Random.Range(-4, 4), 0, 4);
             for (int i = 0; i < del; i++)
             {
                 yield return new WaitForFixedUpdate();
             }
         }
-    }
-
-    private CurrencyType GetRandomCoin(int maxValue)
-    {
-        int max = 3;
-        if (maxValue >= (int)CurrencyType.big)
-            max = 3;
-        else if (maxValue >= (int)CurrencyType.medium)
-            max = 2;
-        else
-            max = 1;
-
-        CurrencyType chosenType = CurrencyType.normal;
-        switch (Random.Range(0, max))
-        {
-            case 0:
-                chosenType = CurrencyType.normal;
-                break;
-            case 1:
-                chosenType = CurrencyType.medium;
-                break;
-            case 2:
-                chosenType = CurrencyType.big;
-                break;
-            default:
-                break;
-        }
-
-        return chosenType;
     }
 
     IEnumerator WaitToDie()

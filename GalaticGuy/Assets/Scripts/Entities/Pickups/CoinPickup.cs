@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Movement))]
 public class CoinPickup : MonoBehaviour
 {
-    [SerializeField]
-    CurrencyType type;
     Movement movement;
     SpriteRenderer rend;
     [SerializeField]
@@ -16,9 +14,8 @@ public class CoinPickup : MonoBehaviour
         rend = GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void Initialise(CurrencyType currencyType, int layerOrder)
+    public void Initialise(int layerOrder)
     {
-        type = currencyType;
         rend.sortingOrder = layerOrder;
     }
 
@@ -35,7 +32,6 @@ public class CoinPickup : MonoBehaviour
     {
         if(collision.tag == Labels.Tags.PLAYER)
         {
-            ShopManager.INSTANCE.AddCurrency(type);
             Destroy(gameObject);
         }
     }
