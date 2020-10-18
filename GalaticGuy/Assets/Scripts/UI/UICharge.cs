@@ -38,8 +38,6 @@ public class UICharge : MonoBehaviour
         chargeBarLFilled.enabled = false;
         chargeBarRFilled.enabled = false;
         isCharging = false;
-
-        //audioSource = GameManager.audioManager.CreatePeristentAudio(gameObject, chargingClip, looping: false, play: false);
     }
 
     private void InitialiseCharge(float percentOfMax)
@@ -69,8 +67,6 @@ public class UICharge : MonoBehaviour
 
         if(chargebarR.value >= 1f && !chargeBarRFilled.enabled)
         {
-            GameManager.AudioEvents.PlayAudio(filledClip);
-
             chargeBarRFilled.enabled = true;
         }
 
@@ -101,29 +97,7 @@ public class UICharge : MonoBehaviour
                 chargeDuration = 0f;
             }
         }
-    }
-/*
-private void UpdateAudio()
-{
-    if(audioSource != null)
-    {
-        //still charging
-        if (timeSinceLastCharge < CHARGE_TIME_THRESHOLD
-            && !chargeBarRFilled.enabled
-            && chargeDuration > MIN_CHARGE_DURATION)
-        {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-            audioSource.pitch += PITCH_INCREASE_RATE * Time.deltaTime;
-        }
-        else
-        {
-            audioSource.Stop();
-            audioSource.pitch = BASE_PITCH;
-        }
+
     }
 }
-    */
-}
+
