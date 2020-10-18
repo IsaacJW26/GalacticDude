@@ -29,9 +29,9 @@ MonoBehaviour:
   levels:
   - difficulty: 0
     length: 4
-    containsBoss: 1
+    containsBoss: 0
     averageTime: 70
   - difficulty: 0
     length: 4
-    containsBoss: 0
+    containsBoss: 1
     averageTime: 70
