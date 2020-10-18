@@ -185,6 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     maxHP: 3
+    onDamageAudio: 7
+    onDeathAudio: 9
   deathChildren: []
   minBounty: 0
   maxBounty: 0
@@ -204,7 +206,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_PROJECTILES: 5
   shootInterval: 180
-  projectileDamage: 1
   projectileSpeed: 2
   projectile: {fileID: 7674457554669734050, guid: 05796e3e6ad4b524e92a198c0fc716b8,
     type: 3}

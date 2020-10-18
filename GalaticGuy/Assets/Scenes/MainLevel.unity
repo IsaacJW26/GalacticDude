@@ -15514,12 +15514,12 @@ PrefabInstance:
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: PlayEvent
-      value: 1
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: StopEvent
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15611,6 +15611,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5975125128452481722}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5975125128452481724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975125128452481723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Music/Boss
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!114 &5975125128452481725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15624,7 +15647,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultShot: event:/SFX/Character/Default
-  music: event:/Music/Intense
+  semiShot: event:/SFX/Character/Semi-Charged-Shot
+  fullShot: event:/SFX/Character/Fully-Charged-Shot
+  semiCharged: 
+  fullyCharged: event:/SFX/Character/Charged
+  Music: event:/Music/Intense
+  bossMusic: 
+  asteroidHit: 
+  asteroidDestroyed: event:/SFX/Objects/AsteroidDestroyed
+  coin: event:/SFX/Objects/Coin
+  charging: event:/SFX/Character/Charging
+  chargingEmitter: {fileID: 5975125128452481733}
+  bossEmitter: {fileID: 5975125128452481724}
 --- !u!114 &5975125128452481731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15637,6 +15671,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be76f1d469deae8439b3bb31b5c6ddcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5975125128452481733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975125128452481723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Character/Charging
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1001 &6539914324053788425
 PrefabInstance:
   m_ObjectHideFlags: 0

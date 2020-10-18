@@ -118,7 +118,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_PROJECTILES: 0
   shootInterval: 35
-  projectileDamage: 1
   projectileSpeed: 3
   projectile: {fileID: 0}
   projectilePoint: {fileID: 0}
@@ -157,6 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     maxHP: 15
+    onDamageAudio: 16
+    onDeathAudio: 17
   deathChildren:
   - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
   - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}

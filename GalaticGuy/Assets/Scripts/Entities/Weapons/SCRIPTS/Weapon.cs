@@ -147,6 +147,11 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
         }
     }
 
+    public void OnDisable()
+    {
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStopCharge);
+    }
+
     public virtual void OnShootButtonDown()
     {
         beingHeld = true;
@@ -164,10 +169,17 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
             float percent = state.currentCharge / (float) WeaponManager.MAX_CHARGE;
             manager.SetEmissionLevel(percent);
         }
+
+        //TODO replace magic number :/
+        if (heldDuration == 10)
+        {
+            GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStartCharge);
+        }
     }
 
     public virtual void OnShootButtonRelease()
     {
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStopCharge);
         //successfully shoot
         //frame limit exists to stop spamming
         if (timeUntilNextShot <= 0)

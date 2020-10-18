@@ -29,6 +29,11 @@ public class AudioEventHandler : MonoBehaviour, IAudio
 
     public void PlayAudio(AudioEventNames eventId)
     {
+        Debug.Log("Event being played " +eventId);
+
+        if(eventId == AudioEventNames.NONE)
+            return;
+
         try
         {
             audioEvents[eventId].Invoke();
@@ -43,32 +48,37 @@ public class AudioEventHandler : MonoBehaviour, IAudio
 public enum AudioEventNames
 {
     // Player
-    PlayerFireSmallBullet,
-    PlayerFireMediumMissile,
-    PlayerFireLargeLaser,
-    PlayerHurt,
-    PlayerStartCharge,
-    PlayerFullyCharged,
+    PlayerFireSmallBullet = 0,
+    PlayerFireMediumMissile = 1,
+    PlayerFireLargeLaser = 2,
+    PlayerHurt = 3,
+    PlayerStartCharge = 4,
+    PlayerStopCharge = 5,
+    PlayerFullyCharged = 6,
     // Enemy
-    EnemyHurt,
-    EnemyShot,
-    EnemyDeath,
+    EnemyHurt = 7,
+    EnemyShot = 8,
+    EnemyDeath = 9,
     // Boss
-    BossEnter,
-    BossHurt,
-    BossCharge,
-    BossFullCharge,
-    BossAttack,
-    BossDeath,
+    BossEnter = 10,
+    BossHurt = 11,
+    BossCharge = 12,
+    BossFullCharge = 13,
+    BossAttack = 14,
+    BossDeath = 15,
     // 
-    AsteroidDestroyed, 
-    AsteroidMoving, 
+    AsteroidHit = 16, 
+    AsteroidDestroyed = 17, 
+    AsteroidMoving = 18, 
     // Currency
-    CoinPickup,
+    CoinPickup = 19,
 
     // UI
-    UiSelect,
-    UiNavigate,
+    UiSelect = 20,
+    UiNavigate = 21,
+    
+    //Misc
+    NONE = 22,
 }
 
 public interface IAudio
