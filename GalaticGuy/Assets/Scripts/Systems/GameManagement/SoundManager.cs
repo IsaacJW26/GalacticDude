@@ -48,6 +48,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private FMODUnity.StudioEventEmitter bossEmitter;
 
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter defaultMusicEmitter;
+
     public void Initialise(AudioEventHandler audioEventHandler)
     {
         // Example use of setting an event listener
@@ -61,7 +64,7 @@ public class SoundManager : MonoBehaviour
         audioEventHandler.SetListener(AudioEventNames.AsteroidDestroyed, PlayAsteroidDestroyed);
         audioEventHandler.SetListener(AudioEventNames.CoinPickup, PlayCoin);
         audioEventHandler.SetListener(AudioEventNames.BossEnter, StartBoss);        
-        audioEventHandler.SetListener(AudioEventNames.BossDeath, StopBoss);  
+        audioEventHandler.SetListener(AudioEventNames.BossDeath, StopBoss); 
         
     }
 
@@ -152,23 +155,28 @@ public class SoundManager : MonoBehaviour
     [ContextMenu("Start Boss Music")]
     public void StartBoss()
     {
+        StopDefaultMusic();
         bossEmitter.Play();
     }
 
     [ContextMenu("Stop Boss Music")]
     public void StopBoss()
     {
-        Debug.Log("BossSSSS");
+        Debug.Log("Boss Music Stopped");
         bossEmitter.Stop();
+        StartDefaultMusic();
     }
 
-    public void OnBossEnter()
+    [ContextMenu("Start Default Music")]
+    public void StartDefaultMusic()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot(defaultShot, transform.position); 
+        defaultMusicEmitter.Play();
     }
 
-    public void OnBossDeath()
+    [ContextMenu("Stop Default Music")]
+    public void StopDefaultMusic()
     {
-
+        Debug.Log("Default Music stopped");
+        defaultMusicEmitter.Stop();
     }
 }

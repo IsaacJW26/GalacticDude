@@ -15475,7 +15475,7 @@ PrefabInstance:
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15624,13 +15624,26 @@ MonoBehaviour:
   semiCharged: 
   fullyCharged: event:/SFX/Character/Charged
   Music: event:/Music/Intense
-  bossMusic: 
+  bossMusic: event:/Music/Boss
   asteroidHit: 
   asteroidDestroyed: event:/SFX/Objects/AsteroidDestroyed
   coin: event:/SFX/Objects/Coin
   charging: event:/SFX/Character/Charging
   chargingEmitter: {fileID: 5975125128452481733}
   bossEmitter: {fileID: 5975125128452481724}
+  defaultMusicEmitter: {fileID: 5975125128452481726}
+--- !u!114 &5975125128452481726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5975125128452481722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975125128452481723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5975125128452481731
 MonoBehaviour:
   m_ObjectHideFlags: 0
