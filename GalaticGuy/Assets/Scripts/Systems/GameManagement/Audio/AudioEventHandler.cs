@@ -79,6 +79,11 @@ public enum AudioEventNames
     
     //Misc
     NONE = 22,
+
+    // Change values
+    IncreaseThreatLevel = 23,
+    DecreaseThreatLevel = 24,
+    ResetThreatLevel = 25,
 }
 
 public interface IAudio

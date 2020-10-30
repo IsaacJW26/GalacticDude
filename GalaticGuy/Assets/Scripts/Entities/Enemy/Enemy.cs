@@ -149,17 +149,11 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             anim.OnDamage();
             health.TakeDamage(damage);
+            Ai.OnHit(health);
 
             if (damage <= 2)
                 EffectManager.INSTANCE.ScreenShakeSmall();
         }
-        /*
-        else if(damage <= 4)
-            ScreenShake.INSTANCE.MediumShake();
-        else if(damage >= 5)
-            ScreenShake.INSTANCE.BigShake();
-            */
-        //Stub
     }
 
     public void OnTriggerEnter2D(Collider2D other)
