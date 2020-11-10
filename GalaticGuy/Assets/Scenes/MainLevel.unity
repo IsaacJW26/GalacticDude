@@ -15445,7 +15445,7 @@ PrefabInstance:
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: Event
-      value: event:/Music/Intense
+      value: event:/Music/Level
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15480,7 +15480,7 @@ PrefabInstance:
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: Event
-      value: event:/Music/Intense
+      value: event:/Music/Level
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15506,6 +15506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Params.Array.data[0].Value
       value: 27.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Params.Array.data[0].Name
+      value: ThreatNew
       objectReference: {fileID: 0}
     - target: {fileID: 5975125129141001767, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15602,7 +15607,9 @@ MonoBehaviour:
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
-  Params: []
+  Params:
+  - Name: Boss 2
+    Value: 100
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
@@ -15621,11 +15628,11 @@ MonoBehaviour:
   defaultShot: event:/SFX/Character/Default
   semiShot: event:/SFX/Character/Semi-Charged-Shot
   fullShot: event:/SFX/Character/Fully-Charged-Shot
-  semiCharged: 
+  semiCharged: event:/SFX/Character/Charged
   fullyCharged: event:/SFX/Character/Charged
-  Music: event:/Music/Intense
+  Music: event:/Music/Level
   bossMusic: event:/Music/Boss
-  asteroidHit: 
+  asteroidHit: event:/SFX/Objects/AsteroidDestroyed
   asteroidDestroyed: event:/SFX/Objects/AsteroidDestroyed
   coin: event:/SFX/Objects/Coin
   charging: event:/SFX/Character/Charging

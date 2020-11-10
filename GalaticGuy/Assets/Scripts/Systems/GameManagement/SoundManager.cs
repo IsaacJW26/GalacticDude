@@ -19,6 +19,9 @@ public class SoundManager : MonoBehaviour
     public string fullShot = "";
 
     [FMODUnity.EventRef]
+    public string bossSpawn = "";
+
+    [FMODUnity.EventRef]
     public string semiCharged = "";
 
     [FMODUnity.EventRef]
@@ -122,7 +125,12 @@ public class SoundManager : MonoBehaviour
     public void PlayCoin()
     {
         FMODUnity.RuntimeManager.PlayOneShot(coin, transform.position);
+    }
 
+    [ContextMenu("bossSpawn")]
+    public void PlayBossSpawn()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(bossSpawn, transform.position);
     }
 
     /*
@@ -157,6 +165,13 @@ public class SoundManager : MonoBehaviour
     public void StartBoss()
     {
         StopDefaultMusic();
+        StartCoroutine(BossSpawnEnum()); 
+    }
+
+    IEnumerator BossSpawnEnum()
+    {
+        PlayBossSpawn();
+        yield return new WaitForSeconds(6);
         bossEmitter.Play();
     }
 
