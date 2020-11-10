@@ -79,8 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     maxHP: 1
-    onDamageAudio: 7
-    onDeathAudio: 9
+    onDamageAudio: 26
+    onDeathAudio: 28
   deathChildren: []
   minBounty: 1
   maxBounty: 1
@@ -104,6 +104,7 @@ MonoBehaviour:
   projectile: {fileID: 7674457554669734050, guid: 05796e3e6ad4b524e92a198c0fc716b8,
     type: 3}
   projectilePoint: {fileID: 9119908270630566906}
+  EnemyShootEvent: 22
 --- !u!114 &8256181706797301278
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0.03, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -79,8 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     maxHP: 4
-    onDamageAudio: 0
-    onDeathAudio: 0
+    onDamageAudio: 29
+    onDeathAudio: 30
   deathChildren: []
   minBounty: 1
   maxBounty: 1
@@ -104,6 +104,7 @@ MonoBehaviour:
   projectile: {fileID: 7674457554669734050, guid: 05796e3e6ad4b524e92a198c0fc716b8,
     type: 3}
   projectilePoint: {fileID: 9119908270630566906}
+  EnemyShootEvent: 8
 --- !u!114 &8256181706797301278
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour
     public string fullyCharged = "";
 
     [FMODUnity.EventRef]
-    public string Music = "";
+    public string music = "";
 
     [FMODUnity.EventRef]
     public string bossMusic = "";
@@ -44,6 +44,28 @@ public class SoundManager : MonoBehaviour
 
     [FMODUnity.EventRef]
     public string charging = "";
+
+    [FMODUnity.EventRef]
+    public string enemyShot = "";
+
+    [FMODUnity.EventRef]
+    public string predictorHurt = "";    
+
+    [FMODUnity.EventRef]
+    public string predictorDeath = "";
+
+    [FMODUnity.EventRef]
+    public string muncherHurt = "";
+
+    [FMODUnity.EventRef]
+    public string muncherDeath = "";
+
+    [FMODUnity.EventRef]
+    public string raisinHurt = "";
+
+    [FMODUnity.EventRef]
+    public string raisinDeath = "";
+    
 
     [SerializeField]
     private FMODUnity.StudioEventEmitter chargingEmitter;
@@ -66,6 +88,15 @@ public class SoundManager : MonoBehaviour
         audioEventHandler.SetListener(AudioEventNames.AsteroidHit, PlayAsteroidHit);
         audioEventHandler.SetListener(AudioEventNames.AsteroidDestroyed, PlayAsteroidDestroyed);
         audioEventHandler.SetListener(AudioEventNames.CoinPickup, PlayCoin);
+
+        audioEventHandler.SetListener(AudioEventNames.EnemyShot, PlayEnemyShot);
+        audioEventHandler.SetListener(AudioEventNames.EnemyHurt, PlayPredictorHurt);
+        audioEventHandler.SetListener(AudioEventNames.EnemyDeath, PlayPredictorDeath);
+        audioEventHandler.SetListener(AudioEventNames.MuncherHurt, PlayMuncherHurt);
+        audioEventHandler.SetListener(AudioEventNames.MuncherDeath, PlayMuncherDeath);
+        audioEventHandler.SetListener(AudioEventNames.RaisinHurt, PlayRaisinHurt);
+        audioEventHandler.SetListener(AudioEventNames.RaisinDeath, PlayRaisinDeath);
+        
         audioEventHandler.SetListener(AudioEventNames.BossEnter, StartBoss);        
         audioEventHandler.SetListener(AudioEventNames.BossDeath, StopBoss); 
         audioEventHandler.SetListener(AudioEventNames.IncreaseThreatLevel, IncreaseThreat);
@@ -126,6 +157,53 @@ public class SoundManager : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot(coin, transform.position);
     }
+
+    [ContextMenu("Enemy Shot")]
+    public void PlayEnemyShot()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(enemyShot, transform.position);
+    }
+
+    [ContextMenu("Predictor Hurt")]
+    public void PlayPredictorHurt()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(enemyShot, transform.position);
+    }
+
+    [ContextMenu("Predictor Death")]
+    public void PlayPredictorDeath()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(predictorDeath, transform.position);
+    }
+
+
+    [ContextMenu("Muncher Hurt")]
+        public void PlayMuncherHurt()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(muncherHurt, transform.position);
+        }
+
+
+    [ContextMenu("Muncher Death")]
+        public void PlayMuncherDeath()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(muncherDeath, transform.position);
+        }
+
+
+    [ContextMenu("Raisin Hurt")]
+        public void PlayRaisinHurt()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(raisinHurt, transform.position);
+        }
+
+
+    [ContextMenu("Raisin Death")]
+        public void PlayRaisinDeath()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(raisinDeath, transform.position);
+        }
+
 
     [ContextMenu("bossSpawn")]
     public void PlayBossSpawn()

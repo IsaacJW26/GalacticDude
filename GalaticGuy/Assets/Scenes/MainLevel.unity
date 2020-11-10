@@ -15628,14 +15628,22 @@ MonoBehaviour:
   defaultShot: event:/SFX/Character/Default
   semiShot: event:/SFX/Character/Semi-Charged-Shot
   fullShot: event:/SFX/Character/Fully-Charged-Shot
+  bossSpawn: event:/SFX/Boss/Planet/Spawn
   semiCharged: event:/SFX/Character/Charged
   fullyCharged: event:/SFX/Character/Charged
-  Music: event:/Music/Level
+  music: event:/Music/Level
   bossMusic: event:/Music/Boss
   asteroidHit: event:/SFX/Objects/AsteroidDestroyed
   asteroidDestroyed: event:/SFX/Objects/AsteroidDestroyed
   coin: event:/SFX/Objects/Coin
   charging: event:/SFX/Character/Charging
+  enemyShot: event:/SFX/Enemies/Predictor/Shot
+  predictorHurt: event:/SFX/Enemies/Predictor/Hit
+  predictorDeath: event:/SFX/Enemies/Predictor/Death
+  muncherHurt: event:/SFX/Enemies/Muncher/Hit
+  muncherDeath: event:/SFX/Enemies/Muncher/Death
+  raisinHurt: event:/SFX/Enemies/Raisin/Hit
+  raisinDeath: event:/SFX/Enemies/Raisin/Death
   chargingEmitter: {fileID: 5975125128452481733}
   bossEmitter: {fileID: 5975125128452481724}
   defaultMusicEmitter: {fileID: 5975125128452481726}
