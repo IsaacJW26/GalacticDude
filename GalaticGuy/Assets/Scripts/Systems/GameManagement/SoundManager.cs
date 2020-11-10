@@ -184,13 +184,11 @@ public class SoundManager : MonoBehaviour
     }
 
     int threatlevel = 0;
-
+    float threatLevelInterpolated = 0f;
     [ContextMenu("increase threat")]
     public void IncreaseThreat()
     {
         threatlevel = (threatlevel >= 4) ? 5 : threatlevel + 1;
-
-        defaultMusicEmitter.SetParameter("Threat", threatlevel);
 
         Debug.Log("Sound threat: " + threatlevel);
     }
@@ -198,8 +196,6 @@ public class SoundManager : MonoBehaviour
     public void DecreaseThreat()
     {
         threatlevel = (threatlevel <= 1) ? 0 : threatlevel - 1;
-        
-        defaultMusicEmitter.SetParameter("Threat", threatlevel);
 
         Debug.Log("Sound threat: " + threatlevel);
     }
@@ -215,5 +211,12 @@ public class SoundManager : MonoBehaviour
     {
         Debug.Log("Default Music stopped");
         defaultMusicEmitter.Stop();
+    }
+
+    void FixedUpdate()
+    {
+        //threat level
+        threatLevelInterpolated = Mathf.Lerp(threatLevelInterpolated, threatlevel, 0.1f);
+        defaultMusicEmitter.SetParameter("Threat", threatLevelInterpolated);
     }
 }

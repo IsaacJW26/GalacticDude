@@ -236,6 +236,7 @@ public class EnemySpawner : MonoBehaviour
     public void EnemyDied()
     {
         killedCount++;
+        CheckThreat();
         if (!ended &&
             enemySpawnQueue.Count <= 0 &&
             killedCount >= totalEnemies)
