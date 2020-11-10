@@ -67,6 +67,8 @@ public class UICharge : MonoBehaviour
 
         if(chargebarR.value >= 1f && !chargeBarRFilled.enabled)
         {
+            GameManager.AudioEvents.PlayAudio(filledClip);
+
             chargeBarRFilled.enabled = true;
         }
 
