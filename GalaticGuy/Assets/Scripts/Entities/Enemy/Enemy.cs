@@ -140,7 +140,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected virtual void AnnouceDeath()
     {
-        GameManager.INST.EnemyDeath();
+        if(isBoss)
+            GameManager.INST.OnBossDeath();
+        else
+            GameManager.INST.EnemyDeath();
     }
 
     public virtual void OnDamage(int damage)

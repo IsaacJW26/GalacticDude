@@ -175,18 +175,18 @@ public class SoundManager : MonoBehaviour
     {
         threatlevel = (threatlevel >= 4) ? 5 : threatlevel + 1;
 
-        defaultMusicEmitter.SetParameter("Threat", threatlevel * 20);
+        defaultMusicEmitter.SetParameter("Threat", threatlevel);
 
-        Debug.Log("Sound threat: " + threatlevel * 20);
+        Debug.Log("Sound threat: " + threatlevel);
     }
 
     public void DecreaseThreat()
     {
         threatlevel = (threatlevel <= 1) ? 0 : threatlevel - 1;
         
-        defaultMusicEmitter.SetParameter("Threat", threatlevel * 20);
+        defaultMusicEmitter.SetParameter("Threat", threatlevel);
 
-        Debug.Log("Sound threat: " + threatlevel * 20);
+        Debug.Log("Sound threat: " + threatlevel);
     }
 
     [ContextMenu("Start Default Music")]

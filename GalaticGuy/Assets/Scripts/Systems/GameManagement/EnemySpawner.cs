@@ -46,13 +46,18 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void StartLevel()
-    {
+    {    
         totalEnemies = 0;
         killedCount = 0;
         ended = false;
 
         CreateAllEnemies();
         SpawnNextEnemy();
+    }
+
+    public bool GameEnded()
+    {
+        return levelInfo.Levels.Count <= currentLevel;
     }
 
     private void CreateAllEnemies()
@@ -80,38 +85,6 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnBossTest()
     {
         SpawnRandomBoss(levelInfo.Levels[currentLevel].difficulty);
-    }
-
-    private void CheckLevelEnded()
-    {
-        //boss levels
-        if (levelInfo.Levels[currentLevel].containsBoss)
-        {
-            if (killedCount >= totalEnemies && !ended)
-            {
-                ended = true;
-                OnLevelEnd();
-            }
-        }
-        //other level
-        else
-        {
-            if (!ended &&
-                enemySpawnQueue.Count <= 0 &&
-                killedCount >= totalEnemies)
-            {
-                ended = true;
-                //Game ended
-                if(currentLevel + 1 >= levelInfo.Levels.Count)
-                {
-                    Debug.Log("Game ended");
-                }
-                else
-                    OnLevelEnd();
-
-                Debug.Log("spawning stopped");
-            }
-        }
     }
 
     private void AddEnemyToQueue(Enemy prefab, Vector3 position)
@@ -168,7 +141,7 @@ public class EnemySpawner : MonoBehaviour
             EnemyInfo enemyInfo = enemySpawnQueue.Dequeue();
 
             CheckThreat();
-            
+
             StartCoroutine(WaitForNextSpawn(enemyInfo));
         }
     }
@@ -263,7 +236,22 @@ public class EnemySpawner : MonoBehaviour
     public void EnemyDied()
     {
         killedCount++;
-        CheckLevelEnded();
+        if (!ended &&
+            enemySpawnQueue.Count <= 0 &&
+            killedCount >= totalEnemies)
+        {
+            ended = true;
+
+            Debug.Log("level end");
+            OnLevelEnd();
+        }
+    }
+
+    public void BossDied()
+    {
+        ended = true;
+
+        OnLevelEnd();
     }
 
     public int FrequencyDeterminer(int current, int longestSpawnTime, int minspawnTime)
