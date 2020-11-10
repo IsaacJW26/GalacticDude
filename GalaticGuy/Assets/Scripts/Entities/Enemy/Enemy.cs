@@ -140,7 +140,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected virtual void AnnouceDeath()
     {
-        GameManager.INST.EnemyDeath();
+        if(isBoss)
+            GameManager.INST.OnBossDeath();
+        else
+            GameManager.INST.EnemyDeath();
     }
 
     public virtual void OnDamage(int damage)
@@ -149,17 +152,11 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             anim.OnDamage();
             health.TakeDamage(damage);
+            Ai.OnHit(health);
 
             if (damage <= 2)
                 EffectManager.INSTANCE.ScreenShakeSmall();
         }
-        /*
-        else if(damage <= 4)
-            ScreenShake.INSTANCE.MediumShake();
-        else if(damage >= 5)
-            ScreenShake.INSTANCE.BigShake();
-            */
-        //Stub
     }
 
     public void OnTriggerEnter2D(Collider2D other)

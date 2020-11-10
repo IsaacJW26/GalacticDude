@@ -15,8 +15,8 @@ public class EnemySpawner : MonoBehaviour
     
     private int currentLevel;
     int killedCount = 0;
-    int spawnedCount = 0;
-
+    int totalEnemies = 0;
+    int threatlevel = 0;
     const int MAXTIME = 450;
     const int MINTIME = 10;
     const int REROLL_REDUCER = 13;
@@ -46,13 +46,18 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void StartLevel()
-    {
-        spawnedCount = 0;
+    {    
+        totalEnemies = 0;
         killedCount = 0;
         ended = false;
 
         CreateAllEnemies();
         SpawnNextEnemy();
+    }
+
+    public bool GameEnded()
+    {
+        return levelInfo.Levels.Count <= currentLevel;
     }
 
     private void CreateAllEnemies()
@@ -82,38 +87,6 @@ public class EnemySpawner : MonoBehaviour
         SpawnRandomBoss(levelInfo.Levels[currentLevel].difficulty);
     }
 
-    private void CheckLevelEnded()
-    {
-        //boss levels
-        if (levelInfo.Levels[currentLevel].containsBoss)
-        {
-            if (killedCount >= spawnedCount && !ended)
-            {
-                ended = true;
-                OnLevelEnd();
-            }
-        }
-        //other level
-        else
-        {
-            if (!ended &&
-                enemySpawnQueue.Count <= 0 &&
-                killedCount >= spawnedCount)
-            {
-                ended = true;
-                //Game ended
-                if(currentLevel + 1 >= levelInfo.Levels.Count)
-                {
-                    Debug.Log("Game ended");
-                }
-                else
-                    OnLevelEnd();
-
-                Debug.Log("spawning stopped");
-            }
-        }
-    }
-
     private void AddEnemyToQueue(Enemy prefab, Vector3 position)
     {
         Enemy enemy = SpawnEnemy(prefab, position);
@@ -127,11 +100,48 @@ public class EnemySpawner : MonoBehaviour
         enemySpawnQueue.Enqueue(info);
     }
 
+    private void CheckThreat()
+    {
+        int newThreatLevel =
+            (totalEnemies -
+                (enemySpawnQueue.Count + killedCount))
+                    / 2;
+
+        while(newThreatLevel != threatlevel)
+        {
+            if(newThreatLevel > threatlevel)
+            {
+                IncreaseThreat();
+            }
+            else if(newThreatLevel < threatlevel)
+            {
+                DecreaseThreat();
+            }
+        }
+
+        Debug.Log("spawner threat: " + threatlevel);
+    }
+
+    private void IncreaseThreat()
+    {
+        threatlevel++;
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.IncreaseThreatLevel);
+    }
+
+    private void DecreaseThreat()
+    {
+        threatlevel--;
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.DecreaseThreatLevel);
+    }
+
     private void SpawnNextEnemy()
     {
         if (enemySpawnQueue.Count > 0)
         {
             EnemyInfo enemyInfo = enemySpawnQueue.Dequeue();
+
+            CheckThreat();
+
             StartCoroutine(WaitForNextSpawn(enemyInfo));
         }
     }
@@ -164,14 +174,14 @@ public class EnemySpawner : MonoBehaviour
 
         int nextTime = Mathf.Clamp(unclampedTime, MINTIME, MAXTIME);
 
-        return FrequencyDeterminer(spawnedCount, nextTime * 6, 5);
+        return FrequencyDeterminer(totalEnemies, nextTime * 6, 5);
     }
     private Enemy SpawnRandomBoss(int difficulty)
     {
         GameManager.INST.OnBossEnter();
 
         Enemy enemy = null;
-        spawnedCount++;
+        totalEnemies++;
         int spawnIndex = Random.Range(0, levelInfo.DifficultyTiers[difficulty].bossPrefabs.Length);
 
         Vector3 spawnPosition = new Vector3(0f, spawnPositionY);
@@ -197,7 +207,7 @@ public class EnemySpawner : MonoBehaviour
 
     public Enemy SpawnEnemy(Enemy enemy, Vector3 position)
     {
-        spawnedCount++;
+        totalEnemies++;
 
         if(position.x > Movement.xBound)
         {
@@ -226,7 +236,22 @@ public class EnemySpawner : MonoBehaviour
     public void EnemyDied()
     {
         killedCount++;
-        CheckLevelEnded();
+        if (!ended &&
+            enemySpawnQueue.Count <= 0 &&
+            killedCount >= totalEnemies)
+        {
+            ended = true;
+
+            Debug.Log("level end");
+            OnLevelEnd();
+        }
+    }
+
+    public void BossDied()
+    {
+        ended = true;
+
+        OnLevelEnd();
     }
 
     public int FrequencyDeterminer(int current, int longestSpawnTime, int minspawnTime)

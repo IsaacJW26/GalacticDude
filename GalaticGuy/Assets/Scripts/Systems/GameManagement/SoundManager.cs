@@ -65,7 +65,8 @@ public class SoundManager : MonoBehaviour
         audioEventHandler.SetListener(AudioEventNames.CoinPickup, PlayCoin);
         audioEventHandler.SetListener(AudioEventNames.BossEnter, StartBoss);        
         audioEventHandler.SetListener(AudioEventNames.BossDeath, StopBoss); 
-        
+        audioEventHandler.SetListener(AudioEventNames.IncreaseThreatLevel, IncreaseThreat);
+        audioEventHandler.SetListener(AudioEventNames.DecreaseThreatLevel, DecreaseThreat);
     }
 
     [ContextMenu("DefaultShot")]
@@ -165,6 +166,27 @@ public class SoundManager : MonoBehaviour
         Debug.Log("Boss Music Stopped");
         bossEmitter.Stop();
         StartDefaultMusic();
+    }
+
+    int threatlevel = 0;
+
+    [ContextMenu("increase threat")]
+    public void IncreaseThreat()
+    {
+        threatlevel = (threatlevel >= 4) ? 5 : threatlevel + 1;
+
+        defaultMusicEmitter.SetParameter("Threat", threatlevel);
+
+        Debug.Log("Sound threat: " + threatlevel);
+    }
+
+    public void DecreaseThreat()
+    {
+        threatlevel = (threatlevel <= 1) ? 0 : threatlevel - 1;
+        
+        defaultMusicEmitter.SetParameter("Threat", threatlevel);
+
+        Debug.Log("Sound threat: " + threatlevel);
     }
 
     [ContextMenu("Start Default Music")]
