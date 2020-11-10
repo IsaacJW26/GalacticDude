@@ -181,13 +181,13 @@ public class GameManager : MonoBehaviour
 
     public void OnBossEnter()
     {
-        music.OnBossEnter();
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.BossEnter);
     }
 
     public void OnBossDeath()
     {
         EnemyDeath();
-        music.OnBossDeath();
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.BossDeath);
     }
 
     public void EnemyDeath()
