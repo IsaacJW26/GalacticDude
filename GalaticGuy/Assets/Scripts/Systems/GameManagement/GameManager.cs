@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameState = GameState.endgame;
-
+        StartCoroutine(RestartGameDelay());
         UIManager.INSTANCE.EndGame();
     }
 
