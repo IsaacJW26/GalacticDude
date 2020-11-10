@@ -162,9 +162,20 @@ public class SoundManager : MonoBehaviour
         bossEmitter.Stop();
     }
 
-    public void OnBossEnter()
+    int threatlevel = 0;
+
+    public void IncreaseThreat()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot(defaultShot, transform.position); 
+        threatlevel = (threatlevel >= 4) ? 5 : threatlevel + 1;
+
+        chargingEmitter.SetParameter("Threat", threatlevel);
+    }
+
+    public void DecreaseThreat()
+    {
+        threatlevel = (threatlevel <= 1) ? 0 : threatlevel - 1;
+        
+        chargingEmitter.SetParameter("Threat", threatlevel);
     }
 
     public void OnBossDeath()
