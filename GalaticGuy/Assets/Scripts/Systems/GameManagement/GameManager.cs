@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             if (Input.anyKey)
             {
                 if (heldTime <= 0f)
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    SceneManager.LoadScene(0);
                 else
                     heldTime -= Time.deltaTime;
             }
@@ -102,7 +102,15 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        gameState = GameState.endgame;
+        StartCoroutine(RestartGameDelay());
         UIManager.INSTANCE.EndGame();
+    }
+
+    private IEnumerator RestartGameDelay()
+    {
+        yield return new WaitForSeconds(10f);
+        SceneManager.LoadScene(0);
     }
 
     private int EndLevel()
@@ -150,16 +158,24 @@ public class GameManager : MonoBehaviour
     [ContextMenu("end purchase phase")]
     public void EndPurchasePhase()
     {
-        gameState = GameState.playing;
+        if(!spawner.GameEnded())
+        {
+            gameState = GameState.playing;
 
-        //activate start game ui
-        UIManager.INSTANCE.StartGame();
+            //activate start game ui
+            UIManager.INSTANCE.StartGame();
 
-        Debug.Log("end playing phase");
-        spawner.StartLevel();
+            Debug.Log("end playing phase");
+                spawner.StartLevel();
+            
 
-        //re enable player
-        playerActive(true);
+            //re enable player
+            playerActive(true);
+        }
+        else
+        {
+            EndGame();
+        }
     }
 
     [ContextMenu("Kill Player")]
@@ -181,13 +197,14 @@ public class GameManager : MonoBehaviour
 
     public void OnBossEnter()
     {
-        music.OnBossEnter();
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.BossEnter);
     }
 
     public void OnBossDeath()
     {
         EnemyDeath();
-        music.OnBossDeath();
+        spawner.BossDied();
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.BossDeath);
     }
 
     public void EnemyDeath()

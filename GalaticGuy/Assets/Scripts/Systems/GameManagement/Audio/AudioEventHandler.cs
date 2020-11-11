@@ -55,10 +55,12 @@ public enum AudioEventNames
     PlayerStartCharge = 4,
     PlayerStopCharge = 5,
     PlayerFullyCharged = 6,
+    
     // Enemy
     EnemyHurt = 7,
     EnemyShot = 8,
     EnemyDeath = 9,
+    
     // Boss
     BossEnter = 10,
     BossHurt = 11,
@@ -66,10 +68,12 @@ public enum AudioEventNames
     BossFullCharge = 13,
     BossAttack = 14,
     BossDeath = 15,
-    // 
+    
+    // Asteroid
     AsteroidHit = 16, 
     AsteroidDestroyed = 17, 
     AsteroidMoving = 18, 
+    
     // Currency
     CoinPickup = 19,
 
@@ -77,8 +81,23 @@ public enum AudioEventNames
     UiSelect = 20,
     UiNavigate = 21,
     
-    //Misc
+    // Misc
     NONE = 22,
+
+    // Change values
+    IncreaseThreatLevel = 23,
+    DecreaseThreatLevel = 24,
+    ResetThreatLevel = 25,
+
+    // Muncher
+    MuncherHurt = 26,
+    MuncherDeath = 28,
+
+    // Raisin
+    RaisinHurt = 29,
+    RaisinDeath = 30,
+    //RaisinShot = 31, WE'RE USING ENEMY SHOT
+
 }
 
 public interface IAudio

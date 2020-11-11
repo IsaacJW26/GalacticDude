@@ -19,13 +19,16 @@ public class SoundManager : MonoBehaviour
     public string fullShot = "";
 
     [FMODUnity.EventRef]
+    public string bossSpawn = "";
+
+    [FMODUnity.EventRef]
     public string semiCharged = "";
 
     [FMODUnity.EventRef]
     public string fullyCharged = "";
 
     [FMODUnity.EventRef]
-    public string Music = "";
+    public string music = "";
 
     [FMODUnity.EventRef]
     public string bossMusic = "";
@@ -42,11 +45,36 @@ public class SoundManager : MonoBehaviour
     [FMODUnity.EventRef]
     public string charging = "";
 
+    [FMODUnity.EventRef]
+    public string enemyShot = "";
+
+    [FMODUnity.EventRef]
+    public string predictorHurt = "";    
+
+    [FMODUnity.EventRef]
+    public string predictorDeath = "";
+
+    [FMODUnity.EventRef]
+    public string muncherHurt = "";
+
+    [FMODUnity.EventRef]
+    public string muncherDeath = "";
+
+    [FMODUnity.EventRef]
+    public string raisinHurt = "";
+
+    [FMODUnity.EventRef]
+    public string raisinDeath = "";
+    
+
     [SerializeField]
     private FMODUnity.StudioEventEmitter chargingEmitter;
 
     [SerializeField]
     private FMODUnity.StudioEventEmitter bossEmitter;
+
+    [SerializeField]
+    private FMODUnity.StudioEventEmitter defaultMusicEmitter;
 
     public void Initialise(AudioEventHandler audioEventHandler)
     {
@@ -60,9 +88,19 @@ public class SoundManager : MonoBehaviour
         audioEventHandler.SetListener(AudioEventNames.AsteroidHit, PlayAsteroidHit);
         audioEventHandler.SetListener(AudioEventNames.AsteroidDestroyed, PlayAsteroidDestroyed);
         audioEventHandler.SetListener(AudioEventNames.CoinPickup, PlayCoin);
-        audioEventHandler.SetListener(AudioEventNames.BossEnter, StartBoss);        
-        audioEventHandler.SetListener(AudioEventNames.BossDeath, StopBoss);  
+
+        audioEventHandler.SetListener(AudioEventNames.EnemyShot, PlayEnemyShot);
+        audioEventHandler.SetListener(AudioEventNames.EnemyHurt, PlayPredictorHurt);
+        audioEventHandler.SetListener(AudioEventNames.EnemyDeath, PlayPredictorDeath);
+        audioEventHandler.SetListener(AudioEventNames.MuncherHurt, PlayMuncherHurt);
+        audioEventHandler.SetListener(AudioEventNames.MuncherDeath, PlayMuncherDeath);
+        audioEventHandler.SetListener(AudioEventNames.RaisinHurt, PlayRaisinHurt);
+        audioEventHandler.SetListener(AudioEventNames.RaisinDeath, PlayRaisinDeath);
         
+        audioEventHandler.SetListener(AudioEventNames.BossEnter, StartBoss);        
+        audioEventHandler.SetListener(AudioEventNames.BossDeath, StopBoss); 
+        audioEventHandler.SetListener(AudioEventNames.IncreaseThreatLevel, IncreaseThreat);
+        audioEventHandler.SetListener(AudioEventNames.DecreaseThreatLevel, DecreaseThreat);
     }
 
     [ContextMenu("DefaultShot")]
@@ -118,7 +156,59 @@ public class SoundManager : MonoBehaviour
     public void PlayCoin()
     {
         FMODUnity.RuntimeManager.PlayOneShot(coin, transform.position);
+    }
 
+    [ContextMenu("Enemy Shot")]
+    public void PlayEnemyShot()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(enemyShot, transform.position);
+    }
+
+    [ContextMenu("Predictor Hurt")]
+    public void PlayPredictorHurt()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(enemyShot, transform.position);
+    }
+
+    [ContextMenu("Predictor Death")]
+    public void PlayPredictorDeath()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(predictorDeath, transform.position);
+    }
+
+
+    [ContextMenu("Muncher Hurt")]
+        public void PlayMuncherHurt()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(muncherHurt, transform.position);
+        }
+
+
+    [ContextMenu("Muncher Death")]
+        public void PlayMuncherDeath()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(muncherDeath, transform.position);
+        }
+
+
+    [ContextMenu("Raisin Hurt")]
+        public void PlayRaisinHurt()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(raisinHurt, transform.position);
+        }
+
+
+    [ContextMenu("Raisin Death")]
+        public void PlayRaisinDeath()
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(raisinDeath, transform.position);
+        }
+
+
+    [ContextMenu("bossSpawn")]
+    public void PlayBossSpawn()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(bossSpawn, transform.position);
     }
 
     /*
@@ -152,23 +242,59 @@ public class SoundManager : MonoBehaviour
     [ContextMenu("Start Boss Music")]
     public void StartBoss()
     {
+        StopDefaultMusic();
+        StartCoroutine(BossSpawnEnum()); 
+    }
+
+    IEnumerator BossSpawnEnum()
+    {
+        PlayBossSpawn();
+        yield return new WaitForSeconds(6);
         bossEmitter.Play();
     }
 
     [ContextMenu("Stop Boss Music")]
     public void StopBoss()
     {
-        Debug.Log("BossSSSS");
+        Debug.Log("Boss Music Stopped");
         bossEmitter.Stop();
+        StartDefaultMusic();
     }
 
-    public void OnBossEnter()
+    int threatlevel = 0;
+    float threatLevelInterpolated = 0f;
+    [ContextMenu("increase threat")]
+    public void IncreaseThreat()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot(defaultShot, transform.position); 
+        threatlevel = (threatlevel >= 4) ? 5 : threatlevel + 1;
+
+        Debug.Log("Sound threat: " + threatlevel);
     }
 
-    public void OnBossDeath()
+    public void DecreaseThreat()
     {
+        threatlevel = (threatlevel <= 1) ? 0 : threatlevel - 1;
 
+        Debug.Log("Sound threat: " + threatlevel);
+    }
+
+    [ContextMenu("Start Default Music")]
+    public void StartDefaultMusic()
+    {
+        defaultMusicEmitter.Play();
+    }
+
+    [ContextMenu("Stop Default Music")]
+    public void StopDefaultMusic()
+    {
+        Debug.Log("Default Music stopped");
+        defaultMusicEmitter.Stop();
+    }
+
+    void FixedUpdate()
+    {
+        //threat level
+        threatLevelInterpolated = Mathf.Lerp(threatLevelInterpolated, threatlevel, 0.1f);
+        defaultMusicEmitter.SetParameter("Threat", threatLevelInterpolated);
     }
 }

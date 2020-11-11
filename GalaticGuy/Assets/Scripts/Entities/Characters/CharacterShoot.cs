@@ -17,8 +17,12 @@ public class CharacterShoot : MonoBehaviour, Shooter
 
     [SerializeField]
     Projectile projectile = null;
+    
     [SerializeField]
     Transform projectilePoint = null;
+
+    [SerializeField]
+    AudioEventNames EnemyShootEvent = AudioEventNames.NONE;
 
     Projectile[] objectPool;
     bool[] activeElements;
@@ -57,6 +61,7 @@ public class CharacterShoot : MonoBehaviour, Shooter
 
     private void Shoot(Vector3 velocity)
     {
+        GameManager.AudioEvents.PlayAudio(EnemyShootEvent);
         Projectile nextProj = EnableNextProjectile(velocity);
     }
 

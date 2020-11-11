@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     }
     const string STR_CLEAR = "Wave Cleared";
     const string STR_INCOMING = "Wave Incoming";
-    const string STR_WON = "END";
+    const string STR_WON = "YOU WIN";
     const string STR_DEAD = "Game Over\nHold any key to try again";
 
 

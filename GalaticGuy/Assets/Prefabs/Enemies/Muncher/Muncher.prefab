@@ -79,9 +79,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     maxHP: 2
-    onDamageAudio: 7
-    onDeathAudio: 9
-  deathChildren: []
+    onDamageAudio: 26
+    onDeathAudio: 28
+  deathChildren:
+  - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
+  - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
+  - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
   minBounty: 0
   maxBounty: 0
   bountyChance: 0
@@ -104,6 +107,7 @@ MonoBehaviour:
   projectile: {fileID: 7674457554669734050, guid: 05796e3e6ad4b524e92a198c0fc716b8,
     type: 3}
   projectilePoint: {fileID: 9119908270630566906}
+  EnemyShootEvent: 22
 --- !u!114 &8256181706797301278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb6f9b0483578844aa8bb9c5b1b436b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3.5
 --- !u!50 &1999848888
 Rigidbody2D:
   serializedVersion: 4

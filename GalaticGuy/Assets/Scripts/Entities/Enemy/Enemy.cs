@@ -111,12 +111,13 @@ public class Enemy : MonoBehaviour, IDamageable
         //spawn random coins for certain value
         while (bountyVal > 0)
         {
+            bountyVal--;
             coinLayerOrder++;
             Vector3 offset = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
             CoinPickup coin = Instantiate(GameManager.INST.CurrencyPrefab, transform.position +offset, Quaternion.identity);
             coin.Initialise(coinLayerOrder);
-            int del = Mathf.Clamp(Random.Range(-4, 4), 0, 4);
-            for (int i = 0; i < del; i++)
+            int delay = Mathf.Clamp(Random.Range(-4, 4), 0, 4);
+            for (int i = 0; i < delay; i++)
             {
                 yield return new WaitForFixedUpdate();
             }
@@ -126,7 +127,7 @@ public class Enemy : MonoBehaviour, IDamageable
     IEnumerator WaitToDie()
     {
         yield return null;
-        yield return null;
+        yield return new WaitForFixedUpdate();
 
         foreach (var col in GetComponentsInChildren<Collider2D>())
         {
@@ -140,7 +141,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected virtual void AnnouceDeath()
     {
-        GameManager.INST.EnemyDeath();
+        if(isBoss)
+            GameManager.INST.OnBossDeath();
+        else
+            GameManager.INST.EnemyDeath();
     }
 
     public virtual void OnDamage(int damage)
@@ -149,17 +153,11 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             anim.OnDamage();
             health.TakeDamage(damage);
+            Ai.OnHit(health);
 
             if (damage <= 2)
                 EffectManager.INSTANCE.ScreenShakeSmall();
         }
-        /*
-        else if(damage <= 4)
-            ScreenShake.INSTANCE.MediumShake();
-        else if(damage >= 5)
-            ScreenShake.INSTANCE.BigShake();
-            */
-        //Stub
     }
 
     public void OnTriggerEnter2D(Collider2D other)

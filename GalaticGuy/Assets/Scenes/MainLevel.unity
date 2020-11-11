@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb6f9b0483578844aa8bb9c5b1b436b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
+  speed: 4
 --- !u!114 &8207698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15445,7 +15445,7 @@ PrefabInstance:
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: Event
-      value: event:/Music/Intense
+      value: event:/Music/Level
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15475,12 +15475,12 @@ PrefabInstance:
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
       propertyPath: Event
-      value: event:/Music/Intense
+      value: event:/Music/Level
       objectReference: {fileID: 0}
     - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15506,6 +15506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Params.Array.data[0].Value
       value: 27.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+        type: 3}
+      propertyPath: Params.Array.data[0].Name
+      value: ThreatNew
       objectReference: {fileID: 0}
     - target: {fileID: 5975125129141001767, guid: b0f00f5ab3723f34380a4b81b349e4b8,
         type: 3}
@@ -15602,7 +15607,9 @@ MonoBehaviour:
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
-  Params: []
+  Params:
+  - Name: Boss 2
+    Value: 100
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
@@ -15621,16 +15628,37 @@ MonoBehaviour:
   defaultShot: event:/SFX/Character/Default
   semiShot: event:/SFX/Character/Semi-Charged-Shot
   fullShot: event:/SFX/Character/Fully-Charged-Shot
-  semiCharged: 
+  bossSpawn: event:/SFX/Boss/Planet/Spawn
+  semiCharged: event:/SFX/Character/Charged
   fullyCharged: event:/SFX/Character/Charged
-  Music: event:/Music/Intense
-  bossMusic: 
-  asteroidHit: 
+  music: event:/Music/Level
+  bossMusic: event:/Music/Boss
+  asteroidHit: event:/SFX/Objects/AsteroidDestroyed
   asteroidDestroyed: event:/SFX/Objects/AsteroidDestroyed
   coin: event:/SFX/Objects/Coin
   charging: event:/SFX/Character/Charging
+  enemyShot: event:/SFX/Enemies/Predictor/Shot
+  predictorHurt: event:/SFX/Enemies/Predictor/Hit
+  predictorDeath: event:/SFX/Enemies/Predictor/Death
+  muncherHurt: event:/SFX/Enemies/Muncher/Hit
+  muncherDeath: event:/SFX/Enemies/Muncher/Death
+  raisinHurt: event:/SFX/Enemies/Raisin/Hit
+  raisinDeath: event:/SFX/Enemies/Raisin/Death
   chargingEmitter: {fileID: 5975125128452481733}
   bossEmitter: {fileID: 5975125128452481724}
+  defaultMusicEmitter: {fileID: 5975125128452481726}
+--- !u!114 &5975125128452481726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7348384837107961430, guid: b0f00f5ab3723f34380a4b81b349e4b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5975125128452481722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975125128452481723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5975125128452481731
 MonoBehaviour:
   m_ObjectHideFlags: 0

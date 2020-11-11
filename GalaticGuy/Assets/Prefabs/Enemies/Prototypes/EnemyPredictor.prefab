@@ -158,10 +158,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     maxHP: 2
+    onDamageAudio: 7
+    onDeathAudio: 9
   deathChildren: []
-  minBounty: 0
-  maxBounty: 0
-  bountyChance: 0
+  minBounty: 1
+  maxBounty: 1
+  bountyChance: 1
   explosionScale: 1
 --- !u!114 &7977547823748359183
 MonoBehaviour:
@@ -176,12 +178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MAX_PROJECTILES: 20
-  shootInterval: 90
-  projectileDamage: 1
+  shootInterval: 100
   projectileSpeed: 10
   projectile: {fileID: 7674457554669734050, guid: 05796e3e6ad4b524e92a198c0fc716b8,
     type: 3}
   projectilePoint: {fileID: 9119908270630566906}
+  EnemyShootEvent: 8
 --- !u!114 &8256181706797301278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lowestPosition: 0
-  projectionFactor: 0.3
 --- !u!1 &9119908270693691263
 GameObject:
   m_ObjectHideFlags: 0

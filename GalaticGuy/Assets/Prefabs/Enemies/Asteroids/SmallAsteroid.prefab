@@ -159,9 +159,9 @@ MonoBehaviour:
     onDamageAudio: 16
     onDeathAudio: 17
   deathChildren: []
-  minBounty: 50
-  maxBounty: 20
-  bountyChance: 2
+  minBounty: 3
+  maxBounty: 10
+  bountyChance: 4
   explosionScale: 3
 --- !u!95 &366538063770070296
 Animator:
