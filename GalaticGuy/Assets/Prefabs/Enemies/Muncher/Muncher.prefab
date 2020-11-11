@@ -85,9 +85,9 @@ MonoBehaviour:
   - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
   - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
   - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
-  minBounty: 0
-  maxBounty: 0
-  bountyChance: 0
+  minBounty: 1
+  maxBounty: 1
+  bountyChance: 4
   explosionScale: 1
 --- !u!114 &7977547823748359183
 MonoBehaviour:

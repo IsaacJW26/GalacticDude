@@ -83,8 +83,8 @@ MonoBehaviour:
     onDeathAudio: 28
   deathChildren: []
   minBounty: 1
-  maxBounty: 1
-  bountyChance: 1
+  maxBounty: 4
+  bountyChance: 4
   explosionScale: 1
 --- !u!114 &7977547823748359183
 MonoBehaviour:

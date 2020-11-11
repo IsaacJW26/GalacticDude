@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: event:/SFX/Boss/Planet/Shoot
   guid: 0aa9e383a46fd645a8d241c2357f81f0
   Banks:
-  - {fileID: 5217445626320347369}
+  - {fileID: -5817050937849141196}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -93,6 +93,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-9159503335934206403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Banks/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637407001494588679
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-9156158244915007314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +540,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-8731145330194478403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Screen-Wipe/Random
+  m_EditorClassIdentifier: 
+  Name: Random
+  Min: 1
+  Max: 4
+  Default: 1
+  Exists: 1
 --- !u!114 &-8726251027455905692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,7 +858,7 @@ MonoBehaviour:
   lastModified: 637406623477629410
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-8403945089089409486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,7 +1540,7 @@ MonoBehaviour:
   Min: 0
   Max: 5
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-7835906671734450945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1758,7 +1793,7 @@ MonoBehaviour:
   lastModified: 637406623477936939
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-7607439896012356306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1871,6 +1906,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &-7472822364293635982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Banks/Desktop/UI.bank
+  SubDir: 
+  lastModified: 637386435911514454
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-7440351447468664442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2185,6 +2238,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-7200497142163956248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Environment.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Banks/Desktop/Environment.bank
+  SubDir: 
+  lastModified: 637407001187481349
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-7180888090192316785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2607,7 +2678,7 @@ MonoBehaviour:
   Path: event:/SFX/Enemies/Predictor/Hit
   guid: fcd508565e14a84c91e2d42750f408b0
   Banks:
-  - {fileID: -211809211332364989}
+  - {fileID: -3767325453982959460}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2835,7 +2906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Banks/Desktop/Music.strings.bank
   SubDir: 
-  lastModified: 637406623477674065
+  lastModified: 637407001191460708
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -3566,6 +3637,24 @@ MonoBehaviour:
   Max: 4
   Default: 1
   Exists: 0
+--- !u!114 &-5817050937849141196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Boss.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Banks/Desktop/Boss.bank
+  SubDir: 
+  lastModified: 637407001186912876
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-5812940768605028931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3913,7 +4002,7 @@ MonoBehaviour:
   Path: event:/SFX/Boss/Planet/Spawn
   guid: 931c8e623d56004584a37e6ce0d3fa8a
   Banks:
-  - {fileID: 5217445626320347369}
+  - {fileID: -5817050937849141196}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -3995,7 +4084,7 @@ MonoBehaviour:
   Min: 1
   Max: 4
   Default: 1
-  Exists: 1
+  Exists: 0
 --- !u!114 &-5327621926326730117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4461,7 +4550,7 @@ MonoBehaviour:
   Path: event:/Music/Menu
   guid: 5fd6a3f030a1b94ea6cd88597e40c776
   Banks:
-  - {fileID: -8420053411522427804}
+  - {fileID: -9159503335934206403}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -5083,7 +5172,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Charged
   guid: cb1ec2979d3d0a44a658d929a1d70860
   Banks:
-  - {fileID: 5331710873213304780}
+  - {fileID: -3233779056066574684}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -5414,6 +5503,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-3767325453982959460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Enemy.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Banks/Desktop/Enemy.bank
+  SubDir: 
+  lastModified: 637407001187421514
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-3759774159698129459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6001,6 +6108,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-3233779056066574684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Character.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Banks/Desktop/Character.bank
+  SubDir: 
+  lastModified: 637407001187321777
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-3233179342050444229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7580,7 +7705,7 @@ MonoBehaviour:
   Path: event:/SFX/Enemies/Raisin/Hit
   guid: e8ca3bee7a2c3143a4183478221d08f9
   Banks:
-  - {fileID: -211809211332364989}
+  - {fileID: -3767325453982959460}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -7938,12 +8063,12 @@ MonoBehaviour:
   Path: event:/SFX/Objects/AsteroidDestroyed
   guid: ef4150f6d6656547840a7b61784ee28f
   Banks:
-  - {fileID: 1779273309476362392}
+  - {fileID: -7200497142163956248}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -5353269330011228124}
+  - {fileID: 5025103506440500911}
   MinDistance: 0
   MaxDistance: 0
   Length: 859
@@ -8056,7 +8181,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Charging
   guid: 7b90215c0bf82b42930a02b85fbe1471
   Banks:
-  - {fileID: 5331710873213304780}
+  - {fileID: -3233779056066574684}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -9162,7 +9287,7 @@ MonoBehaviour:
   lastModified: 637406623479092617
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-166292982897994844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9232,7 +9357,7 @@ MonoBehaviour:
   lastModified: 637406623477703821
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-110820630412225311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9310,13 +9435,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -6557101974470611463}
-  - {fileID: 5217445626320347369}
-  - {fileID: 5331710873213304780}
-  - {fileID: -211809211332364989}
-  - {fileID: 1779273309476362392}
-  - {fileID: -8420053411522427804}
-  - {fileID: -136251596725652332}
-  - {fileID: -7614425426440149261}
+  - {fileID: -5817050937849141196}
+  - {fileID: -3233779056066574684}
+  - {fileID: -3767325453982959460}
+  - {fileID: -7200497142163956248}
+  - {fileID: -9159503335934206403}
+  - {fileID: 278249928616991262}
+  - {fileID: -7472822364293635982}
   EditorEvents:
   - {fileID: -9197595902514936429}
   - {fileID: -5464362880785046729}
@@ -9342,10 +9467,10 @@ MonoBehaviour:
   - {fileID: -6700029950935702610}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -8420053411522427804}
+  - {fileID: -9159503335934206403}
   StringsBanks:
   - {fileID: -6557101974470611463}
-  stringsBankWriteTime: 637406623477674065
+  stringsBankWriteTime: 637407001191460708
   cacheVersion: 3
 --- !u!114 &49089373698416799
 MonoBehaviour:
@@ -9379,7 +9504,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Default
   guid: f071148d22b2364986ccb201cd46a04f
   Banks:
-  - {fileID: 5331710873213304780}
+  - {fileID: -3233779056066574684}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -9478,7 +9603,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Semi-Charged-Shot
   guid: 46d8e670bc89754091897582198ed434
   Banks:
-  - {fileID: 5331710873213304780}
+  - {fileID: -3233779056066574684}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -9527,6 +9652,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &278249928616991262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Shop.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Banks/Desktop/Shop.bank
+  SubDir: 
+  lastModified: 637386435911504478
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &310655430485831781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9672,12 +9815,12 @@ MonoBehaviour:
   Path: event:/Music/Boss
   guid: f317191b831d7745bbfc871fe8be9779
   Banks:
-  - {fileID: -8420053411522427804}
+  - {fileID: -9159503335934206403}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 492902853988441380}
+  - {fileID: 3792986354283733073}
   MinDistance: 0
   MaxDistance: 0
   Length: 96000
@@ -9768,7 +9911,7 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 100
-  Exists: 1
+  Exists: 0
 --- !u!114 &528703212006500840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10188,7 +10331,7 @@ MonoBehaviour:
   Path: event:/SFX/Enemies/Predictor/Shot
   guid: de48c384ec81e84faf2ecd8aedb95418
   Banks:
-  - {fileID: -211809211332364989}
+  - {fileID: -3767325453982959460}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -10706,7 +10849,7 @@ MonoBehaviour:
   Path: event:/SFX/Enemies/Muncher/Hit
   guid: 4a9240f58cbacc4281415a5cbe7fc028
   Banks:
-  - {fileID: -211809211332364989}
+  - {fileID: -3767325453982959460}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -10913,7 +11056,7 @@ MonoBehaviour:
   lastModified: 637406623479390213
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &1847623808001445596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11271,7 +11414,7 @@ MonoBehaviour:
   Path: event:/SFX/Character/Fully-Charged-Shot
   guid: f419d48ec2f8484e8e21d295bcddab72
   Banks:
-  - {fileID: 5331710873213304780}
+  - {fileID: -3233779056066574684}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -12216,12 +12359,12 @@ MonoBehaviour:
   Path: event:/Music/Level
   guid: 56c2aba81f9c734a925c829755b6c0dc
   Banks:
-  - {fileID: -8420053411522427804}
+  - {fileID: -9159503335934206403}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -7841146566739267108}
+  - {fileID: 4236343398219460199}
   MinDistance: 0
   MaxDistance: 0
   Length: 160000
@@ -12579,12 +12722,12 @@ MonoBehaviour:
   Path: event:/SFX/Character/Screen-Wipe
   guid: 13b250ffa29db4489f3fe4f9195fa0a0
   Banks:
-  - {fileID: 5331710873213304780}
+  - {fileID: -3233779056066574684}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 6592364665289704924}
+  - {fileID: -8731145330194478403}
   MinDistance: 0
   MaxDistance: 0
   Length: 4000
@@ -12682,6 +12825,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 162000
+--- !u!114 &3792986354283733073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Boss/Boss 2
+  m_EditorClassIdentifier: 
+  Name: Boss 2
+  Min: 0
+  Max: 100
+  Default: 100
+  Exists: 1
 --- !u!114 &3809860873813326966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13065,6 +13225,23 @@ MonoBehaviour:
   lastModified: 637371547196604320
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &4236343398219460199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level/Threat
+  m_EditorClassIdentifier: 
+  Name: Threat
+  Min: 0
+  Max: 5
+  Default: 0
   Exists: 1
 --- !u!114 &4236876331628853174
 MonoBehaviour:
@@ -13556,7 +13733,7 @@ MonoBehaviour:
   Path: event:/SFX/Enemies/Muncher/Death
   guid: 841a105a6671fd48ad57b892b655987b
   Banks:
-  - {fileID: -211809211332364989}
+  - {fileID: -3767325453982959460}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -13696,6 +13873,23 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 2196
+  Exists: 1
+--- !u!114 &5025103506440500911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AsteroidDestroyed/Asteroid
+  m_EditorClassIdentifier: 
+  Name: Asteroid
+  Min: 1
+  Max: 4
+  Default: 1
   Exists: 1
 --- !u!114 &5033459689129777737
 MonoBehaviour:
@@ -13872,7 +14066,7 @@ MonoBehaviour:
   lastModified: 637406623478165093
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &5224466914089561986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14059,7 +14253,7 @@ MonoBehaviour:
   lastModified: 637406623478626375
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &5336632999178654155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14093,7 +14287,7 @@ MonoBehaviour:
   Path: event:/SFX/Menu/Select
   guid: c3f62b0080db6d45900deb5d9a275b30
   Banks:
-  - {fileID: -7614425426440149261}
+  - {fileID: -7472822364293635982}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -14263,7 +14457,7 @@ MonoBehaviour:
   Path: event:/SFX/Objects/Coin
   guid: 62ac11c49f50ef4a8de217528a78a201
   Banks:
-  - {fileID: 1779273309476362392}
+  - {fileID: -7200497142163956248}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -15331,7 +15525,7 @@ MonoBehaviour:
   Path: event:/SFX/Menu/Navigate
   guid: 614d4d9e4c76c4439e8bc02db1d1105e
   Banks:
-  - {fileID: -7614425426440149261}
+  - {fileID: -7472822364293635982}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -15541,7 +15735,7 @@ MonoBehaviour:
   Min: 1
   Max: 4
   Default: 1
-  Exists: 1
+  Exists: 0
 --- !u!114 &6619681410838959330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15863,7 +16057,7 @@ MonoBehaviour:
   Path: event:/SFX/Enemies/Raisin/Death
   guid: d15bf3e5357acf4593df0d1306f4fb41
   Banks:
-  - {fileID: -211809211332364989}
+  - {fileID: -3767325453982959460}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -16016,7 +16210,7 @@ MonoBehaviour:
   Path: event:/SFX/Enemies/Predictor/Death
   guid: 0c4243c3137c0940bb09377db4bda67a
   Banks:
-  - {fileID: -211809211332364989}
+  - {fileID: -3767325453982959460}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
