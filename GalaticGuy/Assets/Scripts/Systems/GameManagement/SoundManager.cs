@@ -201,7 +201,7 @@ public class SoundManager : MonoBehaviour
     void FixedUpdate()
     {
         //threat level
-        threatLevelInterpolated = Mathf.Lerp(threatLevelInterpolated, threatlevel, 0.1f);
+        threatLevelInterpolated = Mathf.Lerp(threatLevelInterpolated, threatlevel, 0.01f);
         defaultMusicEmitter.SetParameter("Threat", threatLevelInterpolated);
     }
 }
