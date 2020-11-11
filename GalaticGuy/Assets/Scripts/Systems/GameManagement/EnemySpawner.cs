@@ -104,8 +104,7 @@ public class EnemySpawner : MonoBehaviour
     {
         int newThreatLevel =
             (totalEnemies -
-                (enemySpawnQueue.Count + killedCount))
-                    / 2;
+                (enemySpawnQueue.Count + killedCount));
 
         while(newThreatLevel != threatlevel)
         {
