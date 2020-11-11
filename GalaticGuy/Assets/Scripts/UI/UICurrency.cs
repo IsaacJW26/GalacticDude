@@ -10,7 +10,7 @@ public class UICurrency : MonoBehaviour
     [SerializeField]
     private Image currencyImage = null;
 
-    private int currency = 0;
+    public int currency = 0;
 
     public Image CurrencyImage
     {

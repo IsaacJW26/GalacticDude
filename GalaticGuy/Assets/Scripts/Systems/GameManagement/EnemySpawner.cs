@@ -250,8 +250,17 @@ public class EnemySpawner : MonoBehaviour
 
     public void BossDied()
     {
-        ended = true;
+        if(!ended)
+        {
+            ended = true;
 
+            StartCoroutine(WaitForBossLevelEnd());
+        }
+    }
+
+    public IEnumerator WaitForBossLevelEnd()
+    {
+        yield return new WaitForSeconds(5f);
         OnLevelEnd();
     }
 

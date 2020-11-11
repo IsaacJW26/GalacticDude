@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RestartGameDelay()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
         SceneManager.LoadScene(0);
     }
 
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
             gameState = GameState.endlevel;
 
             //disable player
-            playerActive(false);
+            //playerActive(false);
 
             //
             waitingFunction = EndLevelDelay();
