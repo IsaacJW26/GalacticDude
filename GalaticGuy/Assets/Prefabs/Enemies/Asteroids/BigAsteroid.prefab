@@ -121,6 +121,7 @@ MonoBehaviour:
   projectileSpeed: 3
   projectile: {fileID: 0}
   projectilePoint: {fileID: 0}
+  EnemyShootEvent: 22
 --- !u!50 &366538063770070301
 Rigidbody2D:
   serializedVersion: 4
@@ -162,9 +163,9 @@ MonoBehaviour:
   - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
   - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
   - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
-  minBounty: 1
+  minBounty: 5
   maxBounty: 10
-  bountyChance: 1
+  bountyChance: 4
   explosionScale: 3
 --- !u!95 &366538063770070296
 Animator:

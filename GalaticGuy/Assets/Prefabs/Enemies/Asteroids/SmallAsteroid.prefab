@@ -121,6 +121,7 @@ MonoBehaviour:
   projectileSpeed: 3
   projectile: {fileID: 0}
   projectilePoint: {fileID: 0}
+  EnemyShootEvent: 22
 --- !u!50 &366538063770070301
 Rigidbody2D:
   serializedVersion: 4
@@ -159,8 +160,8 @@ MonoBehaviour:
     onDamageAudio: 16
     onDeathAudio: 17
   deathChildren: []
-  minBounty: 3
-  maxBounty: 10
+  minBounty: 10
+  maxBounty: 20
   bountyChance: 4
   explosionScale: 3
 --- !u!95 &366538063770070296

@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class UICurrency : MonoBehaviour
 {
+    public static UICurrency INST = null;
+
     [SerializeField]
     private Image currencyImage = null;
+
+    public int currency = 0;
 
     public Image CurrencyImage
     {
@@ -17,6 +21,14 @@ public class UICurrency : MonoBehaviour
 
             return currencyImage;
         }
+    }
+
+    public void Awake()
+    {
+        if(INST == null)
+            INST = this;
+        else
+            Destroy(this);
     }
 
     [SerializeField]
@@ -31,6 +43,14 @@ public class UICurrency : MonoBehaviour
 
             return currencyText;
         }
+    }
+
+    // Place holder to load currency, as shop manager managed it previously
+    // and now is disabled
+    public void AddCurrency()
+    {
+        currency++;
+        UpdateCurrency(currency*10);
     }
 
     public void UpdateCurrency(int value)

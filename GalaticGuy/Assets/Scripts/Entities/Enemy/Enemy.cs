@@ -116,7 +116,7 @@ public class Enemy : MonoBehaviour, IDamageable
             Vector3 offset = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
             CoinPickup coin = Instantiate(GameManager.INST.CurrencyPrefab, transform.position +offset, Quaternion.identity);
             coin.Initialise(coinLayerOrder);
-            int delay = Mathf.Clamp(Random.Range(-4, 4), 0, 4);
+            int delay = Mathf.Clamp(Random.Range(-4, 3), 0, 3);
             for (int i = 0; i < delay; i++)
             {
                 yield return new WaitForFixedUpdate();

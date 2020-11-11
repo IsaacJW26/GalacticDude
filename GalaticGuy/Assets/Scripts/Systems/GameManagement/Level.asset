@@ -36,10 +36,6 @@ MonoBehaviour:
     containsBoss: 0
     averageTime: 30
   - difficulty: 0
-    length: 30
-    containsBoss: 0
-    averageTime: 40
-  - difficulty: 0
     length: 4
     containsBoss: 1
     averageTime: 70

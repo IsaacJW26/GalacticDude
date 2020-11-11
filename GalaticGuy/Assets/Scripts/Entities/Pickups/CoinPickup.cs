@@ -32,6 +32,8 @@ public class CoinPickup : MonoBehaviour
     {
         if(collision.tag == Labels.Tags.PLAYER)
         {
+            GameManager.AudioEvents.PlayAudio(AudioEventNames.CoinPickup);
+            UICurrency.INST.AddCurrency();
             Destroy(gameObject);
         }
     }

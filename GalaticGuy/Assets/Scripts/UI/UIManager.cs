@@ -95,7 +95,9 @@ public class UIManager : MonoBehaviour
     public void EndGame()
     {
         //activate text
-        UiText.text = STR_WON;
+        UiText.text =
+        $"{STR_WON}\n{UICurrency.INST.currency*10}";
+
         UiText.gameObject.SetActive(true);
 
         //disable everything else

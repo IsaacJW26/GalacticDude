@@ -85,9 +85,9 @@ MonoBehaviour:
   - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
   - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
   - {fileID: 9119908270630566908, guid: 540b6cfca2b8a8a4b83274e80380fa84, type: 3}
-  minBounty: 0
-  maxBounty: 0
-  bountyChance: 0
+  minBounty: 1
+  maxBounty: 1
+  bountyChance: 4
   explosionScale: 1
 --- !u!114 &7977547823748359183
 MonoBehaviour:
@@ -165,7 +165,7 @@ Animator:
   m_GameObject: {fileID: 9119908270630566909}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 510e1eda36750d147aa3563956105ba6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4ebe1288aff13a64f99a73b9340fefa9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
