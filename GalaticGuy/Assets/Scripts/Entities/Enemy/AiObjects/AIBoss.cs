@@ -71,7 +71,7 @@ public class AIBoss : EnemyAI
     }
 
     // remove a ring on hit
-    public override void OnHit(CharacterHealth health)
+    public override void OnDamage(CharacterHealth health)
     {
         // 4 stages
         // first is 3 rings to 2 rings
