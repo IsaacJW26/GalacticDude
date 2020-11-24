@@ -63,7 +63,7 @@ public class ScreenShake : MonoBehaviour
     private void StartShake(float frequency, float amplitude, float duration)
     {
         if (ShakeTimeRemaining > 0f)
-            ShakeTimeRemaining = duration / 4f;
+            ShakeTimeRemaining = (ShakeTimeRemaining) + (duration / 4f);
         else
             ShakeTimeRemaining = duration;
         // Set Cinemachine Camera Noise parameters
@@ -98,6 +98,6 @@ public class ScreenShake : MonoBehaviour
     [ContextMenu("Small Shake")]
     public void SmallShake()
     {
-        StartShake(0.8f, 1.5f, 0.2f);
+        StartShake(0.7f, 1.1f, 0.2f);
     }
 }
