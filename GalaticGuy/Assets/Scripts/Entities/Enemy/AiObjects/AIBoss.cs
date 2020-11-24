@@ -6,12 +6,12 @@ public class AIBoss : EnemyAI
 {
     readonly float moveDownDistance = 0.6f;
     [SerializeField]
-    float lowestPosition = 0f;
-    bool movingDown = true;
-    bool movingRight = true;
+    private float lowestPosition = 0f;
+    private bool movingDown = true;
+    private bool movingRight = true;
 
     [SerializeField]
-    GameObject[] rings = null;
+    private GameObject[] rings = new GameObject[3];
 
     public override void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
     {
@@ -73,26 +73,27 @@ public class AIBoss : EnemyAI
     // remove a ring on hit
     public override void OnHit(CharacterHealth health)
     {
-        int hpStageInterval = (health.GetMaxHealth() / 4);
         // 4 stages
         // first is 3 rings to 2 rings
         // 2 rings to 1
         // 1 ring to none
         // no rings to dead
-        const int totalHpStages = 4;
+        
+        int totalHpStages = rings.Length + 1;
+        int hpStageInterval = (health.GetMaxHealth() / totalHpStages);
 
         //check if hp is below any health bracket
-        for(int ii = 0; ii < totalHpStages - 1; ii--)
+        for(int ii = 0; ii < totalHpStages; ii++)
         {
             // when first hp bracket is found, disable the rest
             if(health.GetHealth() < ii * hpStageInterval)
             {
-                // disable the rings from last to current
-                for(int jj = totalHpStages - 1; jj < ii; jj++)
+                // disable the rings from outer to inner
+                if(ii > 0)
                 {
-                    rings[jj].SetActive(false);
+                    rings[ii - 1].SetActive(false);
+                    break;
                 }
-                break;
             }
         }
     }
