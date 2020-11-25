@@ -23,6 +23,16 @@ public class AIBoss : EnemyAI
     //tries to shoot and move every frame
     public override void UpdateFrame(Vector3 currentPosition)
     {
+        BossMove();
+
+        //get player direction
+        Vector3 dir = (GameManager.INST.GetPlayerPos() - transform.position).normalized;
+
+        Shoot(dir);
+    }
+
+    private void BossMove()
+    {
         Vector3 direction;
         if (movingRight)
             direction = Vector3.right;
@@ -58,11 +68,6 @@ public class AIBoss : EnemyAI
             direction += Vector3.down;
 
         Move(direction);
-
-        //get player direction
-        Vector3 dir = (GameManager.INST.GetPlayerPos() - transform.position).normalized;
-
-        Shoot(dir);
     }
 
     private float DistanceToXBound()
