@@ -97,4 +97,9 @@ public class AIBoss : EnemyAI
             }
         }
     }
+
+    public override void OnDeath()
+    {
+        
+    }
 }

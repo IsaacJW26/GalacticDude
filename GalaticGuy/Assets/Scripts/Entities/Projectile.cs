@@ -132,6 +132,9 @@ public class Projectile : MonoBehaviour, IDamageable
             DisableObject();
     }
 
+    public virtual void OnDeath()
+    {  }
+
     public virtual void DisableObject()
     {
         parent.DisableProjectile(this);
