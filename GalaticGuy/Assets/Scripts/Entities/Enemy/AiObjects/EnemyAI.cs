@@ -32,6 +32,6 @@ public abstract class EnemyAI : MonoBehaviour
     public virtual void OnDeath()
     { }
 
-    public virtual void OnHit(CharacterHealth health)
+    public virtual void OnDamage(CharacterHealth health)
     { }
 }

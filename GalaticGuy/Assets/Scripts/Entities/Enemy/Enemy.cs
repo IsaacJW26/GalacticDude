@@ -149,14 +149,16 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void OnDamage(int damage)
     {
+        if (damage <= 2)
+            EffectManager.INSTANCE.ScreenShakeSmall();
+        else 
+            EffectManager.INSTANCE.ScreenShakeMedium();
+
         if (!isDead)
         {
             anim.OnDamage();
-            health.TakeDamage(damage);
-            Ai.OnHit(health);
-
-            if (damage <= 2)
-                EffectManager.INSTANCE.ScreenShakeSmall();
+            health.OnDamage(damage);
+            Ai.OnDamage(health);
         }
     }
 

@@ -305,13 +305,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3483904256585763364}
   - component: {fileID: 6181243898294171651}
-  - component: {fileID: 1135099308267561331}
   - component: {fileID: 3450630277832835547}
   - component: {fileID: 1858064340737229508}
   - component: {fileID: 5795318427676420456}
   - component: {fileID: 7001233414193594097}
   - component: {fileID: 726255909376779045}
   - component: {fileID: -5039327450082650990}
+  - component: {fileID: 7859199025216376561}
   m_Layer: 8
   m_Name: Eyeboss
   m_TagString: Enemy
@@ -353,19 +353,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &1135099308267561331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3483904256585763367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e3a0abf1100c0b4188b2fba0916300b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lowestPosition: 3
 --- !u!114 &3450630277832835547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +458,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f9c40265a689b4bb6d4016afd485ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7859199025216376561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483904256585763367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5d22409aad3814fb10c397a7af0ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowestPosition: 0
+  rings:
+  - {fileID: 2267145828446061329}
+  - {fileID: 7790959779294750540}
+  - {fileID: 7163341751537061710}
 --- !u!1 &4201129976644031697
 GameObject:
   m_ObjectHideFlags: 0

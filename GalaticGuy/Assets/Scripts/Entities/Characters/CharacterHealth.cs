@@ -40,7 +40,7 @@ public class CharacterHealth
         this.deathMethod = deathMethod;
     }
 
-    public void TakeDamage(int damage)
+    public void OnDamage(int damage)
     {
         int newDamage = Mathf.Abs(damage);
         if ((currentHP - newDamage) <= 0)
