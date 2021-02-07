@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour, IDamageable
 
     Rigidbody2D rb;
     protected Vector2 velocity;
-    protected Shooter parent;
+    protected IShooter parent;
 
     [SerializeField]
     protected Stats stats;
@@ -38,6 +38,8 @@ public class Projectile : MonoBehaviour, IDamageable
     [Space(0.1f)]
     [SerializeField]
     bool destroyOnHit = true;
+    [SerializeField]
+    bool rotateTowardsDirection = false;
     [SerializeField]
     private AudioEventNames audioClip = AudioEventNames.PlayerFireSmallBullet;
     
@@ -59,7 +61,7 @@ public class Projectile : MonoBehaviour, IDamageable
         return (accelerated*(Time.fixedDeltaTime)  + velocity * (1f-Time.fixedDeltaTime));
     }
 
-    public void Initialise(int index, Shooter parent)
+    public void Initialise(int index, IShooter parent)
     {
         if (stats.maxLifeTime <= 0)
             stats.maxLifeTime = Stats.DEFAULT_LIFETIME;
@@ -84,7 +86,16 @@ public class Projectile : MonoBehaviour, IDamageable
         gameObject.SetActive(this);
         GameManager.AudioEvents.PlayAudio(audioClip);
 
-        //Debug.Log(velocity+ ", "+direction+", "+stats.initialSpeed);
+        // 
+        if(rotateTowardsDirection)
+        {
+            float zRotation = Vector3.Angle(Vector2.down, direction);
+            // flip direction if on left
+            if(direction.x < 0f)
+                zRotation *= -1f;
+
+            transform.rotation = Quaternion.Euler(0, 0, zRotation);
+        }
     }
 
     //default behaviour: destroy on hit

@@ -23,13 +23,13 @@ public class AudioEventHandler : MonoBehaviour, IAudio
         }
         catch (ArgumentException)
         {
-            Debug.LogWarning($"audio event \"{eventId}\" already exists");
+            //Debug.LogWarning($"audio event \"{eventId}\" already exists");
         }
     }
 
     public void PlayAudio(AudioEventNames eventId)
     {
-        Debug.Log("Event being played " +eventId);
+        //Debug.Log("Event being played " +eventId);
 
         if(eventId == AudioEventNames.NONE)
             return;
@@ -40,7 +40,7 @@ public class AudioEventHandler : MonoBehaviour, IAudio
         }
         catch (KeyNotFoundException)
         {
-            Debug.LogWarning($"audio event \"{eventId}\" is not set");
+            //Debug.LogWarning($"audio event \"{eventId}\" is not set");
         }
     }
 }

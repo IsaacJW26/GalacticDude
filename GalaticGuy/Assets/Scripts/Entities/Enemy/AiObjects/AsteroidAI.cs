@@ -30,7 +30,7 @@ public class AsteroidAI : EnemyAI
     int frame;
     const int rotateUpdateTime = 10;
 
-    public override void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
+    public override void Initialise(Movement movement, MainCharacter player, IShooter shoot)
     {
         base.Initialise(movement, player, shoot);
         renderer = GetComponentInChildren<Renderer>();

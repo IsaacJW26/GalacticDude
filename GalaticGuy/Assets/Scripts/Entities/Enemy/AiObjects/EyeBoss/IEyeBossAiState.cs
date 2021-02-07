@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEyeBossAiState
+namespace EyeBoss
 {
-    Vector3 Initialise(Enemy bossController, Shooter bossWeapon, Transform bossTransform, IEyeBossAiState nextState);
-    void GoToNextState();
+    public interface IEyeBossAiState
+    {
+        void Initialise(AIBoss bossController, EyeBossShoot bossWeapon, Transform bossTransform);
+        void GoToNextState();
+        void UpdateFrame();
+        int GetPhaseNumber();
+    }
 }

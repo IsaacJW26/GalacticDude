@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityTools.Maths;
 
-[RequireComponent(typeof(CharacterShoot))]
+[RequireComponent(typeof(IShooter))]
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(EnemyAI))]
 [RequireComponent(typeof(CharacterAnimator))]
@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
     CharacterHealth health = null;
-    CharacterShoot shoot;
+    IShooter shoot;
     Movement movement;
     ICharacterAnimator anim;
 
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     void Awake()
     {
-        shoot = GetComponent<CharacterShoot>();
+        shoot = GetComponent<IShooter>();
         movement = GetComponent<Movement>();
         Ai = GetComponent<EnemyAI>();
         anim = GetComponent<CharacterAnimator>();
@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
             EffectManager.INSTANCE.CreateExplosion(transform.position, explosionScale * scale);
             //disable everything
-                shoot.DestroyPool();
+                shoot.OnShooterDestroy();
                 movement.OnDeath();
 
 

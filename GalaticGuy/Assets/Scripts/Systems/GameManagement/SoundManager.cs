@@ -235,7 +235,6 @@ public class SoundManager : MonoBehaviour
     [ContextMenu("Stop Charging")]
     public void StopCharging()
     {
-        Debug.Log("CharggeEEEE");
         chargingEmitter.Stop();
     }
 
@@ -268,14 +267,14 @@ public class SoundManager : MonoBehaviour
     {
         threatlevel = (threatlevel >= 4) ? 5 : threatlevel + 1;
 
-        Debug.Log("Sound threat: " + threatlevel);
+        //Debug.Log("Sound threat: " + threatlevel);
     }
 
     public void DecreaseThreat()
     {
         threatlevel = (threatlevel <= 1) ? 0 : threatlevel - 1;
 
-        Debug.Log("Sound threat: " + threatlevel);
+        //Debug.Log("Sound threat: " + threatlevel);
     }
 
     [ContextMenu("Start Default Music")]
