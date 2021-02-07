@@ -54,7 +54,7 @@ public class CharacterShoot : MonoBehaviour, IShooter
             Shoot(direction.normalized);
         }
     }
-
+    
     private void Shoot(Vector3 velocity)
     {
         GameManager.AudioEvents.PlayAudio(EnemyShootEvent);
