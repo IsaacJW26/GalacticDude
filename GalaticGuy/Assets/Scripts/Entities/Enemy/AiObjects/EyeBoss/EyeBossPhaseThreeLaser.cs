@@ -58,7 +58,7 @@ namespace EyeBoss
 
                 Shoot(bossTransform, bossWeapon, bossController);
                 // attack for 3 seconds
-                if(framesSinceLastCheck >= 360)
+                if(framesSinceLastCheck > 180)
                 {
                     attacking = false;
                     framesSinceLastCheck = 0;
@@ -109,10 +109,7 @@ namespace EyeBoss
 
         private void Shoot(Transform bossTransform, EyeBossShoot bossWeapon, AIBoss bossController)
         {
-            Debug.Log("Shoot eye boss");
-            Vector3 dir = (GameManager.INST.GetPlayerPos() - bossTransform.position).normalized;
-
-            bossWeapon.ShootThirdPhase(Vector3.down);
+            bossWeapon.ShootThirdPhase();
         }
 
         private float DistanceToXBound()

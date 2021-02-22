@@ -12,18 +12,22 @@ namespace EyeBoss
         private CharacterShoot secondPhaseShooter;
         [SerializeField]
         private CharacterShoot thirdPhaseShooter;
-        private CharacterShoot thirdPhaseShooter1;
-        private CharacterShoot thirdPhaseShooter2;
+        private CharacterShoot[] thirdPhaseShooters;
+        private const int SHOOTER_COUNT = 7;
+        private const float SHOOT_SPREAD = 1f / (float)(SHOOTER_COUNT+1);
         private int phase = 0;
 
         public void SetPhase(int phase)
         {
             if(this.phase == 2 && phase == 3)
             {
-                thirdPhaseShooter1 = Instantiate(thirdPhaseShooter);
-                thirdPhaseShooter1.transform.SetParent(thirdPhaseShooter.transform.parent);
-                thirdPhaseShooter2 = Instantiate(thirdPhaseShooter);
-                thirdPhaseShooter2.transform.SetParent(thirdPhaseShooter.transform.parent);
+                thirdPhaseShooters = new CharacterShoot[SHOOTER_COUNT];
+                thirdPhaseShooters[0] = thirdPhaseShooter;
+                for(int i = 1; i < SHOOTER_COUNT; i++)
+                {
+                    thirdPhaseShooters[i] = Instantiate(thirdPhaseShooter);
+                    thirdPhaseShooters[i].transform.SetParent(thirdPhaseShooter.transform.parent);
+                }
             }
 
             this.phase = phase;
@@ -61,16 +65,13 @@ namespace EyeBoss
             secondPhaseShooter.TryShoot(direction);
         }
 
-        public void ShootThirdPhase(Vector3 direction)
+        public void ShootThirdPhase()
         {
-            thirdPhaseShooter.TryShoot(direction);
-            
-            Vector3 directionL, directionR;
-            directionL = (Vector3.down * 2f + Vector3.left).normalized;
-            directionR = (Vector3.down * 2f + Vector3.right).normalized;
-
-            thirdPhaseShooter1.TryShoot(directionL);
-            thirdPhaseShooter2.TryShoot(directionR);
+            for(int i = 0; i < SHOOTER_COUNT; i++)
+            {
+                Vector3 shootDirection = (Vector3.down + (((i+1) * SHOOT_SPREAD) - 0.5f) * 2f * Vector3.left).normalized;
+                thirdPhaseShooters[i].TryShoot(shootDirection);
+            }
         }
 
         public void DisableProjectile(Projectile proj)

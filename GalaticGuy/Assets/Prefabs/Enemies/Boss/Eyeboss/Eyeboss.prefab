@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00304ece41361a440892d15c065cd05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_PROJECTILES: 10
-  shootInterval: 280
+  MAX_PROJECTILES: 6
+  shootInterval: 59
   projectile: {fileID: 7674457554669734050, guid: b3f6373069866274f84a95004cb28200,
     type: 3}
   projectilePoint: {fileID: 3483904256585763364}
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb6f9b0483578844aa8bb9c5b1b436b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
 --- !u!95 &7001233414193594097
 Animator:
   serializedVersion: 3
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    maxHP: 100
+    maxHP: 50
     onDamageAudio: 11
     onDeathAudio: 15
   deathChildren: []
@@ -779,7 +779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MAX_PROJECTILES: 10
-  shootInterval: 40
+  shootInterval: 15
   projectile: {fileID: 7674457554669734050, guid: 35c24442cecc1a7438a48fe8801cc537,
     type: 3}
   projectilePoint: {fileID: 3483904256585763364}
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MAX_PROJECTILES: 10
-  shootInterval: 20
+  shootInterval: 5
   projectile: {fileID: 7674457554669734050, guid: 47015176b17183f49b8343cdd869bf89,
     type: 3}
   projectilePoint: {fileID: 3483904256585763364}

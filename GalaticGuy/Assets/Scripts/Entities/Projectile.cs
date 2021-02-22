@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour, IDamageable
         public int damage;
         public float initialSpeed;
         public float yAccelerationOverTime = 0f;
-        [Range(1f,1000f)]
+        [Range(1f,10f)]
         public float dragOverTime = 1f;
 
         public int maxLifeTime = DEFAULT_LIFETIME;
@@ -105,6 +105,7 @@ public class Projectile : MonoBehaviour, IDamageable
             CheckPlayer(collision) ||
             CheckProj(collision))
         {
+
             //damage hit target
             IDamageable damageable = collision.GetComponentInParent<IDamageable>();
             damageable?.OnDamage(stats.damage);
@@ -138,6 +139,8 @@ public class Projectile : MonoBehaviour, IDamageable
     //Destroys 
     public virtual void OnDamage(int inDamage)
     {
+        EffectManager.INSTANCE.CreateProjectileHit(transform.position);
+
         stats.hp--;
         if (destroyOnHit && stats.hp <= 0)
             DisableObject();

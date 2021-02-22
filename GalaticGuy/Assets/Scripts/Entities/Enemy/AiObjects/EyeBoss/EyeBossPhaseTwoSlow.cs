@@ -109,10 +109,12 @@ namespace EyeBoss
 
         private void Shoot(Transform bossTransform, EyeBossShoot bossWeapon, AIBoss bossController)
         {
-            Debug.Log("Shoot eye boss");
-            Vector3 dir = (GameManager.INST.GetPlayerPos() - bossTransform.position).normalized;
+            //Debug.Log("Shoot eye boss");
+            Vector3 randomOffset = new Vector3(Random.Range(-1.5f,1.5f), Random.Range(-1.5f,1.5f));
 
-            bossWeapon.ShootSecondPhase(Vector3.down);
+            Vector3 dir = ((GameManager.INST.GetPlayerPos() - bossTransform.position) + randomOffset).normalized;
+
+            bossWeapon.ShootSecondPhase(dir);
         }
 
         private float DistanceToXBound()
