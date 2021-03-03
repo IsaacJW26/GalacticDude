@@ -13,13 +13,13 @@ namespace EyeBoss
         private bool movingRight = true;
         //private const float MOVE_DOWN_DISTANCE_THRESHOLD = 0f;
 
-        private const float LOWEST_POSITION = 1f;
-
+        private const float LOWEST_POSITION = 3f;
+        
         private int phaseNumber = 0;
         private int framesSinceLastCheck = 0;
         private bool attacking = false;
 
-        // 🏃‍♂️ PUBLIC METHODS ----------------------------------------------------------------
+        // 🏃‍ PUBLIC METHODS ----------------------------------------------------------------
         public EyeBossPhaseOneRings(int phaseNumber)
         {
             this.phaseNumber = phaseNumber;
@@ -48,33 +48,38 @@ namespace EyeBoss
 
         public void UpdateFrame()
         {
-
-            // attacking mode
-            if(attacking)
+            if (bossTransform.position.y > LOWEST_POSITION)
             {
-                Shoot(bossTransform, bossWeapon, bossController);
-
-                // attack for 2 seconds
-                if(framesSinceLastCheck >= 360)
-                {
-                    attacking = false;
-                    framesSinceLastCheck = 0;
-                }
+                bossController.Move(Vector3.down);
             }
             else
             {
-                // wait random time until attack again
-                if(framesSinceLastCheck >= 60)
+                // attacking mode
+                if (attacking)
                 {
-                    attacking = Random.Range(0,100) < 25;
-                    framesSinceLastCheck = 0;
+                    Shoot(bossTransform, bossWeapon, bossController);
+
+                    // attack for 2 seconds
+                    if (framesSinceLastCheck >= 360)
+                    {
+                        attacking = false;
+                        framesSinceLastCheck = 0;
+                    }
                 }
+                else
+                {
+                    // wait random time until attack again
+                    if (framesSinceLastCheck >= 60)
+                    {
+                        attacking = Random.Range(0, 100) < 25;
+                        framesSinceLastCheck = 0;
+                    }
+                }
+
+                framesSinceLastCheck++;
+
+                BossMove(bossTransform, bossTransform.position, DistanceToXBound());
             }
-
-            framesSinceLastCheck++;
-            
-            BossMove(bossTransform, bossTransform.position, DistanceToXBound());
-
         }
 
         // 🤫 PRIVATE METHODS ----------------------------------------------------------------
