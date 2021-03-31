@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EyeBoss
 {
-    public class EyeBossPhaseTwoSlow : IEyeBossAiState
+    public class EyeBossPhaseRings : IEyeBossAiState
     {
         private AIBoss bossController;
         private EyeBossShoot bossWeapon;
@@ -19,7 +19,7 @@ namespace EyeBoss
         private bool attacking = false;
 
         // 🏃‍♂️ PUBLIC METHODS ----------------------------------------------------------------
-        public EyeBossPhaseTwoSlow(int phaseNumber)
+        public EyeBossPhaseRings(int phaseNumber)
         {
             this.phaseNumber = phaseNumber;
             attacking = false;
@@ -40,7 +40,7 @@ namespace EyeBoss
         {
             IEyeBossAiState nextState;
 
-            nextState = new EyeBossPhaseThreeLaser(phaseNumber+1);
+            nextState = new EyeBossPhaseLaserEyelash(phaseNumber+1);
 
             nextState.Initialise(bossController, bossWeapon, bossTransform);
 

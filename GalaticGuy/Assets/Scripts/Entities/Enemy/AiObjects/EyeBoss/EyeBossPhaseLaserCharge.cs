@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EyeBoss
 {
-    public class EyeBossPhaseOneRings : IEyeBossAiState
+    public class EyeBossPhaseLaserCharge : IEyeBossAiState
     {
         private AIBoss bossController;
         private EyeBossShoot bossWeapon;
@@ -17,12 +17,22 @@ namespace EyeBoss
         
         private int phaseNumber = 0;
         private int framesSinceLastCheck = 0;
-        private bool attacking = false;
+        private AttackState attackingState;
+        enum AttackState
+        {
+            entering,
+            moving,
+            looking,
+            charging,
+            shooting,
+            cooldown,
+        }
 
         // 🏃‍ PUBLIC METHODS ----------------------------------------------------------------
-        public EyeBossPhaseOneRings(int phaseNumber)
+        public EyeBossPhaseLaserCharge(int phaseNumber)
         {
             this.phaseNumber = phaseNumber;
+            attackingState = AttackState.moving;
         }
 
         public void Initialise(AIBoss bossController, EyeBossShoot bossWeapon, Transform bossTransform)
@@ -38,48 +48,68 @@ namespace EyeBoss
         {
             IEyeBossAiState nextState;
 
-            nextState = new EyeBossPhaseTwoSlow(phaseNumber+1);
+            nextState = new EyeBossPhaseRings(phaseNumber+1);
 
             nextState.Initialise(bossController, bossWeapon, bossTransform);
 
             bossController.AiState = nextState;
-            Debug.Log("Phase number "+phaseNumber);
+            Debug.Log("Phase number "+ phaseNumber);
         }
 
         public void UpdateFrame()
         {
-            if (bossTransform.position.y > LOWEST_POSITION)
+            switch(attackingState)
             {
-                bossController.Move(Vector3.down);
-            }
-            else
-            {
-                // attacking mode
-                if (attacking)
-                {
+                case AttackState.entering:
+                    if (bossTransform.position.y > LOWEST_POSITION)
+                    {
+                        bossController.Move(Vector3.down);
+                    }
+                    else
+                    {
+                        attackingState = AttackState.moving;
+                    }
+                    break;
+                case AttackState.moving:
+                    // wait random time until attack again
+                    if (framesSinceLastCheck >= 60)
+                    {
+                        bool attacking = Random.Range(0, 100) < 25;
+                        framesSinceLastCheck = 0;
+                        if(attacking)
+                        {
+                            attackingState = AttackState.looking;
+                        }
+                    }
+
+                    framesSinceLastCheck++;
+
+                    BossMove(bossTransform, bossTransform.position, DistanceToXBound());
+                    break;
+                case AttackState.looking:
+                    attackingState = AttackState.charging;
+
+                    break;
+                case AttackState.charging:
+                    attackingState = AttackState.shooting;
+
+                    break;
+                case AttackState.shooting:
                     Shoot(bossTransform, bossWeapon, bossController);
 
                     // attack for 2 seconds
                     if (framesSinceLastCheck >= 360)
                     {
-                        attacking = false;
+                        attackingState = AttackState.cooldown;
+
                         framesSinceLastCheck = 0;
                     }
-                }
-                else
-                {
-                    // wait random time until attack again
-                    if (framesSinceLastCheck >= 60)
-                    {
-                        attacking = Random.Range(0, 100) < 25;
-                        framesSinceLastCheck = 0;
-                    }
-                }
+                    break;
+                case AttackState.cooldown:
+                    attackingState = AttackState.moving;
 
-                framesSinceLastCheck++;
-
-                BossMove(bossTransform, bossTransform.position, DistanceToXBound());
-            }
+                    break;
+            }            
         }
 
         // 🤫 PRIVATE METHODS ----------------------------------------------------------------

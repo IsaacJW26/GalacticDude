@@ -22,7 +22,7 @@ namespace EyeBoss
         {
             base.Initialise(movement, player, shoot);
             Debug.Log("shooter "+shoot);
-            state = new EyeBossPhaseOneRings(1);
+            state = new EyeBossPhaseLaserCharge(1);
             state.Initialise(this, (shoot as EyeBossShoot), transform);
             SetPhase(1);
         }
