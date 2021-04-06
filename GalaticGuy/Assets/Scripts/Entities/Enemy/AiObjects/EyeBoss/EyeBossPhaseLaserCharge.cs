@@ -32,7 +32,7 @@ namespace EyeBoss
         public EyeBossPhaseLaserCharge(int phaseNumber)
         {
             this.phaseNumber = phaseNumber;
-            attackingState = AttackState.moving;
+            attackingState = AttackState.entering;
         }
 
         public void Initialise(AIBoss bossController, EyeBossShoot bossWeapon, Transform bossTransform)
@@ -62,13 +62,10 @@ namespace EyeBoss
             {
                 case AttackState.entering:
                     if (bossTransform.position.y > LOWEST_POSITION)
-                    {
                         bossController.Move(Vector3.down);
-                    }
                     else
-                    {
                         attackingState = AttackState.moving;
-                    }
+
                     break;
                 case AttackState.moving:
                     // wait random time until attack again
@@ -78,6 +75,7 @@ namespace EyeBoss
                         framesSinceLastCheck = 0;
                         if(attacking)
                         {
+                            bossController.EyeAnimationObject.StartFrantic();
                             attackingState = AttackState.looking;
                         }
                     }
@@ -87,11 +85,22 @@ namespace EyeBoss
                     BossMove(bossTransform, bossTransform.position, DistanceToXBound());
                     break;
                 case AttackState.looking:
-                    attackingState = AttackState.charging;
+                    if (framesSinceLastCheck >= 180)
+                    {
+                        framesSinceLastCheck = 0;
+                        attackingState = AttackState.charging;
+                        bossController.EyeAnimationObject.StartTracking();
+                    }
+                    framesSinceLastCheck++;
 
                     break;
                 case AttackState.charging:
-                    attackingState = AttackState.shooting;
+                    if (framesSinceLastCheck >= 120)
+                    {
+                        framesSinceLastCheck = 0;
+                        attackingState = AttackState.shooting;
+                    }
+                    framesSinceLastCheck++;
 
                     break;
                 case AttackState.shooting:
@@ -103,7 +112,9 @@ namespace EyeBoss
                         attackingState = AttackState.cooldown;
 
                         framesSinceLastCheck = 0;
+                        bossController.EyeAnimationObject.StartWandering();
                     }
+                    framesSinceLastCheck++;
                     break;
                 case AttackState.cooldown:
                     attackingState = AttackState.moving;
@@ -139,7 +150,6 @@ namespace EyeBoss
 
         private void Shoot(Transform bossTransform, EyeBossShoot bossWeapon, AIBoss bossController)
         {
-            Debug.Log("Shoot eye boss");
             Vector3 dir = (GameManager.INST.GetPlayerPos() - bossTransform.position).normalized;
 
             bossWeapon.ShootFirstPhase();

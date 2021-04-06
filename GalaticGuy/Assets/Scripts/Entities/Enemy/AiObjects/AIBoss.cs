@@ -16,6 +16,17 @@ namespace EyeBoss
 
         private IEyeBossAiState state;
 
+        private EyeAnimation eyeAnimationCache = null;
+        public EyeAnimation EyeAnimationObject
+        {
+            get
+            {
+                if(eyeAnimationCache == null)
+                    eyeAnimationCache = GetComponentInChildren<EyeAnimation>();
+
+                return eyeAnimationCache;
+            }
+        }
         // 🏃‍♂️ PUBLIC METHODS ----------------------------------------------------------------
 
         public override void Initialise(Movement movement, MainCharacter player, IShooter shoot)
