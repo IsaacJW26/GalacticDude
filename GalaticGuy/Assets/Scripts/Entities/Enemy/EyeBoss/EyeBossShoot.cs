@@ -54,9 +54,8 @@ namespace EyeBoss
             }
         }
 
-        public void ShootFirstPhase()
+        public void ShootFirstPhase(Vector3 direction)
         {
-            Vector3 direction = Vector3.down;
             firstPhaseShooter.TryShoot(direction);
         }
 

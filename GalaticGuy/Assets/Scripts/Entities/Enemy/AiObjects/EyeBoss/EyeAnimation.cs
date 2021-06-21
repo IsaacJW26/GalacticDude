@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityTools.Maths;
 
 public class EyeAnimation : MonoBehaviour
 {
@@ -14,15 +15,31 @@ public class EyeAnimation : MonoBehaviour
     private AnimationState currentState;
     private Rigidbody rb3d;
     int timeSinceLastCheck = 0;
-    const int DurationBetweenFranticEyeTrack = 5;
+    const int DurationBetweenFranticEyeTrack = 3;
     Quaternion eyeTargetRotation;
     Quaternion startRotationFranticEye;
     int maxDuration = DurationBetweenFranticEyeTrack;
+
+    [SerializeField]
+    ParticleSystem chargeParticles = null;
+    ParticleSystem.EmissionModule emissionModule;
+    float defaultEmission;
+    Vector3 defaultSize;
+
+    public delegate Vector3 DirectionToPlayer();
+
+    public DirectionToPlayer LookDirection;
+
+
     // Start is called before the first frame update
     void Start()
     {
         currentState = AnimationState.Wandering;
         rb3d = GetComponentInChildren<Rigidbody>();
+
+        emissionModule = chargeParticles.emission;
+        defaultSize = chargeParticles.transform.localScale;
+        defaultEmission = emissionModule.rateOverTime.Evaluate(0);
     }
 
     // Update is called once per frame
@@ -55,8 +72,10 @@ public class EyeAnimation : MonoBehaviour
                 break;
 
             case AnimationState.Tracking:
-                var directionToPlayerPosition = (GameManager.INST.GetPlayerPos() - transform.position + (Vector3.back * 8f)).normalized;
-                rb3d.rotation = Quaternion.LookRotation(-directionToPlayerPosition, Vector3.down);
+                var offset = (Vector3.back);
+                var directionToPlayerPosition = (LookDirection() + offset).normalized;
+
+                rb3d.rotation = Quaternion.LookRotation(-directionToPlayerPosition, Vector3.up);
                 break;
         }
     }
@@ -72,6 +91,7 @@ public class EyeAnimation : MonoBehaviour
         {
             currentState = AnimationState.Wandering;
             rb3d.isKinematic = false;
+            emissionModule.enabled = false;
         }
     }
 
@@ -90,5 +110,34 @@ public class EyeAnimation : MonoBehaviour
         {
             currentState = AnimationState.Tracking;
         }
+    }
+
+    public void ChargeUpdate(float emissionPercent)
+    {
+
+        if(emissionPercent <= 0f)
+        {
+            emissionModule.enabled = false;
+        }
+        else if(!emissionModule.enabled)
+        {
+            emissionModule.enabled = true;
+        }
+
+        // move particles to be in front of eye
+        const float OFFSET = 1.85f;
+        chargeParticles.transform.position = transform.position +
+            (LookDirection() * OFFSET);
+
+        // scale player effects from 35% TO 100%
+        rfloat scaleRange = new rfloat(0.35f, 1.0f);
+        chargeParticles.transform.localScale = scaleRange.LerpValue(emissionPercent) * defaultSize;
+
+        // scale emission rate from 30% TO 100%
+        rfloat rateRange = new rfloat(0.3f, 1.0f);
+        ParticleSystem.MinMaxCurve rate = emissionModule.rateOverTime;
+        rate.constant = defaultEmission * rateRange.LerpValue(emissionPercent);
+
+        emissionModule.rateOverTime = rate;
     }
 }

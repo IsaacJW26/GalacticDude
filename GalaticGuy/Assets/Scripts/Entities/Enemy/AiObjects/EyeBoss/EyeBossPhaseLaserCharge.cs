@@ -42,6 +42,7 @@ namespace EyeBoss
             this.bossTransform = bossTransform;
             
             this.bossWeapon.SetPhase(phaseNumber);
+            bossController.EyeAnimationObject.LookDirection = DirectionToPlayer;
         }
 
         public void GoToNextState()
@@ -61,6 +62,7 @@ namespace EyeBoss
             switch(attackingState)
             {
                 case AttackState.entering:
+
                     if (bossTransform.position.y > LOWEST_POSITION)
                         bossController.Move(Vector3.down);
                     else
@@ -89,6 +91,7 @@ namespace EyeBoss
                     {
                         framesSinceLastCheck = 0;
                         attackingState = AttackState.charging;
+                        
                         bossController.EyeAnimationObject.StartTracking();
                     }
                     framesSinceLastCheck++;
@@ -102,9 +105,12 @@ namespace EyeBoss
                     }
                     framesSinceLastCheck++;
 
+                    float percent = framesSinceLastCheck / 120f;
+                    bossController.EyeAnimationObject.ChargeUpdate(percent);
                     break;
                 case AttackState.shooting:
                     Shoot(bossTransform, bossWeapon, bossController);
+                    bossController.EyeAnimationObject.ChargeUpdate(0f);
 
                     // attack for 2 seconds
                     if (framesSinceLastCheck >= 360)
@@ -124,6 +130,10 @@ namespace EyeBoss
         }
 
         // 🤫 PRIVATE METHODS ----------------------------------------------------------------
+        private Vector3 DirectionToPlayer()
+        {
+            return (GameManager.INST.GetPlayerPos() - bossTransform.position).normalized;
+        }
 
         private void BossMove(Transform bossTransform, Vector3 currentPosition, float distanceToXBoundary)
         {
@@ -152,7 +162,7 @@ namespace EyeBoss
         {
             Vector3 dir = (GameManager.INST.GetPlayerPos() - bossTransform.position).normalized;
 
-            bossWeapon.ShootFirstPhase();
+            bossWeapon.ShootFirstPhase(dir);
         }
 
         private float DistanceToXBound()

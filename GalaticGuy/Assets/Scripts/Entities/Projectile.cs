@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour, IDamageable
     bool rotateTowardsDirection = false;
     [SerializeField]
     private AudioEventNames audioClip = AudioEventNames.PlayerFireSmallBullet;
-    
+
     protected virtual void FixedUpdate()
     {
         velocity = GetVelocity();
@@ -69,6 +69,19 @@ public class Projectile : MonoBehaviour, IDamageable
 
         this.index = index;
         this.parent = parent;
+
+        OnInitialise();
+    }
+
+    public void Initialise()
+    {
+        if (stats.maxLifeTime <= 0)
+            stats.maxLifeTime = Stats.DEFAULT_LIFETIME;
+        
+        rb = GetComponent<Rigidbody2D>();
+
+        this.index = 0;
+        this.parent = null;
 
         OnInitialise();
     }
@@ -151,7 +164,10 @@ public class Projectile : MonoBehaviour, IDamageable
 
     public virtual void DisableObject()
     {
-        parent.DisableProjectile(this);
+        if(parent != null)
+            parent.DisableProjectile(this);
+        else
+            Destroy(gameObject);
     }
 
     public int GetIndex()
