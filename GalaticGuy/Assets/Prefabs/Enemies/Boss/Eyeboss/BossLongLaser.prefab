@@ -223,7 +223,7 @@ MonoBehaviour:
     initialSpeed: 0
     yAccelerationOverTime: 0
     dragOverTime: 1
-    maxLifeTime: 90
+    maxLifeTime: 30
     hp: 1
   player: 1
   projectiles: 1
@@ -231,7 +231,7 @@ MonoBehaviour:
   destroyOnHit: 0
   rotateTowardsDirection: 1
   audioClip: 2
-  damageFrameGap: 90
+  damageFrameGap: 30
   slowMo: 0
   bigShake: 1
 --- !u!1 &4620870741281084381
@@ -372,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 8084049163444484300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 1.65, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 4620870741281084380}
   m_RootOrder: 2

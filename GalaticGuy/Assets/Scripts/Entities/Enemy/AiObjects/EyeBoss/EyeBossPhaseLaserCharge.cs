@@ -18,6 +18,8 @@ namespace EyeBoss
         private int phaseNumber = 0;
         private int framesSinceLastCheck = 0;
         private AttackState attackingState;
+
+        private Vector3? savedPlayerPosition = null;
         enum AttackState
         {
             entering,
@@ -70,8 +72,10 @@ namespace EyeBoss
 
                     break;
                 case AttackState.moving:
+                    framesSinceLastCheck++;
+
                     // wait random time until attack again
-                    if (framesSinceLastCheck >= 60)
+                    if (framesSinceLastCheck > 60)
                     {
                         bool attacking = Random.Range(0, 100) < 25;
                         framesSinceLastCheck = 0;
@@ -82,51 +86,62 @@ namespace EyeBoss
                         }
                     }
 
-                    framesSinceLastCheck++;
-
                     BossMove(bossTransform, bossTransform.position, DistanceToXBound());
                     break;
                 case AttackState.looking:
-                    if (framesSinceLastCheck >= 180)
+                    framesSinceLastCheck++;
+
+                    if (framesSinceLastCheck > 180)
                     {
                         framesSinceLastCheck = 0;
                         attackingState = AttackState.charging;
                         
                         bossController.EyeAnimationObject.StartTracking();
                     }
-                    framesSinceLastCheck++;
 
                     break;
                 case AttackState.charging:
-                    if (framesSinceLastCheck >= 120)
+                    const int chargeDuration = 180;
+                    framesSinceLastCheck++;
+
+                    // Stop following player after 90 frames
+                    if(framesSinceLastCheck == 1)
+                        UnlockPlayerPosition();
+                    if(framesSinceLastCheck == 90)
+                        LockPlayerPosition();
+
+
+                    if (framesSinceLastCheck > chargeDuration)
                     {
                         framesSinceLastCheck = 0;
                         attackingState = AttackState.shooting;
                     }
-                    framesSinceLastCheck++;
 
-                    float percent = framesSinceLastCheck / 120f;
+                    float percent = (float)framesSinceLastCheck / (float)chargeDuration;
                     bossController.EyeAnimationObject.ChargeUpdate(percent);
                     break;
                 case AttackState.shooting:
-                    bossController.EyeAnimationObject.ChargeUpdate(0f);
+                    framesSinceLastCheck++;
 
-                    // attack after 2 seconds
-                    if (framesSinceLastCheck >= 120)
+                    // attack for 1 frame
+                    if (framesSinceLastCheck == 7)
                     {
+                        bossController.EyeAnimationObject.ChargeUpdate(0f);
+
                         Shoot(bossTransform, bossWeapon, bossController);
-
-                        attackingState = AttackState.cooldown;
-
+                    }
+                    // delay a little after attack
+                    else if(framesSinceLastCheck > 60)
+                    {
                         framesSinceLastCheck = 0;
                         bossController.EyeAnimationObject.StartWandering();
+                        attackingState = AttackState.cooldown;
                     }
-                    framesSinceLastCheck++;
 
                     break;
                 case AttackState.cooldown:
                     framesSinceLastCheck++;
-                    if (framesSinceLastCheck >= 180)
+                    if (framesSinceLastCheck > 180)
                     {
                         framesSinceLastCheck = 0;
                         attackingState = AttackState.moving;
@@ -137,9 +152,20 @@ namespace EyeBoss
         }
 
         // 🤫 PRIVATE METHODS ----------------------------------------------------------------
+        // when player position is saved return that, otherwise get current
         private Vector3 DirectionToPlayer()
         {
-            return (GameManager.INST.GetPlayerPos() - bossTransform.position).normalized;
+            return savedPlayerPosition ?? (GameManager.INST.GetPlayerPos() - bossTransform.position).normalized;
+        }
+
+        private void LockPlayerPosition()
+        {
+            savedPlayerPosition = DirectionToPlayer();
+        }
+
+        private void UnlockPlayerPosition()
+        {
+            savedPlayerPosition = null;
         }
 
         private void BossMove(Transform bossTransform, Vector3 currentPosition, float distanceToXBoundary)
@@ -167,9 +193,7 @@ namespace EyeBoss
 
         private void Shoot(Transform bossTransform, EyeBossShoot bossWeapon, AIBoss bossController)
         {
-            Vector3 dir = (GameManager.INST.GetPlayerPos() - bossTransform.position).normalized;
-
-            bossWeapon.ShootFirstPhase(dir);
+            bossWeapon.ShootFirstPhase(DirectionToPlayer());
         }
 
         private float DistanceToXBound()

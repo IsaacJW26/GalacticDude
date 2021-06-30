@@ -45,8 +45,12 @@ public class Projectile : MonoBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
-        velocity = GetVelocity();
-        rb.velocity = velocity;
+        if(rb != null)
+        {
+            velocity = GetVelocity();
+            rb.velocity = velocity;
+        }
+        
         timeSinceBirth++;
 
         if (timeSinceBirth > stats.maxLifeTime)
