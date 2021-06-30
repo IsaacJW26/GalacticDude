@@ -79,6 +79,7 @@ public class EyeAnimation : MonoBehaviour
                 break;
         }
     }
+    
     Vector3 m_direction;
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;

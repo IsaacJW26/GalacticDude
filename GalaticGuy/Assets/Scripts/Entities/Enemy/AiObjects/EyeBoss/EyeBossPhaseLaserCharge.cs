@@ -109,21 +109,28 @@ namespace EyeBoss
                     bossController.EyeAnimationObject.ChargeUpdate(percent);
                     break;
                 case AttackState.shooting:
-                    Shoot(bossTransform, bossWeapon, bossController);
                     bossController.EyeAnimationObject.ChargeUpdate(0f);
 
-                    // attack for 2 seconds
-                    if (framesSinceLastCheck >= 360)
+                    // attack after 2 seconds
+                    if (framesSinceLastCheck >= 120)
                     {
+                        Shoot(bossTransform, bossWeapon, bossController);
+
                         attackingState = AttackState.cooldown;
 
                         framesSinceLastCheck = 0;
                         bossController.EyeAnimationObject.StartWandering();
                     }
                     framesSinceLastCheck++;
+
                     break;
                 case AttackState.cooldown:
-                    attackingState = AttackState.moving;
+                    framesSinceLastCheck++;
+                    if (framesSinceLastCheck >= 180)
+                    {
+                        framesSinceLastCheck = 0;
+                        attackingState = AttackState.moving;
+                    }
 
                     break;
             }            

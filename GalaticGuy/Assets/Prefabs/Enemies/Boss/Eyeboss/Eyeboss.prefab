@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 493719375572218319}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: -2.85, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 5375378768910465250}
   m_Father: {fileID: 3483904256585763364}
@@ -149,8 +149,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
-      minScalar: 0.3
+      scalar: 0.9
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -318,8 +318,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
-      minScalar: 3
+      scalar: 2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1024,22 +1024,13 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.14299454
         - serializedVersion: 3
-          time: 0.93181974
-          value: 1
+          time: 1
+          value: 0.8360653
           inSlope: 0.28311813
           outSlope: 0.28311813
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.111050636
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 0.56603855
-          inSlope: -5.877643
-          outSlope: -5.877643
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.15418215
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1698,7 +1689,7 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -1751,7 +1742,7 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -1804,9 +1795,9 @@ ParticleSystem:
         m_RotationOrder: 4
     orbitalZ:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 2
-      minScalar: 1
+      minMaxState: 3
+      scalar: 5
+      minScalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10481,11 +10472,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00304ece41361a440892d15c065cd05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_PROJECTILES: 10
-  shootInterval: 5
-  projectile: {fileID: 7674457554669734050, guid: 47015176b17183f49b8343cdd869bf89,
+  MAX_PROJECTILES: 1
+  shootInterval: 100
+  projectile: {fileID: 8038325770130421891, guid: 6251caf57db975f40818ebf79f3665dc,
     type: 3}
-  projectilePoint: {fileID: 3483904256585763364}
+  projectilePoint: {fileID: 5276361854243121665}
   EnemyShootEvent: 22
 --- !u!1 &8357754186880899369
 GameObject:
