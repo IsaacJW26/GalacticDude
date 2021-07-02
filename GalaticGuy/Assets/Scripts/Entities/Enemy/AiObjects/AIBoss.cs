@@ -32,7 +32,6 @@ namespace EyeBoss
         public override void Initialise(Movement movement, MainCharacter player, IShooter shoot)
         {
             base.Initialise(movement, player, shoot);
-            Debug.Log("shooter "+shoot);
             state = new EyeBossPhaseLaserCharge(1);
             state.Initialise(this, (shoot as EyeBossShoot), transform);
             SetPhase(1);

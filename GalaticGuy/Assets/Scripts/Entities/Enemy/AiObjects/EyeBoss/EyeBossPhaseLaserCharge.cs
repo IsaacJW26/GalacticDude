@@ -14,27 +14,19 @@ namespace EyeBoss
         //private const float MOVE_DOWN_DISTANCE_THRESHOLD = 0f;
 
         private const float LOWEST_POSITION = 3f;
-        
+        // phase number usd for debugging
         private int phaseNumber = 0;
         private int framesSinceLastCheck = 0;
-        private AttackState attackingState;
 
         private Vector3? savedPlayerPosition = null;
-        enum AttackState
-        {
-            entering,
-            moving,
-            looking,
-            charging,
-            shooting,
-            cooldown,
-        }
+
+        private List<BossAnimation> animationParts;
+        private IEnumerator<BossAnimation> animEnumerator;
 
         // 🏃‍ PUBLIC METHODS ----------------------------------------------------------------
         public EyeBossPhaseLaserCharge(int phaseNumber)
         {
             this.phaseNumber = phaseNumber;
-            attackingState = AttackState.entering;
         }
 
         public void Initialise(AIBoss bossController, EyeBossShoot bossWeapon, Transform bossTransform)
@@ -45,6 +37,7 @@ namespace EyeBoss
             
             this.bossWeapon.SetPhase(phaseNumber);
             bossController.EyeAnimationObject.LookDirection = DirectionToPlayer;
+            InitialiseAnimation();
         }
 
         public void GoToNextState()
@@ -52,6 +45,8 @@ namespace EyeBoss
             IEyeBossAiState nextState;
 
             nextState = new EyeBossPhaseRings(phaseNumber+1);
+            bossController.EyeAnimationObject.StartWandering();
+            bossController.EyeAnimationObject.ChargeUpdate(0f);
 
             nextState.Initialise(bossController, bossWeapon, bossTransform);
 
@@ -59,96 +54,106 @@ namespace EyeBoss
             Debug.Log("Phase number "+ phaseNumber);
         }
 
+        private void InitialiseAnimation()
+        {
+            animationParts = new List<BossAnimation>();
+
+            BossAnimation enterstate = new BossAnimation().
+                AddAnimationPart(
+                    animationDuration: 600,
+                    animationFunction: _ => { 
+                        Debug.Log("enterstate");
+                        if (bossTransform.position.y > LOWEST_POSITION)
+                        {
+                            Debug.Log("entering");
+                            bossController.Move(Vector3.down);
+                        }   
+                        else
+                        {
+                            animEnumerator.MoveNext();
+                            Debug.Log("move to move state");
+                        }
+                });
+            animationParts.Add(enterstate);
+
+            BossAnimation movestate = new BossAnimation().AddAnimationPart(
+                //animationDuration: 60 * Random.Range(1, 4),
+                animationDuration: 20,
+                animationFunction: _ =>
+                {
+                    BossMove(bossTransform, bossTransform.position, DistanceToXBound());
+                    Debug.Log("moving");
+                })
+                .AddAnimationFrame( _ => {
+                    bossController.EyeAnimationObject.StartFrantic();
+                    animEnumerator.MoveNext();
+                    Debug.Log("move to look state");
+
+                });
+            animationParts.Add(movestate);
+
+            BossAnimation lookingState = new BossAnimation().
+                AddDelay(180).
+                AddAnimationFrame( _ => {
+                    UnlockPlayerPosition();
+                    bossController.EyeAnimationObject.StartTracking();
+                    animEnumerator.MoveNext();
+                    Debug.Log("move to charge state");
+                });
+            animationParts.Add(lookingState);
+
+            BossAnimation chargeSubstates = new BossAnimation().
+                AddAnimationFrame( _ => UnlockPlayerPosition()).
+                AddDelay(89).
+                AddAnimationFrame( _ => LockPlayerPosition());
+
+            const int chargeDuration = 180;
+            BossAnimation chargeState = new BossAnimation().
+                AddAnimationPart(
+                    chargeDuration,
+                    (int f) => {
+                        chargeSubstates.FrameUpdate();
+                        float percent = (float) f / (float) chargeDuration;
+                        bossController.EyeAnimationObject.ChargeUpdate(percent);
+                }).AddAnimationFrame( _ => {
+                    animEnumerator.MoveNext();
+                    Debug.Log("move to attack state");
+                });
+            animationParts.Add(chargeState);
+
+            BossAnimation attackState = new BossAnimation().
+                AddDelay(7).
+                AddAnimationFrame(_ => {
+                    bossController.EyeAnimationObject.ChargeUpdate(0f);
+                    Shoot(bossTransform, bossWeapon, bossController);
+                }).AddDelay(60).
+                AddAnimationFrame(_ => {
+                    bossController.EyeAnimationObject.StartWandering();
+                    animEnumerator.MoveNext();
+                    Debug.Log("move to cool down");
+                });
+            animationParts.Add(attackState);
+
+            BossAnimation cooldownState = new BossAnimation().
+                AddDelay(10).
+                AddAnimationFrame(_ => { 
+                    animEnumerator = animationParts.GetEnumerator();
+                    animEnumerator.MoveNext();
+                    // skip entry state
+                    //animEnumerator.MoveNext();
+                    Debug.Log("reset from cool down");
+                });
+            animationParts.Add(cooldownState);
+
+            animEnumerator = animationParts.GetEnumerator();
+            animEnumerator.MoveNext();
+        }
+
         public void UpdateFrame()
         {
-            switch(attackingState)
-            {
-                case AttackState.entering:
-
-                    if (bossTransform.position.y > LOWEST_POSITION)
-                        bossController.Move(Vector3.down);
-                    else
-                        attackingState = AttackState.moving;
-
-                    break;
-                case AttackState.moving:
-                    framesSinceLastCheck++;
-
-                    // wait random time until attack again
-                    if (framesSinceLastCheck > 60)
-                    {
-                        bool attacking = Random.Range(0, 100) < 25;
-                        framesSinceLastCheck = 0;
-                        if(attacking)
-                        {
-                            bossController.EyeAnimationObject.StartFrantic();
-                            attackingState = AttackState.looking;
-                        }
-                    }
-
-                    BossMove(bossTransform, bossTransform.position, DistanceToXBound());
-                    break;
-                case AttackState.looking:
-                    framesSinceLastCheck++;
-
-                    if (framesSinceLastCheck > 180)
-                    {
-                        framesSinceLastCheck = 0;
-                        attackingState = AttackState.charging;
-                        
-                        bossController.EyeAnimationObject.StartTracking();
-                    }
-
-                    break;
-                case AttackState.charging:
-                    const int chargeDuration = 180;
-                    framesSinceLastCheck++;
-
-                    // Stop following player after 90 frames
-                    if(framesSinceLastCheck == 1)
-                        UnlockPlayerPosition();
-                    if(framesSinceLastCheck == 90)
-                        LockPlayerPosition();
-
-
-                    if (framesSinceLastCheck > chargeDuration)
-                    {
-                        framesSinceLastCheck = 0;
-                        attackingState = AttackState.shooting;
-                    }
-
-                    float percent = (float)framesSinceLastCheck / (float)chargeDuration;
-                    bossController.EyeAnimationObject.ChargeUpdate(percent);
-                    break;
-                case AttackState.shooting:
-                    framesSinceLastCheck++;
-
-                    // attack for 1 frame
-                    if (framesSinceLastCheck == 7)
-                    {
-                        bossController.EyeAnimationObject.ChargeUpdate(0f);
-
-                        Shoot(bossTransform, bossWeapon, bossController);
-                    }
-                    // delay a little after attack
-                    else if(framesSinceLastCheck > 60)
-                    {
-                        framesSinceLastCheck = 0;
-                        bossController.EyeAnimationObject.StartWandering();
-                        attackingState = AttackState.cooldown;
-                    }
-
-                    break;
-                case AttackState.cooldown:
-                    framesSinceLastCheck++;
-                    if (framesSinceLastCheck > 180)
-                    {
-                        framesSinceLastCheck = 0;
-                        attackingState = AttackState.moving;
-                    }
-
-                    break;
-            }            
+            animEnumerator.Current.FrameUpdate();    
+            Debug.Log(animEnumerator.Current);
+            Debug.Log(animationParts.Count);        
         }
 
         // 🤫 PRIVATE METHODS ----------------------------------------------------------------
