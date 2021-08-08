@@ -11,22 +11,28 @@ public class BossAnimation
     private int currentFrame = 0;
     private float remainderFrames = 0f;
     private float? attackSpeed = null;
-
+    private static int ID_COUNT = 0;
+    public readonly int ID;
     private struct BossAnimationPart
     {
+        private static int ID_COUNT = 0;
+        public readonly int ID;
+
+        public int Duration { get; private set; }
+        public AnimationFunction AnimateUpdate { get; private set; }
+
         public BossAnimationPart(int animationDurationInFrames, AnimationFunction animationFunction)
         {
             this.Duration = animationDurationInFrames;
             this.AnimateUpdate = animationFunction;
+            ID = ++ID_COUNT;
         }
-
-        public int Duration { get; private set; }
-        public AnimationFunction AnimateUpdate { get; private set; }
     }
 
     public BossAnimation()
     {
         partsList = new List<BossAnimationPart>();
+        ID = ++ID_COUNT;
     }
 
     private BossAnimation AddAnimationPart(BossAnimationPart animationPart)
@@ -49,16 +55,30 @@ public class BossAnimation
     {
         return AddAnimationPart(new BossAnimationPart(1, animationFunction));
     }
+    
+    public BossAnimation AddEnd(AnimationFunction animationFunction)
+    {
+        return AddAnimationFrame((int f) => {
+            partsIterator.Reset();
+            partsIterator.MoveNext();
+            if(animationFunction != null)
+                animationFunction(f);   
+        });
+    }
+    public BossAnimation AddEnd()
+    {
+        return AddEnd(null);
+    }
 
     public void FrameUpdate()
     {
-        Debug.Log("frup");
         if(partsIterator == null)
         {
             partsIterator = partsList.GetEnumerator();
             partsIterator.MoveNext();
         }
-
+        Debug.Log($"anim id {ID}, part id {partsIterator.Current.ID}");
+        // TODO: iterator doesn't get reset when looping back, how can we reset it?
         if(animationRunning)
         {
             if(currentFrame >= partsIterator.Current.Duration)
@@ -86,6 +106,7 @@ public class BossAnimation
             }
         }
     }
+
 
     public void SetTimeScale(float timeScale)
     {

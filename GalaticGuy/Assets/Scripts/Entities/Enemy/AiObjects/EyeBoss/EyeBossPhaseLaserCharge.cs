@@ -73,7 +73,7 @@ namespace EyeBoss
                             animEnumerator.MoveNext();
                             Debug.Log("move to move state");
                         }
-                });
+                }).AddEnd();
             animationParts.Add(enterstate);
 
             BossAnimation movestate = new BossAnimation().AddAnimationPart(
@@ -86,7 +86,6 @@ namespace EyeBoss
                 })
                 .AddAnimationFrame( _ => {
                     bossController.EyeAnimationObject.StartFrantic();
-                    animEnumerator.MoveNext();
                     Debug.Log("move to look state");
 
                 });
@@ -97,7 +96,6 @@ namespace EyeBoss
                 AddAnimationFrame( _ => {
                     UnlockPlayerPosition();
                     bossController.EyeAnimationObject.StartTracking();
-                    animEnumerator.MoveNext();
                     Debug.Log("move to charge state");
                 });
             animationParts.Add(lookingState);
@@ -116,7 +114,6 @@ namespace EyeBoss
                         float percent = (float) f / (float) chargeDuration;
                         bossController.EyeAnimationObject.ChargeUpdate(percent);
                 }).AddAnimationFrame( _ => {
-                    animEnumerator.MoveNext();
                     Debug.Log("move to attack state");
                 });
             animationParts.Add(chargeState);
@@ -129,7 +126,6 @@ namespace EyeBoss
                 }).AddDelay(60).
                 AddAnimationFrame(_ => {
                     bossController.EyeAnimationObject.StartWandering();
-                    animEnumerator.MoveNext();
                     Debug.Log("move to cool down");
                 });
             animationParts.Add(attackState);
@@ -137,13 +133,19 @@ namespace EyeBoss
             BossAnimation cooldownState = new BossAnimation().
                 AddDelay(10).
                 AddAnimationFrame(_ => { 
-                    animEnumerator = animationParts.GetEnumerator();
-                    animEnumerator.MoveNext();
-                    // skip entry state
-                    //animEnumerator.MoveNext();
                     Debug.Log("reset from cool down");
+                }).AddEnd(_ => {
+                    animEnumerator.Reset();
+                    animEnumerator.MoveNext();
                 });
             animationParts.Add(cooldownState);
+
+            for (int i = 1; i < animationParts.Count - 1; i++)
+            {
+                animationParts[i].AddEnd(_ => {
+                    animEnumerator.MoveNext();
+                });
+            }
 
             animEnumerator = animationParts.GetEnumerator();
             animEnumerator.MoveNext();
