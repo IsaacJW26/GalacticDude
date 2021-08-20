@@ -137,7 +137,7 @@ MonoBehaviour:
   player: 0
   projectiles: 1
   enemies: 1
-  destroyOnHit: 1
+  destroyOnHit: 0
   rotateTowardsDirection: 0
   audioClip: 0
 --- !u!50 &1069531354422499561
