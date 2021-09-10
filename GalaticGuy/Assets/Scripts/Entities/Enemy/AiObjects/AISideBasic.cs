@@ -7,6 +7,8 @@ public class AISideBasic : EnemyAI
     readonly float moveDownDistance = 0.6f;
     [SerializeField]
     float lowestPosition = 0f;
+    [SerializeField]
+    float gradient = 1f;
     bool movingDown = true;
     bool movingRight = true;
 
@@ -53,7 +55,7 @@ public class AISideBasic : EnemyAI
         if (movingDown)
             direction += Vector3.down;
 
-        direction += (Vector3.down / 2f);
+        direction += (Vector3.down * gradient);
 
         Move(direction);
         //Shoot(Vector3.down);

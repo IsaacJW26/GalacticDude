@@ -84,7 +84,7 @@ MonoBehaviour:
   deathChildren: []
   minBounty: 1
   maxBounty: 2
-  bountyChance: 4
+  bountyChance: 1
   explosionScale: 1
 --- !u!114 &7977547823748359183
 MonoBehaviour:
@@ -100,7 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_PROJECTILES: 5
   shootInterval: 180
-  projectileSpeed: 2
   projectile: {fileID: 7674457554669734050, guid: 05796e3e6ad4b524e92a198c0fc716b8,
     type: 3}
   projectilePoint: {fileID: 9119908270630566906}
@@ -171,6 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lowestPosition: 0
+  gradient: 1
 --- !u!114 &-1096931678121354438
 MonoBehaviour:
   m_ObjectHideFlags: 0

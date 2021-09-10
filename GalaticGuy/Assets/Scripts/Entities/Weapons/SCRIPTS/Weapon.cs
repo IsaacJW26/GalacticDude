@@ -159,27 +159,37 @@ public class Weapon : MonoBehaviour, IShooter, IWeapon
 
     public virtual void OnShootButtonHold()
     {
-        SetCharge(state.currentCharge + currentStats.chargeRate);
+        float percent = state.currentCharge / (float) WeaponManager.MAX_CHARGE;
+
         //dont slow down until significantly held
         //TODO replace magic number :/
-        if (heldDuration > 20)
+        if(heldDuration == 15)
         {
+            Debug.Log($"Player start charging, held duration: {heldDuration}, charge percent {percent}");
+            GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStartCharge);
+        }
+        else if (heldDuration > 15)
+        {
+            SetCharge(state.currentCharge + currentStats.chargeRate);
             movement.SlowDown(slowPercent: currentStats.chargeSlowDown);
             manager.OnCharge();
-            float percent = state.currentCharge / (float) WeaponManager.MAX_CHARGE;
             manager.SetEmissionLevel(percent);
         }
-
-        //TODO replace magic number :/
-        if (heldDuration == 10)
+        else
         {
-            GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStartCharge);
+            GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStopCharge);
         }
     }
 
     public virtual void OnShootButtonRelease()
     {
-        TryShoot(manager.GetPlayerDirection());
+        if(heldDuration <= 15 || state.currentCharge >= WeaponManager.MAX_CHARGE)
+        {
+            TryShoot(manager.GetPlayerDirection());
+        }
+        beingHeld = false;
+        heldDuration = 0;
+        GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStopCharge);
     }
 
     public virtual void TryShoot(Vector3 direction)
@@ -207,8 +217,7 @@ public class Weapon : MonoBehaviour, IShooter, IWeapon
             //reset charge
             SetCharge(0);
         }
-        beingHeld = false;
-        heldDuration = 0;
+ 
         manager.OnChargeEnd();
     }
 

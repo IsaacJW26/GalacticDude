@@ -137,15 +137,14 @@ public class AsteroidAI : EnemyAI
             if(collisionPoint.y > direction.y)
             {
                 //speed up
-                yval = direction.y * 1.5f;
+                yval = direction.y * 2f;
                 move.speed *= 1.15f;
             }
             else
             {
-                move.speed *= 0.95f;
+                move.speed *= 0.80f;
 
-                //slow down
-                //yval = direction.y * 0.8f;
+                yval = direction.y * 1.10f;
             }
 
             direction = new Vector3(-direction.x, yval).normalized;

@@ -229,13 +229,19 @@ public class SoundManager : MonoBehaviour
     [ContextMenu("Start Charging")]
     public void StartCharging()
     {
-        chargingEmitter.Play();
+        if(!chargingEmitter.IsPlaying())
+        {
+            chargingEmitter.Play();
+        }
     }
 
     [ContextMenu("Stop Charging")]
     public void StopCharging()
     {
-        chargingEmitter.Stop();
+        if(chargingEmitter.IsPlaying())
+        {
+            chargingEmitter.Stop();
+        }
     }
 
     [ContextMenu("Start Boss Music")]
