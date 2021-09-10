@@ -53,7 +53,7 @@ MonoBehaviour:
   relativeShoot: {x: 0, y: 0}
   projectileDefault: {fileID: 3735054432054898068, guid: a7a8387a59411ed4488a3890527ddddd,
     type: 3}
-  projectileMedium: {fileID: 3735054432054898068, guid: ba7101d3824c60f46a78d0c39071231b,
+  projectileMedium: {fileID: 5692928875460624385, guid: ba7101d3824c60f46a78d0c39071231b,
     type: 3}
   projectileMax: {fileID: 8038325770130421891, guid: d9455d972a96e004d9fe70fcfe0c4d76,
     type: 3}

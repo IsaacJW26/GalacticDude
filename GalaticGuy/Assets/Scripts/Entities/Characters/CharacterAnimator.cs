@@ -21,6 +21,7 @@ public class CharacterAnimator : MonoBehaviour, ICharacterAnimator
 
     void ICharacterAnimator.Move(Vector2 velocity)
     {
+        
         switch(Comparitors.FloatCompare(velocity.y, 0f))
         {
             //moving down
@@ -59,6 +60,7 @@ public class CharacterAnimator : MonoBehaviour, ICharacterAnimator
                 animator.SetBool(AnimProperties.MOVE_LEFT, false);
                 break;
         }
+        
     }
 
     void ICharacterAnimator.OnDeath()

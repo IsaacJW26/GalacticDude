@@ -4795,6 +4795,33 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &5692928875460624385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4654127213129162372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0395757bc955c4d8e6970a0968e3c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    damage: 1
+    initialSpeed: 0.5
+    yAccelerationOverTime: 6
+    dragOverTime: 1
+    maxLifeTime: 180
+    hp: 1
+  player: 0
+  projectiles: 1
+  enemies: 1
+  destroyOnHit: 1
+  rotateTowardsDirection: 0
+  audioClip: 1
+  explosion: {fileID: 2415089997106798859, guid: e26520f6cf8980e4cb7f55ead3b88333,
+    type: 3}
 --- !u!1001 &5161839547234442996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4860,7 +4887,7 @@ PrefabInstance:
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: stats.hp
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
@@ -5034,6 +5061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3333804251504392022, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
+    - {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8022621cf3437834085c47560e4ce33e, type: 3}
 --- !u!1 &4654127213129162372 stripped
 GameObject:

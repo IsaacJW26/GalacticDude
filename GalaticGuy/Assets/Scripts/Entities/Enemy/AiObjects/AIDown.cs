@@ -19,7 +19,7 @@ public class AIDown : EnemyAI
     private Shield innerShieldObj;
     private Shield outerShieldObj;
 
-    public override void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
+    public override void Initialise(Movement movement, MainCharacter player, IShooter shoot)
     {
         base.Initialise(movement, player, shoot);
         var rb = GetComponent<Rigidbody2D>();

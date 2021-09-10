@@ -10,6 +10,8 @@ public class EffectManager : MonoBehaviour
     IEnumerator slowFunction;
     [SerializeField]
     GameObject Explosion = null;
+    [SerializeField]
+    GameObject ProjectileHit = null;
 
     // Start is called before the first frame update
     void Awake()
@@ -65,10 +67,17 @@ public class EffectManager : MonoBehaviour
         GameObject obj = Instantiate(Explosion);
         obj.transform.localScale *= scale;
         obj.transform.position = position;
-        StartCoroutine(RemoveExposion(obj, 5f));
+        StartCoroutine(RemoveEffect(obj, 5f));
     }
 
-    private IEnumerator RemoveExposion(GameObject instance, float duration)
+    public void CreateProjectileHit(Vector3 position)
+    {
+        GameObject obj = Instantiate(ProjectileHit);
+        obj.transform.position = position;
+        StartCoroutine(RemoveEffect(obj, 2f));
+    }
+
+    private IEnumerator RemoveEffect(GameObject instance, float duration)
     {
         yield return new WaitForSeconds(duration);
         Destroy(instance);

@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour, IDamageable
         public int damage;
         public float initialSpeed;
         public float yAccelerationOverTime = 0f;
-        [Range(1f,1000f)]
+        [Range(1f,10f)]
         public float dragOverTime = 1f;
 
         public int maxLifeTime = DEFAULT_LIFETIME;
@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour, IDamageable
 
     Rigidbody2D rb;
     protected Vector2 velocity;
-    protected Shooter parent;
+    protected IShooter parent;
 
     [SerializeField]
     protected Stats stats;
@@ -39,12 +39,18 @@ public class Projectile : MonoBehaviour, IDamageable
     [SerializeField]
     bool destroyOnHit = true;
     [SerializeField]
+    bool rotateTowardsDirection = false;
+    [SerializeField]
     private AudioEventNames audioClip = AudioEventNames.PlayerFireSmallBullet;
-    
+
     protected virtual void FixedUpdate()
     {
-        velocity = GetVelocity();
-        rb.velocity = velocity;
+        if(rb != null)
+        {
+            velocity = GetVelocity();
+            rb.velocity = velocity;
+        }
+        
         timeSinceBirth++;
 
         if (timeSinceBirth > stats.maxLifeTime)
@@ -59,7 +65,7 @@ public class Projectile : MonoBehaviour, IDamageable
         return (accelerated*(Time.fixedDeltaTime)  + velocity * (1f-Time.fixedDeltaTime));
     }
 
-    public void Initialise(int index, Shooter parent)
+    public void Initialise(int index, IShooter parent)
     {
         if (stats.maxLifeTime <= 0)
             stats.maxLifeTime = Stats.DEFAULT_LIFETIME;
@@ -67,6 +73,19 @@ public class Projectile : MonoBehaviour, IDamageable
 
         this.index = index;
         this.parent = parent;
+
+        OnInitialise();
+    }
+
+    public void Initialise()
+    {
+        if (stats.maxLifeTime <= 0)
+            stats.maxLifeTime = Stats.DEFAULT_LIFETIME;
+        
+        rb = GetComponent<Rigidbody2D>();
+
+        this.index = 0;
+        this.parent = null;
 
         OnInitialise();
     }
@@ -84,7 +103,16 @@ public class Projectile : MonoBehaviour, IDamageable
         gameObject.SetActive(this);
         GameManager.AudioEvents.PlayAudio(audioClip);
 
-        //Debug.Log(velocity+ ", "+direction+", "+stats.initialSpeed);
+        // 
+        if(rotateTowardsDirection)
+        {
+            float zRotation = Vector3.Angle(Vector2.down, direction);
+            // flip direction if on left
+            if(direction.x < 0f)
+                zRotation *= -1f;
+
+            transform.rotation = Quaternion.Euler(0, 0, zRotation);
+        }
     }
 
     //default behaviour: destroy on hit
@@ -94,6 +122,7 @@ public class Projectile : MonoBehaviour, IDamageable
             CheckPlayer(collision) ||
             CheckProj(collision))
         {
+
             //damage hit target
             IDamageable damageable = collision.GetComponentInParent<IDamageable>();
             damageable?.OnDamage(stats.damage);
@@ -127,14 +156,22 @@ public class Projectile : MonoBehaviour, IDamageable
     //Destroys 
     public virtual void OnDamage(int inDamage)
     {
+        EffectManager.INSTANCE.CreateProjectileHit(transform.position);
+
         stats.hp--;
         if (destroyOnHit && stats.hp <= 0)
             DisableObject();
     }
 
+    public virtual void OnDeath()
+    {  }
+
     public virtual void DisableObject()
     {
-        parent.DisableProjectile(this);
+        if(parent != null)
+            parent.DisableProjectile(this);
+        else
+            Destroy(gameObject);
     }
 
     public int GetIndex()

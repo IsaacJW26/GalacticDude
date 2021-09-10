@@ -28,9 +28,9 @@ MonoBehaviour:
     squads: []
   levels:
   - difficulty: 0
-    length: 10
+    length: 25
     containsBoss: 0
-    averageTime: 40
+    averageTime: 5
   - difficulty: 0
     length: 20
     containsBoss: 0

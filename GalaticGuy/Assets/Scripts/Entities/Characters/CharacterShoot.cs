@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterShoot : MonoBehaviour, Shooter
+public class CharacterShoot : MonoBehaviour, IShooter
 {
     [SerializeField]
     int MAX_PROJECTILES = 20;
@@ -11,10 +11,6 @@ public class CharacterShoot : MonoBehaviour, Shooter
     [SerializeField]
     int shootInterval = 35;
     
-    [SerializeField]
-    float projectileSpeed = 3f;
-    public float ProjectileSpeed { get => projectileSpeed; private set => projectileSpeed = value; }
-
     [SerializeField]
     Projectile projectile = null;
     
@@ -55,10 +51,10 @@ public class CharacterShoot : MonoBehaviour, Shooter
         if(timeUntilNextShot <= 0)
         {
             timeUntilNextShot = shootInterval;
-            Shoot(direction.normalized * ProjectileSpeed);
+            Shoot(direction.normalized);
         }
     }
-
+    
     private void Shoot(Vector3 velocity)
     {
         GameManager.AudioEvents.PlayAudio(EnemyShootEvent);
@@ -80,8 +76,9 @@ public class CharacterShoot : MonoBehaviour, Shooter
         return null;
     }
 
-    public void DestroyPool()
+    public void OnShooterDestroy()
     {
+        // recursively destroy all objects in the pool
         for (int ii = 0; ii < MAX_PROJECTILES; ii++)
         {
             Destroy(objectPool[ii].gameObject);
@@ -95,7 +92,9 @@ public class CharacterShoot : MonoBehaviour, Shooter
     }
 }
 
-public interface Shooter
+public interface IShooter
 {
+    void TryShoot(Vector3 direction);
     void DisableProjectile(Projectile proj);
+    void OnShooterDestroy();
 }

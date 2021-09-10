@@ -14,7 +14,7 @@ public class AIPredictor : EnemyAI
 
     Vector3 dir;
 
-    public override void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
+    public override void Initialise(Movement movement, MainCharacter player, IShooter shoot)
     {
         base.Initialise(movement,player,shoot);
         if (transform.position.y < lowestPosition)
@@ -68,7 +68,8 @@ public class AIPredictor : EnemyAI
         {
             var player = GameManager.INST.GetPlayerPos();
             var ourPos = transform.position;
-            float angle = Mathf.Acos((player.x * ourPos.x + player.y * ourPos.y) / (velocity.magnitude * shoot.ProjectileSpeed));
+            var charShoot = shoot as CharacterShoot;
+            float angle = Mathf.Acos((player.x * ourPos.x + player.y * ourPos.y) / (velocity.magnitude));
             float x = Mathf.Cos(angle);
             float y = -Mathf.Sin(angle);
             dir = new Vector3(x, y).normalized;
@@ -115,6 +116,7 @@ public class AIPredictor : EnemyAI
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(transform.position, dir * shoot.ProjectileSpeed);
+        var charShoot = shoot as CharacterShoot;
+        Gizmos.DrawRay(transform.position, dir);
     }
 }

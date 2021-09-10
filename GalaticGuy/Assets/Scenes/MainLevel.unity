@@ -15190,6 +15190,26 @@ PrefabInstance:
       propertyPath: m_Text
       value: Wave Cleared
       objectReference: {fileID: 0}
+    - target: {fileID: 566476722283182095, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 566476722283182095, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 566476722283182095, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 566476722097281982, guid: 8fbe6aaa445976e48aedf89f6b881140,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 566476721278711857, guid: 8fbe6aaa445976e48aedf89f6b881140, type: 3}
     - {fileID: 566476721543331962, guid: 8fbe6aaa445976e48aedf89f6b881140, type: 3}

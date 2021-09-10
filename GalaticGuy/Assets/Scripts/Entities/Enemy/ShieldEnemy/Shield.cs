@@ -51,4 +51,7 @@ public class Shield : MonoBehaviour, IDamageable
             sprite.color = new Color(1f, 1f, 1f, percentHP);
         }
     }
+
+    public void OnDeath()
+    { }
 }

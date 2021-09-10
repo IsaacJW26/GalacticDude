@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, Shooter, IWeapon
+public class Weapon : MonoBehaviour, IShooter, IWeapon
 {
     protected int timeUntilNextShot
     { get; private set; }
@@ -179,6 +179,11 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
 
     public virtual void OnShootButtonRelease()
     {
+        TryShoot(manager.GetPlayerDirection());
+    }
+
+    public virtual void TryShoot(Vector3 direction)
+    {
         GameManager.AudioEvents.PlayAudio(AudioEventNames.PlayerStopCharge);
         //successfully shoot
         //frame limit exists to stop spamming
@@ -188,16 +193,16 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
 
             if (state.currentCharge >= WeaponManager.MAX_CHARGE)
             {
-                ShootMax(manager.GetPlayerDirection(), manager.GetLaunchPosition());
+                ShootMax(direction, manager.GetLaunchPosition());
                 movement.SlowDown(currentStats.shootSlowMax, currentStats.slowDuration);
             }
             else if (state.currentCharge >= currentStats.chargeTier)
             {
-                ShootMedium(manager.GetPlayerDirection(), manager.GetLaunchPosition());
+                ShootMedium(direction, manager.GetLaunchPosition());
             }
             else
             {
-                ShootDefault(manager.GetPlayerDirection(), manager.GetLaunchPosition());
+                ShootDefault(direction, manager.GetLaunchPosition());
             }
             //reset charge
             SetCharge(0);
@@ -291,5 +296,10 @@ public class Weapon : MonoBehaviour, Shooter, IWeapon
     {
         //stub
         throw new NotImplementedException();
+    }
+
+    public void OnShooterDestroy()
+    {
+
     }
 }

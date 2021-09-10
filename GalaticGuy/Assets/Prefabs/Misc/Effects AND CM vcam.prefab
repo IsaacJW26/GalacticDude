@@ -157,3 +157,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Explosion: {fileID: 5699222086619254338, guid: beab8132b2a77ec4b8fc185fec7b1ae1,
     type: 3}
+  ProjectileHit: {fileID: 2282634219719511408, guid: 18375ef49e270b546a73a3e3e94e21e5,
+    type: 3}

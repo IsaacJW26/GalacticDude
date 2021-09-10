@@ -117,8 +117,6 @@ public class EnemySpawner : MonoBehaviour
                 DecreaseThreat();
             }
         }
-
-        Debug.Log("spawner threat: " + threatlevel);
     }
 
     private void IncreaseThreat()

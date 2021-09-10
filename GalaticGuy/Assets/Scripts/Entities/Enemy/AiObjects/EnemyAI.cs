@@ -6,9 +6,9 @@ public abstract class EnemyAI : MonoBehaviour
 {
     protected Movement movement;
     protected MainCharacter player;
-    protected CharacterShoot shoot;
+    protected IShooter shoot;
 
-    public virtual void Initialise(Movement movement, MainCharacter player, CharacterShoot shoot)
+    public virtual void Initialise(Movement movement, MainCharacter player, IShooter shoot)
     {
         this.movement = movement;
         this.player = player;
