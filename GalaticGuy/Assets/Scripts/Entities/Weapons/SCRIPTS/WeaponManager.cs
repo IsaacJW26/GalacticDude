@@ -20,7 +20,10 @@ public class WeaponManager : MonoBehaviour, IWeaponManager
     float defaultEmission;
     Vector3 defaultSize;
 
-    bool held = false;
+    bool pressed = false;
+    int framesPressed = 0;
+    const int HELD_THRESHOLD = 15;
+
     
     // Start is called before the first frame update
     void Start()
@@ -37,25 +40,21 @@ public class WeaponManager : MonoBehaviour, IWeaponManager
     void FixedUpdate()
     {
         current.FixedUpdate();
-        if(held)
-        {
-            current.OnShootButtonHold();
-        }
     }
 
     public void OnShootButtonDown()
     {
-        if (!held)
+        if (!pressed)
         {
-            held = true;
-
+            pressed = true;
+            framesPressed = 0;
             current.OnShootButtonDown();
         }
     }
 
     public void OnShootButtonHold()
     {
-        //current.OnShootButtonHold();
+        current.OnShootButtonHold();
     }
 
     public IWeapon GetCurrentWeapon()
@@ -65,10 +64,10 @@ public class WeaponManager : MonoBehaviour, IWeaponManager
 
     public void OnShootButtonRelease()
     {
-        if (held)
+        if (pressed)
         {
-            held = false;
-
+            pressed = false;
+            framesPressed = 0;
             current.OnShootButtonRelease();
         }
     }

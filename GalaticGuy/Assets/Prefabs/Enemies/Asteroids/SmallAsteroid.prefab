@@ -118,7 +118,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_PROJECTILES: 0
   shootInterval: 35
-  projectileSpeed: 3
   projectile: {fileID: 0}
   projectilePoint: {fileID: 0}
   EnemyShootEvent: 22
@@ -160,8 +159,8 @@ MonoBehaviour:
     onDamageAudio: 16
     onDeathAudio: 17
   deathChildren: []
-  minBounty: 10
-  maxBounty: 20
+  minBounty: 4
+  maxBounty: 7
   bountyChance: 4
   explosionScale: 3
 --- !u!95 &366538063770070296
