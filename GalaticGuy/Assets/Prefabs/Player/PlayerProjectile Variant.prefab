@@ -12,6 +12,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerProjectile Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: player
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: destroyOnHit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
+        type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -65,11 +80,6 @@ PrefabInstance:
     - target: {fileID: 519112092338487423, guid: 8022621cf3437834085c47560e4ce33e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8392208931838604128, guid: 8022621cf3437834085c47560e4ce33e,
-        type: 3}
-      propertyPath: player
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

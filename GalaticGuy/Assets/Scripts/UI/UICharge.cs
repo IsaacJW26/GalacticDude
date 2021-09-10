@@ -7,20 +7,19 @@ using Labels;
 public class UICharge : MonoBehaviour
 {
     [SerializeField]
-    Slider chargebarL;
+    Slider chargebarL = null;
     [SerializeField]
-    Slider chargebarR;
+    Slider chargebarR = null;
 
     [SerializeField]
-    Image chargeBarLFilled;
+    Image chargeBarLFilled = null;
     [SerializeField]
-    Image chargeBarRFilled;
+    Image chargeBarRFilled = null;
 
-    [SerializeField]
-    AudioClip filledClip;
-    [SerializeField]
-    AudioClip chargingClip;
-    AudioSource audioSource;
+    private AudioEventNames filledClip = AudioEventNames.PlayerFullyCharged;
+
+    private AudioEventNames chargingClip = AudioEventNames.PlayerStartCharge;
+
 
     Animator anim;
     bool isCharging, chargingR;
@@ -39,8 +38,6 @@ public class UICharge : MonoBehaviour
         chargeBarLFilled.enabled = false;
         chargeBarRFilled.enabled = false;
         isCharging = false;
-
-        audioSource = GameManager.audioManager.CreatePeristentAudio(gameObject, chargingClip, looping: false, play: false);
     }
 
     private void InitialiseCharge(float percentOfMax)
@@ -70,21 +67,21 @@ public class UICharge : MonoBehaviour
 
         if(chargebarR.value >= 1f && !chargeBarRFilled.enabled)
         {
-            GameManager.audioManager.CreateReplacableAudio(filledClip);
+            GameManager.AudioEvents.PlayAudio(filledClip);
 
             chargeBarRFilled.enabled = true;
         }
 
         if(!chargingR)
         {
-            GameManager.audioManager.CreateReplacableAudio(filledClip);
+            GameManager.AudioEvents.PlayAudio(filledClip);
+
             chargingR = true;
         }
     }
 
     private void Update()
     {
-        //anim.SetBool(AnimProperties.CHARGING, chargingL);
         chargeDuration += Time.deltaTime;
 
         if (isCharging)
@@ -103,21 +100,6 @@ public class UICharge : MonoBehaviour
             }
         }
 
-        //still charging
-        if (timeSinceLastCharge < CHARGE_TIME_THRESHOLD
-            && !chargeBarRFilled.enabled
-            && chargeDuration > MIN_CHARGE_DURATION)
-        {
-            if(!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-            audioSource.pitch += PITCH_INCREASE_RATE * Time.deltaTime;
-        }
-        else
-        {
-            audioSource.Stop();
-            audioSource.pitch = BASE_PITCH;
-        }
     }
 }
+

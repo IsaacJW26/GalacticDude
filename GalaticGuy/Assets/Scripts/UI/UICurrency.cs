@@ -5,14 +5,57 @@ using UnityEngine.UI;
 
 public class UICurrency : MonoBehaviour
 {
+    public static UICurrency INST = null;
+
     [SerializeField]
-    Image currencyImage;
+    private Image currencyImage = null;
+
+    public int currency = 0;
+
+    public Image CurrencyImage
+    {
+        get
+        {
+            if (currencyImage == null)
+                currencyImage = GetComponent<Image>();
+
+            return currencyImage;
+        }
+    }
+
+    public void Awake()
+    {
+        if(INST == null)
+            INST = this;
+        else
+            Destroy(this);
+    }
+
     [SerializeField]
-    Text currencyText;
+    private Text currencyText = null;
+
+    public Text CurrencyText
+    {
+        get
+        {
+            if (currencyText == null)
+                currencyText = GetComponent<Text>();
+
+            return currencyText;
+        }
+    }
+
+    // Place holder to load currency, as shop manager managed it previously
+    // and now is disabled
+    public void AddCurrency()
+    {
+        currency++;
+        UpdateCurrency(currency*10);
+    }
 
     public void UpdateCurrency(int value)
     {
-        currencyText.text = string.Format("{0:#,#}", value);
+        CurrencyText.text = string.Format("{0:#,#}", value);
     }
 
     [ContextMenu("Test 0")]

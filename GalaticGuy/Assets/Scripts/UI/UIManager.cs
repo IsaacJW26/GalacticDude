@@ -8,15 +8,32 @@ public class UIManager : MonoBehaviour
 
     UICharge charge;
     UIHp health;
-    UIShop storeUI;
 
     [SerializeField]
-    UnityEngine.UI.Text UiText;
+    UnityEngine.UI.Text uiText = null;
+    private UnityEngine.UI.Text UiText
+    { get
+        {
+            if (uiText == null)
+                uiText = GetComponentInChildren<UnityEngine.UI.Text>();
+            return uiText;
+        }
+    }
+
     [SerializeField]
-    GameObject Uibackground;
+    GameObject uibackground = null;
+
+    private GameObject Uibackground
+    { get
+        {
+            if (uibackground == null)
+                uibackground = GameObject.Find("HP Background");
+            return uibackground;
+        }
+    }
     const string STR_CLEAR = "Wave Cleared";
     const string STR_INCOMING = "Wave Incoming";
-    const string STR_WON = "END";
+    const string STR_WON = "YOU WIN";
     const string STR_DEAD = "Game Over\nHold any key to try again";
 
 
@@ -30,7 +47,6 @@ public class UIManager : MonoBehaviour
 
         charge = GetComponentInChildren<UICharge>();
         health = GetComponentInChildren<UIHp>();
-        storeUI = GetComponentInChildren<UIShop>();
     }
 
     // Update is called once per frame
@@ -61,8 +77,6 @@ public class UIManager : MonoBehaviour
         charge.gameObject.SetActive(true);
         health.gameObject.SetActive(true);
         Uibackground.SetActive(true);
-        //disable store
-        storeUI.SetStoreActive(false);
     }
 
     //
@@ -81,7 +95,9 @@ public class UIManager : MonoBehaviour
     public void EndGame()
     {
         //activate text
-        UiText.text = STR_WON;
+        UiText.text =
+        $"{STR_WON}\n{UICurrency.INST.currency*10}";
+
         UiText.gameObject.SetActive(true);
 
         //disable everything else
@@ -93,8 +109,6 @@ public class UIManager : MonoBehaviour
     //deactivate everything
     public void PurchasePhase()
     {
-        //activate store ui
-        storeUI.SetStoreActive(true);
         //
         UiText.gameObject.SetActive(false);
         charge.gameObject.SetActive(false);
