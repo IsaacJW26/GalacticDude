@@ -9,12 +9,15 @@ public class Movement : MonoBehaviour, ISpeed
     ICharacterAnimator anim;
     protected Rigidbody2D rb;
     [SerializeField]
-    public float speed = 2.5f;
+    [Range(0.01f, 5f)]
+    public float baseSpeed = 2.5f;
     private float currentSpeed;
     private int timeTillSpeedReset;
     private const int speedreset = 5;
 
     public const float xBound = 4f;
+    public const float yBound = 7f;
+
     float xdirection = 0, ydirection = 0;
     bool isDead = false;
 
@@ -22,26 +25,41 @@ public class Movement : MonoBehaviour, ISpeed
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<CharacterAnimator>();
-        currentSpeed = speed;
+        currentSpeed = baseSpeed;
     }
 
     void FixedUpdate()
     {
         if (!isDead)
         {
-            float actualX = 0;
-            //outside of bound but moving to centre
-            if ((transform.position.x > xBound && xdirection <= 0) || (transform.position.x < -xBound && xdirection >= 0))
+            float actualX = xdirection;
+
+            // when outside right bound, dont move right
+            if (transform.position.x > xBound && xdirection >= 0f)
             {
-                actualX = xdirection;
+                actualX = 0f;
             }
-            //or within bounds
-            else if ((transform.position.x < xBound) && (transform.position.x > -xBound))
+            // when outside left bound, dont move left
+            else if(transform.position.x < -xBound && xdirection <= 0f)
             {
-                actualX = xdirection;
+                actualX = 0f;
             }
 
-            var velocity = new Vector3(actualX, ydirection).normalized * currentSpeed;
+            float actualY = ydirection;
+
+            // when outside right bound, dont move right
+            if (transform.position.y > yBound && ydirection >= 0f)
+            {
+                actualY = 0f;
+            }
+            // when outside left bound, dont move left
+            else if(transform.position.y < -yBound && ydirection <= 0f)
+            {
+                actualY = 0f;
+            }
+
+            var velocity = new Vector3(actualX, actualY).normalized * currentSpeed;
+
             //move in animator
             anim?.Move(velocity);
             Move(velocity, Time.fixedDeltaTime);
@@ -51,17 +69,17 @@ public class Movement : MonoBehaviour, ISpeed
             {
                 float perc = (float)timeTillSpeedReset / (float)speedreset;
                 //
-                if (Mathf.Abs(currentSpeed - speed) < 0.01f)
-                    currentSpeed = Mathf.Lerp(speed, currentSpeed, perc);
+                if (Mathf.Abs(currentSpeed - baseSpeed) < 0.01f)
+                    currentSpeed = Mathf.Lerp(baseSpeed, currentSpeed, perc);
 
                 timeTillSpeedReset--;
             }
             else
             {
-                if (Mathf.Abs(currentSpeed - speed) > 0.01f)
-                    currentSpeed = speed;
+                if (Mathf.Abs(currentSpeed - baseSpeed) > 0.01f)
+                    currentSpeed = baseSpeed;
                 else
-                    currentSpeed = Mathf.Lerp(speed, currentSpeed, 0.5f);
+                    currentSpeed = Mathf.Lerp(baseSpeed, currentSpeed, 0.5f);
             }
         }
     }
@@ -106,27 +124,27 @@ public class Movement : MonoBehaviour, ISpeed
 
     void ISpeed.SlowDown(float slowPercent)
     {
-        currentSpeed = speed * slowPercent;
+        currentSpeed = baseSpeed * slowPercent;
         timeTillSpeedReset = speedreset;
         //Debug.Log($"original {speed} perc {slowPercent} new {currentSpeed} ");
     }
 
     void ISpeed.SlowDown(float slowPercent, int duration)
     {
-        currentSpeed = speed * slowPercent;
+        currentSpeed = baseSpeed * slowPercent;
         timeTillSpeedReset = duration;
         //Debug.Log($"original {speed} perc {slowPercent} new {currentSpeed} ");
     }
 
     void ISpeed.SpeedUp(float speedupPercent)
     {
-        currentSpeed = speed * speedupPercent;
+        currentSpeed = baseSpeed * speedupPercent;
         timeTillSpeedReset = speedreset;
     }
 
     void ISpeed.SpeedUp(float speedupPercent, int duration)
     {
-        currentSpeed = speed * speedupPercent;
+        currentSpeed = baseSpeed * speedupPercent;
         timeTillSpeedReset = duration;
     }
 }

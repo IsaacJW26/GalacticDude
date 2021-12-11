@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace EyeBoss
 {
-    public class EyeBossPhaseLaserCharge : IEyeBossAiState
+    public class EyeBossPhaseLaserCharge : AiState
     {
         private AIBoss bossController;
         private EyeBossShoot bossWeapon;
         private Transform bossTransform;
-        
+        private float speed = 1f;
         private bool movingRight = true;
         //private const float MOVE_DOWN_DISTANCE_THRESHOLD = 0f;
 
@@ -42,7 +42,8 @@ namespace EyeBoss
 
         public void GoToNextState()
         {
-            IEyeBossAiState nextState;
+            /*
+            AiState nextState;
 
             nextState = new EyeBossPhaseRings(phaseNumber+1);
             bossController.EyeAnimationObject.StartWandering();
@@ -52,6 +53,9 @@ namespace EyeBoss
 
             bossController.AiState = nextState;
             Debug.Log("Phase number "+ phaseNumber);
+            */
+            //speed += 0.5f;
+            phaseNumber++;
         }
 
         private void InitialiseAnimation()
@@ -77,22 +81,21 @@ namespace EyeBoss
             animationParts.Add(enterstate);
 
             BossAnimation movestate = new BossAnimation().AddAnimationPart(
-                //animationDuration: 60 * Random.Range(1, 4),
-                animationDuration: 20,
+                animationDuration: 60 + Random.Range(0, 140),
                 animationFunction: _ =>
                 {
-                    BossMove(bossTransform, bossTransform.position, DistanceToXBound());
+                    BossMove(bossTransform, bossTransform.position);
                     Debug.Log("moving");
-                })
-                .AddAnimationFrame( _ => {
-                    bossController.EyeAnimationObject.StartFrantic();
-                    Debug.Log("move to look state");
-
                 });
             animationParts.Add(movestate);
 
             BossAnimation lookingState = new BossAnimation().
-                AddDelay(180).
+                AddAnimationFrame( _ => {
+                    bossController.EyeAnimationObject.StartFrantic();
+                    BossStopMove();
+                    Debug.Log("move to look state");
+                }).
+                AddDelay(Random.Range(90, 180)).
                 AddAnimationFrame( _ => {
                     UnlockPlayerPosition();
                     bossController.EyeAnimationObject.StartTracking();
@@ -102,10 +105,10 @@ namespace EyeBoss
 
             BossAnimation chargeSubstates = new BossAnimation().
                 AddAnimationFrame( _ => UnlockPlayerPosition()).
-                AddDelay(89).
+                AddDelay(15).
                 AddAnimationFrame( _ => LockPlayerPosition());
 
-            const int chargeDuration = 180;
+            const int chargeDuration = 100;
             BossAnimation chargeState = new BossAnimation().
                 AddAnimationPart(
                     chargeDuration,
@@ -115,6 +118,9 @@ namespace EyeBoss
                         bossController.EyeAnimationObject.ChargeUpdate(percent);
                 }).AddAnimationFrame( _ => {
                     Debug.Log("move to attack state");
+                }).AddEnd( _ => {
+                    chargeSubstates.OnEnd();
+                    animEnumerator.MoveNext();
                 });
             animationParts.Add(chargeState);
 
@@ -175,7 +181,12 @@ namespace EyeBoss
             savedPlayerPosition = null;
         }
 
-        private void BossMove(Transform bossTransform, Vector3 currentPosition, float distanceToXBoundary)
+        private void BossStopMove()
+        {
+            bossController.Move(Vector3.zero);
+        }
+
+        private void BossMove(Transform bossTransform, Vector3 currentPosition)
         {
             //  move around side to side 
             Vector3 direction;

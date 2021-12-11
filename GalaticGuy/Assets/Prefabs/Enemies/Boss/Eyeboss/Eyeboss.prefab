@@ -10046,7 +10046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb6f9b0483578844aa8bb9c5b1b436b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  baseSpeed: 2.5
 --- !u!95 &7001233414193594097
 Animator:
   serializedVersion: 3
@@ -10079,7 +10079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    maxHP: 500
+    maxHP: 250
     onDamageAudio: 11
     onDeathAudio: 15
   deathChildren: []

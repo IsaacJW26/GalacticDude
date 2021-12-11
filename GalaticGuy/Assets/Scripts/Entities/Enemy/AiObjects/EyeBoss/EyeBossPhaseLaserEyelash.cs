@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EyeBoss
 {
-    public class EyeBossPhaseLaserEyelash : IEyeBossAiState
+    public class EyeBossPhaseLaserEyelash : AiState
     {
         private AIBoss bossController;
         private EyeBossShoot bossWeapon;
@@ -38,7 +38,7 @@ namespace EyeBoss
 
         public void GoToNextState()
         {
-            IEyeBossAiState nextState;
+            AiState nextState;
 
             nextState = new EyeBossPhaseLaserEyelash(phaseNumber+1);
 

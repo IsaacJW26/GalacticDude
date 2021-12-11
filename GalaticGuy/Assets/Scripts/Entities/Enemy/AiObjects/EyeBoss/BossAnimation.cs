@@ -59,8 +59,7 @@ public class BossAnimation
     public BossAnimation AddEnd(AnimationFunction animationFunction)
     {
         return AddAnimationFrame((int f) => {
-            partsIterator.Reset();
-            partsIterator.MoveNext();
+            OnEnd();
             if(animationFunction != null)
                 animationFunction(f);   
         });
@@ -107,6 +106,12 @@ public class BossAnimation
         }
     }
 
+    public void OnEnd()
+    {
+        partsIterator.Reset();
+        partsIterator.MoveNext();
+        animationRunning = true;
+    }
 
     public void SetTimeScale(float timeScale)
     {

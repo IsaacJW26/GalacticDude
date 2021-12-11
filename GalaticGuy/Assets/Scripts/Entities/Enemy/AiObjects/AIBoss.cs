@@ -14,7 +14,7 @@ namespace EyeBoss
         // hidden fields --------------------------------
         readonly float moveDownDistance = 0.6f;
 
-        private IEyeBossAiState state;
+        private AiState state;
 
         private EyeAnimation eyeAnimationCache = null;
         public EyeAnimation EyeAnimationObject
@@ -37,7 +37,7 @@ namespace EyeBoss
             SetPhase(1);
         }
 
-        public IEyeBossAiState AiState
+        public AiState AiState
         {
             get { return state; }
             set { state = value; }

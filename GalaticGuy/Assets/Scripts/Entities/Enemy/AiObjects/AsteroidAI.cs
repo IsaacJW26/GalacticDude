@@ -48,7 +48,7 @@ public class AsteroidAI : EnemyAI
         float scale = Random.Range(0.8f, 1.2f);
         transform.localScale *= scale;
 
-        move.speed *= Random.Range(0.8f, 1.2f);
+        move.baseSpeed *= Random.Range(0.8f, 1.2f);
 
         health = asteroid.GetHealth();
     }
@@ -138,11 +138,11 @@ public class AsteroidAI : EnemyAI
             {
                 //speed up
                 yval = direction.y * 2f;
-                move.speed *= 1.15f;
+                move.baseSpeed *= 1.15f;
             }
             else
             {
-                move.speed *= 0.80f;
+                move.baseSpeed *= 0.80f;
 
                 yval = direction.y * 1.10f;
             }

@@ -25,16 +25,16 @@ public class AIDown : EnemyAI
         var rb = GetComponent<Rigidbody2D>();
         if(shieldInnerPrefab != null)
             {
-            innerShieldObj = Instantiate(shieldInnerPrefab, innerRelativePosition, Quaternion.identity) as Shield;
-            innerShieldObj.Initialise(rb);
+            innerShieldObj = Instantiate(shieldInnerPrefab,transform.position + innerRelativePosition, Quaternion.identity) as Shield;
+            innerShieldObj.Initialise(rb, innerRelativePosition);
             innerShieldObj.gameObject.SetActive(false);
 
         }
 
         if (shieldOuterPrefab != null)
         {
-            outerShieldObj = Instantiate(shieldOuterPrefab, outerRelativePosition, Quaternion.identity) as Shield;
-            outerShieldObj.Initialise(rb);
+            outerShieldObj = Instantiate(shieldOuterPrefab, transform.position + outerRelativePosition, Quaternion.identity) as Shield;
+            outerShieldObj.Initialise(rb, outerRelativePosition);
             shieldOuterPrefab.gameObject.SetActive(false);
 
         }
@@ -54,12 +54,10 @@ public class AIDown : EnemyAI
 
     public override void OnDeath()
     {
-        Debug.Log("death");
-        
         if (innerShieldObj != null)
-            Destroy(innerShieldObj);
+            innerShieldObj.OnDeath();
 
         if (outerShieldObj != null)
-            Destroy(outerShieldObj);
+            outerShieldObj.OnDeath();
     }
 }

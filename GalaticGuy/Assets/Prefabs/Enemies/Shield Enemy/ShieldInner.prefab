@@ -46,7 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f372b6a710a934287894ed61a0f4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHP: 5
+  stats:
+    damage: 0
+    initialSpeed: 0
+    yAccelerationOverTime: 0
+    dragOverTime: 1
+    maxLifeTime: 1800
+    hp: 1
+  player: 0
+  projectiles: 1
+  enemies: 0
+  destroyOnHit: 1
+  rotateTowardsDirection: 0
+  audioClip: 22
+  baseHP: 7
 --- !u!61 &5996009579050538410
 BoxCollider2D:
   m_ObjectHideFlags: 0

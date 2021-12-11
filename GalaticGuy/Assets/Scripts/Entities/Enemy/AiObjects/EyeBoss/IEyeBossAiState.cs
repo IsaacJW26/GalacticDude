@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EyeBoss
 {
-    public interface IEyeBossAiState
+    public interface AiState
     {
         void Initialise(AIBoss bossController, EyeBossShoot bossWeapon, Transform bossTransform);
         void GoToNextState();

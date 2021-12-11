@@ -61,7 +61,6 @@ public class Enemy : MonoBehaviour, IDamageable
             //destroy once end of level is reached
             if (transform.position.y < GameManager.LOWEST_Y)
             {
-                Ai.OnDeath();
                 OnDeath();
             }
         }
@@ -72,6 +71,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (!isDead)
         {
             isDead = true;
+            Ai.OnDeath();
             anim.OnDeath();
 
             float scale = (transform.localScale.x + transform.localScale.y + transform.localScale.z ) / 3f;

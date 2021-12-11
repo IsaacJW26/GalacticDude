@@ -42,6 +42,8 @@ public class MainCharacter : MonoBehaviour, IDamageable
             move.enabled = true;
 
             move.InputDirectionX(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.HORIZONTAL_AXIS)));
+            move.InputDirectionY(Mathf.RoundToInt(Input.GetAxis(Labels.Inputs.VERTICAL_AXIS)));
+
             if (Input.GetButtonDown(Labels.Inputs.SHOOT))
             {
                 weapons.OnShootButtonDown();

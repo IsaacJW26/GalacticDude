@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour, IDamageable
     protected int timeSinceBirth = 0;
     protected int index;
 
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     protected Vector2 velocity;
     protected IShooter parent;
 
@@ -140,17 +140,17 @@ public class Projectile : MonoBehaviour, IDamageable
 
     public bool CheckProj(Collider2D col)
     {
-        return CheckTag(col, Labels.Tags.PROJECTILE) && projectiles;
+        return projectiles && CheckTag(col, Labels.Tags.PROJECTILE);
     }
 
     public bool CheckEnemy(Collider2D col)
     {
-        return CheckTag(col, Labels.Tags.ENEMY) && enemies;
+        return  enemies && CheckTag(col, Labels.Tags.ENEMY);
     }
 
     public bool CheckPlayer(Collider2D col)
     {
-        return CheckTag(col, Labels.Tags.PLAYER) && player;
+        return  player && CheckTag(col, Labels.Tags.PLAYER);
     }
 
     //Destroys 

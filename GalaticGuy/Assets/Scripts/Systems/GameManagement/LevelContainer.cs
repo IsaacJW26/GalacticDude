@@ -61,6 +61,7 @@ namespace LevelInfo
         public int difficulty;
         public int length;
         public bool containsBoss;
+        [Tooltip("Frames between each spawn, higher numbers means slower spawn times.")]
         public int averageTime;
 
         public Level(int difficulty, int length, bool containsBoss, int averageTime)

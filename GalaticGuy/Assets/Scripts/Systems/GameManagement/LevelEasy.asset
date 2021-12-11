@@ -10,17 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c97f45c080c9b7843a362f29fb369df8, type: 3}
-  m_Name: Level
+  m_Name: LevelEasy
   m_EditorClassIdentifier: 
   difficultyTiers:
-  - name: 
+  - name: DifficultyA
     enemyPrefabs:
-    - {fileID: 366538063770070275, guid: 9a9e008667b1d89439fb9142833f83e0, type: 3}
-    - {fileID: 9119908270630566908, guid: e527e996e33cb6b4a886a9b6be7dcb4d, type: 3}
-    - {fileID: 9119908270630566908, guid: 622fd8d4aaf5f9049a213dccc62261fd, type: 3}
     - {fileID: 9119908270630566908, guid: 72ec208e6718f9043832d27cb9756cfe, type: 3}
+    - {fileID: 9119908270630566908, guid: 622fd8d4aaf5f9049a213dccc62261fd, type: 3}
     bossPrefabs:
     - {fileID: 726255909376779045, guid: c4b270aa8bc256b478084994e30e3ecc, type: 3}
+    squads: []
+  - name: DifficultyB
+    enemyPrefabs:
+    - {fileID: 9119908270630566908, guid: 622fd8d4aaf5f9049a213dccc62261fd, type: 3}
+    - {fileID: 9119908270630566908, guid: 72ec208e6718f9043832d27cb9756cfe, type: 3}
+    - {fileID: 366538063770070275, guid: 1e028bb690ad0254bbc8ad9f33d721ff, type: 3}
+    bossPrefabs: []
+    squads: []
+  - name: 
+    enemyPrefabs: []
+    bossPrefabs: []
     squads: []
   - name: 
     enemyPrefabs: []
@@ -28,11 +37,11 @@ MonoBehaviour:
     squads: []
   levels:
   - difficulty: 0
-    length: 25
+    length: 4
     containsBoss: 0
-    averageTime: 35
+    averageTime: 60
   - difficulty: 0
-    length: 20
+    length: 6
     containsBoss: 0
     averageTime: 30
   - difficulty: 0
@@ -41,5 +50,13 @@ MonoBehaviour:
     averageTime: 35
   - difficulty: 0
     length: 4
-    containsBoss: 1
+    containsBoss: 0
+    averageTime: 70
+  - difficulty: 0
+    length: 4
+    containsBoss: 0
+    averageTime: 70
+  - difficulty: 0
+    length: 4
+    containsBoss: 0
     averageTime: 70
