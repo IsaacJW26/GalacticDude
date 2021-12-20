@@ -21,7 +21,7 @@ namespace Labels
     {
         public const string HORIZONTAL_AXIS = "Horizontal";
         public const string VERTICAL_AXIS = "Vertical";
-        public const string SHOOT = "Jump";
+        public const string SHOOT = "Fire";
     }
 
     public static class AnimProperties
