@@ -58,8 +58,7 @@ namespace EyeBoss
         {
             animationParts = new List<BossAnimation>();
 
-            BossAnimation enterstate = new BossAnimation().
-                AddAnimationPart(
+            BossAnimation enterstate = new BossAnimation().AddAnimationPart(
                     animationDuration: 600,
                     animationFunction: _ => { 
                         Debug.Log("enterstate");
@@ -100,17 +99,24 @@ namespace EyeBoss
                 });
             animationParts.Add(lookingState);
 
-            BossAnimation chargeSubstates = new BossAnimation().
-                AddAnimationFrame( _ => UnlockPlayerPosition()).
-                AddDelay(89).
-                AddAnimationFrame( _ => LockPlayerPosition());
+            // BossAnimation chargeSubstates = new BossAnimation().
+            //     AddAnimationFrame( _ => UnlockPlayerPosition()).
+            //     AddDelay(89).
+            //     AddAnimationFrame( _ => LockPlayerPosition()).
+            //     AddEnd();
 
             const int chargeDuration = 180;
             BossAnimation chargeState = new BossAnimation().
                 AddAnimationPart(
                     chargeDuration,
                     (int f) => {
-                        chargeSubstates.FrameUpdate();
+                        if(f == 0) {
+                            UnlockPlayerPosition();
+                        }
+                        else if(f == 89) {
+                            LockPlayerPosition();
+                        }
+                        // chargeSubstates.FrameUpdate();
                         float percent = (float) f / (float) chargeDuration;
                         bossController.EyeAnimationObject.ChargeUpdate(percent);
                 }).AddAnimationFrame( _ => {
@@ -155,7 +161,7 @@ namespace EyeBoss
         {
             animEnumerator.Current.FrameUpdate();    
             Debug.Log(animEnumerator.Current);
-            Debug.Log(animationParts.Count);        
+            Debug.Log(animationParts.Count);
         }
 
         // 🤫 PRIVATE METHODS ----------------------------------------------------------------
