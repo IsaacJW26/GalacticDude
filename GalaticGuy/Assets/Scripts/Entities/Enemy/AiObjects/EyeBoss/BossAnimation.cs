@@ -77,7 +77,6 @@ public class BossAnimation
             partsIterator = partsList.GetEnumerator();
             partsIterator.MoveNext();
         }
-        Debug.Log($"anim id {ID}, part id {partsIterator.Current.ID}");
         // TODO: iterator doesn't get reset when looping back, how can we reset it?
         if(animationRunning)
         {

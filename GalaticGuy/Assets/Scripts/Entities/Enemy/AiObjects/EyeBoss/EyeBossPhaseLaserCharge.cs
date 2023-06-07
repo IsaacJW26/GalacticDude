@@ -64,13 +64,13 @@ namespace EyeBoss
                         Debug.Log("enterstate");
                         if (bossTransform.position.y > LOWEST_POSITION)
                         {
-                            Debug.Log("entering");
+                            // Debug.Log("entering");
                             bossController.Move(Vector3.down);
                         }   
                         else
                         {
                             animEnumerator.MoveNext();
-                            Debug.Log("move to move state");
+                            // Debug.Log("move to move state");
                         }
                 }).AddEnd();
             animationParts.Add(enterstate);
@@ -120,7 +120,7 @@ namespace EyeBoss
                         float percent = (float) f / (float) chargeDuration;
                         bossController.EyeAnimationObject.ChargeUpdate(percent);
                 }).AddAnimationFrame( _ => {
-                    Debug.Log("move to attack state");
+                    // Debug.Log("move to attack state");
                 });
             animationParts.Add(chargeState);
 
@@ -132,14 +132,14 @@ namespace EyeBoss
                 }).AddDelay(60).
                 AddAnimationFrame(_ => {
                     bossController.EyeAnimationObject.StartWandering();
-                    Debug.Log("move to cool down");
+                    // Debug.Log("move to cool down");
                 });
             animationParts.Add(attackState);
 
             BossAnimation cooldownState = new BossAnimation().
                 AddDelay(10).
                 AddAnimationFrame(_ => { 
-                    Debug.Log("reset from cool down");
+                    // Debug.Log("reset from cool down");
                 }).AddEnd(_ => {
                     animEnumerator.Reset();
                     animEnumerator.MoveNext();
@@ -160,8 +160,6 @@ namespace EyeBoss
         public void UpdateFrame()
         {
             animEnumerator.Current.FrameUpdate();    
-            Debug.Log(animEnumerator.Current);
-            Debug.Log(animationParts.Count);
         }
 
         // 🤫 PRIVATE METHODS ----------------------------------------------------------------
